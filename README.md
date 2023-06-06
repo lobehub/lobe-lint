@@ -71,6 +71,8 @@ pnpm add @lobehub/lint -D
 config can be found at `./src/eslint/index.ts`
 
 ```js
+// .eslintrc.js
+
 module.exports = require('@lobehub/lint/dist/eslint');
 ```
 
@@ -79,6 +81,8 @@ module.exports = require('@lobehub/lint/dist/eslint');
 config can be found at `./src/stylelint/index.ts`
 
 ```js
+// .stylelintrc.js
+
 module.exports = require('@lobehub/lint/dist/stylelint');
 ```
 
