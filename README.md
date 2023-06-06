@@ -55,7 +55,7 @@ ESlint config, Prettier config, Remark config for LobeHub
 To install Lobe Lint, run the following command:
 
 ```bash
-pnpm add lobehub/lint -D
+pnpm add @lobehub/lint -D
 ```
 
 <div align="right">
