@@ -71,7 +71,7 @@ pnpm add @lobehub/lint -D
 config can be found at `./src/eslint/index.ts`
 
 ```js
-module.exports = require('lobehub/lint/dist/eslint');
+module.exports = require('@lobehub/lint/dist/eslint');
 ```
 
 ### Stylelint
@@ -79,7 +79,7 @@ module.exports = require('lobehub/lint/dist/eslint');
 config can be found at `./src/stylelint/index.ts`
 
 ```js
-module.exports = require('lobehub/lint/dist/stylelint');
+module.exports = require('@lobehub/lint/dist/stylelint');
 ```
 
 ### Commitlint
@@ -89,7 +89,7 @@ config can be found at `./src/commitlint/index.ts`
 ```js
 // .commitlintrc.js
 
-module.exports = require('lobehub/lint/dist/commitlint');
+module.exports = require('@lobehub/lint/dist/commitlint');
 ```
 
 ### Changelog
@@ -99,7 +99,7 @@ config can be found at `./src/changelog/index.ts`
 ```js
 // .changelogrc.js
 
-module.exports = require('lobehub/lint/dist/commitlint');
+module.exports = require('@lobehub/lint/dist/commitlint');
 ```
 
 ### Remark
@@ -109,7 +109,7 @@ config can be found at `./src/remarklint/index.ts`
 ```js
 // .remarkrc.js
 
-module.exports = require('lobehub/lint/dist/remarklint');
+module.exports = require('@lobehub/lint/dist/remarklint');
 ```
 
 ### Prettier
@@ -119,7 +119,7 @@ config can be found at `./src/prettier/index.ts`
 ```js
 // .prettierrc.js
 
-module.exports = require('lobehub/lint/dist/prettier');
+module.exports = require('@lobehub/lint/dist/prettier');
 ```
 
 ### Semantic Release
@@ -129,7 +129,7 @@ config can be found at `./src/semantic-release/index.ts`
 ```js
 // .releaserc.js
 
-module.exports = require('lobehub/lint/dist/semantic-release');
+module.exports = require('@lobehub/lint/dist/semantic-release');
 ```
 
 <div align="right">
