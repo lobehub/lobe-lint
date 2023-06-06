@@ -10,4 +10,4 @@
 
 ### ✨ Features
 
-- add lints config ([3e56232](https://github.com/lobehub/lint/commit/3e56232))
+- add lints config ([3e56232](https://github.com/lobehub/lobe-lint/commit/3e56232))

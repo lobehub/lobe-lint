@@ -1,13 +1,13 @@
 {
   "name": "@lobehub/lint",
   "version": "1.0.1",
-  "homepage": "https://github.com/lobehub/lint",
+  "homepage": "https://github.com/lobehub/lobe-lint",
   "bugs": {
-    "url": "https://github.com/lobehub/lint/issues/new"
+    "url": "https://github.com/lobehub/lobe-lint/issues/new"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lobehub/lint.git"
+    "url": "https://github.com/lobehub/lobe-lint.git"
   },
   "license": "MIT",
   "author": "canisminor1990 <i@canisminor.cc>",
