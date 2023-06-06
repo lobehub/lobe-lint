@@ -57,7 +57,7 @@ This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908
 To install Lobe UI, run the following command:
 
 ```bash
-pnpm add @lobehub/lint -D
+pnpm add lobehub/lint -D
 ```
 
 <div align="right">
@@ -73,7 +73,7 @@ pnpm add @lobehub/lint -D
 config can be found at `./src/eslint/index.ts`
 
 ```js
-module.exports = require('@lobehub/lint/dist/eslint');
+module.exports = require('lobehub/lint/dist/eslint');
 ```
 
 ### Stylelint
@@ -81,7 +81,7 @@ module.exports = require('@lobehub/lint/dist/eslint');
 config can be found at `./src/stylelint/index.ts`
 
 ```js
-module.exports = require('@lobehub/lint/dist/stylelint');
+module.exports = require('lobehub/lint/dist/stylelint');
 ```
 
 ### Commitlint
@@ -91,7 +91,7 @@ config can be found at `./src/commitlint/index.ts`
 ```js
 // .commitlintrc.js
 
-module.exports = require('@lobehub/lint/dist/commitlint');
+module.exports = require('lobehub/lint/dist/commitlint');
 ```
 
 ### Changelog
@@ -101,7 +101,7 @@ config can be found at `./src/changelog/index.ts`
 ```js
 // .changelogrc.js
 
-module.exports = require('@lobehub/lint/dist/commitlint');
+module.exports = require('lobehub/lint/dist/commitlint');
 ```
 
 ### Remark
@@ -111,7 +111,7 @@ config can be found at `./src/remarklint/index.ts`
 ```js
 // .remarkrc.js
 
-module.exports = require('@lobehub/lint/dist/remarklint');
+module.exports = require('lobehub/lint/dist/remarklint');
 ```
 
 ### Prettier
@@ -121,7 +121,7 @@ config can be found at `./src/prettier/index.ts`
 ```js
 // .prettierrc.js
 
-module.exports = require('@lobehub/lint/dist/prettier');
+module.exports = require('lobehub/lint/dist/prettier');
 ```
 
 ### Semantic Release
@@ -131,7 +131,7 @@ config can be found at `./src/semantic-release/index.ts`
 ```js
 // .releaserc.js
 
-module.exports = require('@lobehub/lint/dist/semantic-release');
+module.exports = require('lobehub/lint/dist/semantic-release');
 ```
 
 <div align="right">
@@ -149,8 +149,8 @@ You can use Gitpod for online development:
 Or clone it for local development:
 
 ```bash
-$ git clone https://github.com/@lobehub/lint.git
-$ cd @lobehub/lint
+$ git clone https://github.com/lobehub/lint.git
+$ cd lobehub/lint
 $ npm install
 $ npm start
 ```
@@ -195,7 +195,7 @@ This project is [MIT](./LICENSE) licensed.
 <!-- LINK GROUP -->
 
 [profile-url]: https://github.com/canisminor1990
-[gitpod-url]: https://gitpod.io/#https://github.com/@lobehub/lint
+[gitpod-url]: https://gitpod.io/#https://github.com/lobehub/lint
 
 <!-- SHIELD LINK GROUP -->
 
@@ -208,35 +208,35 @@ This project is [MIT](./LICENSE) licensed.
 
 <!-- releaseDate -->
 
-[release-date-shield]: https://img.shields.io/github/release-date/@lobehub/lint?style=flat
-[release-date-url]: https://github.com/@lobehub/lint/releases
+[release-date-shield]: https://img.shields.io/github/release-date/lobehub/lint?style=flat
+[release-date-url]: https://github.com/lobehub/lint/releases
 
 <!-- ciTest -->
 
-[ci-test-shield]: https://github.com/@lobehub/lint/workflows/Test%20CI/badge.svg
-[ci-test-url]: https://github.com/@lobehub/lint/actions/workflows/test.yml
+[ci-test-shield]: https://github.com/lobehub/lint/workflows/Test%20CI/badge.svg
+[ci-test-url]: https://github.com/lobehub/lint/actions/workflows/test.yml
 
 <!-- ciRelease -->
 
-[ci-release-shield]: https://github.com/@lobehub/lint/workflows/Build%20and%20Release/badge.svg
-[ci-release-url]: https://github.com/@lobehub/lint/actions/workflows/release.yml
+[ci-release-shield]: https://github.com/lobehub/lint/workflows/Build%20and%20Release/badge.svg
+[ci-release-url]: https://github.com/lobehub/lint/actions/workflows/release.yml
 
 <!-- contributors -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/@lobehub/lint.svg?style=flat
-[contributors-url]: https://github.com/@lobehub/lint/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/lobehub/lint.svg?style=flat
+[contributors-url]: https://github.com/lobehub/lint/graphs/contributors
 
 <!-- forks -->
 
-[forks-shield]: https://img.shields.io/github/forks/@lobehub/lint.svg?style=flat
-[forks-url]: https://github.com/@lobehub/lint/network/members
+[forks-shield]: https://img.shields.io/github/forks/lobehub/lint.svg?style=flat
+[forks-url]: https://github.com/lobehub/lint/network/members
 
 <!-- stargazers -->
 
-[stargazers-shield]: https://img.shields.io/github/stars/@lobehub/lint.svg?style=flat
-[stargazers-url]: https://github.com/@lobehub/lint/stargazers
+[stargazers-shield]: https://img.shields.io/github/stars/lobehub/lint.svg?style=flat
+[stargazers-url]: https://github.com/lobehub/lint/stargazers
 
 <!-- issues -->
 
-[issues-shield]: https://img.shields.io/github/issues/@lobehub/lint.svg?style=flat
-[issues-url]: https://github.com/@lobehub/lint/issues/new/choose
+[issues-shield]: https://img.shields.io/github/issues/lobehub/lint.svg?style=flat
+[issues-url]: https://github.com/lobehub/lint/issues/new/choose
