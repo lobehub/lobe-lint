@@ -149,7 +149,7 @@ You can use Gitpod for online development:
 Or clone it for local development:
 
 ```bash
-$ git clone https://github.com/canisminor1990/@lobehub/lint.git
+$ git clone https://github.com/@lobehub/lint.git
 $ cd @lobehub/lint
 $ npm install
 $ npm start
@@ -195,7 +195,7 @@ This project is [MIT](./LICENSE) licensed.
 <!-- LINK GROUP -->
 
 [profile-url]: https://github.com/canisminor1990
-[gitpod-url]: https://gitpod.io/#https://github.com/canisminor1990/@lobehub/lint
+[gitpod-url]: https://gitpod.io/#https://github.com/@lobehub/lint
 
 <!-- SHIELD LINK GROUP -->
 
@@ -208,35 +208,35 @@ This project is [MIT](./LICENSE) licensed.
 
 <!-- releaseDate -->
 
-[release-date-shield]: https://img.shields.io/github/release-date/canisminor1990/@lobehub/lint?style=flat
-[release-date-url]: https://github.com/canisminor1990/@lobehub/lint/releases
+[release-date-shield]: https://img.shields.io/github/release-date/@lobehub/lint?style=flat
+[release-date-url]: https://github.com/@lobehub/lint/releases
 
 <!-- ciTest -->
 
-[ci-test-shield]: https://github.com/canisminor1990/@lobehub/lint/workflows/Test%20CI/badge.svg
-[ci-test-url]: https://github.com/canisminor1990/@lobehub/lint/actions/workflows/test.yml
+[ci-test-shield]: https://github.com/@lobehub/lint/workflows/Test%20CI/badge.svg
+[ci-test-url]: https://github.com/@lobehub/lint/actions/workflows/test.yml
 
 <!-- ciRelease -->
 
-[ci-release-shield]: https://github.com/canisminor1990/@lobehub/lint/workflows/Build%20and%20Release/badge.svg
-[ci-release-url]: https://github.com/canisminor1990/@lobehub/lint/actions/workflows/release.yml
+[ci-release-shield]: https://github.com/@lobehub/lint/workflows/Build%20and%20Release/badge.svg
+[ci-release-url]: https://github.com/@lobehub/lint/actions/workflows/release.yml
 
 <!-- contributors -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/canisminor1990/@lobehub/lint.svg?style=flat
-[contributors-url]: https://github.com/canisminor1990/@lobehub/lint/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/@lobehub/lint.svg?style=flat
+[contributors-url]: https://github.com/@lobehub/lint/graphs/contributors
 
 <!-- forks -->
 
-[forks-shield]: https://img.shields.io/github/forks/canisminor1990/@lobehub/lint.svg?style=flat
-[forks-url]: https://github.com/canisminor1990/@lobehub/lint/network/members
+[forks-shield]: https://img.shields.io/github/forks/@lobehub/lint.svg?style=flat
+[forks-url]: https://github.com/@lobehub/lint/network/members
 
 <!-- stargazers -->
 
-[stargazers-shield]: https://img.shields.io/github/stars/canisminor1990/@lobehub/lint.svg?style=flat
-[stargazers-url]: https://github.com/canisminor1990/@lobehub/lint/stargazers
+[stargazers-shield]: https://img.shields.io/github/stars/@lobehub/lint.svg?style=flat
+[stargazers-url]: https://github.com/@lobehub/lint/stargazers
 
 <!-- issues -->
 
-[issues-shield]: https://img.shields.io/github/issues/canisminor1990/@lobehub/lint.svg?style=flat
-[issues-url]: https://github.com/canisminor1990/@lobehub/lint/issues/new/choose
+[issues-shield]: https://img.shields.io/github/issues/@lobehub/lint.svg?style=flat
+[issues-url]: https://github.com/@lobehub/lint/issues/new/choose
