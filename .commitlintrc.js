@@ -1,3 +1,1 @@
-module.exports = {
-  extends: ['gitmoji'],
-};
+module.exports = require('./dist/commitlint');

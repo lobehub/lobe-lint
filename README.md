@@ -2,11 +2,11 @@
 
 <div align="center">
 
-<img width="160" src="https://avatars.githubusercontent.com/u/17870709?v=4">
+<img width="160" src="https://raw.githubusercontent.com/lobehub/.github/main/profile/Logo.webp">
 
-<h1>CanisMinor Template</h1>
+<h1>Lobe-Lint</h1>
 
-This is a template repo for canisminor1990
+ESlint config, Prettier config, Remark config for LobeHub
 
 [Changelog](./CHANGELOG.md) · [Report Bug][issues-url] · [Request Feature][issues-url]
 
@@ -21,21 +21,124 @@ This is a template repo for canisminor1990
 [![stargazers][stargazers-shield]][stargazers-url]
 [![issues][issues-shield]][issues-url]
 
-![](https://github.com/othneildrew/Best-README-Template/raw/master/images/screenshot.png)
-
 </div>
+
+![](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <details>
 <summary><kbd>Table of contents</kbd></summary>
 
 #### TOC
 
+- [📦 Installation](#-installation)
+
+- [🤯 Usage](#-usage)
+
+  - [Eslint](#eslint)
+  - [Stylelint](#stylelint)
+  - [Commitlint](#commitlint)
+  - [Changelog](#changelog)
+  - [Remark](#remark)
+  - [Prettier](#prettier)
+  - [Semantic Release](#semantic-release)
+
 - [⌨️ Local Development](#️-local-development)
+
 - [🤝 Contributing](#-contributing)
 
 ####
 
 </details>
+
+## 📦 Installation
+
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+
+To install Lobe UI, run the following command:
+
+```bash
+pnpm add @lobehub/lint -D
+```
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## 🤯 Usage
+
+### Eslint
+
+config can be found at `./src/eslint/index.ts`
+
+```js
+module.exports = require('@lobehub/lint/dist/eslint');
+```
+
+### Stylelint
+
+config can be found at `./src/stylelint/index.ts`
+
+```js
+module.exports = require('@lobehub/lint/dist/stylelint');
+```
+
+### Commitlint
+
+config can be found at `./src/commitlint/index.ts`
+
+```js
+// .commitlintrc.js
+
+module.exports = require('@lobehub/lint/dist/commitlint');
+```
+
+### Changelog
+
+config can be found at `./src/changelog/index.ts`
+
+```js
+// .changelogrc.js
+
+module.exports = require('@lobehub/lint/dist/commitlint');
+```
+
+### Remark
+
+config can be found at `./src/remarklint/index.ts`
+
+```js
+// .remarkrc.js
+
+module.exports = require('@lobehub/lint/dist/remarklint');
+```
+
+### Prettier
+
+config can be found at `./src/prettier/index.ts`
+
+```js
+// .prettierrc.js
+
+module.exports = require('@lobehub/lint/dist/prettier');
+```
+
+### Semantic Release
+
+config can be found at `./src/semantic-release/index.ts`
+
+```js
+// .releaserc.js
+
+module.exports = require('@lobehub/lint/dist/semantic-release');
+```
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
 
 ## ⌨️ Local Development
 
@@ -46,8 +149,8 @@ You can use Gitpod for online development:
 Or clone it for local development:
 
 ```bash
-$ git clone https://github.com/canisminor1990/canisminor-template.git
-$ cd canisminor-template
+$ git clone https://github.com/canisminor1990/@lobehub/lint.git
+$ cd @lobehub/lint
 $ npm install
 $ npm start
 ```
@@ -92,7 +195,7 @@ This project is [MIT](./LICENSE) licensed.
 <!-- LINK GROUP -->
 
 [profile-url]: https://github.com/canisminor1990
-[gitpod-url]: https://gitpod.io/#https://github.com/canisminor1990/canisminor-template
+[gitpod-url]: https://gitpod.io/#https://github.com/canisminor1990/@lobehub/lint
 
 <!-- SHIELD LINK GROUP -->
 
@@ -100,40 +203,40 @@ This project is [MIT](./LICENSE) licensed.
 
 <!-- release -->
 
-[release-shield]: https://img.shields.io/github/v/release/canisminor1990/canisminor-template?style=flat&sort=semver&logo=github
-[release-url]: https://github.com/canisminor1990/canisminor-template/releases
+[release-shield]: https://img.shields.io/npm/v/@lobehub/lint?label=%F0%9F%A4%AF%20NPM
+[release-url]: https://www.npmjs.com/package/@lobehub/lint
 
 <!-- releaseDate -->
 
-[release-date-shield]: https://img.shields.io/github/release-date/canisminor1990/canisminor-template?style=flat
-[release-date-url]: https://github.com/canisminor1990/canisminor-template/releases
+[release-date-shield]: https://img.shields.io/github/release-date/canisminor1990/@lobehub/lint?style=flat
+[release-date-url]: https://github.com/canisminor1990/@lobehub/lint/releases
 
 <!-- ciTest -->
 
-[ci-test-shield]: https://github.com/canisminor1990/canisminor-template/workflows/Test%20CI/badge.svg
-[ci-test-url]: https://github.com/canisminor1990/canisminor-template/actions/workflows/test.yml
+[ci-test-shield]: https://github.com/canisminor1990/@lobehub/lint/workflows/Test%20CI/badge.svg
+[ci-test-url]: https://github.com/canisminor1990/@lobehub/lint/actions/workflows/test.yml
 
 <!-- ciRelease -->
 
-[ci-release-shield]: https://github.com/canisminor1990/canisminor-template/workflows/Build%20and%20Release/badge.svg
-[ci-release-url]: https://github.com/canisminor1990/canisminor-template/actions/workflows/release.yml
+[ci-release-shield]: https://github.com/canisminor1990/@lobehub/lint/workflows/Build%20and%20Release/badge.svg
+[ci-release-url]: https://github.com/canisminor1990/@lobehub/lint/actions/workflows/release.yml
 
 <!-- contributors -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/canisminor1990/canisminor-template.svg?style=flat
-[contributors-url]: https://github.com/canisminor1990/canisminor-template/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/canisminor1990/@lobehub/lint.svg?style=flat
+[contributors-url]: https://github.com/canisminor1990/@lobehub/lint/graphs/contributors
 
 <!-- forks -->
 
-[forks-shield]: https://img.shields.io/github/forks/canisminor1990/canisminor-template.svg?style=flat
-[forks-url]: https://github.com/canisminor1990/canisminor-template/network/members
+[forks-shield]: https://img.shields.io/github/forks/canisminor1990/@lobehub/lint.svg?style=flat
+[forks-url]: https://github.com/canisminor1990/@lobehub/lint/network/members
 
 <!-- stargazers -->
 
-[stargazers-shield]: https://img.shields.io/github/stars/canisminor1990/canisminor-template.svg?style=flat
-[stargazers-url]: https://github.com/canisminor1990/canisminor-template/stargazers
+[stargazers-shield]: https://img.shields.io/github/stars/canisminor1990/@lobehub/lint.svg?style=flat
+[stargazers-url]: https://github.com/canisminor1990/@lobehub/lint/stargazers
 
 <!-- issues -->
 
-[issues-shield]: https://img.shields.io/github/issues/canisminor1990/canisminor-template.svg?style=flat
-[issues-url]: https://github.com/canisminor1990/canisminor-template/issues/new/choose
+[issues-shield]: https://img.shields.io/github/issues/canisminor1990/@lobehub/lint.svg?style=flat
+[issues-url]: https://github.com/canisminor1990/@lobehub/lint/issues/new/choose

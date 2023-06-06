@@ -1,3 +1,1 @@
-module.exports = {
-  displayTypes: ['feat', 'fix', 'style', 'pref', 'build'],
-};
+module.exports = require('./dist/changelog');
