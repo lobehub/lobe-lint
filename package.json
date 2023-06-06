@@ -69,7 +69,6 @@
     "prettier-plugin-organize-imports": "latest",
     "prettier-plugin-packagejson": "latest",
     "prettier-plugin-sort-json": "latest",
-    "prettier-sort-destructure": "latest",
     "remark-frontmatter": "latest",
     "remark-gfm": "latest",
     "remark-lint-checkbox-content-indent": "latest",

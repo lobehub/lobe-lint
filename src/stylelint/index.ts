@@ -25,6 +25,7 @@ module.exports = {
         'property-no-vendor-prefix': true,
         'no-empty-source': null,
         'no-missing-end-of-source-newline': null,
+        'no-invalid-double-slash-comments': null,
       },
     },
   ],

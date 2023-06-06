@@ -4,7 +4,7 @@
 
 <img width="160" src="https://raw.githubusercontent.com/lobehub/.github/main/profile/Logo.webp">
 
-<h1>Lobe-Lint</h1>
+<h1>Lobe Lint</h1>
 
 ESlint config, Prettier config, Remark config for LobeHub
 

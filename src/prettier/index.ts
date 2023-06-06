@@ -19,11 +19,5 @@ module.exports = {
         proseWrap: 'preserve',
       },
     },
-    {
-      files: ['*.js', '*.jsx', '*.mjs', '*.cjs', '*.ts', '*.tsx'],
-      options: {
-        parser: require.resolve('prettier-sort-destructure'),
-      },
-    },
   ],
 };
