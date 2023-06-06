@@ -52,9 +52,7 @@ ESlint config, Prettier config, Remark config for LobeHub
 
 ## 📦 Installation
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
-
-To install Lobe UI, run the following command:
+To install Lobe Lint, run the following command:
 
 ```bash
 pnpm add lobehub/lint -D
