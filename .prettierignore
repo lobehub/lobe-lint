@@ -3,6 +3,7 @@
 
 # general
 .DS_Store
+.editorconfig
 .idea
 .vscode
 .history

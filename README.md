@@ -210,12 +210,12 @@ $ npm start
 
 #### 📝 License
 
-Copyright © 2023 [CanisMinor][profile-url]. <br />
+Copyright © 2023 [LobeHub][profile-url]. <br />
 This project is [MIT](./LICENSE) licensed.
 
 <!-- LINK GROUP -->
 
-[profile-url]: https://github.com/canisminor1990
+[profile-url]: https://github.com/lobehub
 [gitpod-url]: https://gitpod.io/#https://github.com/lobehub/lobe-lint
 
 <!-- SHIELD LINK GROUP -->
