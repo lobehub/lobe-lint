@@ -1,5 +1,11 @@
 # Changelog
 
+# [1.1.0](https://github.com/lobehub/lobe-lint/compare/v1.0.1...v1.1.0) (2023-06-08)
+
+### ✨ Features
+
+- **ignore**: better ignore file ([aa7f702](https://github.com/lobehub/lobe-lint/commit/aa7f702))
+
 ## [1.0.1](https://github.com/lobehub/lint/compare/v1.0.0...v1.0.1) (2023-06-06)
 
 ### 🐛 Bug Fixes
