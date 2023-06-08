@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1](https://github.com/lobehub/lobe-lint/compare/v1.1.0...v1.1.1) (2023-06-08)
+
+### 💄 Styles
+
+- prettier ([93e7a39](https://github.com/lobehub/lobe-lint/commit/93e7a39))
+
 # [1.1.0](https://github.com/lobehub/lobe-lint/compare/v1.0.1...v1.1.0) (2023-06-08)
 
 ### ✨ Features
