@@ -13,6 +13,7 @@ ESlint config, Prettier config, Remark config for LobeHub
 <!-- SHIELD GROUP -->
 
 [![release][release-shield]][release-url]
+![][release-download-shield]
 [![releaseDate][release-date-shield]][release-date-url]
 [![ciTest][ci-test-shield]][ci-test-url]
 [![ciRelease][ci-release-shield]][ci-release-url] <br/>
@@ -231,6 +232,10 @@ This project is [MIT](./LICENSE) licensed.
 
 [release-date-shield]: https://img.shields.io/github/release-date/lobehub/lobe-lint?style=flat
 [release-date-url]: https://github.com/lobehub/lobe-lint/releases
+
+<!-- releaseDownload -->
+
+[release-download-shield]: https://img.shields.io/npm/dt/@lobehub/lint
 
 <!-- ciTest -->
 
