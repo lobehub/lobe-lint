@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.2](https://github.com/lobehub/lobe-lint/compare/v1.1.1...v1.1.2) (2023-06-08)
+
+### 💄 Styles
+
+- Add image file extensions to .prettierignore and add download count badge to README.md ([555c532](https://github.com/lobehub/lobe-lint/commit/555c532))
+
 ## [1.1.1](https://github.com/lobehub/lobe-lint/compare/v1.1.0...v1.1.1) (2023-06-08)
 
 ### 💄 Styles
