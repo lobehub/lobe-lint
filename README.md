@@ -80,13 +80,14 @@ curl -O https://raw.githubusercontent.com/lobehub/lobe-lint/master/.prettierigno
 
 ```text
 public-hoist-pattern[]=*@umijs/lint*
-public-hoist-pattern[]=*remark*
-public-hoist-pattern[]=*eslint*
-public-hoist-pattern[]=*stylelint*
-public-hoist-pattern[]=*prettier*
+public-hoist-pattern[]=*changelog*
 public-hoist-pattern[]=*commitlint*
+public-hoist-pattern[]=*eslint*
 public-hoist-pattern[]=*postcss*
+public-hoist-pattern[]=*prettier*
+public-hoist-pattern[]=*remark*
 public-hoist-pattern[]=*semantic-release*
+public-hoist-pattern[]=*stylelint*
 ```
 
 ### ESlint
