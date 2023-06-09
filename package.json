@@ -64,6 +64,7 @@
     "eslint-plugin-import": "latest",
     "eslint-plugin-simple-import-sort": "latest",
     "eslint-plugin-typescript-sort-keys": "latest",
+    "eslint-plugin-unused-imports": "latest",
     "postcss-less": "latest",
     "postcss-styled-syntax": "latest",
     "prettier-plugin-organize-imports": "latest",
