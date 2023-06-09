@@ -126,7 +126,7 @@ config can be found at `./src/changelog/index.ts`
 ```js
 // .changelogrc.js
 
-module.exports = require('@lobehub/lint/dist/commitlint');
+module.exports = require('@lobehub/lint/dist/changelog');
 ```
 
 ### Remark
