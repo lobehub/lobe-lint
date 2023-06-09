@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.1](https://github.com/lobehub/lobe-lint/compare/v1.2.0...v1.2.1) (2023-06-09)
+
+### 👷 Build System
+
+- update LICENSE ([8175954](https://github.com/lobehub/lobe-lint/commit/8175954))
+
 # [1.2.0](https://github.com/lobehub/lobe-lint/compare/v1.1.2...v1.2.0) (2023-06-09)
 
 ### ✨ Features
