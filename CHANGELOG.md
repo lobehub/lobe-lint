@@ -1,5 +1,11 @@
 # Changelog
 
+# [1.2.0](https://github.com/lobehub/lobe-lint/compare/v1.1.2...v1.2.0) (2023-06-09)
+
+### ✨ Features
+
+- **eslint**: add eslint-plugin-unused-imports ([0eb0f4d](https://github.com/lobehub/lobe-lint/commit/0eb0f4d))
+
 ## [1.1.2](https://github.com/lobehub/lobe-lint/compare/v1.1.1...v1.1.2) (2023-06-08)
 
 ### 💄 Styles
