@@ -72,6 +72,7 @@
     "prettier-plugin-sort-json": "latest",
     "remark-frontmatter": "latest",
     "remark-gfm": "latest",
+    "remark-lint": "latest",
     "remark-lint-checkbox-content-indent": "latest",
     "remark-lint-frontmatter-schema": "latest",
     "remark-lint-heading-whitespace": "latest",
@@ -115,7 +116,6 @@
     "prettier": "^2",
     "remark": "^14",
     "remark-cli": "^11",
-    "remark-lint": "^9",
     "semantic-release": "^21",
     "stylelint": "^15",
     "typescript": "^5"
