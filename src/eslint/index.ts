@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   extends: [require.resolve('@umijs/lint/dist/config/eslint')],
   plugins: ['simple-import-sort', 'import', 'typescript-sort-keys', 'unused-imports'],
   rules: {

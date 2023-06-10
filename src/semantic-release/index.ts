@@ -1,3 +1,3 @@
-module.exports = {
+export default {
   extends: ['semantic-release-config-gitmoji'],
 };

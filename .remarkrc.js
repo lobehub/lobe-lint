@@ -1,1 +1,1 @@
-module.exports = require('./dist/remarklint');
+module.exports = require('./dist').remarklint;

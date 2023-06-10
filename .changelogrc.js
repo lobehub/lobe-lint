@@ -1,1 +1,1 @@
-module.exports = require('./dist/changelog');
+module.exports = require('./dist').changelog;

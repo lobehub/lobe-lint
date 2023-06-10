@@ -92,72 +92,58 @@ public-hoist-pattern[]=*stylelint*
 
 ### ESlint
 
-config can be found at `./src/eslint/index.ts`
+config can be found at [`.eslintrc.js`](/src/eslint/index.ts)
 
 ```js
-// .eslintrc.js
-
-module.exports = require('@lobehub/lint/dist/eslint');
+module.exports = require('@lobehub/lint').eslint;
 ```
 
 ### Stylelint
 
-config can be found at `./src/stylelint/index.ts`
+config can be found at [`.stylelintrc.js`](/src/stylelint/index.ts)
 
 ```js
-// .stylelintrc.js
-
-module.exports = require('@lobehub/lint/dist/stylelint');
+module.exports = require('@lobehub/lint').stylelint;
 ```
 
 ### Commitlint
 
-config can be found at `./src/commitlint/index.ts`
+config can be found at [`.commitlintrc.js`](/src/commitlint/index.ts)
 
 ```js
-// .commitlintrc.js
-
-module.exports = require('@lobehub/lint/dist/commitlint');
+module.exports = require('@lobehub/lint').commitlint;
 ```
 
 ### Changelog
 
-config can be found at `./src/changelog/index.ts`
+config can be found at [`.changelogrc.js`](/src/changelog/index.ts)
 
 ```js
-// .changelogrc.js
-
-module.exports = require('@lobehub/lint/dist/changelog');
+module.exports = require('@lobehub/lint').changelog;
 ```
 
 ### Remark
 
-config can be found at `./src/remarklint/index.ts`
+config can be found at [`.remarkrc.js`](/src/remarklint/index.ts)
 
 ```js
-// .remarkrc.js
-
-module.exports = require('@lobehub/lint/dist/remarklint');
+module.exports = require('@lobehub/lint').remarklint;
 ```
 
 ### Prettier
 
-config can be found at `./src/prettier/index.ts`
+config can be found at [`.prettierrc.js`](/src/prettier/index.ts)
 
 ```js
-// .prettierrc.js
-
-module.exports = require('@lobehub/lint/dist/prettier');
+module.exports = require('@lobehub/lint').prettier;
 ```
 
 ### Semantic Release
 
-config can be found at `./src/semantic-release/index.ts`
+config can be found at [`.releaserc.js`](/src/semantic-release/index.ts)
 
 ```js
-// .releaserc.js
-
-module.exports = require('@lobehub/lint/dist/semantic-release');
+module.exports = require('@lobehub/lint').semanticRelease;
 ```
 
 <div align="right">

@@ -1,1 +1,1 @@
-module.exports = require('./dist/commitlint');
+module.exports = require('./dist').commitlint;

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   extends: [
     'stylelint-config-recommended',
     require.resolve('@umijs/lint/dist/config/stylelint'),

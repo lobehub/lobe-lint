@@ -1,1 +1,1 @@
-module.exports = require('./dist/eslint');
+module.exports = require('./dist').eslint;

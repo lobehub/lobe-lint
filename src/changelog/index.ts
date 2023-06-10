@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   newlineTimestamp: true,
   reduceHeadingLevel: true,
   addBackToTop: true,
