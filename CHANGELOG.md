@@ -2,6 +2,76 @@
 
 # Changelog
 
+# [Version 1.4.0](https://github.com/lobehub/lobe-lint/compare/v1.3.0...v1.4.0)
+
+<sup>Released on **2023-06-11**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Update config files to import from dist directory.
+
+#### ✨ Features
+
+- **config**: Add release rules for minor, patch and major releases based on commit type.
+- **semantic-release**: Update configs.
+- **misc**: Update config, update config \[force release].
+
+#### 🎫 Chores
+
+- **npmrc, package.json, src**: Update hoist patterns and packages.
+
+#### 🐛 Bug Fixes
+
+- **semantic-release**: Fix semantic-release config.
+
+#### 👷 Build System
+
+- **misc**: Update package.json.
+
+#### 📝 Documentation
+
+- **misc**: Update CHANGELOG.md \[skip ci].
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+##### Code refactoring
+
+- **misc**: Update config files to import from dist directory ([dac1221](https://github.com/lobehub/lobe-lint/commit/dac1221))
+
+##### What's improved
+
+- **config**: Add release rules for minor, patch and major releases based on commit type ([dabb122](https://github.com/lobehub/lobe-lint/commit/dabb122))
+- **semantic-release**: Update configs ([738941a](https://github.com/lobehub/lobe-lint/commit/738941a))
+- **misc**: Update config ([2f282fa](https://github.com/lobehub/lobe-lint/commit/2f282fa))
+- **misc**: Update config \[force release] ([96a8483](https://github.com/lobehub/lobe-lint/commit/96a8483))
+
+##### Chores
+
+- **npmrc, package.json, src**: Update hoist patterns and packages ([2c3c741](https://github.com/lobehub/lobe-lint/commit/2c3c741))
+
+##### What's fixed
+
+- **semantic-release**: Fix semantic-release config ([43a4858](https://github.com/lobehub/lobe-lint/commit/43a4858))
+
+##### Build system
+
+- **misc**: Update package.json ([6509087](https://github.com/lobehub/lobe-lint/commit/6509087))
+
+##### Documentation
+
+- **misc**: Update CHANGELOG.md \[skip ci] ([2345aa2](https://github.com/lobehub/lobe-lint/commit/2345aa2))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.3.0](https://github.com/lobehub/lobe-lint/compare/v1.2.1...v1.3.0)
 
 <sup>Released on **2023-06-10**</sup>
