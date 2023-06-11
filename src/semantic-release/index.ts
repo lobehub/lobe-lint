@@ -6,34 +6,38 @@ export default createConfig({
 # Changelog`,
   releaseRules: [
     {
-      type: '*feat*',
+      type: 'feat',
       release: 'minor',
     },
     {
-      type: '*fix*',
+      type: 'fix',
       release: 'patch',
     },
     {
-      type: '*perf*',
+      type: 'perf',
       release: 'patch',
     },
     {
-      type: '*style*',
+      type: 'style',
       release: 'patch',
     },
     {
-      type: '*refactor*',
+      type: 'refactor',
       release: 'patch',
     },
     {
-      type: '*build*',
+      type: 'build',
       release: 'patch',
     },
-    { type: '*docs*', scope: 'README', release: 'patch' },
-    { type: '*docs*', scope: 'README.md', release: 'patch' },
-    { type: '*docs*', release: false },
+    { type: 'docs', scope: 'README', release: 'patch' },
+    { type: 'docs', scope: 'README.md', release: 'patch' },
+    { type: 'docs', release: false },
     {
-      type: '*BREAKING CHANGE*',
+      type: 'BREAKING CHANGE',
+      release: 'major',
+    },
+    {
+      scope: 'BREAKING CHANGE',
       release: 'major',
     },
     {
