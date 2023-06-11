@@ -6,31 +6,15 @@
 
 <sup>Released on **2023-06-11**</sup>
 
-#### ♻ Code Refactoring
-
-- **misc**: Update config files to import from dist directory.
-
 #### ✨ Features
 
 - **config**: Add release rules for minor, patch and major releases based on commit type.
 - **semantic-release**: Update configs.
 - **misc**: Update config, update config \[force release].
 
-#### 🎫 Chores
-
-- **npmrc, package.json, src**: Update hoist patterns and packages.
-
 #### 🐛 Bug Fixes
 
 - **semantic-release**: Fix semantic-release config.
-
-#### 👷 Build System
-
-- **misc**: Update package.json.
-
-#### 📝 Documentation
-
-- **misc**: Update CHANGELOG.md \[skip ci].
 
 <br/>
 
