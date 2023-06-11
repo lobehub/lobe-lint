@@ -33,6 +33,22 @@ export default createConfig({
     { type: 'docs', scope: 'README.md', release: 'patch' },
     { type: 'docs', release: false },
     {
+      type: 'test',
+      release: false,
+    },
+    {
+      type: 'ci',
+      release: false,
+    },
+    {
+      type: 'chore',
+      release: false,
+    },
+    {
+      type: 'wip',
+      release: false,
+    },
+    {
       type: 'BREAKING CHANGE',
       release: 'major',
     },
@@ -45,6 +61,9 @@ export default createConfig({
       release: 'major',
     },
     { subject: '*force release*', release: 'patch' },
+    { subject: '*force patch*', release: 'patch' },
+    { subject: '*force minor*', release: 'minor' },
+    { subject: '*force major*', release: 'major' },
     { subject: '*skip release*', release: false },
   ],
 });

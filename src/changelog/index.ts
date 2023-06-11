@@ -1,4 +1,5 @@
 export default {
+  displayTypes: ['feat', 'fix', 'styles', 'pref', 'refactor'],
   newlineTimestamp: true,
   reduceHeadingLevel: true,
   addBackToTop: true,
