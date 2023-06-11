@@ -44,7 +44,7 @@ export default createConfig({
       subject: '*BREAKING CHANGE*',
       release: 'major',
     },
-    { subject: '*[force release]*', release: 'patch' },
-    { subject: '*[skip release]*', release: false },
+    { subject: '*force release*', release: 'patch' },
+    { subject: '*skip release*', release: false },
   ],
 });
