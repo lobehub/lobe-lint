@@ -1,1 +1,1 @@
-module.exports = require('./dist').prettier;
+module.exports = require('./dist').semanticRelease;
