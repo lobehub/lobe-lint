@@ -2,6 +2,33 @@
 
 # Changelog
 
+# [Version 1.5.0](https://github.com/lobehub/lobe-lint/compare/v1.4.0...v1.5.0)
+
+<sup>Released on **2023-06-11**</sup>
+
+#### ✨ Features
+
+- **changelog**: Add displayTypes options.
+- **config**: Add release rules for minor, patch and major releases based on commit type.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+##### What's improved
+
+- **changelog**: Add displayTypes options ([16faf66](https://github.com/lobehub/lobe-lint/commit/16faf66))
+- **config**: Add release rules for minor, patch and major releases based on commit type ([61224b6](https://github.com/lobehub/lobe-lint/commit/61224b6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 # [Version 1.4.0](https://github.com/lobehub/lobe-lint/compare/v1.3.0...v1.4.0)
 
 <sup>Released on **2023-06-11**</sup>
