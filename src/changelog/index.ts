@@ -1,5 +1,5 @@
 export default {
-  displayTypes: ['feat', 'fix', 'styles', 'pref', 'refactor'],
+  displayTypes: ['feat', 'fix', 'style', 'pref', 'refactor'],
   newlineTimestamp: true,
   reduceHeadingLevel: true,
   addBackToTop: true,
@@ -9,13 +9,13 @@ export default {
   },
   customTypeMap: {
     build: {
-      emojj: '📦',
+      emoji: '📦',
     },
     chore: {
-      emojj: '🔧',
+      emoji: '🔧',
     },
     ci: {
-      emojj: '👷',
+      emoji: '👷',
     },
   },
 };
