@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.6.0](https://github.com/lobehub/lobe-lint/compare/v1.5.1...v1.6.0)
+
+<sup>Released on **2023-06-16**</sup>
+
+#### ✨ Features
+
+- **eslint**: Add new plugins and rules.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint**: Add new plugins and rules ([d73cee2](https://github.com/lobehub/lobe-lint/commit/d73cee2))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.5.1](https://github.com/lobehub/lobe-lint/compare/v1.5.0...v1.5.1)
 
 <sup>Released on **2023-06-13**</sup>
