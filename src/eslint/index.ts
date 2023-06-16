@@ -28,14 +28,7 @@ export default {
     'unicorn/no-array-reduce': 0,
     'unicorn/prefer-logical-operator-over-ternary': 'warn',
     'unicorn/prefer-module': 'warn',
-    'unicorn/prevent-abbreviations': [
-      'error',
-      {
-        replacements: {
-          props: false,
-        },
-      },
-    ],
+    'unicorn/prevent-abbreviations': 0,
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
