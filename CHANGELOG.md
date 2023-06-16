@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.7.3](https://github.com/lobehub/lobe-lint/compare/v1.7.2...v1.7.3)
+
+<sup>Released on **2023-06-16**</sup>
+
+#### 💄 Styles
+
+- **prettier**: Add new Prettier rules.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **prettier**: Add new Prettier rules ([6eaf48f](https://github.com/lobehub/lobe-lint/commit/6eaf48f))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.7.2](https://github.com/lobehub/lobe-lint/compare/v1.7.1...v1.7.2)
 
 <sup>Released on **2023-06-16**</sup>
