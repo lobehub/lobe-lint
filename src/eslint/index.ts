@@ -25,8 +25,10 @@ export default {
     'typescript-sort-keys/interface': 'error',
     'typescript-sort-keys/string-enum': 'error',
     'unicorn/filename-case': 0,
+    'unicorn/no-array-for-each': 'warn',
     'unicorn/no-array-reduce': 0,
     'unicorn/no-nested-ternary': 0,
+    'unicorn/no-null': 'warn',
     'unicorn/prefer-logical-operator-over-ternary': 'warn',
     'unicorn/prefer-module': 'warn',
     'unicorn/prevent-abbreviations': [
