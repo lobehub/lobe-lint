@@ -1,12 +1,5 @@
 export default {
-  displayTypes: ['feat', 'fix', 'style', 'pref', 'refactor'],
-  newlineTimestamp: true,
-  reduceHeadingLevel: true,
   addBackToTop: true,
-  showSummary: true,
-  scopeDisplayName: {
-    '*': 'misc',
-  },
   customTypeMap: {
     build: {
       emoji: '📦',
@@ -18,4 +11,11 @@ export default {
       emoji: '👷',
     },
   },
+  displayTypes: ['feat', 'fix', 'style', 'pref', 'refactor'],
+  newlineTimestamp: true,
+  reduceHeadingLevel: true,
+  scopeDisplayName: {
+    '*': 'misc',
+  },
+  showSummary: true,
 };

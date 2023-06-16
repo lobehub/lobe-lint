@@ -4,29 +4,29 @@ export default {
     require.resolve('@umijs/lint/dist/config/stylelint'),
     'stylelint-config-clean-order',
   ],
-  plugins: ['stylelint-order'],
   overrides: [
     {
+      customSyntax: 'postcss-less',
       files: ['*.less', '*.css'],
       plugins: ['stylelint-less'],
-      customSyntax: 'postcss-less',
       rules: {
-        'function-no-unknown': null,
-        'at-rule-no-unknown': null,
+        'at-rule-no-unknown': undefined,
         'color-no-invalid-hex': true,
+        'function-no-unknown': undefined,
         'less/color-no-invalid-hex': true,
       },
     },
     {
-      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
       customSyntax: 'postcss-styled-syntax',
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
       rules: {
-        'value-no-vendor-prefix': true,
+        'no-empty-source': undefined,
+        'no-invalid-double-slash-comments': undefined,
+        'no-missing-end-of-source-newline': undefined,
         'property-no-vendor-prefix': true,
-        'no-empty-source': null,
-        'no-missing-end-of-source-newline': null,
-        'no-invalid-double-slash-comments': null,
+        'value-no-vendor-prefix': true,
       },
     },
   ],
+  plugins: ['stylelint-order'],
 };

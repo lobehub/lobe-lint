@@ -1,69 +1,70 @@
-const { createConfig } = require('semantic-release-config-gitmoji/lib/createConfig');
+import { type Options, createConfig } from 'semantic-release-config-gitmoji/lib/createConfig';
 
-export default createConfig({
+const options: Options | any = {
   changelogTitle: `<a name="readme-top"></a>
 
 # Changelog`,
   releaseRules: [
     {
-      type: 'feat',
       release: 'minor',
+      type: 'feat',
     },
     {
+      release: 'patch',
       type: 'fix',
-      release: 'patch',
     },
     {
+      release: 'patch',
       type: 'perf',
-      release: 'patch',
     },
     {
+      release: 'patch',
       type: 'style',
-      release: 'patch',
     },
     {
+      release: 'patch',
       type: 'refactor',
-      release: 'patch',
     },
     {
+      release: 'patch',
       type: 'build',
-      release: 'patch',
     },
-    { type: 'docs', scope: 'README', release: 'patch' },
-    { type: 'docs', scope: 'README.md', release: 'patch' },
-    { type: 'docs', release: false },
+    { release: 'patch', scope: 'README', type: 'docs' },
+    { release: 'patch', scope: 'README.md', type: 'docs' },
+    { release: false, type: 'docs' },
     {
+      release: false,
       type: 'test',
-      release: false,
     },
     {
+      release: false,
       type: 'ci',
-      release: false,
     },
     {
+      release: false,
       type: 'chore',
-      release: false,
     },
     {
+      release: false,
       type: 'wip',
-      release: false,
     },
     {
+      release: 'major',
       type: 'BREAKING CHANGE',
-      release: 'major',
     },
     {
+      release: 'major',
       scope: 'BREAKING CHANGE',
-      release: 'major',
     },
     {
-      subject: '*BREAKING CHANGE*',
       release: 'major',
+      subject: '*BREAKING CHANGE*',
     },
-    { subject: '*force release*', release: 'patch' },
-    { subject: '*force patch*', release: 'patch' },
-    { subject: '*force minor*', release: 'minor' },
-    { subject: '*force major*', release: 'major' },
-    { subject: '*skip release*', release: false },
+    { release: 'patch', subject: '*force release*' },
+    { release: 'patch', subject: '*force patch*' },
+    { release: 'minor', subject: '*force minor*' },
+    { release: 'major', subject: '*force major*' },
+    { release: false, subject: '*skip release*' },
   ],
-});
+};
+export default createConfig(options);

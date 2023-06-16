@@ -1,4 +1,15 @@
 export default {
+  importOrder: ['<THIRD_PARTY_MODULES>', '^@/(.*)$', '^[./]'],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+  overrides: [
+    {
+      files: '*.md',
+      options: {
+        proseWrap: 'preserve',
+      },
+    },
+  ],
   plugins: [
     require.resolve('prettier-plugin-organize-imports'),
     require.resolve('prettier-plugin-packagejson'),
@@ -9,15 +20,4 @@ export default {
   proseWrap: 'never',
   singleQuote: true,
   trailingComma: 'all',
-  importOrderSeparation: true,
-  importOrderSortSpecifiers: true,
-  importOrder: ['<THIRD_PARTY_MODULES>', '^@/(.*)$', '^[./]'],
-  overrides: [
-    {
-      files: '*.md',
-      options: {
-        proseWrap: 'preserve',
-      },
-    },
-  ],
 };
