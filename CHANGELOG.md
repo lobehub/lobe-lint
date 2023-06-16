@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.7.4](https://github.com/lobehub/lobe-lint/compare/v1.7.3...v1.7.4)
+
+<sup>Released on **2023-06-16**</sup>
+
+#### ♻ Code Refactoring
+
+- **eslint**: Remove custom abbreviation rule.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **eslint**: Remove custom abbreviation rule ([7301e47](https://github.com/lobehub/lobe-lint/commit/7301e47))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.7.3](https://github.com/lobehub/lobe-lint/compare/v1.7.2...v1.7.3)
 
 <sup>Released on **2023-06-16**</sup>
