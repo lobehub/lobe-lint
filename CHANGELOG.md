@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.6.1](https://github.com/lobehub/lobe-lint/compare/v1.6.0...v1.6.1)
+
+<sup>Released on **2023-06-16**</sup>
+
+#### ♻ Code Refactoring
+
+- **eslint-config**: Remove unused eslint plugins and rules.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **eslint-config**: Remove unused eslint plugins and rules ([4568381](https://github.com/lobehub/lobe-lint/commit/4568381))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.6.0](https://github.com/lobehub/lobe-lint/compare/v1.5.1...v1.6.0)
 
 <sup>Released on **2023-06-16**</sup>
