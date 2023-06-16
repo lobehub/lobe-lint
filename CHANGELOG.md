@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.7.2](https://github.com/lobehub/lobe-lint/compare/v1.7.1...v1.7.2)
+
+<sup>Released on **2023-06-16**</sup>
+
+#### 💄 Styles
+
+- **eslint**: Update eslint rules for unicorn/prevent-abbreviations.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **eslint**: Update eslint rules for unicorn/prevent-abbreviations ([847d6a2](https://github.com/lobehub/lobe-lint/commit/847d6a2))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.7.1](https://github.com/lobehub/lobe-lint/compare/v1.7.0...v1.7.1)
 
 <sup>Released on **2023-06-16**</sup>
