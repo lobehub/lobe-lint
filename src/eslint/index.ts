@@ -1,7 +1,6 @@
 export default {
-  extends: [require.resolve('@umijs/lint/dist/config/eslint'), 'plugin:unicorn/recommended'],
+  extends: [require.resolve('@umijs/lint/dist/config/eslint')],
   plugins: [
-    'unicorn',
     'import',
     'unused-imports',
     'simple-import-sort',
@@ -19,7 +18,6 @@ export default {
     'sort-keys-fix/sort-keys-fix': 'warn',
     'typescript-sort-keys/interface': 'warn',
     'typescript-sort-keys/string-enum': 'warn',
-    'unicorn/prefer-module': 'warn',
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
