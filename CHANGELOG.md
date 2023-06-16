@@ -2,6 +2,32 @@
 
 # Changelog
 
+## [Version 1.8.0](https://github.com/lobehub/lobe-lint/compare/v1.7.5...v1.8.0)
+
+<sup>Released on **2023-06-16**</sup>
+
+#### ✨ Features
+
+- **eslint**: Add new rules for unicorn/no-array-for-each and unicorn/no-null, update eslint config.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint**: Add new rules for unicorn/no-array-for-each and unicorn/no-null ([124cd9c](https://github.com/lobehub/lobe-lint/commit/124cd9c))
+- **eslint**: Update eslint config ([58594d6](https://github.com/lobehub/lobe-lint/commit/58594d6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.7.5](https://github.com/lobehub/lobe-lint/compare/v1.7.4...v1.7.5)
 
 <sup>Released on **2023-06-16**</sup>
