@@ -1,4 +1,5 @@
 export default {
+  $schema: 'https://json.schemastore.org/commitlintrc',
   extends: ['gitmoji'],
   rules: {
     'footer-leading-blank': [0, 'never'],

@@ -1,5 +1,10 @@
 export default {
-  extends: [require.resolve('@umijs/lint/dist/config/eslint'), 'plugin:unicorn/recommended'],
+  $schema: 'https://json.schemastore.org/eslintrc',
+  extends: [
+    'eslint:recommended',
+    require.resolve('@umijs/lint/dist/config/eslint'),
+    'plugin:unicorn/recommended',
+  ],
   plugins: [
     'unicorn',
     'import',

@@ -70,6 +70,7 @@
     "postcss-styled-syntax": "latest",
     "prettier-plugin-organize-imports": "latest",
     "prettier-plugin-packagejson": "latest",
+    "prettier-plugin-sh": "latest",
     "prettier-plugin-sort-json": "latest",
     "remark-frontmatter": "latest",
     "remark-gfm": "latest",

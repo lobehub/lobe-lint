@@ -1,4 +1,5 @@
 export default {
+  $schema: 'https://json.schemastore.org/remarkrc',
   plugins: [
     'remark-gfm',
     'remark-frontmatter',

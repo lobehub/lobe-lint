@@ -1,7 +1,8 @@
 export default {
+  $schema: 'https://json.schemastore.org/stylelintrc',
   extends: [
-    'stylelint-config-recommended',
     require.resolve('@umijs/lint/dist/config/stylelint'),
+    'stylelint-config-recommended',
     'stylelint-config-clean-order',
   ],
   overrides: [

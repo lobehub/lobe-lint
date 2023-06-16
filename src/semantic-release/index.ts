@@ -67,4 +67,7 @@ const options: Options | any = {
     { release: false, subject: '*skip release*' },
   ],
 };
-export default createConfig(options);
+export default {
+  $schema: 'https://json.schemastore.org/semantic-release',
+  ...createConfig(options),
+};
