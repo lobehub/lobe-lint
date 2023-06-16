@@ -64,6 +64,7 @@
     "eslint-plugin-simple-import-sort": "latest",
     "eslint-plugin-sort-keys-fix": "latest",
     "eslint-plugin-typescript-sort-keys": "latest",
+    "eslint-plugin-unicorn": "latest",
     "eslint-plugin-unused-imports": "latest",
     "postcss-less": "latest",
     "postcss-styled-syntax": "latest",
