@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.8.1](https://github.com/lobehub/lobe-lint/compare/v1.8.0...v1.8.1)
+
+<sup>Released on **2023-07-07**</sup>
+
+#### 🐛 Bug Fixes
+
+- **eslint**: Add ProcessEnv to abbreviations list.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **eslint**: Add ProcessEnv to abbreviations list ([1a471a6](https://github.com/lobehub/lobe-lint/commit/1a471a6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.8.0](https://github.com/lobehub/lobe-lint/compare/v1.7.5...v1.8.0)
 
 <sup>Released on **2023-06-16**</sup>
