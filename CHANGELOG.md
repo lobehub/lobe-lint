@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.8.2](https://github.com/lobehub/lobe-lint/compare/v1.8.1...v1.8.2)
+
+<sup>Released on **2023-07-07**</sup>
+
+#### 🐛 Bug Fixes
+
+- **eslint**: Rm env from abbreviations.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **eslint**: Rm env from abbreviations ([2d04f48](https://github.com/lobehub/lobe-lint/commit/2d04f48))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.8.1](https://github.com/lobehub/lobe-lint/compare/v1.8.0...v1.8.1)
 
 <sup>Released on **2023-07-07**</sup>
