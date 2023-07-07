@@ -35,6 +35,7 @@ export default {
       'error',
       {
         replacements: {
+          ProcessEnv: false,
           e: false,
           props: false,
           res: false,
