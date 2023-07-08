@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.9.0](https://github.com/lobehub/lobe-lint/compare/v1.8.2...v1.9.0)
+
+<sup>Released on **2023-07-08**</sup>
+
+#### ✨ Features
+
+- **eslint**: Update coding conventions rules in "index.ts".
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint**: Update coding conventions rules in "index.ts" ([aee57d1](https://github.com/lobehub/lobe-lint/commit/aee57d1))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.8.2](https://github.com/lobehub/lobe-lint/compare/v1.8.1...v1.8.2)
 
 <sup>Released on **2023-07-07**</sup>
