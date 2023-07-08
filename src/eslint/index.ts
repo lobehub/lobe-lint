@@ -30,18 +30,8 @@ export default {
     'unicorn/no-nested-ternary': 0,
     'unicorn/no-null': 'warn',
     'unicorn/prefer-logical-operator-over-ternary': 'warn',
-    'unicorn/prefer-module': 'warn',
-    'unicorn/prevent-abbreviations': [
-      'error',
-      {
-        replacements: {
-          e: false,
-          env: false,
-          props: false,
-          res: false,
-        },
-      },
-    ],
+    'unicorn/prefer-module': 0,
+    'unicorn/prevent-abbreviations': 0,
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
