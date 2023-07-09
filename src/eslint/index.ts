@@ -38,6 +38,7 @@ export default {
     'unicorn/prefer-spread': 'warn',
     'unicorn/prefer-string-replace-all': 'warn',
     'unicorn/prevent-abbreviations': 0,
+    'unicorn/switch-case-braces': 'warn',
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
