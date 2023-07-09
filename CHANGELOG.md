@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.12.0](https://github.com/lobehub/lobe-lint/compare/v1.11.0...v1.12.0)
+
+<sup>Released on **2023-07-09**</sup>
+
+#### ✨ Features
+
+- **eslint**: Add "unicorn/switch-case-braces" rule with warning level.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint**: Add "unicorn/switch-case-braces" rule with warning level ([3dddf3d](https://github.com/lobehub/lobe-lint/commit/3dddf3d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.11.0](https://github.com/lobehub/lobe-lint/compare/v1.10.0...v1.11.0)
 
 <sup>Released on **2023-07-09**</sup>
