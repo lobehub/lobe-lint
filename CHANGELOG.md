@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.10.0](https://github.com/lobehub/lobe-lint/compare/v1.9.0...v1.10.0)
+
+<sup>Released on **2023-07-09**</sup>
+
+#### ✨ Features
+
+- **eslint**: Add warnings for "no-empty", "unicorn/explicit-length-check", and "unicorn/no-empty-file" rules.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint**: Add warnings for "no-empty", "unicorn/explicit-length-check", and "unicorn/no-empty-file" rules ([51c8ce6](https://github.com/lobehub/lobe-lint/commit/51c8ce6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.9.0](https://github.com/lobehub/lobe-lint/compare/v1.8.2...v1.9.0)
 
 <sup>Released on **2023-07-08**</sup>
