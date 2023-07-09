@@ -32,8 +32,11 @@ export default {
     'unicorn/no-empty-file': 'warn',
     'unicorn/no-nested-ternary': 0,
     'unicorn/no-null': 'warn',
+    'unicorn/prefer-code-point': 'warn',
     'unicorn/prefer-logical-operator-over-ternary': 'warn',
     'unicorn/prefer-module': 0,
+    'unicorn/prefer-spread': 'warn',
+    'unicorn/prefer-string-replace-all': 'warn',
     'unicorn/prevent-abbreviations': 0,
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [

@@ -115,12 +115,16 @@
     "father": "^4",
     "husky": "^8",
     "lint-staged": "^13",
-    "prettier": "^2",
+    "prettier": "^3",
     "remark": "^14",
     "remark-cli": "^11",
     "semantic-release": "^21",
     "stylelint": "^15",
     "typescript": "^5"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.42",
+    "prettier": ">=3"
   },
   "publishConfig": {
     "access": "public",
