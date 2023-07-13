@@ -1,6 +1,6 @@
 import { type Options, createConfig } from 'semantic-release-config-gitmoji/lib/createConfig';
 
-const options: Options | any = {
+export const options: Options = {
   changelogTitle: `<a name="readme-top"></a>
 
 # Changelog`,
@@ -66,7 +66,7 @@ const options: Options | any = {
     { release: 'major', subject: '*force major*' },
     { release: false, subject: '*skip release*' },
   ],
-};
+} as Options;
 export default {
   $schema: 'https://json.schemastore.org/semantic-release',
   ...createConfig(options),
