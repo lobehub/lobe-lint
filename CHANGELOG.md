@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.15.0](https://github.com/lobehub/lobe-lint/compare/v1.14.0...v1.15.0)
+
+<sup>Released on **2023-08-25**</sup>
+
+#### ✨ Features
+
+- **misc**: Add new dependencies and update ESLint configuration.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add new dependencies and update ESLint configuration ([1d92c16](https://github.com/lobehub/lobe-lint/commit/1d92c16))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.14.0](https://github.com/lobehub/lobe-lint/compare/v1.13.0...v1.14.0)
 
 <sup>Released on **2023-08-25**</sup>
