@@ -200,7 +200,7 @@ $ npm start
 
 #### 📝 License
 
-Copyright © 2023 [LobeHub][profile-url]. <br />
+Copyright © 2023 ~ present [LobeHub][profile-url]. <br />
 This project is [MIT](./LICENSE) licensed.
 
 <!-- LINK GROUP -->
