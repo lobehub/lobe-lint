@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.14.0](https://github.com/lobehub/lobe-lint/compare/v1.13.0...v1.14.0)
+
+<sup>Released on **2023-08-25**</sup>
+
+#### ✨ Features
+
+- **misc**: Add TypeScript, Jest, and React dependencies and plugins.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add TypeScript, Jest, and React dependencies and plugins ([898dbc9](https://github.com/lobehub/lobe-lint/commit/898dbc9))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.13.0](https://github.com/lobehub/lobe-lint/compare/v1.12.0...v1.13.0)
 
 <sup>Released on **2023-07-13**</sup>
