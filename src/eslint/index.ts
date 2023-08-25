@@ -1,10 +1,44 @@
+import rules, {
+  jest as jestRules,
+  typescript as tsRules,
+} from '@umijs/lint/dist/config/eslint/rules/recommended';
+
 export default {
   $schema: 'https://json.schemastore.org/eslintrc',
-  extends: [
-    'eslint:recommended',
-    require.resolve('@umijs/lint/dist/config/eslint'),
-    'plugin:unicorn/recommended',
+  env: {
+    browser: true,
+    es2022: true,
+    jest: true,
+    node: true,
+  },
+  extends: ['eslint:recommended', 'plugin:unicorn/recommended'],
+  overrides: [
+    {
+      files: ['**/*.{ts,tsx}'],
+      parser: require.resolve('@typescript-eslint/parser'),
+      plugins: ['@typescript-eslint/eslint-plugin'],
+      rules: tsRules,
+    },
+    {
+      files: ['**/*.{test,spec,unit,e2e}.{ts,tsx,js,jsx}'],
+      plugins: ['jest'],
+      rules: jestRules,
+    },
   ],
+  parser: require.resolve('@babel/eslint-parser'),
+  parserOptions: {
+    babelOptions: {
+      babelrc: false,
+      browserslistConfigFile: false,
+      configFile: false,
+      presets: [require.resolve('@umijs/babel-preset-umi')],
+    },
+    ecmaFeatures: {
+      jsx: true,
+    },
+    requireConfigFile: false,
+    tsconfigRootDir: __dirname,
+  },
   plugins: [
     'unicorn',
     'import',
@@ -12,12 +46,16 @@ export default {
     'simple-import-sort',
     'sort-keys-fix',
     'typescript-sort-keys',
+    'react',
+    'react-hooks',
   ],
   rules: {
+    ...rules,
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
     'no-empty': 'warn',
+    'no-extra-boolean-cast': 'warn',
     'no-unused-vars': 0,
     'react/jsx-no-useless-fragment': 'error',
     'react/jsx-sort-props': 'error',
@@ -30,13 +68,17 @@ export default {
     'unicorn/no-array-for-each': 'warn',
     'unicorn/no-array-reduce': 0,
     'unicorn/no-empty-file': 'warn',
+    'unicorn/no-negated-condition': 'warn',
     'unicorn/no-nested-ternary': 0,
     'unicorn/no-null': 'warn',
+    'unicorn/no-typeof-undefined': 'warn',
+    'unicorn/no-useless-undefined': 'warn',
     'unicorn/prefer-code-point': 'warn',
-    'unicorn/prefer-logical-operator-over-ternary': 'warn',
+    'unicorn/prefer-logical-operator-over-ternary': 0,
     'unicorn/prefer-module': 0,
     'unicorn/prefer-spread': 'warn',
     'unicorn/prefer-string-replace-all': 'warn',
+    'unicorn/prefer-type-error': 'warn',
     'unicorn/prevent-abbreviations': 0,
     'unicorn/switch-case-braces': 'warn',
     'unused-imports/no-unused-imports': 'error',
@@ -44,5 +86,10 @@ export default {
       'warn',
       { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^_' },
     ],
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
 };
