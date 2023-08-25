@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.15.1](https://github.com/lobehub/lobe-lint/compare/v1.15.0...v1.15.1)
+
+<sup>Released on **2023-08-25**</sup>
+
+#### 💄 Styles
+
+- **misc**: Update ESLint rules for TypeScript project.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Update ESLint rules for TypeScript project ([56314d0](https://github.com/lobehub/lobe-lint/commit/56314d0))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.15.0](https://github.com/lobehub/lobe-lint/compare/v1.14.0...v1.15.0)
 
 <sup>Released on **2023-08-25**</sup>

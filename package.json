@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/lint",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "homepage": "https://github.com/lobehub/lobe-lint",
   "bugs": {
     "url": "https://github.com/lobehub/lobe-lint/issues/new"
