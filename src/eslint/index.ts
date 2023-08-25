@@ -16,7 +16,6 @@ export default {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:unicorn/recommended',
-    '@microsoft/eslint-config-spfx/lib/profiles/react',
   ],
   overrides: [
     {
