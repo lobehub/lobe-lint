@@ -55,12 +55,14 @@
     ]
   },
   "dependencies": {
+    "@microsoft/eslint-config-spfx": "latest",
     "@trivago/prettier-plugin-sort-imports": "latest",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "@umijs/babel-preset-umi": "latest",
     "@umijs/lint": "latest",
     "commitlint-config-gitmoji": "latest",
+    "eslint-config-prettier": "latest",
     "eslint-import-resolver-alias": "latest",
     "eslint-import-resolver-typescript": "latest",
     "eslint-plugin-import": "latest",

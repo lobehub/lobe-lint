@@ -11,7 +11,13 @@ export default {
     jest: true,
     node: true,
   },
-  extends: ['eslint:recommended', 'plugin:unicorn/recommended'],
+  extends: [
+    'prettier',
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:unicorn/recommended',
+    '@microsoft/eslint-config-spfx/lib/profiles/react',
+  ],
   overrides: [
     {
       files: ['**/*.{ts,tsx}'],
