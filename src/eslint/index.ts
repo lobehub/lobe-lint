@@ -1,49 +1,10 @@
-import rules, {
-  jest as jestRules,
-  typescript as tsRules,
-} from '@umijs/lint/dist/config/eslint/rules/recommended';
-
 export default {
   $schema: 'https://json.schemastore.org/eslintrc',
-  env: {
-    browser: true,
-    es2022: true,
-    jest: true,
-    node: true,
-  },
   extends: [
-    'prettier',
     'eslint:recommended',
-    'plugin:react/recommended',
+    require.resolve('@umijs/lint/dist/config/eslint'),
     'plugin:unicorn/recommended',
   ],
-  overrides: [
-    {
-      files: ['**/*.{ts,tsx}'],
-      parser: require.resolve('@typescript-eslint/parser'),
-      plugins: ['@typescript-eslint/eslint-plugin'],
-      rules: tsRules,
-    },
-    {
-      files: ['**/*.{test,spec,unit,e2e}.{ts,tsx,js,jsx}'],
-      plugins: ['jest'],
-      rules: jestRules,
-    },
-  ],
-  parser: require.resolve('@babel/eslint-parser'),
-  parserOptions: {
-    babelOptions: {
-      babelrc: false,
-      browserslistConfigFile: false,
-      configFile: false,
-      presets: [require.resolve('@umijs/babel-preset-umi')],
-    },
-    ecmaFeatures: {
-      jsx: true,
-    },
-    requireConfigFile: false,
-    tsconfigRootDir: __dirname,
-  },
   plugins: [
     'unicorn',
     'import',
@@ -51,11 +12,8 @@ export default {
     'simple-import-sort',
     'sort-keys-fix',
     'typescript-sort-keys',
-    'react',
-    'react-hooks',
   ],
   rules: {
-    ...rules,
     '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/no-explicit-any': 0,
     'import/first': 'error',
@@ -96,10 +54,5 @@ export default {
       'warn',
       { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^_' },
     ],
-  },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
+  }
 };
