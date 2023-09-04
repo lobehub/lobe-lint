@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.16.0](https://github.com/lobehub/lobe-lint/compare/v1.15.2...v1.16.0)
+
+<sup>Released on **2023-09-04**</sup>
+
+#### ✨ Features
+
+- **misc**: Update eslint with umiji/lint.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update eslint with umiji/lint ([fe602c3](https://github.com/lobehub/lobe-lint/commit/fe602c3))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.15.2](https://github.com/lobehub/lobe-lint/compare/v1.15.1...v1.15.2)
 
 <sup>Released on **2023-08-25**</sup>
