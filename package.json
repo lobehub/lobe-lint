@@ -121,7 +121,7 @@
     "eslint": "^8",
     "father": "^4",
     "husky": "^8",
-    "lint-staged": "^13",
+    "lint-staged": "^14",
     "prettier": "^3",
     "remark": "^14",
     "remark-cli": "^11",
