@@ -206,58 +206,28 @@ $ npm start
 
 #### 📝 License
 
-Copyright © 2023 ~ present [LobeHub][profile-url]. <br />
+Copyright © 2023 \~ present [LobeHub][profile-url]. <br />
 This project is [MIT](./LICENSE) licensed.
 
 <!-- LINK GROUP -->
 
-[profile-url]: https://github.com/lobehub
-[gitpod-url]: https://gitpod.io/#https://github.com/lobehub/lobe-lint
-
-<!-- SHIELD LINK GROUP -->
-
 [back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square
-
-<!-- release -->
-
-[release-shield]: https://img.shields.io/npm/v/@lobehub/lint?label=%F0%9F%A4%AF%20NPM
-[release-url]: https://www.npmjs.com/package/@lobehub/lint
-
-<!-- releaseDate -->
-
-[release-date-shield]: https://img.shields.io/github/release-date/lobehub/lobe-lint?style=flat
-[release-date-url]: https://github.com/lobehub/lobe-lint/releases
-
-<!-- releaseDownload -->
-
-[release-download-shield]: https://img.shields.io/npm/dt/@lobehub/lint
-
-<!-- ciTest -->
-
-[ci-test-shield]: https://github.com/lobehub/lobe-lint/workflows/Test%20CI/badge.svg
-[ci-test-url]: https://github.com/lobehub/lobe-lint/actions/workflows/test.yml
-
-<!-- ciRelease -->
-
 [ci-release-shield]: https://github.com/lobehub/lobe-lint/workflows/Build%20and%20Release/badge.svg
 [ci-release-url]: https://github.com/lobehub/lobe-lint/actions/workflows/release.yml
-
-<!-- contributors -->
-
+[ci-test-shield]: https://github.com/lobehub/lobe-lint/workflows/Test%20CI/badge.svg
+[ci-test-url]: https://github.com/lobehub/lobe-lint/actions/workflows/test.yml
 [contributors-shield]: https://img.shields.io/github/contributors/lobehub/lobe-lint.svg?style=flat
 [contributors-url]: https://github.com/lobehub/lobe-lint/graphs/contributors
-
-<!-- forks -->
-
 [forks-shield]: https://img.shields.io/github/forks/lobehub/lobe-lint.svg?style=flat
 [forks-url]: https://github.com/lobehub/lobe-lint/network/members
-
-<!-- stargazers -->
-
-[stargazers-shield]: https://img.shields.io/github/stars/lobehub/lobe-lint.svg?style=flat
-[stargazers-url]: https://github.com/lobehub/lobe-lint/stargazers
-
-<!-- issues -->
-
+[gitpod-url]: https://gitpod.io/#https://github.com/lobehub/lobe-lint
 [issues-shield]: https://img.shields.io/github/issues/lobehub/lobe-lint.svg?style=flat
 [issues-url]: https://github.com/lobehub/lobe-lint/issues/new/choose
+[profile-url]: https://github.com/lobehub
+[release-date-shield]: https://img.shields.io/github/release-date/lobehub/lobe-lint?style=flat
+[release-date-url]: https://github.com/lobehub/lobe-lint/releases
+[release-download-shield]: https://img.shields.io/npm/dt/@lobehub/lint
+[release-shield]: https://img.shields.io/npm/v/@lobehub/lint?label=%F0%9F%A4%AF%20NPM
+[release-url]: https://www.npmjs.com/package/@lobehub/lint
+[stargazers-shield]: https://img.shields.io/github/stars/lobehub/lobe-lint.svg?style=flat
+[stargazers-url]: https://github.com/lobehub/lobe-lint/stargazers

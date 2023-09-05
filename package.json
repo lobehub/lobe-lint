@@ -105,6 +105,8 @@
     "remark-preset-lint-consistent": "latest",
     "remark-preset-lint-markdown-style-guide": "latest",
     "remark-preset-lint-recommended": "latest",
+    "remark-remove-unused-definitions": "latest",
+    "remark-sort-definitions": "latest",
     "remark-toc": "latest",
     "semantic-release-config-gitmoji": "latest",
     "stylelint-config-clean-order": "latest",

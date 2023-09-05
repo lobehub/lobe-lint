@@ -4,6 +4,11 @@ export default {
     'remark-gfm',
     'remark-frontmatter',
 
+    // ----- Plugin -----------------------------------------------------------
+    'remark-sort-definitions',
+    ['remark-toc', { heading: 'TOC', maxDepth: 3 }],
+    'remark-remove-unused-definitions',
+
     // ----- Presets -----------------------------------------------------------
     'remark-preset-lint-markdown-style-guide',
     'remark-preset-lint-recommended',
@@ -26,7 +31,6 @@ export default {
     'remark-lint-no-empty-sections',
     'remark-lint-write-good',
     'remark-lint-frontmatter-schema',
-    ['remark-toc', { heading: 'TOC', maxDepth: 3 }],
 
     // ----- Overrides ---------------------------------------------------------
     ['remark-lint-list-item-indent', 'space'],
