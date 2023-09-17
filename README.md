@@ -63,15 +63,15 @@ To install Lobe Lint, run the following command:
 [![][bun-shield]][bun-link]
 
 ```bash
-bun add @lobehub/lint -D
+$ bun add @lobehub/lint -D
 ```
 
 To use template ignore files, run the following command:
 
 ```bash
-curl -O https://raw.githubusercontent.com/lobehub/lobe-lint/master/.eslintignore
-curl -O https://raw.githubusercontent.com/lobehub/lobe-lint/master/.gitignore
-curl -O https://raw.githubusercontent.com/lobehub/lobe-lint/master/.prettierignore
+$ curl -O https://raw.githubusercontent.com/lobehub/lobe-lint/master/.eslintignore
+$ curl -O https://raw.githubusercontent.com/lobehub/lobe-lint/master/.gitignore
+$ curl -O https://raw.githubusercontent.com/lobehub/lobe-lint/master/.prettierignore
 ```
 
 <div align="right">
