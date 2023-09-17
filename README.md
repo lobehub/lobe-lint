@@ -228,10 +228,10 @@ This project is [MIT](./LICENSE) licensed.
 [github-stars-link]: https://github.com/lobehub/lobe-lint/network/stargazers
 [github-stars-shield]: https://img.shields.io/github/stars/lobehub/lobe-lint?color=ffcb47&labelColor=black&style=flat-square
 [issues-link]: https://github.com/lobehub/lobe-lint/issues/new/choose
-[npm-downloads-link]: https://www.npmjs.com/package/@lobehub/ui
-[npm-downloads-shield]: https://img.shields.io/npm/dt/@lobehub/ui?labelColor=black&style=flat-square
-[npm-release-link]: https://www.npmjs.com/package/@lobehub/ui
-[npm-release-shield]: https://img.shields.io/npm/v/@lobehub/ui?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
+[npm-downloads-link]: https://www.npmjs.com/package/@lobehub/lint
+[npm-downloads-shield]: https://img.shields.io/npm/dt/@lobehub/lint?labelColor=black&style=flat-square
+[npm-release-link]: https://www.npmjs.com/package/@lobehub/lint
+[npm-release-shield]: https://img.shields.io/npm/v/@lobehub/lint?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [pr-welcome-link]: https://github.com/lobehub/lobe-chat/pulls
 [pr-welcome-shield]: https://img.shields.io/badge/🤯_pr_welcome-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
 [profile-link]: https://github.com/lobehub
