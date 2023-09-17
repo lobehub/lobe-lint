@@ -14,17 +14,6 @@ body:
         - Other
     validations:
       required: true
-  - type: dropdown
-    attributes:
-      label: '🌐 浏览器 | Browser'
-      options:
-        - Chrome
-        - Edge
-        - Safari
-        - Firefox
-        - Other
-    validations:
-      required: true
   - type: textarea
     attributes:
       label: '🐛 问题描述 | Bug Description'

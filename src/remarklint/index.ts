@@ -1,8 +1,14 @@
+const replaceNBSP = (str: string) => {
+  return str.replaceAll(' ', ' ');
+};
+
 export default {
   $schema: 'https://json.schemastore.org/remarkrc',
   plugins: [
     'remark-gfm',
     'remark-frontmatter',
+    'remark-pangu',
+    ['remark-textr', { plugins: [replaceNBSP] }],
 
     // ----- Plugin -----------------------------------------------------------
     'remark-sort-definitions',

@@ -17,6 +17,7 @@ node_modules
 *.log
 *.lock
 package-lock.json
+bun.lockb
 
 # ci
 .coverage
