@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.18.0](https://github.com/lobehub/lobe-lint/compare/v1.17.0...v1.18.0)
+
+<sup>Released on **2023-09-17**</sup>
+
+#### ✨ Features
+
+- **misc**: Update remark setting.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update remark setting ([c457ae0](https://github.com/lobehub/lobe-lint/commit/c457ae0))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.17.0](https://github.com/lobehub/lobe-lint/compare/v1.16.0...v1.17.0)
 
 <sup>Released on **2023-09-05**</sup>
