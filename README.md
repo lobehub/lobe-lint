@@ -36,9 +36,7 @@ ESlint config, Prettier config, Remark config for LobeHub
 #### TOC
 
 - [📦 Installation](#-installation)
-
 - [🤯 Usage](#-usage)
-
   - [.npmrc](#npmrc)
   - [ESlint](#eslint)
   - [Stylelint](#stylelint)
@@ -47,9 +45,7 @@ ESlint config, Prettier config, Remark config for LobeHub
   - [Remark](#remark)
   - [Prettier](#prettier)
   - [Semantic Release](#semantic-release)
-
 - [⌨️ Local Development](#️-local-development)
-
 - [🤝 Contributing](#-contributing)
 
 ####
@@ -211,9 +207,9 @@ This project is [MIT](./LICENSE) licensed.
 [contributors-url]: https://github.com/lobehub/lobe-lint/graphs/contributors
 [discord-link]: https://discord.gg/AYFPHvv2jT
 [discord-shield]: https://img.shields.io/discord/1127171173982154893?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square
-[github-action-release-link]: https://github.com/actions/workflows/lobehub/lobe-lint/release.yml
+[github-action-release-link]: https://github.com/lobehub/lobe-lint/actions/workflows/release.yml
 [github-action-release-shield]: https://img.shields.io/github/actions/workflow/status/lobehub/lobe-lint/release.yml?label=release&labelColor=black&logo=githubactions&logoColor=white&style=flat-square
-[github-action-test-link]: https://github.com/actions/workflows/lobehub/lobe-lint/test.yml
+[github-action-test-link]: https://github.com/lobehub/lobe-lint/actions/workflows/test.yml
 [github-action-test-shield]: https://img.shields.io/github/actions/workflow/status/lobehub/lobe-lint/test.yml?label=test&labelColor=black&logo=githubactions&logoColor=white&style=flat-square
 [github-contributors-link]: https://github.com/lobehub/lobe-lint/graphs/contributors
 [github-contributors-shield]: https://img.shields.io/github/contributors/lobehub/lobe-lint?color=c4f042&labelColor=black&style=flat-square
