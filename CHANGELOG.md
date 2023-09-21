@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.18.1](https://github.com/lobehub/lobe-lint/compare/v1.18.0...v1.18.1)
+
+<sup>Released on **2023-09-21**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix remark-gfm deps.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix remark-gfm deps ([1e1408f](https://github.com/lobehub/lobe-lint/commit/1e1408f))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.18.0](https://github.com/lobehub/lobe-lint/compare/v1.17.0...v1.18.0)
 
 <sup>Released on **2023-09-17**</sup>
