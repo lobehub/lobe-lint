@@ -80,7 +80,7 @@
     "prettier-plugin-sh": "^0.13",
     "prettier-plugin-sort-json": "^3",
     "remark-frontmatter": "^5",
-    "remark-gfm": "^3",
+    "remark-gfm": "^4.0.0",
     "remark-lint": "^9",
     "remark-lint-checkbox-content-indent": "^4",
     "remark-lint-frontmatter-schema": "^3",
