@@ -123,7 +123,7 @@
     "clean-pkg-json": "^1",
     "commitlint": "^18.0.0",
     "eslint": "^8",
-    "father": "4.3.1",
+    "father": "4.3.6",
     "husky": "^8",
     "lint-staged": "^15.0.0",
     "prettier": "^3",
