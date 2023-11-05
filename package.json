@@ -71,7 +71,7 @@
     "eslint-plugin-simple-import-sort": "^10",
     "eslint-plugin-sort-keys-fix": "^1",
     "eslint-plugin-typescript-sort-keys": "^3",
-    "eslint-plugin-unicorn": "^48",
+    "eslint-plugin-unicorn": "^49.0.0",
     "eslint-plugin-unused-imports": "^3",
     "postcss-less": "^6",
     "postcss-styled-syntax": "^0.5",
