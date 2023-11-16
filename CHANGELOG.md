@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.19.0](https://github.com/lobehub/lobe-lint/compare/v1.18.1...v1.19.0)
+
+<sup>Released on **2023-11-16**</sup>
+
+#### ✨ Features
+
+- **misc**: Update dependencies and modify code in TypeScript files.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update dependencies and modify code in TypeScript files ([0786757](https://github.com/lobehub/lobe-lint/commit/0786757))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.18.1](https://github.com/lobehub/lobe-lint/compare/v1.18.0...v1.18.1)
 
 <sup>Released on **2023-09-21**</sup>
