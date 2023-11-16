@@ -12,16 +12,13 @@ export function remarkGfmHighlight() {
     visit(tree, 'blockquote', (node: any) => {
       visit(node.children[0], 'strong', (subnode: any) => {
         if (subnode.position.start.column !== 3) return;
-        let value: string;
         visit(subnode, 'text', (textnode: any) => {
-          if (['Note', 'Tip', 'Important', 'Warning', 'Caution'].includes(textnode.value)) {
-            for (const item of gfmHighlight) {
-              if (item.from === textnode.value) value = item.to;
-            }
-          }
-          if (value) {
+          if (!['Note', 'Tip', 'Important', 'Warning', 'Caution'].includes(textnode.value)) return;
+          for (const item of gfmHighlight) {
+            if (item.from !== textnode.value) continue;
             subnode.type = 'text';
-            subnode.value = value;
+            subnode.value = item.to;
+            return;
           }
         });
       });
