@@ -1,6 +1,5 @@
-const replaceNBSP = (str: string) => {
-  return str.replaceAll(' ', ' ');
-};
+import { remarkGfmHighlight } from './remarkGfmHighlight';
+import { replaceNBSP } from './remarkTextrPlugins';
 
 export default {
   $schema: 'https://json.schemastore.org/remarkrc',
@@ -9,6 +8,7 @@ export default {
     'remark-frontmatter',
     'remark-pangu',
     ['remark-textr', { plugins: [replaceNBSP] }],
+    remarkGfmHighlight,
 
     // ----- Plugin -----------------------------------------------------------
     'remark-sort-definitions',
@@ -50,9 +50,11 @@ export default {
   ],
   settings: {
     bullet: '-',
+    emphasis: '*',
     fences: true,
     listItemIndent: 1,
     rule: '-',
+    strong: '*',
     tightDefinitions: true,
   },
 };

@@ -71,8 +71,9 @@
     "eslint-plugin-simple-import-sort": "^10",
     "eslint-plugin-sort-keys-fix": "^1",
     "eslint-plugin-typescript-sort-keys": "^3",
-    "eslint-plugin-unicorn": "^48",
+    "eslint-plugin-unicorn": "^49",
     "eslint-plugin-unused-imports": "^3",
+    "gatsby-remark-find-replace": "^0.3.0",
     "postcss-less": "^6",
     "postcss-styled-syntax": "^0.5",
     "prettier-plugin-organize-imports": "^3",
@@ -114,7 +115,8 @@
     "stylelint-config-clean-order": "^5",
     "stylelint-config-recommended": "^13",
     "stylelint-less": "^2",
-    "stylelint-order": "^6"
+    "stylelint-order": "^6",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^18",
