@@ -10,15 +10,13 @@ export function remarkGfmHighlight() {
   return async (tree: any) => {
     const { visit } = await import('unist-util-visit');
     visit(tree, 'blockquote', (node: any) => {
-      visit(node, 'strong', (subnode: any) => {
-        let value = '';
-
+      visit(node.children[0], 'strong', (subnode: any) => {
+        if (subnode.position.start.column !== 3) return;
+        let value: string;
         visit(subnode, 'text', (textnode: any) => {
           if (['Note', 'Tip', 'Important', 'Warning', 'Caution'].includes(textnode.value)) {
             for (const item of gfmHighlight) {
-              if (item.from === textnode.value) {
-                value = item.to;
-              }
+              if (item.from === textnode.value) value = item.to;
             }
           }
           if (value) {
