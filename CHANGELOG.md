@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.21.0](https://github.com/lobehub/lobe-lint/compare/v1.20.0...v1.21.0)
+
+<sup>Released on **2023-11-16**</sup>
+
+#### ✨ Features
+
+- **misc**: Add new function "remarkGfmHighlight" for modifying "blockquote" nodes.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add new function "remarkGfmHighlight" for modifying "blockquote" nodes ([e0cd845](https://github.com/lobehub/lobe-lint/commit/e0cd845))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.20.0](https://github.com/lobehub/lobe-lint/compare/v1.19.0...v1.20.0)
 
 <sup>Released on **2023-11-16**</sup>
