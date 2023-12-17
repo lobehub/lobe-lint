@@ -114,7 +114,7 @@
     "semantic-release-config-gitmoji": "^1",
     "stylelint-config-clean-order": "^5",
     "stylelint-config-recommended": "^13",
-    "stylelint-less": "^2",
+    "stylelint-less": "^3.0.0",
     "stylelint-order": "^6",
     "unist-util-visit": "^5.0.0"
   },
