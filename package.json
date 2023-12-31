@@ -75,7 +75,7 @@
     "eslint-plugin-unused-imports": "^3",
     "gatsby-remark-find-replace": "^0.3.0",
     "postcss-less": "^6",
-    "postcss-styled-syntax": "^0.5",
+    "postcss-styled-syntax": "^0.6.0",
     "prettier-plugin-organize-imports": "^3",
     "prettier-plugin-packagejson": "^2",
     "prettier-plugin-sh": "^0.13",
