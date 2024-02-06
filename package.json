@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "father build",
-    "dev": "father dev",
+    "build:watch": "father dev",
     "lint": "eslint \"{src,tests}/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --output",
     "lint:style": "stylelint \"{src,tests}/**/*.{css,less,js,jsx,ts,tsx}\" --fix",
