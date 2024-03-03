@@ -119,7 +119,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18",
+    "@commitlint/cli": "^19.0.0",
     "@types/node": "^20",
     "antd-style": "^3",
     "clean-pkg-json": "^1",
