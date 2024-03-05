@@ -17,5 +17,6 @@ export default {
   scopeDisplayName: {
     '*': 'misc',
   },
+  showAuthor: true,
   showSummary: true,
 };
