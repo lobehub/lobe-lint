@@ -20,7 +20,12 @@ export default {
     {
       customSyntax: 'postcss-styled-syntax',
       files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      plugins: ['stylelint-use-logical-spec'],
       rules: {
+        'liberty/use-logical-spec': [
+          'always',
+          { except: ['float', /^((min|max)-)?(height|width)$/i] },
+        ],
         'no-empty-source': undefined,
         'no-invalid-double-slash-comments': undefined,
         'no-missing-end-of-source-newline': undefined,

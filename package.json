@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "father build",
-    "dev": "father dev",
+    "build:watch": "father dev",
     "lint": "eslint \"{src,tests}/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --output",
     "lint:style": "stylelint \"{src,tests}/**/*.{css,less,js,jsx,ts,tsx}\" --fix",
@@ -133,6 +133,7 @@
     "remark-cli": "^11",
     "semantic-release": "^21",
     "stylelint": "^15",
+    "stylelint-use-logical-spec": "^5.0.1",
     "typescript": "^5"
   },
   "peerDependencies": {
