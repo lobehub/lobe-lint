@@ -57,7 +57,7 @@
   "dependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4",
     "@typescript-eslint/eslint-plugin": "^6",
-    "@typescript-eslint/parser": "^6",
+    "@typescript-eslint/parser": "^7.0.0",
     "@umijs/babel-preset-umi": "^4",
     "@umijs/lint": "^4",
     "commitlint-config-gitmoji": "^2",
