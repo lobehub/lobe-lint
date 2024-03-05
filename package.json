@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4",
-    "@typescript-eslint/eslint-plugin": "^6",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^6",
     "@umijs/babel-preset-umi": "^4",
     "@umijs/lint": "^4",
