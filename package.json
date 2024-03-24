@@ -79,7 +79,7 @@
     "prettier-plugin-organize-imports": "^3",
     "prettier-plugin-packagejson": "^2",
     "prettier-plugin-sh": "^0.13",
-    "prettier-plugin-sort-json": "^3",
+    "prettier-plugin-sort-json": "^4.0.0",
     "remark-frontmatter": "^5",
     "remark-gfm": "^3",
     "remark-lint": "^9",
