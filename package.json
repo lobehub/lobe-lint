@@ -65,7 +65,7 @@
     "eslint-import-resolver-alias": "^1",
     "eslint-import-resolver-typescript": "^3",
     "eslint-plugin-import": "^2",
-    "eslint-plugin-jest": "^27",
+    "eslint-plugin-jest": "^28.0.0",
     "eslint-plugin-react": "^7",
     "eslint-plugin-react-hooks": "^4",
     "eslint-plugin-simple-import-sort": "^12",
