@@ -124,7 +124,7 @@
     "antd-style": "^3",
     "clean-pkg-json": "^1",
     "commitlint": "^19",
-    "eslint": "^8",
+    "eslint": "^9.0.0",
     "father": "^4",
     "husky": "^9",
     "lint-staged": "^15",
