@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.23.2](https://github.com/lobehub/lobe-lint/compare/v1.23.1...v1.23.2)
+
+<sup>Released on **2024-04-08**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix eslint config.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix eslint config ([13a80a4](https://github.com/lobehub/lobe-lint/commit/13a80a4))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.23.1](https://github.com/lobehub/lobe-lint/compare/v1.23.0...v1.23.1)
 
 <sup>Released on **2024-04-08**</sup>
