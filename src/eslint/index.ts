@@ -33,6 +33,7 @@ export default {
     'typescript-sort-keys/string-enum': 'error',
     'unicorn/explicit-length-check': 'warn',
     'unicorn/filename-case': 0,
+    'unicorn/no-anonymous-default-export': 0,
     'unicorn/no-array-for-each': 'warn',
     'unicorn/no-array-reduce': 0,
     'unicorn/no-empty-file': 'warn',
