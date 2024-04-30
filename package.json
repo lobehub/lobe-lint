@@ -101,7 +101,7 @@
     "remark-lint-no-tabs": "^3.1.2",
     "remark-lint-no-unneeded-full-reference-image": "^3.1.2",
     "remark-lint-no-unneeded-full-reference-link": "^3.1.2",
-    "remark-lint-ordered-list-marker-value": "^3.1.2",
+    "remark-lint-ordered-list-marker-value": "^4.0.0",
     "remark-lint-write-good": "^1.2.0",
     "remark-pangu": "^2.2.0",
     "remark-preset-lint-consistent": "^5.1.2",
