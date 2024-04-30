@@ -33,6 +33,7 @@ export default {
     'typescript-sort-keys/string-enum': 'error',
     'unicorn/explicit-length-check': 'warn',
     'unicorn/filename-case': 0,
+    'unicorn/import-style': 0,
     'unicorn/no-anonymous-default-export': 0,
     'unicorn/no-array-for-each': 'warn',
     'unicorn/no-array-reduce': 0,
@@ -50,11 +51,10 @@ export default {
     'unicorn/prefer-type-error': 'warn',
     'unicorn/prevent-abbreviations': 0,
     'unicorn/switch-case-braces': 'warn',
-    'unicorn/import-style': 0,
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
       { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^_' },
     ],
-  }
+  },
 };
