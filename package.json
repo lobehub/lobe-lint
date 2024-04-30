@@ -87,7 +87,7 @@
     "remark-lint-frontmatter-schema": "^3.15.4",
     "remark-lint-heading-whitespace": "^1.0.0",
     "remark-lint-linebreak-style": "^3.1.2",
-    "remark-lint-list-item-indent": "^3.1.2",
+    "remark-lint-list-item-indent": "^4.0.0",
     "remark-lint-list-item-spacing": "^4.1.2",
     "remark-lint-no-duplicate-headings-in-section": "^3.1.2",
     "remark-lint-no-empty-sections": "^4.0.0",
