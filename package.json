@@ -95,7 +95,7 @@
     "remark-lint-no-file-name-irregular-characters": "^2.1.2",
     "remark-lint-no-heading-indent": "^4.1.2",
     "remark-lint-no-heading-like-paragraph": "^3.1.2",
-    "remark-lint-no-paragraph-content-indent": "^4.1.2",
+    "remark-lint-no-paragraph-content-indent": "^5.0.0",
     "remark-lint-no-reference-like-url": "^3.1.2",
     "remark-lint-no-shell-dollars": "^3.1.2",
     "remark-lint-no-tabs": "^3.1.2",
