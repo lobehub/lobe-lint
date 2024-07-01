@@ -47,6 +47,7 @@ export default {
     'unicorn/prefer-logical-operator-over-ternary': 0,
     'unicorn/prefer-module': 0,
     'unicorn/prefer-spread': 'warn',
+    'unicorn/prefer-string-raw': 0,
     'unicorn/prefer-string-replace-all': 'warn',
     'unicorn/prefer-type-error': 'warn',
     'unicorn/prevent-abbreviations': 0,
