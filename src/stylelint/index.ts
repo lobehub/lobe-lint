@@ -25,7 +25,7 @@ export default {
         'no-invalid-double-slash-comments': undefined,
         'no-missing-end-of-source-newline': undefined,
         'property-no-vendor-prefix': true,
-        'value-no-vendor-prefix': true,
+        'value-no-vendor-prefix': [true, { ignoreValues: ['box'] }],
       },
     },
   ],
