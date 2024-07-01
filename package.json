@@ -116,6 +116,7 @@
     "stylelint-config-recommended": "^14.0.1",
     "stylelint-less": "^3.0.1",
     "stylelint-order": "^6.0.4",
+    "stylelint-use-logical-spec": "^5.0.1",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {

@@ -11,9 +11,9 @@ export default {
       files: ['*.less', '*.css'],
       plugins: ['stylelint-less'],
       rules: {
-        'at-rule-no-unknown': undefined,
+        'at-rule-no-unknown': 'never',
         'color-no-invalid-hex': true,
-        'function-no-unknown': undefined,
+        'function-no-unknown': 'never',
         'less/color-no-invalid-hex': true,
       },
     },
@@ -21,13 +21,16 @@ export default {
       customSyntax: 'postcss-styled-syntax',
       files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
       rules: {
-        'no-empty-source': undefined,
-        'no-invalid-double-slash-comments': undefined,
-        'no-missing-end-of-source-newline': undefined,
+        'no-empty-source': 'never',
+        'no-invalid-double-slash-comments': 'never',
+        'no-missing-end-of-source-newline': 'never',
         'property-no-vendor-prefix': true,
         'value-no-vendor-prefix': [true, { ignoreValues: ['box'] }],
       },
     },
   ],
-  plugins: ['stylelint-order'],
+  plugins: ['stylelint-order', 'stylelint-use-logical-spec'],
+  rules: {
+    'liberty/use-logical-spec': [true, { except: ['float', /^((min|max)-)?(height|width)$/i] }],
+  },
 };
