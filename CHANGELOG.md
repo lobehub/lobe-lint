@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.24.1](https://github.com/lobehub/lobe-lint/compare/v1.24.0...v1.24.1)
+
+<sup>Released on **2024-07-01**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix stylelint.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix stylelint ([a64d63e](https://github.com/lobehub/lobe-lint/commit/a64d63e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.24.0](https://github.com/lobehub/lobe-lint/compare/v1.23.4...v1.24.0)
 
 <sup>Released on **2024-07-01**</sup>
