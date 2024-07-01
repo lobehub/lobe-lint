@@ -2,6 +2,47 @@
 
 # Changelog
 
+## [Version 1.24.0](https://github.com/lobehub/lobe-lint/compare/v1.23.4...v1.24.0)
+
+<sup>Released on **2024-07-01**</sup>
+
+#### ✨ Features
+
+- **misc**: Add stylelint-use-logical-spec.
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix deps.
+
+#### 💄 Styles
+
+- **misc**: Update value-no-vendor-prefix in stylelint.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add stylelint-use-logical-spec ([861ecb8](https://github.com/lobehub/lobe-lint/commit/861ecb8))
+
+#### What's fixed
+
+- **misc**: Fix deps ([08169dd](https://github.com/lobehub/lobe-lint/commit/08169dd))
+
+#### Styles
+
+- **misc**: Update value-no-vendor-prefix in stylelint ([050b93f](https://github.com/lobehub/lobe-lint/commit/050b93f))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.23.4](https://github.com/lobehub/lobe-lint/compare/v1.23.3...v1.23.4)
 
 <sup>Released on **2024-04-30**</sup>
