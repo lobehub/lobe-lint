@@ -97,7 +97,7 @@
     "remark-lint-no-heading-like-paragraph": "^3.1.2",
     "remark-lint-no-paragraph-content-indent": "^4.1.2",
     "remark-lint-no-reference-like-url": "^3.1.2",
-    "remark-lint-no-shell-dollars": "^3.1.2",
+    "remark-lint-no-shell-dollars": "^4.0.0",
     "remark-lint-no-tabs": "^3.1.2",
     "remark-lint-no-unneeded-full-reference-image": "^3.1.2",
     "remark-lint-no-unneeded-full-reference-link": "^3.1.2",
