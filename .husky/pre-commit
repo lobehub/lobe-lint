@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
 
-git add .
+npm run type-check
+npm run lint:circular
 npx --no-install lint-staged

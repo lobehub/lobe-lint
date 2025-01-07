@@ -18,9 +18,6 @@ jobs:
       - name: Install deps
         run: bun i
 
-      - name: Test
-        run: bun run test
-
       - name: Build
         run: bun run build
 

@@ -52,7 +52,6 @@ export default {
     bullet: '-',
     emphasis: '*',
     fences: true,
-    listItemIndent: 1,
     rule: '-',
     strong: '*',
     tightDefinitions: true,
