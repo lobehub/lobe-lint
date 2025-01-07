@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.25.3](https://github.com/lobehub/lobe-lint/compare/v1.25.2...v1.25.3)
+
+<sup>Released on **2025-01-07**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix @typescript-eslint/eslint-plugin.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix @typescript-eslint/eslint-plugin ([7c4a12e](https://github.com/lobehub/lobe-lint/commit/7c4a12e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.25.2](https://github.com/lobehub/lobe-lint/compare/v1.25.1...v1.25.2)
 
 <sup>Released on **2025-01-07**</sup>
