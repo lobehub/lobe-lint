@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.25.0](https://github.com/lobehub/lobe-lint/compare/v1.24.4...v1.25.0)
+
+<sup>Released on **2025-01-07**</sup>
+
+#### ✨ Features
+
+- **misc**: Update Remark.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update Remark ([78eec46](https://github.com/lobehub/lobe-lint/commit/78eec46))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.24.4](https://github.com/lobehub/lobe-lint/compare/v1.24.3...v1.24.4)
 
 <sup>Released on **2024-08-09**</sup>
