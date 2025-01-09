@@ -6,6 +6,8 @@ export default {
   importOrder: ['<THIRD_PARTY_MODULES>', '^@/(.*)$', '^[./]'],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
+  jsonRecursiveSort: false,
+  jsonSortOrder: '{"*": "lexical"}',
   overrides: [
     {
       files: '*.md',
