@@ -27,6 +27,13 @@ export default {
     'react/jsx-sort-props': 'error',
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
+    'react/self-closing-comp': [
+      'warn',
+      {
+        component: true,
+        html: true,
+      },
+    ],
     'simple-import-sort/exports': 'error',
     'sort-keys-fix/sort-keys-fix': 'error',
     'typescript-sort-keys/interface': 'error',
