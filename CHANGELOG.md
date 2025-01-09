@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.25.5](https://github.com/lobehub/lobe-lint/compare/v1.25.4...v1.25.5)
+
+<sup>Released on **2025-01-09**</sup>
+
+#### 💄 Styles
+
+- **misc**: Update react/self-closing-comp.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Update react/self-closing-comp ([de3850c](https://github.com/lobehub/lobe-lint/commit/de3850c))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.25.4](https://github.com/lobehub/lobe-lint/compare/v1.25.3...v1.25.4)
 
 <sup>Released on **2025-01-09**</sup>
