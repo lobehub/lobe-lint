@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.25.4](https://github.com/lobehub/lobe-lint/compare/v1.25.3...v1.25.4)
+
+<sup>Released on **2025-01-09**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix json order.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix json order ([d8463ae](https://github.com/lobehub/lobe-lint/commit/d8463ae))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.25.3](https://github.com/lobehub/lobe-lint/compare/v1.25.2...v1.25.3)
 
 <sup>Released on **2025-01-07**</sup>
