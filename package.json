@@ -76,6 +76,7 @@
     "eslint-plugin-unicorn": "^54.0.0",
     "eslint-plugin-unused-imports": "^3.2.0",
     "gatsby-remark-find-replace": "^0.3.0",
+    "mdast-util-gfm": "3.0.0",
     "postcss-less": "^6.0.0",
     "postcss-styled-syntax": "^0.7.0",
     "prettier-plugin-organize-imports": "^4.1.0",
@@ -146,12 +147,10 @@
   },
   "pnpm": {
     "overrides": {
-      "mdast-util-gfm-autolink-literal": "2.0.0",
-      "mdast-util-gfm-table": "2.0.0"
+      "mdast-util-gfm": "3.0.0"
     }
   },
   "overrides": {
-    "mdast-util-gfm-autolink-literal": "2.0.0",
-    "mdast-util-gfm-table": "2.0.0"
+    "mdast-util-gfm": "3.0.0"
   }
 }
