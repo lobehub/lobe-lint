@@ -143,5 +143,15 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "pnpm": {
+    "overrides": {
+      "mdast-util-gfm-autolink-literal": "2.0.0",
+      "mdast-util-gfm-table": "2.0.0"
+    }
+  },
+  "overrides": {
+    "mdast-util-gfm-autolink-literal": "2.0.0",
+    "mdast-util-gfm-table": "2.0.0"
   }
 }
