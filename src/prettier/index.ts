@@ -4,7 +4,7 @@ export default {
   bracketSpacing: true,
   endOfLine: 'lf',
   importOrder: ['<THIRD_PARTY_MODULES>', '^@/(.*)$', '^[./]'],
-  importOrderParserPlugins: ['typescript', 'decorators-legacy'],
+  importOrderParserPlugins: ['typescript', 'jsx', 'decorators'],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
   jsonRecursiveSort: false,
