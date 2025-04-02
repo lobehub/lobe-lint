@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.26.0](https://github.com/lobehub/lobe-lint/compare/v1.25.7...v1.26.0)
+
+<sup>Released on **2025-04-02**</sup>
+
+#### ✨ Features
+
+- **misc**: Support decorators in prettier.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Support decorators in prettier ([dc17b98](https://github.com/lobehub/lobe-lint/commit/dc17b98))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.25.7](https://github.com/lobehub/lobe-lint/compare/v1.25.6...v1.25.7)
 
 <sup>Released on **2025-01-31**</sup>
