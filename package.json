@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/lint",
-  "version": "1.26.1",
+  "version": "1.26.2",
   "homepage": "https://github.com/lobehub/lobe-lint",
   "bugs": {
     "url": "https://github.com/lobehub/lobe-lint/issues/new"
@@ -55,6 +55,9 @@
       "stylelint --fix",
       "eslint --fix"
     ]
+  },
+  "overrides": {
+    "mdast-util-gfm": "3.0.0"
   },
   "dependencies": {
     "@trivago/prettier-plugin-sort-imports": "^5.2.1",
@@ -149,8 +152,5 @@
     "overrides": {
       "mdast-util-gfm": "3.0.0"
     }
-  },
-  "overrides": {
-    "mdast-util-gfm": "3.0.0"
   }
 }
