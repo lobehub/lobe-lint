@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.26.3](https://github.com/lobehub/lobe-lint/compare/v1.26.2...v1.26.3)
+
+<sup>Released on **2025-11-24**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Lock stylelint-config-clean-order.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Lock stylelint-config-clean-order ([94fdd95](https://github.com/lobehub/lobe-lint/commit/94fdd95))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.26.2](https://github.com/lobehub/lobe-lint/compare/v1.26.1...v1.26.2)
 
 <sup>Released on **2025-05-27**</sup>
