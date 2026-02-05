@@ -50,7 +50,7 @@ describe('ESLint Config Fixtures', () => {
     it.each([
       ['javascript/invalid/unused-var.js', 'unused-imports/no-unused-vars'],
       ['typescript/invalid/missing-type-import.ts', '@typescript-eslint/consistent-type-imports'],
-      ['react/invalid/unsorted-props.tsx', '@stylistic/jsx-sort-props'],
+      ['react/invalid/unsorted-props.tsx', 'react/jsx-sort-props'],
       ['imports/invalid/duplicate.ts', 'import-x/no-duplicates'],
       ['imports/invalid/unused-import.ts', 'unused-imports/no-unused-imports'],
       ['imports/invalid/unsorted-imports.ts', 'simple-import-sort/imports'],

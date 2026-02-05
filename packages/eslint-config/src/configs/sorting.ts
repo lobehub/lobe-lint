@@ -1,6 +1,6 @@
-import stylistic from '@stylistic/eslint-plugin';
 import { defineConfig } from 'eslint/config';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
+import reactPlugin from 'eslint-plugin-react';
 
 import { GLOB_JSX, GLOB_TS_ALL, GLOB_TSX } from '../globs';
 import type { Options } from '../types';
@@ -38,10 +38,10 @@ export function sorting(options: Options) {
     {
       files: [GLOB_JSX, GLOB_TSX],
       plugins: {
-        '@stylistic': stylistic,
+        react: reactPlugin,
       },
       rules: {
-        '@stylistic/jsx-sort-props': [
+        'react/jsx-sort-props': [
           'warn',
           {
             callbacksLast: true,
