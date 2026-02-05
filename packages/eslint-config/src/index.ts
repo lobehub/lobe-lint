@@ -7,7 +7,6 @@ import { react } from './configs/react';
 import { reactNative } from './configs/react-native';
 import { regexp } from './configs/regexp';
 import { sorting } from './configs/sorting';
-import { stylisticConfig } from './configs/stylistic';
 import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
 import { unused } from './configs/unused';
@@ -25,7 +24,6 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
     regexp: regexpOption = true,
     sortImports = true,
     sortKeys = true,
-    stylistic = true,
     typeChecked = false,
     typescript: tsOption = true,
   } = options;
@@ -41,7 +39,6 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
     ...imports({ ...options, sortImports }),
     ...unicorn(),
     ...sorting({ ...options, sortKeys }),
-    ...stylisticConfig({ ...options, stylistic }),
     ...regexp({ ...options, regexp: regexpOption }),
     ...unused(),
     // 用户自定义配置（最高优先级）

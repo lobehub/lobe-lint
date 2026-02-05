@@ -1,5 +1,6 @@
 import eslintReact from '@eslint-react/eslint-plugin';
 import { defineConfig } from 'eslint/config';
+import reactPlugin from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -22,6 +23,7 @@ export function react(options: Options) {
     {
       files,
       plugins: {
+        'react': reactPlugin,
         'react-hooks': reactHooksPlugin,
         'react-refresh': reactRefresh,
       },
@@ -31,6 +33,8 @@ export function react(options: Options) {
         '@eslint-react/dom/no-dangerously-set-innerhtml': 'off',
         '@eslint-react/no-array-index-key': 'warn',
         '@eslint-react/no-leaked-conditional-rendering': 'warn',
+
+        'react/self-closing-comp': 'warn',
 
         'react-refresh/only-export-components': [
           'warn',

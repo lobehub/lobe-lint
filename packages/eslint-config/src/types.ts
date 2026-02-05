@@ -61,12 +61,6 @@ export interface Options {
   sortKeys?: boolean;
 
   /**
-   * 是否启用代码风格规则
-   * @default true
-   */
-  stylistic?: boolean;
-
-  /**
    * tsconfig 路径，用于类型检查规则
    */
   tsconfigPath?: string | string[];
