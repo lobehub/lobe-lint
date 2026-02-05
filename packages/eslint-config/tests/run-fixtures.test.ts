@@ -31,7 +31,10 @@ describe('ESLint Config Fixtures', () => {
       ['sorting/valid/sorted-enum.ts'],
       ['imports/valid/type-imports.tsx'],
       ['imports/valid/sorted-imports.ts'],
-      ['unicorn/valid/best-practices.ts'],
+      // Unicorn valid fixtures
+      ['unicorn/valid/error-prevention.ts'],
+      ['unicorn/valid/code-cleanliness.ts'],
+      ['unicorn/valid/modern-apis.ts'],
     ])('%s', async (file) => {
       const filePath = path.join(fixturesDir, file);
       const results = await eslint.lintFiles(filePath);
@@ -48,15 +51,41 @@ describe('ESLint Config Fixtures', () => {
 
   describe('invalid fixtures should fail', () => {
     it.each([
+      // JavaScript
       ['javascript/invalid/unused-var.js', 'unused-imports/no-unused-vars'],
+      // TypeScript
       ['typescript/invalid/missing-type-import.ts', '@typescript-eslint/consistent-type-imports'],
+      // React
       ['react/invalid/unsorted-props.tsx', 'react/jsx-sort-props'],
+      // Imports
       ['imports/invalid/duplicate.ts', 'import-x/no-duplicates'],
       ['imports/invalid/unused-import.ts', 'unused-imports/no-unused-imports'],
       ['imports/invalid/unsorted-imports.ts', 'simple-import-sort/imports'],
+      // Sorting
       ['sorting/invalid/unsorted-keys.ts', 'perfectionist/sort-interfaces'],
       ['sorting/invalid/unsorted-enum.ts', 'perfectionist/sort-enums'],
+      // Unicorn - Error Prevention
       ['unicorn/invalid/anonymous-default-export.ts', 'unicorn/no-anonymous-default-export'],
+      ['unicorn/invalid/error-message.ts', 'unicorn/error-message'],
+      ['unicorn/invalid/new-for-builtins.ts', 'unicorn/new-for-builtins'],
+      ['unicorn/invalid/no-instanceof-builtins.ts', 'unicorn/no-instanceof-builtins'],
+      ['unicorn/invalid/no-new-array.ts', 'unicorn/no-new-array'],
+      ['unicorn/invalid/throw-new-error.ts', 'unicorn/throw-new-error'],
+      ['unicorn/invalid/no-thenable.ts', 'unicorn/no-thenable'],
+      [
+        'unicorn/invalid/no-single-promise-in-promise-methods.ts',
+        'unicorn/no-single-promise-in-promise-methods',
+      ],
+      // Unicorn - Code Cleanliness
+      ['unicorn/invalid/no-zero-fractions.ts', 'unicorn/no-zero-fractions'],
+      ['unicorn/invalid/number-literal-case.ts', 'unicorn/number-literal-case'],
+      ['unicorn/invalid/no-useless-spread.ts', 'unicorn/no-useless-spread'],
+      // Unicorn - Modern APIs
+      ['unicorn/invalid/prefer-includes.ts', 'unicorn/prefer-includes'],
+      ['unicorn/invalid/prefer-array-find.ts', 'unicorn/prefer-array-find'],
+      ['unicorn/invalid/prefer-array-some.ts', 'unicorn/prefer-array-some'],
+      ['unicorn/invalid/prefer-at.ts', 'unicorn/prefer-at'],
+      ['unicorn/invalid/prefer-node-protocol.ts', 'unicorn/prefer-node-protocol'],
     ])('%s should have %s error', async (file, expectedRule) => {
       const filePath = path.join(fixturesDir, file);
       const results = await eslint.lintFiles(filePath);
