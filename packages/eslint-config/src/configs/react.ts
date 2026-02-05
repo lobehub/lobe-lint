@@ -32,7 +32,7 @@ export function react(options: Options) {
 
         '@eslint-react/dom/no-dangerously-set-innerhtml': 'off',
         '@eslint-react/no-array-index-key': 'warn',
-        '@eslint-react/no-leaked-conditional-rendering': 'warn',
+        '@eslint-react/no-leaked-conditional-rendering': 'off',
 
         'react/self-closing-comp': 'warn',
 
