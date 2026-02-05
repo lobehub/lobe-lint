@@ -21,6 +21,8 @@ const GLOB_NEXT_APP_FILES = [
   '**/app/**/manifest.{js,ts}',
 ];
 
+const GLOB_CONFIG_FILES = ['**/*.config.{js,mjs,ts,mts,cjs,cts}', '**/.*.{js,mjs,ts,mts,cjs,cts}'];
+
 export function unicorn() {
   return defineConfig([
     {
@@ -61,6 +63,12 @@ export function unicorn() {
     },
     {
       files: GLOB_NEXT_APP_FILES,
+      rules: {
+        'unicorn/no-anonymous-default-export': 'off',
+      },
+    },
+    {
+      files: GLOB_CONFIG_FILES,
       rules: {
         'unicorn/no-anonymous-default-export': 'off',
       },

@@ -1,6 +1,10 @@
 export { default as commitlint } from '@lobehub/commitlint-config';
 export type { Options as EslintOptions } from '@lobehub/eslint-config';
-export { default as defineEslintConfig, defineConfig as eslint } from '@lobehub/eslint-config';
+export {
+  defineConfig,
+  defineConfig as defineEslintConfig,
+  defineConfig as eslint,
+} from '@lobehub/eslint-config';
 export { default as prettier } from '@lobehub/prettier-config';
 export { default as remarklint } from '@lobehub/remarklint-config';
 export {
