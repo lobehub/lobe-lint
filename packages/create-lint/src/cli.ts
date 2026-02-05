@@ -1,9 +1,16 @@
 /* eslint-disable unicorn/no-process-exit */
+import { execSync } from 'node:child_process';
+
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 
 import { ALL_TOOLS, CONFIG_META, PRESET_TOOLS } from './constants.js';
-import { generateConfigs, getDependencies } from './generators/index.js';
+import {
+  generateConfigs,
+  generateGitHooksConfig,
+  getDependencies,
+  getGitHooksDependencies,
+} from './generators/index.js';
 import type {
   CliOptions,
   ConfigTool,
@@ -13,8 +20,10 @@ import type {
 } from './types.js';
 import {
   detectProject,
+  hasExistingGitHooksConfig,
   installDependencies,
   parseReactFramework,
+  updatePackageJson,
   writeFiles,
 } from './utils/index.js';
 
@@ -83,14 +92,22 @@ export async function run(options: CliOptions): Promise<void> {
     process.exit(0);
   }
 
+  // Ask about git hooks configuration
+  selections.configureGitHooks = await askGitHooksConfiguration(options, selections);
+
   const ctx: GeneratorContext = {
+    cwd,
     projectInfo,
     selections,
-    cwd,
   };
 
   const files = generateConfigs(ctx);
   const deps = getDependencies(ctx);
+
+  // Add git hooks dependencies if configured
+  if (selections.configureGitHooks) {
+    deps.push(...getGitHooksDependencies(ctx));
+  }
 
   const existingConfigsToOverwrite = selections.tools.filter((t) =>
     projectInfo.existingConfigs.includes(t),
@@ -113,10 +130,24 @@ export async function run(options: CliOptions): Promise<void> {
 
   writeFiles(cwd, files);
 
+  // Generate git hooks configuration
+  let gitHooksConfigured = false;
+  if (selections.configureGitHooks) {
+    const gitHooksConfig = generateGitHooksConfig(ctx);
+    const updated = updatePackageJson(cwd, gitHooksConfig);
+    if (updated) {
+      gitHooksConfigured = true;
+    }
+  }
+
   s.stop(`Generated ${files.length} config files`);
 
   for (const file of files) {
     p.log.success(`${pc.green('+')} ${file.path}`);
+  }
+
+  if (gitHooksConfigured) {
+    p.log.success(`${pc.green('+')} package.json (lint-staged, simple-git-hooks)`);
   }
 
   p.note(deps.map((d) => `${pc.green('+')} ${d}`).join('\n'), 'Dependencies to install');
@@ -143,6 +174,16 @@ export async function run(options: CliOptions): Promise<void> {
 
     if (result.success) {
       s.stop('Dependencies installed');
+
+      // Initialize git hooks after dependencies are installed
+      if (gitHooksConfigured) {
+        try {
+          execSync('npx simple-git-hooks', { cwd, stdio: 'pipe' });
+          p.log.success('Git hooks initialized');
+        } catch {
+          p.log.warn('Failed to initialize git hooks. Run manually: npx simple-git-hooks');
+        }
+      }
     } else {
       s.stop('Failed to install dependencies');
       p.log.error(result.error || 'Unknown error');
@@ -152,6 +193,9 @@ export async function run(options: CliOptions): Promise<void> {
     }
   } else {
     p.log.info(`Run: ${pc.cyan(getInstallCommandHint(projectInfo.packageManager, deps))}`);
+    if (gitHooksConfigured) {
+      p.log.info(`After installing, run: ${pc.cyan('npx simple-git-hooks')}`);
+    }
   }
 
   p.outro(pc.green('Done! Happy linting!'));
@@ -185,9 +229,10 @@ function getSelectionsFromFlags(
     options.react !== undefined ? parseReactFramework(options.react) : detectedFramework;
 
   return {
-    tools,
-    reactFramework,
+    configureGitHooks: false,
     installDeps: options.install ?? true,
+    reactFramework,
+    tools,
   };
 }
 
@@ -207,9 +252,10 @@ async function getPresetSelections(
   }
 
   return {
-    tools: [...PRESET_TOOLS],
-    reactFramework,
+    configureGitHooks: false,
     installDeps: options.install ?? true,
+    reactFramework,
+    tools: [...PRESET_TOOLS],
   };
 }
 
@@ -246,9 +292,10 @@ async function getManualSelections(
   }
 
   return {
-    tools: selectedTools as ConfigTool[],
-    reactFramework,
+    configureGitHooks: false,
     installDeps: options.install ?? true,
+    reactFramework,
+    tools: selectedTools as ConfigTool[],
   };
 }
 
@@ -287,6 +334,63 @@ async function selectReactFramework(detected: ReactFramework): Promise<ReactFram
   }
 
   return parseReactFramework(selected as string);
+}
+
+async function askGitHooksConfiguration(
+  options: CliOptions,
+  selections: UserSelections,
+): Promise<boolean> {
+  // Check if --git-hooks or --no-git-hooks was explicitly set
+  if (options.gitHooks !== undefined) {
+    return options.gitHooks;
+  }
+
+  // Check if there are tools that can be linted
+  const hasLintableTools = selections.tools.some((t) =>
+    ['eslint', 'prettier', 'stylelint', 'remarklint'].includes(t),
+  );
+  const hasCommitlint = selections.tools.includes('commitlint');
+
+  // Skip if no lintable tools and no commitlint
+  if (!hasLintableTools && !hasCommitlint) {
+    return false;
+  }
+
+  // Skip asking in yes mode, default to true
+  if (options.yes) {
+    return true;
+  }
+
+  // Check for existing configurations
+  const cwd = process.cwd();
+  const existing = hasExistingGitHooksConfig(cwd);
+
+  if (existing.hasHusky) {
+    p.log.warn('Detected existing Husky configuration. Git hooks setup may conflict.');
+  }
+
+  if (existing.hasLintStaged || existing.hasSimpleGitHooks) {
+    const shouldOverwrite = await p.confirm({
+      initialValue: false,
+      message: 'Existing lint-staged/simple-git-hooks config detected. Overwrite?',
+    });
+
+    if (p.isCancel(shouldOverwrite) || !shouldOverwrite) {
+      return false;
+    }
+    return true;
+  }
+
+  const hookQuestion = await p.confirm({
+    initialValue: true,
+    message: 'Configure lint-staged and git hooks?',
+  });
+
+  if (p.isCancel(hookQuestion)) {
+    return false;
+  }
+
+  return hookQuestion;
 }
 
 function formatReactFramework(framework: ReactFramework): string {
@@ -333,6 +437,8 @@ ${pc.bold('Options:')}
   --remarklint          Include Remarklint configuration
   --semantic-release    Include Semantic Release configuration
   --react <framework>   Set React framework (next/remix/vite/expo/true/false)
+  --git-hooks           Configure lint-staged and simple-git-hooks
+  --no-git-hooks        Skip git hooks configuration
   --install             Auto-install dependencies (default)
   --no-install          Skip dependency installation
   -y, --yes             Skip confirmations

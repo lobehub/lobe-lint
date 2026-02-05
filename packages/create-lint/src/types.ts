@@ -22,6 +22,7 @@ export interface ProjectInfo {
 export interface CliOptions {
   commitlint?: boolean;
   eslint?: boolean;
+  gitHooks?: boolean;
   help?: boolean;
   install?: boolean;
   manual?: boolean;
@@ -35,6 +36,7 @@ export interface CliOptions {
 }
 
 export interface UserSelections {
+  configureGitHooks: boolean;
   installDeps: boolean;
   reactFramework: ReactFramework;
   tools: ConfigTool[];

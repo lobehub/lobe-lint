@@ -23,6 +23,7 @@ const argv = mri(process.argv.slice(2), {
     'semantic-release',
     'yes',
     'install',
+    'git-hooks',
   ],
   string: ['react'],
 });
@@ -30,6 +31,7 @@ const argv = mri(process.argv.slice(2), {
 const options: CliOptions = {
   commitlint: argv.commitlint,
   eslint: argv.eslint,
+  gitHooks: argv['git-hooks'],
   help: argv.help,
   install: argv.install,
   manual: argv.manual,

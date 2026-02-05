@@ -89,6 +89,8 @@ function getToolDependencies(tool: ConfigTool, ctx: GeneratorContext): string[] 
 
 export { generateCommitlintConfig, getCommitlintDependencies } from './commitlint.js';
 export { generateEslintConfig, getEslintDependencies } from './eslint.js';
+export type { GitHooksConfig } from './git-hooks.js';
+export { generateGitHooksConfig, getGitHooksDependencies } from './git-hooks.js';
 export { generatePrettierConfig, getPrettierDependencies } from './prettier.js';
 export { generateRemarklintConfig, getRemarklintDependencies } from './remarklint.js';
 export {
