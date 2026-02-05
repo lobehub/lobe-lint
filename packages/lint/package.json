@@ -1,0 +1,50 @@
+{
+  "name": "@lobehub/lint",
+  "version": "2.0.0",
+  "description": "Meta package that re-exports all LobeHub lint configurations",
+  "homepage": "https://github.com/lobehub/lobe-lint",
+  "bugs": {
+    "url": "https://github.com/lobehub/lobe-lint/issues/new"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobehub/lobe-lint.git",
+    "directory": "packages/lint"
+  },
+  "license": "MIT",
+  "author": "canisminor1990 <i@canisminor.cc>, Innei <i@innei.in>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@lobehub/commitlint-config": "workspace:*",
+    "@lobehub/eslint-config": "workspace:*",
+    "@lobehub/prettier-config": "workspace:*",
+    "@lobehub/remarklint-config": "workspace:*",
+    "@lobehub/semantic-release-config": "workspace:*",
+    "@lobehub/stylelint-config": "workspace:*"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}
