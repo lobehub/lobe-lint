@@ -1,5 +1,5 @@
-import type { Options } from 'semantic-release-config-gitmoji/lib/createConfig';
-import { createConfig } from 'semantic-release-config-gitmoji/lib/createConfig';
+import type { Options } from 'semantic-release-config-gitmoji/lib/createConfig.js';
+import { createConfig } from 'semantic-release-config-gitmoji/lib/createConfig.js';
 
 export const options: Options = {
   changelogTitle: `<a name="readme-top"></a>
