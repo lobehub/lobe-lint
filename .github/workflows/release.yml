@@ -2,8 +2,8 @@ name: Build and Release
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'v*'
 
 jobs:
   release:
@@ -12,17 +12,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install bun
-        uses: oven-sh/setup-bun@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
 
       - name: Install deps
-        run: bun i
+        run: pnpm install
 
       - name: Build
-        run: bun run build
+        run: pnpm build
 
-      - name: Release
-        run: bun run release
+      - name: Setup npm auth
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to npm
+        run: pnpm -r publish --no-git-checks
