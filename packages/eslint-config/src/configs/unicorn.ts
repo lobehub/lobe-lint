@@ -41,6 +41,10 @@ export function unicorn() {
         'unicorn/no-array-for-each': 'off',
         'unicorn/no-array-push-push': 'off',
         'unicorn/no-array-reduce': 'off',
+        // Prefer immutable array methods (toSorted, toReversed, toSpliced)
+        'unicorn/no-array-reverse': 'warn',
+        'unicorn/no-array-sort': 'warn',
+        'unicorn/prefer-array-flat-map': 'warn',
         'unicorn/no-empty-file': 'warn',
         'unicorn/no-negated-condition': 'off',
         'unicorn/no-nested-ternary': 'off',
