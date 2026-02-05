@@ -19,7 +19,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: pnpm
 
       - name: Install deps
         run: pnpm install
@@ -33,4 +32,9 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to npm
-        run: pnpm -r publish --no-git-checks
+        run: |
+          if [[ "${{ github.ref_name }}" == *"-"* ]]; then
+            pnpm -r publish --no-git-checks --tag beta
+          else
+            pnpm -r publish --no-git-checks
+          fi
