@@ -62,6 +62,7 @@ export function unicorn() {
         'unicorn/prefer-ternary': 'off',
         'unicorn/prefer-type-error': 'off',
         'unicorn/prevent-abbreviations': 'off',
+        'unicorn/require-module-specifiers': 'off',
         'unicorn/switch-case-braces': 'warn',
       },
     },
