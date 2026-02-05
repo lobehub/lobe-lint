@@ -1,6 +1,6 @@
 {
   "name": "lobe-lint-monorepo",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0-beta.1",
   "private": true,
   "homepage": "https://github.com/lobehub/lobe-lint",
   "bugs": {
@@ -21,7 +21,7 @@
     "lint:style": "stylelint \"packages/*/src/**/*.{css,less,js,jsx,ts,tsx}\" --fix",
     "prepare": "husky",
     "prettier": "prettier -c --write \"**/**\"",
-    "release": "bumpp -r --all --commit \":bookmark: release: v%s\" --tag \"v%s\" && pnpm -r publish",
+    "release": "bumpp -r --all --commit \":bookmark: chore(release): v%s\" --tag \"v%s\" && pnpm -r publish",
     "test": "pnpm -r test",
     "type-check": "pnpm -r type-check"
   },
