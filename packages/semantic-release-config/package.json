@@ -1,0 +1,54 @@
+{
+  "name": "@lobehub/semantic-release-config",
+  "version": "2.0.0",
+  "description": "Semantic release configuration for LobeHub projects",
+  "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/semantic-release-config",
+  "bugs": {
+    "url": "https://github.com/lobehub/lobe-lint/issues/new"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobehub/lobe-lint.git",
+    "directory": "packages/semantic-release-config"
+  },
+  "license": "MIT",
+  "author": "canisminor1990 <i@canisminor.cc>, Innei <i@innei.in>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./monorepo": {
+      "types": "./dist/monorepo.d.ts",
+      "import": "./dist/monorepo.js"
+    },
+    "./changelog": {
+      "types": "./dist/changelog.d.ts",
+      "import": "./dist/changelog.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown src/index.ts src/monorepo.ts src/changelog.ts",
+    "dev": "tsdown src/index.ts src/monorepo.ts src/changelog.ts --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "semantic-release-config-gitmoji": "^1.5.3"
+  },
+  "peerDependencies": {
+    "semantic-release": ">=21.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

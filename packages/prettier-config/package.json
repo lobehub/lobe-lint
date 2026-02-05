@@ -1,0 +1,48 @@
+{
+  "name": "@lobehub/prettier-config",
+  "version": "2.0.0",
+  "description": "Prettier configuration for LobeHub projects",
+  "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/prettier-config",
+  "bugs": {
+    "url": "https://github.com/lobehub/lobe-lint/issues/new"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobehub/lobe-lint.git",
+    "directory": "packages/prettier-config"
+  },
+  "license": "MIT",
+  "author": "canisminor1990 <i@canisminor.cc>, Innei <i@innei.in>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "prettier-plugin-packagejson": "^2.5.6",
+    "prettier-plugin-sh": "^0.14.0",
+    "prettier-plugin-sort-json": "^4.1.0"
+  },
+  "peerDependencies": {
+    "prettier": ">=3.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

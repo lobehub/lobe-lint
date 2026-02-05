@@ -1,0 +1,53 @@
+{
+  "name": "@lobehub/stylelint-config",
+  "version": "2.0.0",
+  "description": "Stylelint configuration for LobeHub projects",
+  "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/stylelint-config",
+  "bugs": {
+    "url": "https://github.com/lobehub/lobe-lint/issues/new"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobehub/lobe-lint.git",
+    "directory": "packages/stylelint-config"
+  },
+  "license": "MIT",
+  "author": "canisminor1990 <i@canisminor.cc>, Innei <i@innei.in>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "postcss-less": "^6.0.0",
+    "postcss-styled-syntax": "^0.7.0",
+    "stylelint-config-clean-order": "^7.0.0",
+    "stylelint-config-recommended": "^14.0.1",
+    "stylelint-config-standard": "^37.0.0",
+    "stylelint-less": "^3.0.1",
+    "stylelint-order": "^6.0.4",
+    "stylelint-use-logical-spec": "^5.0.1"
+  },
+  "peerDependencies": {
+    "stylelint": ">=16.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

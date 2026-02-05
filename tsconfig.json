@@ -1,19 +1,17 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "esModuleInterop": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "target": "es2019",
-    "jsx": "react",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "noEmit": true
   },
   "exclude": ["**/node_modules", "**/dist"],
-  "include": ["src"]
+  "extends": "./tsconfig.base.json",
+  "include": [],
+  "references": [
+    { "path": "./packages/eslint-config" },
+    { "path": "./packages/prettier-config" },
+    { "path": "./packages/stylelint-config" },
+    { "path": "./packages/commitlint-config" },
+    { "path": "./packages/remarklint-config" },
+    { "path": "./packages/semantic-release-config" },
+    { "path": "./packages/lint" }
+  ]
 }
