@@ -17,18 +17,22 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./monorepo": {
       "types": "./dist/monorepo.d.ts",
-      "import": "./dist/monorepo.js"
+      "import": "./dist/monorepo.js",
+      "require": "./dist/monorepo.cjs"
     },
     "./changelog": {
       "types": "./dist/changelog.d.ts",
-      "import": "./dist/changelog.js"
+      "import": "./dist/changelog.js",
+      "require": "./dist/changelog.cjs"
     }
   },
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
