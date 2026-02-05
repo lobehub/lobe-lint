@@ -1,4 +1,5 @@
 import { a11y } from './configs/a11y';
+import { eslintCommentsConfig } from './configs/eslint-comments';
 import { ignores } from './configs/ignores';
 import { imports } from './configs/imports';
 import { javascript } from './configs/javascript';
@@ -41,6 +42,7 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
     ...sorting({ ...options, sortKeys }),
     ...regexp({ ...options, regexp: regexpOption }),
     ...unused(),
+    ...eslintCommentsConfig(),
     // 用户自定义配置（最高优先级）
     ...userConfigs,
   ];
