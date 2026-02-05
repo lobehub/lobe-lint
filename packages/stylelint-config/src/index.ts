@@ -24,7 +24,6 @@ const config: Config = {
       rules: {
         'no-empty-source': null,
         'no-invalid-double-slash-comments': null,
-        'no-missing-end-of-source-newline': null,
         'property-no-vendor-prefix': true,
         'value-no-vendor-prefix': [true, { ignoreValues: ['box'] }],
       },
