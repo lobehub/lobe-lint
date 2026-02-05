@@ -29,7 +29,8 @@ export function installDependencies(
   try {
     execSync(command, {
       cwd,
-      stdio: 'pipe',
+      // Let the user see install progress in real time
+      stdio: 'inherit',
     });
     return { success: true };
   } catch (error) {

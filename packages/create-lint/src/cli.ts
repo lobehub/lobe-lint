@@ -20,6 +20,7 @@ import type {
 } from './types.js';
 import {
   detectProject,
+  getInstallCommand,
   hasExistingGitHooksConfig,
   installDependencies,
   parseReactFramework,
@@ -168,24 +169,28 @@ export async function run(options: CliOptions): Promise<void> {
   }
 
   if (shouldInstall) {
-    s.start('Installing dependencies...');
+    // Don't hide the actual install logs behind a spinner.
+    // Show the command and stream output to the current terminal.
+    const installCommand = getInstallCommand(projectInfo.packageManager, deps);
+    p.log.info(`Running: ${pc.cyan(installCommand)}`);
 
     const result = installDependencies(projectInfo.packageManager, deps, cwd);
 
     if (result.success) {
-      s.stop('Dependencies installed');
+      p.log.success('Dependencies installed');
 
       // Initialize git hooks after dependencies are installed
       if (gitHooksConfigured) {
         try {
-          execSync('npx simple-git-hooks', { cwd, stdio: 'pipe' });
+          p.log.info(`Running: ${pc.cyan('npx simple-git-hooks')}`);
+          execSync('npx simple-git-hooks', { cwd, stdio: 'inherit' });
           p.log.success('Git hooks initialized');
         } catch {
           p.log.warn('Failed to initialize git hooks. Run manually: npx simple-git-hooks');
         }
       }
     } else {
-      s.stop('Failed to install dependencies');
+      p.log.error('Failed to install dependencies');
       p.log.error(result.error || 'Unknown error');
       p.log.info(
         `Run manually: ${pc.cyan(getInstallCommandHint(projectInfo.packageManager, deps))}`,
