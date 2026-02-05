@@ -1,6 +1,6 @@
 {
   "name": "create-lobe-lint",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "CLI tool to setup LobeHub lint configurations",
   "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/create-lint",
   "bugs": {
