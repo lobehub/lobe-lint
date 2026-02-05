@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/semantic-release-config",
-  "version": "2.0.0-beta.9",
+  "version": "2.0.0-beta.10",
   "description": "Semantic release configuration for LobeHub projects",
   "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/semantic-release-config",
   "bugs": {
