@@ -124,4 +124,4 @@ npx create-lobe-lint --preset -y --no-install
 #### 📝 License
 
 Copyright © 2026 \[LobeHub]\[profile-link]. <br />
-This project is [MIT](./LICENSE) licensed.
+This project is MIT licensed.
