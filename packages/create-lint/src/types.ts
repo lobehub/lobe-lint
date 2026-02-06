@@ -24,6 +24,7 @@ export interface CliOptions {
   eslint?: boolean;
   gitHooks?: boolean;
   help?: boolean;
+  ignoreFiles?: boolean;
   install?: boolean;
   manual?: boolean;
   preset?: boolean;
@@ -38,6 +39,7 @@ export interface CliOptions {
 
 export interface UserSelections {
   configureGitHooks: boolean;
+  configureIgnoreFiles: boolean;
   configureVscode: boolean;
   excludeUnusedImportsAutofix: boolean;
   installDeps: boolean;

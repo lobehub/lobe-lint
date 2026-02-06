@@ -95,6 +95,9 @@ export async function run(options: CliOptions): Promise<void> {
     process.exit(0);
   }
 
+  // Ask about ignore files generation
+  selections.configureIgnoreFiles = await askIgnoreFilesConfiguration(options, selections);
+
   // Ask about git hooks configuration
   selections.configureGitHooks = await askGitHooksConfiguration(options, selections);
 
@@ -256,6 +259,7 @@ function getSelectionsFromFlags(
 
   return {
     configureGitHooks: false,
+    configureIgnoreFiles: false,
     configureVscode: false,
     excludeUnusedImportsAutofix: false,
     installDeps: options.install ?? true,
@@ -281,6 +285,7 @@ async function getPresetSelections(
 
   return {
     configureGitHooks: false,
+    configureIgnoreFiles: false,
     configureVscode: false,
     excludeUnusedImportsAutofix: false,
     installDeps: options.install ?? true,
@@ -323,6 +328,7 @@ async function getManualSelections(
 
   return {
     configureGitHooks: false,
+    configureIgnoreFiles: false,
     configureVscode: false,
     excludeUnusedImportsAutofix: false,
     installDeps: options.install ?? true,
@@ -366,6 +372,37 @@ async function selectReactFramework(detected: ReactFramework): Promise<ReactFram
   }
 
   return parseReactFramework(selected as string);
+}
+
+const TOOLS_WITH_IGNORE_FILES: ConfigTool[] = ['prettier', 'stylelint', 'remarklint'];
+
+async function askIgnoreFilesConfiguration(
+  options: CliOptions,
+  selections: UserSelections,
+): Promise<boolean> {
+  if (options.ignoreFiles !== undefined) {
+    return options.ignoreFiles;
+  }
+
+  const hasToolsWithIgnore = selections.tools.some((t) => TOOLS_WITH_IGNORE_FILES.includes(t));
+  if (!hasToolsWithIgnore) {
+    return false;
+  }
+
+  if (options.yes) {
+    return true;
+  }
+
+  const ignoreQuestion = await p.confirm({
+    initialValue: true,
+    message: 'Generate ignore files (.prettierignore, .stylelintignore, etc.)?',
+  });
+
+  if (p.isCancel(ignoreQuestion)) {
+    return false;
+  }
+
+  return ignoreQuestion;
 }
 
 async function askGitHooksConfiguration(
@@ -530,6 +567,8 @@ ${pc.bold('Options:')}
   --remarklint          Include Remarklint configuration
   --semantic-release    Include Semantic Release configuration
   --react <framework>   Set React framework (next/remix/vite/expo/true/false)
+  --ignore-files        Generate ignore files (.prettierignore, .stylelintignore, etc.)
+  --no-ignore-files     Skip ignore files generation
   --git-hooks           Configure lint-staged and simple-git-hooks
   --no-git-hooks        Skip git hooks configuration
   --vscode              Generate VSCode settings to suppress disruptive ESLint auto-fix

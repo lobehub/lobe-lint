@@ -1,6 +1,7 @@
 import { type ConfigTool, type GeneratedFile, type GeneratorContext } from '../types.js';
 import { generateCommitlintConfig, getCommitlintDependencies } from './commitlint.js';
 import { generateEslintConfig, getEslintDependencies } from './eslint.js';
+import { generateIgnoreFiles } from './ignore-files.js';
 import { generatePrettierConfig, getPrettierDependencies } from './prettier.js';
 import { generateRemarklintConfig, getRemarklintDependencies } from './remarklint.js';
 import {
@@ -17,6 +18,10 @@ export function generateConfigs(ctx: GeneratorContext): GeneratedFile[] {
     if (file) {
       files.push(file);
     }
+  }
+
+  if (ctx.selections.configureIgnoreFiles) {
+    files.push(...generateIgnoreFiles(ctx.selections.tools));
   }
 
   return files;
@@ -91,6 +96,7 @@ export { generateCommitlintConfig, getCommitlintDependencies } from './commitlin
 export { generateEslintConfig, getEslintDependencies } from './eslint.js';
 export type { GitHooksConfig } from './git-hooks.js';
 export { generateGitHooksConfig, getGitHooksDependencies } from './git-hooks.js';
+export { generateIgnoreFiles } from './ignore-files.js';
 export { generatePrettierConfig, getPrettierDependencies } from './prettier.js';
 export { generateRemarklintConfig, getRemarklintDependencies } from './remarklint.js';
 export {
