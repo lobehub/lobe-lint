@@ -1,4 +1,4 @@
-import type { Options } from 'semantic-release-config-gitmoji/lib/createConfig.js';
+import { type Options } from 'semantic-release-config-gitmoji/lib/createConfig.js';
 import { createConfig } from 'semantic-release-config-gitmoji/lib/createConfig.js';
 
 export const options: Options = {

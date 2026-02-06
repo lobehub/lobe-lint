@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from '@lobehub/stylelint-config';
+export { default } from '@lobehub/stylelint-config';

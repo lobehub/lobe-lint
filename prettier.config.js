@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from '@lobehub/prettier-config';
+export { default } from '@lobehub/prettier-config';

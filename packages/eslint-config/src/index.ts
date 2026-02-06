@@ -11,7 +11,7 @@ import { sorting } from './configs/sorting';
 import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
 import { unused } from './configs/unused';
-import type { FlatConfig, FlatConfigArray, Options } from './types';
+import { type FlatConfig, type FlatConfigArray, type Options } from './types';
 
 export type { FlatConfig, FlatConfigArray, Linter, Options, ParserOptions } from './types';
 

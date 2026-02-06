@@ -2,7 +2,7 @@ import { defineConfig } from 'eslint/config';
 import reactNativePlugin from 'eslint-plugin-react-native';
 
 import { GLOB_JSX, GLOB_TSX } from '../globs';
-import type { Options } from '../types';
+import { type Options } from '../types';
 
 export function reactNative(options: Options) {
   const { reactNative: reactNativeOption } = options;

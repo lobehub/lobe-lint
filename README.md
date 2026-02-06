@@ -39,6 +39,7 @@ ESLint, Prettier, Stylelint, Commitlint, Remarklint, and Semantic Release config
 - [Packages](#packages)
 - [Installation](#installation)
 - [Quick Start (CLI)](#quick-start-cli)
+  - [VSCode Settings](#vscode-settings)
 - [Usage](#usage)
   - [ESLint](#eslint)
   - [Prettier](#prettier)
@@ -124,6 +125,20 @@ npx create-lobe-lint --eslint --prettier --react next
 # Manual selection mode
 npx create-lobe-lint --manual
 ```
+
+### VSCode Settings
+
+The CLI can generate `.vscode/settings.json` to suppress disruptive ESLint auto-fix rules (import sorting, object key sorting, etc.) that conflict with your editing workflow:
+
+```bash
+# Include VSCode settings in setup
+npx create-lobe-lint --preset --vscode -y
+
+# Skip VSCode settings
+npx create-lobe-lint --preset --no-vscode -y
+```
+
+Generated settings disable auto-fix for rules like `perfectionist/sort-enums`, `perfectionist/sort-interfaces`, `simple-import-sort/imports`, `react/jsx-sort-props`, and optionally `unused-imports/no-unused-imports`, while keeping them as informational diagnostics.
 
 See [create-lobe-lint](./packages/create-lint) for full options and documentation.
 

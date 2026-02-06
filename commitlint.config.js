@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from '@lobehub/commitlint-config';
+export { default } from '@lobehub/commitlint-config';

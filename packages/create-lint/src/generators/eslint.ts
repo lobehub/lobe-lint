@@ -1,5 +1,5 @@
 import { CONFIG_META } from '../constants.js';
-import type { GeneratedFile, GeneratorContext } from '../types.js';
+import { type GeneratedFile, type GeneratorContext } from '../types.js';
 
 export function generateEslintConfig(ctx: GeneratorContext): GeneratedFile {
   const { projectInfo, selections } = ctx;

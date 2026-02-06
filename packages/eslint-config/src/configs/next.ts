@@ -2,7 +2,7 @@ import nextPlugin from '@next/eslint-plugin-next';
 import { defineConfig } from 'eslint/config';
 
 import { GLOB_JSX, GLOB_TSX } from '../globs';
-import type { Options } from '../types';
+import { type Options } from '../types';
 
 export function next(options: Options) {
   const { next: nextOption } = options;

@@ -1,5 +1,5 @@
 import { CONFIG_META } from '../constants.js';
-import type { GeneratedFile } from '../types.js';
+import { type GeneratedFile } from '../types.js';
 
 export function generateSemanticReleaseConfig(): GeneratedFile {
   const content = `import config from '@lobehub/semantic-release-config';

@@ -1,4 +1,4 @@
-import type { ConfigMeta, ConfigTool } from './types.js';
+import { type ConfigMeta, type ConfigTool } from './types.js';
 
 export const CONFIG_META: Record<ConfigTool, ConfigMeta> = {
   'eslint': {

@@ -32,11 +32,14 @@ export interface CliOptions {
   remarklint?: boolean;
   semanticRelease?: boolean;
   stylelint?: boolean;
+  vscode?: boolean;
   yes?: boolean;
 }
 
 export interface UserSelections {
   configureGitHooks: boolean;
+  configureVscode: boolean;
+  excludeUnusedImportsAutofix: boolean;
   installDeps: boolean;
   reactFramework: ReactFramework;
   tools: ConfigTool[];

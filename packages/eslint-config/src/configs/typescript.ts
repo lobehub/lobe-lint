@@ -2,7 +2,7 @@ import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
 import { GLOB_TS_ALL } from '../globs';
-import type { Options } from '../types';
+import { type Options } from '../types';
 
 export function typescript(options: Options) {
   const {
@@ -50,7 +50,7 @@ export function typescript(options: Options) {
           },
         ],
         '@typescript-eslint/method-signature-style': ['error', 'property'],
-        '@typescript-eslint/no-import-type-side-effects': 'error',
+        '@typescript-eslint/no-import-type-side-effects': 'off',
         '@typescript-eslint/no-unused-expressions': [
           'error',
           {

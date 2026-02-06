@@ -1,5 +1,5 @@
 import { CONFIG_META } from '../constants.js';
-import type { GeneratedFile } from '../types.js';
+import { type GeneratedFile } from '../types.js';
 
 export function generatePrettierConfig(): GeneratedFile {
   const content = `import config from '@lobehub/prettier-config';

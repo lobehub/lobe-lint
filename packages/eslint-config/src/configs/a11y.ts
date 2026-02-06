@@ -2,7 +2,7 @@ import { defineConfig } from 'eslint/config';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 import { GLOB_JSX, GLOB_TSX } from '../globs';
-import type { Options } from '../types';
+import { type Options } from '../types';
 
 export function a11y(options: Options) {
   const { a11y: a11yOption, react: reactOption } = options;

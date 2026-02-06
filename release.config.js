@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from '@lobehub/semantic-release-config';
+export { default } from '@lobehub/semantic-release-config';

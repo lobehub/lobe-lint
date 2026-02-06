@@ -1,4 +1,4 @@
-import type { ConfigTool, GeneratedFile, GeneratorContext } from '../types.js';
+import { type ConfigTool, type GeneratedFile, type GeneratorContext } from '../types.js';
 import { generateCommitlintConfig, getCommitlintDependencies } from './commitlint.js';
 import { generateEslintConfig, getEslintDependencies } from './eslint.js';
 import { generatePrettierConfig, getPrettierDependencies } from './prettier.js';
@@ -98,3 +98,10 @@ export {
   getSemanticReleaseDependencies,
 } from './semantic-release.js';
 export { generateStylelintConfig, getStylelintDependencies } from './stylelint.js';
+export type { VscodeWriteResult } from './vscode.js';
+export {
+  generateVscodeSettings,
+  hasConflictingKeys,
+  readExistingVscodeSettings,
+  writeVscodeSettings,
+} from './vscode.js';

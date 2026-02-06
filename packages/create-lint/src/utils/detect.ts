@@ -4,7 +4,12 @@ import path from 'node:path';
 import { LOCKS } from 'package-manager-detector';
 
 import { EXISTING_CONFIG_PATTERNS, REACT_FRAMEWORKS } from '../constants.js';
-import type { ConfigTool, PackageManager, ProjectInfo, ReactFramework } from '../types.js';
+import {
+  type ConfigTool,
+  type PackageManager,
+  type ProjectInfo,
+  type ReactFramework,
+} from '../types.js';
 
 export function detectPackageManager(cwd: string): PackageManager {
   for (const [lockfile, agent] of Object.entries(LOCKS)) {

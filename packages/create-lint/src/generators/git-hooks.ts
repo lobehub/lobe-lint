@@ -1,4 +1,4 @@
-import type { ConfigTool, GeneratorContext, PackageManager } from '../types.js';
+import { type ConfigTool, type GeneratorContext, type PackageManager } from '../types.js';
 
 export interface GitHooksConfig {
   lintStaged: Record<string, string[]>;

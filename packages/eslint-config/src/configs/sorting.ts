@@ -3,7 +3,7 @@ import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import reactPlugin from 'eslint-plugin-react';
 
 import { GLOB_JSX, GLOB_TS_ALL, GLOB_TSX } from '../globs';
-import type { Options } from '../types';
+import { type Options } from '../types';
 
 export function sorting(options: Options) {
   const { sortKeys = true } = options;

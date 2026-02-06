@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import type { GeneratedFile } from '../types.js';
+import { type GeneratedFile } from '../types.js';
 
 export function writeFiles(cwd: string, files: GeneratedFile[]): void {
   for (const file of files) {

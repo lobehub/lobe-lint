@@ -1,4 +1,4 @@
-import type { Config } from 'stylelint';
+import { type Config } from 'stylelint';
 
 const config: Config = {
   extends: [

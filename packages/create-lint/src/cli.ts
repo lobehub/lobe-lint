@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-process-exit */
 import { execSync } from 'node:child_process';
 
 import * as p from '@clack/prompts';
@@ -10,13 +9,16 @@ import {
   generateGitHooksConfig,
   getDependencies,
   getGitHooksDependencies,
+  hasConflictingKeys,
+  readExistingVscodeSettings,
+  writeVscodeSettings,
 } from './generators/index.js';
-import type {
-  CliOptions,
-  ConfigTool,
-  GeneratorContext,
-  ReactFramework,
-  UserSelections,
+import {
+  type CliOptions,
+  type ConfigTool,
+  type GeneratorContext,
+  type ReactFramework,
+  type UserSelections,
 } from './types.js';
 import {
   detectProject,
@@ -96,6 +98,12 @@ export async function run(options: CliOptions): Promise<void> {
   // Ask about git hooks configuration
   selections.configureGitHooks = await askGitHooksConfiguration(options, selections);
 
+  // Ask about VSCode configuration
+  selections.configureVscode = await askVscodeConfiguration(options, selections);
+  if (selections.configureVscode) {
+    selections.excludeUnusedImportsAutofix = await askUnusedImportsExclusion(options);
+  }
+
   const ctx: GeneratorContext = {
     cwd,
     projectInfo,
@@ -141,6 +149,15 @@ export async function run(options: CliOptions): Promise<void> {
     }
   }
 
+  // Generate VSCode settings
+  let vscodeConfigured = false;
+  if (selections.configureVscode) {
+    const result = writeVscodeSettings(cwd, ctx, true);
+    if (result.written) {
+      vscodeConfigured = true;
+    }
+  }
+
   s.stop(`Generated ${files.length} config files`);
 
   for (const file of files) {
@@ -149,6 +166,10 @@ export async function run(options: CliOptions): Promise<void> {
 
   if (gitHooksConfigured) {
     p.log.success(`${pc.green('+')} package.json (lint-staged, simple-git-hooks)`);
+  }
+
+  if (vscodeConfigured) {
+    p.log.success(`${pc.green('+')} .vscode/settings.json`);
   }
 
   p.note(deps.map((d) => `${pc.green('+')} ${d}`).join('\n'), 'Dependencies to install');
@@ -235,6 +256,8 @@ function getSelectionsFromFlags(
 
   return {
     configureGitHooks: false,
+    configureVscode: false,
+    excludeUnusedImportsAutofix: false,
     installDeps: options.install ?? true,
     reactFramework,
     tools,
@@ -258,6 +281,8 @@ async function getPresetSelections(
 
   return {
     configureGitHooks: false,
+    configureVscode: false,
+    excludeUnusedImportsAutofix: false,
     installDeps: options.install ?? true,
     reactFramework,
     tools: [...PRESET_TOOLS],
@@ -298,6 +323,8 @@ async function getManualSelections(
 
   return {
     configureGitHooks: false,
+    configureVscode: false,
+    excludeUnusedImportsAutofix: false,
     installDeps: options.install ?? true,
     reactFramework,
     tools: selectedTools as ConfigTool[],
@@ -398,6 +425,67 @@ async function askGitHooksConfiguration(
   return hookQuestion;
 }
 
+async function askVscodeConfiguration(
+  options: CliOptions,
+  selections: UserSelections,
+): Promise<boolean> {
+  if (options.vscode !== undefined) {
+    return options.vscode;
+  }
+
+  if (!selections.tools.includes('eslint')) {
+    return false;
+  }
+
+  if (options.yes) {
+    return true;
+  }
+
+  const cwd = process.cwd();
+  const existing = readExistingVscodeSettings(cwd);
+
+  if (existing !== null && hasConflictingKeys(existing)) {
+    const shouldOverwrite = await p.confirm({
+      initialValue: false,
+      message:
+        'Existing .vscode/settings.json has ESLint autofix settings. Overwrite these fields?',
+    });
+
+    if (p.isCancel(shouldOverwrite) || !shouldOverwrite) {
+      return false;
+    }
+    return true;
+  }
+
+  const vscodeQuestion = await p.confirm({
+    initialValue: true,
+    message: 'Generate VSCode settings to suppress disruptive ESLint auto-fix?',
+  });
+
+  if (p.isCancel(vscodeQuestion)) {
+    return false;
+  }
+
+  return vscodeQuestion;
+}
+
+async function askUnusedImportsExclusion(options: CliOptions): Promise<boolean> {
+  if (options.yes) {
+    return true;
+  }
+
+  const question = await p.confirm({
+    initialValue: true,
+    message: 'Also suppress auto-removal of unused imports on save?',
+  });
+
+  if (p.isCancel(question)) {
+    return false;
+  }
+
+  return question;
+}
+
 function formatReactFramework(framework: ReactFramework): string {
   if (framework === true) return 'Generic React';
   if (framework === false) return 'None';
@@ -444,6 +532,8 @@ ${pc.bold('Options:')}
   --react <framework>   Set React framework (next/remix/vite/expo/true/false)
   --git-hooks           Configure lint-staged and simple-git-hooks
   --no-git-hooks        Skip git hooks configuration
+  --vscode              Generate VSCode settings to suppress disruptive ESLint auto-fix
+  --no-vscode           Skip VSCode settings generation
   --install             Auto-install dependencies (default)
   --no-install          Skip dependency installation
   -y, --yes             Skip confirmations

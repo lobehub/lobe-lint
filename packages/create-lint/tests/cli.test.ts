@@ -71,4 +71,115 @@ describe('create-lobe-lint CLI', () => {
       'commit-msg': 'npx --no -- commitlint --edit $1',
     });
   });
+
+  it('generates preset configs with vscode settings (--yes includes vscode)', async () => {
+    await run({ preset: true, yes: true, install: false });
+
+    const settings = await readJson(path.join(tmpDir, '.vscode', 'settings.json'));
+
+    expect(settings['eslint.codeActionsOnSave.rules']).toContain('*');
+    expect(settings['eslint.codeActionsOnSave.rules']).toContain('!perfectionist/sort-enums');
+    expect(settings['eslint.codeActionsOnSave.rules']).toContain('!simple-import-sort/imports');
+    expect(settings['eslint.codeActionsOnSave.rules']).toContain(
+      '!unused-imports/no-unused-imports',
+    );
+    expect(settings['eslint.codeActionsOnSave.rules']).toContain('!react/jsx-sort-props');
+
+    expect(settings['eslint.rules.customizations']).toEqual(
+      expect.arrayContaining([
+        { rule: 'perfectionist/sort-enums', severity: 'info' },
+        { rule: 'react/jsx-sort-props', severity: 'info' },
+      ]),
+    );
+  });
+
+  it('--vscode generates correct settings.json', async () => {
+    await run({ eslint: true, vscode: true, yes: true, install: false });
+
+    const settings = await readJson(path.join(tmpDir, '.vscode', 'settings.json'));
+
+    expect(settings['eslint.codeActionsOnSave.rules']).toBeDefined();
+    expect(settings['eslint.codeActionsOnSave.rules'][0]).toBe('*');
+    expect(settings['eslint.rules.customizations']).toBeDefined();
+    expect(settings['eslint.rules.customizations'].length).toBeGreaterThan(0);
+  });
+
+  it('--no-vscode does not generate .vscode/settings.json', async () => {
+    await run({ preset: true, yes: true, install: false, vscode: false });
+
+    const settingsExists = await fs
+      .access(path.join(tmpDir, '.vscode', 'settings.json'))
+      .then(() => true)
+      .catch(() => false);
+
+    expect(settingsExists).toBe(false);
+  });
+
+  it('merges with existing .vscode/settings.json without losing original settings', async () => {
+    await fs.mkdir(path.join(tmpDir, '.vscode'), { recursive: true });
+    await fs.writeFile(
+      path.join(tmpDir, '.vscode', 'settings.json'),
+      JSON.stringify({ 'editor.fontSize': 14, 'editor.tabSize': 2 }, null, 2) + '\n',
+      'utf8',
+    );
+
+    await run({ eslint: true, vscode: true, yes: true, install: false });
+
+    const settings = await readJson(path.join(tmpDir, '.vscode', 'settings.json'));
+
+    expect(settings['editor.fontSize']).toBe(14);
+    expect(settings['editor.tabSize']).toBe(2);
+    expect(settings['eslint.codeActionsOnSave.rules']).toBeDefined();
+    expect(settings['eslint.rules.customizations']).toBeDefined();
+  });
+
+  it('does not include react/jsx-sort-props when react is disabled', async () => {
+    await fs.writeFile(
+      path.join(tmpDir, 'package.json'),
+      JSON.stringify({ name: 'fixture-project', private: true, version: '0.0.0' }, null, 2) + '\n',
+      'utf8',
+    );
+
+    await run({
+      eslint: true,
+      react: 'false',
+      vscode: true,
+      yes: true,
+      install: false,
+    });
+
+    const settings = await readJson(path.join(tmpDir, '.vscode', 'settings.json'));
+
+    expect(settings['eslint.codeActionsOnSave.rules']).not.toContain('!react/jsx-sort-props');
+
+    const ruleNames = (settings['eslint.rules.customizations'] as Array<{ rule: string }>).map(
+      (r) => r.rule,
+    );
+    expect(ruleNames).not.toContain('react/jsx-sort-props');
+  });
+
+  it('overwrites conflicting keys in existing settings when --vscode is explicit', async () => {
+    await fs.mkdir(path.join(tmpDir, '.vscode'), { recursive: true });
+    await fs.writeFile(
+      path.join(tmpDir, '.vscode', 'settings.json'),
+      JSON.stringify(
+        {
+          'editor.fontSize': 14,
+          'eslint.codeActionsOnSave.rules': ['old-rule'],
+          'eslint.rules.customizations': [{ rule: 'old', severity: 'warn' }],
+        },
+        null,
+        2,
+      ) + '\n',
+      'utf8',
+    );
+
+    await run({ eslint: true, vscode: true, yes: true, install: false });
+
+    const settings = await readJson(path.join(tmpDir, '.vscode', 'settings.json'));
+
+    expect(settings['editor.fontSize']).toBe(14);
+    expect(settings['eslint.codeActionsOnSave.rules']).toContain('*');
+    expect(settings['eslint.codeActionsOnSave.rules']).not.toContain('old-rule');
+  });
 });

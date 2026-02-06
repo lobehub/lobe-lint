@@ -3,7 +3,7 @@ import { importX } from 'eslint-plugin-import-x';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 import { GLOB_SRC } from '../globs';
-import type { Options } from '../types';
+import { type Options } from '../types';
 
 export function imports(options: Options) {
   const { sortImports = true } = options;

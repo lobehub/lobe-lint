@@ -1,8 +1,7 @@
-/* eslint-disable unicorn/no-process-exit, unicorn/prefer-top-level-await */
 import mri from 'mri';
 
 import { run } from './cli.js';
-import type { CliOptions } from './types.js';
+import { type CliOptions } from './types.js';
 
 const argv = mri(process.argv.slice(2), {
   alias: {
@@ -24,6 +23,7 @@ const argv = mri(process.argv.slice(2), {
     'yes',
     'install',
     'git-hooks',
+    'vscode',
   ],
   string: ['react'],
 });
@@ -41,6 +41,7 @@ const options: CliOptions = {
   remarklint: argv.remarklint,
   semanticRelease: argv['semantic-release'],
   stylelint: argv.stylelint,
+  vscode: argv.vscode,
   yes: argv.yes,
 };
 

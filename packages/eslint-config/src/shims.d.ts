@@ -1,5 +1,5 @@
 declare module 'eslint-plugin-jsx-a11y' {
-  import type { ESLint, Linter } from 'eslint';
+  import { type ESLint, type Linter } from 'eslint';
 
   const plugin: ESLint.Plugin & {
     flatConfigs: {
@@ -17,7 +17,7 @@ declare module 'eslint-plugin-jsx-a11y' {
 }
 
 declare module 'eslint-plugin-react-native' {
-  import type { ESLint } from 'eslint';
+  import { type ESLint } from 'eslint';
 
   const plugin: ESLint.Plugin;
   export default plugin;

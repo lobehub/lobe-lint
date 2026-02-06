@@ -1,6 +1,6 @@
 import { execSync } from 'node:child_process';
 
-import type { PackageManager } from '../types.js';
+import { type PackageManager } from '../types.js';
 
 export function getInstallCommand(pm: PackageManager, packages: string[]): string {
   const pkgList = packages.join(' ');
