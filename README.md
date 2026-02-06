@@ -38,6 +38,7 @@ ESLint, Prettier, Stylelint, Commitlint, Remarklint, and Semantic Release config
 - [Features](#features)
 - [Packages](#packages)
 - [Installation](#installation)
+- [Quick Start (CLI)](#quick-start-cli)
 - [Usage](#usage)
   - [ESLint](#eslint)
   - [Prettier](#prettier)
@@ -66,15 +67,16 @@ ESLint, Prettier, Stylelint, Commitlint, Remarklint, and Semantic Release config
 
 ## Packages
 
-| Package                                                                | Version                                           | Description                |
-| ---------------------------------------------------------------------- | ------------------------------------------------- | -------------------------- |
-| [@lobehub/eslint-config](./packages/eslint-config)                     | [![][eslint-npm-shield]][eslint-npm-link]         | ESLint Flat Config         |
-| [@lobehub/prettier-config](./packages/prettier-config)                 | [![][prettier-npm-shield]][prettier-npm-link]     | Prettier config            |
-| [@lobehub/stylelint-config](./packages/stylelint-config)               | [![][stylelint-npm-shield]][stylelint-npm-link]   | Stylelint config           |
-| [@lobehub/commitlint-config](./packages/commitlint-config)             | [![][commitlint-npm-shield]][commitlint-npm-link] | Commitlint config          |
-| [@lobehub/remarklint-config](./packages/remarklint-config)             | [![][remarklint-npm-shield]][remarklint-npm-link] | Remarklint config          |
-| [@lobehub/semantic-release-config](./packages/semantic-release-config) | [![][semantic-npm-shield]][semantic-npm-link]     | Semantic release config    |
-| [@lobehub/lint](./packages/lint)                                       | [![][npm-release-shield]][npm-release-link]       | Meta package (all configs) |
+| Package                                                                | Version                                             | Description                |
+| ---------------------------------------------------------------------- | --------------------------------------------------- | -------------------------- |
+| [@lobehub/eslint-config](./packages/eslint-config)                     | [![][eslint-npm-shield]][eslint-npm-link]           | ESLint Flat Config         |
+| [@lobehub/prettier-config](./packages/prettier-config)                 | [![][prettier-npm-shield]][prettier-npm-link]       | Prettier config            |
+| [@lobehub/stylelint-config](./packages/stylelint-config)               | [![][stylelint-npm-shield]][stylelint-npm-link]     | Stylelint config           |
+| [@lobehub/commitlint-config](./packages/commitlint-config)             | [![][commitlint-npm-shield]][commitlint-npm-link]   | Commitlint config          |
+| [@lobehub/remarklint-config](./packages/remarklint-config)             | [![][remarklint-npm-shield]][remarklint-npm-link]   | Remarklint config          |
+| [@lobehub/semantic-release-config](./packages/semantic-release-config) | [![][semantic-npm-shield]][semantic-npm-link]       | Semantic release config    |
+| [@lobehub/lint](./packages/lint)                                       | [![][npm-release-shield]][npm-release-link]         | Meta package (all configs) |
+| [create-lobe-lint](./packages/create-lint)                             | [![][create-lint-npm-shield]][create-lint-npm-link] | CLI setup tool             |
 
 ## Installation
 
@@ -101,6 +103,29 @@ bun add -D @lobehub/prettier-config prettier
 [![][back-to-top]](#readme-top)
 
 </div>
+
+## Quick Start (CLI)
+
+The fastest way to set up LobeHub lint configs in your project is using the CLI tool:
+
+```bash
+npx create-lobe-lint
+```
+
+This will start an interactive setup that auto-detects your project configuration (package manager, TypeScript, React framework) and generates the appropriate config files.
+
+```bash
+# Quick setup with preset defaults
+npx create-lobe-lint --preset -y
+
+# Select specific tools with framework
+npx create-lobe-lint --eslint --prettier --react next
+
+# Manual selection mode
+npx create-lobe-lint --manual
+```
+
+See [create-lobe-lint](./packages/create-lint) for full options and documentation.
 
 ## Usage
 
@@ -266,6 +291,8 @@ This project is [MIT](./LICENSE) licensed.
 [commitlint-npm-shield]: https://img.shields.io/npm/v/@lobehub/commitlint-config?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [contributors-contrib]: https://contrib.rocks/image?repo=lobehub/lobe-lint
 [contributors-url]: https://github.com/lobehub/lobe-lint/graphs/contributors
+[create-lint-npm-link]: https://www.npmjs.com/package/create-lobe-lint
+[create-lint-npm-shield]: https://img.shields.io/npm/v/create-lobe-lint?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [discord-link]: https://discord.gg/AYFPHvv2jT
 [discord-shield]: https://img.shields.io/discord/1127171173982154893?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square
 [eslint-npm-link]: https://www.npmjs.com/package/@lobehub/eslint-config
