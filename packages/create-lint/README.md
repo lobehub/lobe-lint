@@ -12,12 +12,6 @@ CLI tool to setup LobeHub lint configurations
 
 [Changelog](./CHANGELOG.md) · \[Report Bug]\[issues-link] · \[Request Feature]\[issues-link]
 
-<!-- SHIELD GROUP -->
-
-\[!\[]\[npm-release-shield]]\[npm-release-link]
-\[!\[]\[npm-downloads-shield]]\[npm-downloads-link]
-\[!\[]\[github-license-shield]]\[github-license-link]
-
 </div>
 
 ![](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
