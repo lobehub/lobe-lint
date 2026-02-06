@@ -38,12 +38,6 @@ CLI tool to setup LobeHub lint configurations
 - **Framework Support** - Next.js, Remix, Vite, Expo support
 - **Flexible** - Generate configs for ESLint, Prettier, Stylelint, Commitlint, Remarklint, Semantic Release
 
-<div align="right">
-
-[![][back-to-top]](#readme-top)
-
-</div>
-
 ## Usage
 
 Run the CLI with npx:
@@ -58,12 +52,6 @@ This will start an interactive setup process that:
 2. Asks which tools you want to configure
 3. Generates the appropriate config files
 4. Installs the required dependencies
-
-<div align="right">
-
-[![][back-to-top]](#readme-top)
-
-</div>
 
 ## Options
 
