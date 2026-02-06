@@ -10,7 +10,7 @@
 
 CLI tool to setup LobeHub lint configurations
 
-[Changelog](./CHANGELOG.md) · \[Report Bug]\[issues-link] · \[Request Feature]\[issues-link]
+[Changelog](./CHANGELOG.md) · [Report Bug][issues-link] · [Request Feature][issues-link]
 
 </div>
 
@@ -40,7 +40,7 @@ CLI tool to setup LobeHub lint configurations
 
 <div align="right">
 
-[!\[\]\[back-to-top\]](#readme-top)
+[![][back-to-top]](#readme-top)
 
 </div>
 
@@ -61,7 +61,7 @@ This will start an interactive setup process that:
 
 <div align="right">
 
-[!\[\]\[back-to-top\]](#readme-top)
+[![][back-to-top]](#readme-top)
 
 </div>
 
@@ -82,12 +82,6 @@ This will start an interactive setup process that:
 | `--no-install`        |       | Skip dependency installation                                            |
 | `--yes`               | `-y`  | Skip confirmations                                                      |
 | `--help`              | `-h`  | Show help                                                               |
-
-<div align="right">
-
-[!\[\]\[back-to-top\]](#readme-top)
-
-</div>
 
 ## Examples
 
@@ -123,5 +117,5 @@ npx create-lobe-lint --preset -y --no-install
 
 #### 📝 License
 
-Copyright © 2026 \[LobeHub]\[profile-link]. <br />
+Copyright © 2026 [LobeHub](https://github.com/lobehub). <br />
 This project is MIT licensed.
