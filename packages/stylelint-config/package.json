@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/stylelint-config",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Stylelint configuration for LobeHub projects",
   "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/stylelint-config",
   "bugs": {
