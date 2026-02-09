@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/lint",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Meta package that re-exports all LobeHub lint configurations",
   "homepage": "https://github.com/lobehub/lobe-lint",
   "bugs": {
