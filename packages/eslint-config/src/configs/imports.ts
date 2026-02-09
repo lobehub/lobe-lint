@@ -26,7 +26,7 @@ export function imports(options: Options) {
         'import-x/no-duplicates': 'error',
         'import-x/no-mutable-exports': 'error',
         'import-x/no-self-import': 'error',
-        'import-x/consistent-type-specifier-style': ['error', 'prefer-inline'],
+        'import-x/consistent-type-specifier-style': 0,
       },
     },
   ]);
