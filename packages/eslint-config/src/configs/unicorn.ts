@@ -85,6 +85,23 @@ export function unicorn() {
         'unicorn/prefer-string-slice': 'warn',
         'unicorn/prefer-string-starts-ends-with': 'warn',
         'unicorn/prefer-structured-clone': 'warn',
+
+        // Styles
+        'unicorn/catch-error-name': 0,
+        'unicorn/explicit-length-check': 0,
+        'unicorn/no-array-callback-reference': 0,
+        'unicorn/require-module-specifiers': 0,
+        'unicorn/no-array-for-each': 0,
+        'unicorn/no-negated-condition': 0,
+        'unicorn/no-null': 0,
+        'unicorn/no-typeof-undefined': 0,
+        'unicorn/no-useless-undefined': 0,
+        'unicorn/prefer-code-point': 0,
+        'unicorn/prefer-number-properties': 0,
+        'unicorn/prefer-query-selector': 0,
+        'unicorn/prefer-spread': 0,
+        'unicorn/prefer-ternary': 0,
+        'unicorn/prefer-type-error': 0,
       },
     },
     {
