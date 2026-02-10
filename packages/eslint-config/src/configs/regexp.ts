@@ -16,7 +16,7 @@ export function regexp(options: Options) {
         regexp: regexpPlugin,
       },
       rules: {
-        ...(regexpPlugin.configs['flat/recommended'].rules as any),
+        ...regexpPlugin.configs['flat/recommended'].rules,
       },
     },
   ]);

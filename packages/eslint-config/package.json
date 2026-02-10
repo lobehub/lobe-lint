@@ -28,7 +28,9 @@
     "dist"
   ],
   "scripts": {
+    "prebuild": "node ./scripts/generate-eslint-typegen.mjs",
     "build": "tsdown",
+    "postbuild": "node ./scripts/postbuild.mjs",
     "dev": "tsdown --watch",
     "test": "vitest run",
     "type-check": "tsc --noEmit"
@@ -56,6 +58,7 @@
     "typescript-eslint": "^8.54.0"
   },
   "devDependencies": {
+    "eslint-typegen": "^2.3.0",
     "glob": "^13.0.1"
   },
   "peerDependencies": {

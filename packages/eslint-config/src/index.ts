@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="./eslint-typegen.d.ts" />
+
 import { a11y } from './configs/a11y';
 import { eslintCommentsConfig } from './configs/eslint-comments';
 import { ignores } from './configs/ignores';
