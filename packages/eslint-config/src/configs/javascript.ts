@@ -2,7 +2,9 @@ import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 
-import { GLOB_SRC } from '../globs';
+import { GLOB_SRC, GLOB_TEST } from '../globs';
+
+const GLOB_SCRIPTS = ['**/scripts/**'];
 
 export function javascript() {
   return defineConfig([
@@ -30,9 +32,36 @@ export function javascript() {
       },
       rules: {
         ...js.configs.recommended.rules,
+        // Only disallow console.log, allow console.warn/error/info/etc.
+        'no-console': [
+          'error',
+          {
+            allow: [
+              'warn',
+              'error',
+              'info',
+
+              'table',
+
+              'group',
+              'groupCollapsed',
+              'groupEnd',
+
+              'assert',
+              'clear',
+            ],
+          },
+        ],
         'no-empty': 'warn',
         'no-extra-boolean-cast': 'off',
         'no-unused-vars': 'off',
+      },
+    },
+    // Allow all console in test and script files
+    {
+      files: [...GLOB_TEST, ...GLOB_SCRIPTS],
+      rules: {
+        'no-console': 'off',
       },
     },
   ]);

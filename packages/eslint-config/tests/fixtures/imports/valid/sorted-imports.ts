@@ -13,4 +13,4 @@ import { helper } from '../utils';
 import { Component } from './Component';
 
 // Use the imports to avoid unused-imports error
-console.log(fs, path, lodash, helper, Component);
+void [fs, path, lodash, helper, Component];

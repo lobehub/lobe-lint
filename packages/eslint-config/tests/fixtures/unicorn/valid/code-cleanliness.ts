@@ -5,8 +5,9 @@ const tab = '\t';
 const newline = '\n';
 const unicode = '\u001B';
 
-// no-console-spaces: No extra spaces in console
+// no-console-spaces: No extra spaces in console (allowed via disable for this rule demo)
 const logValue = 42;
+// eslint-disable-next-line no-console
 console.log('Value:', logValue);
 
 // no-lonely-if: Proper if-else structure
@@ -43,6 +44,7 @@ const spread = { ...obj };
 // no-useless-length-check: No redundant length check
 function processItems(items: number[]) {
   for (const item of items) {
+    // eslint-disable-next-line no-console
     console.log(item);
   }
 }
