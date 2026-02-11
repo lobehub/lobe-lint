@@ -76,6 +76,12 @@ export interface Options {
    * @default true
    */
   typescript?: boolean | 'strict';
+
+  /**
+   * 是否启用 YAML 规则（如字符串使用单引号）
+   * @default true
+   */
+  yml?: boolean;
 }
 
 export type FlatConfig = Linter.Config;

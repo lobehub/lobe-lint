@@ -14,6 +14,7 @@ import { sorting } from './configs/sorting';
 import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
 import { unused } from './configs/unused';
+import { yml } from './configs/yml';
 import { type FlatConfig, type FlatConfigArray, type Options } from './types';
 
 export type { FlatConfig, FlatConfigArray, Linter, Options, ParserOptions } from './types';
@@ -30,6 +31,7 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
     sortKeys = true,
     typeChecked = false,
     typescript: tsOption = true,
+    yml: ymlOption = true,
   } = options;
 
   const configs: FlatConfigArray = [
@@ -45,6 +47,7 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
     ...sorting({ ...options, sortKeys }),
     ...regexp({ ...options, regexp: regexpOption }),
     ...unused(),
+    ...yml({ ...options, yml: ymlOption }),
     ...eslintCommentsConfig(),
     // 用户自定义配置（最高优先级）
     ...userConfigs,

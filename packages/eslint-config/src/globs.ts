@@ -13,6 +13,8 @@ export const GLOB_TEST = [
   '**/__tests__/**/*.{js,jsx,ts,tsx}',
 ];
 
+export const GLOB_YAML = ['**/*.yaml', '**/*.yml'];
+
 export const GLOB_IGNORES = [
   '**/node_modules/**',
   '**/dist/**',
