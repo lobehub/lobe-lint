@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/commitlint-config",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Commitlint configuration for LobeHub projects",
   "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/commitlint-config",
   "bugs": {
