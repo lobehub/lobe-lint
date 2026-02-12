@@ -15,7 +15,7 @@ export function next(options: Options) {
     {
       files,
       plugins: {
-        '@next/next': nextPlugin,
+        '@next/next': nextPlugin as any,
       },
       rules: {
         ...nextPlugin.configs.recommended.rules,
