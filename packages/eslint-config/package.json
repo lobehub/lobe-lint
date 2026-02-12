@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/eslint-config",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "ESLint Flat Config configuration for LobeHub projects",
   "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/eslint-config",
   "bugs": {
