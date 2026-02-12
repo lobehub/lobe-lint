@@ -32,6 +32,8 @@ export function javascript() {
       },
       rules: {
         ...js.configs.recommended.rules,
+        'no-useless-rename': 'error',
+        'object-shorthand': ['error', 'properties', { avoidQuotes: true }],
         // Only disallow console.log, allow console.warn/error/info/etc.
         'no-console': [
           'error',

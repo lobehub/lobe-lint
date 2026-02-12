@@ -23,6 +23,8 @@ describe('ESLint Config Fixtures', () => {
   describe('valid fixtures should pass', () => {
     it.each([
       ['javascript/valid/basic.js'],
+      ['javascript/valid/object-shorthand.ts'],
+      ['javascript/valid/destructuring-shorthand.ts'],
       ['typescript/valid/types.ts'],
       ['typescript/valid/type-imports.ts'],
       ['react/valid/component.tsx'],
@@ -53,6 +55,8 @@ describe('ESLint Config Fixtures', () => {
     it.each([
       // JavaScript
       ['javascript/invalid/unused-var.js', 'unused-imports/no-unused-vars'],
+      ['javascript/invalid/object-shorthand.ts', 'object-shorthand'],
+      ['javascript/invalid/no-useless-rename.ts', 'no-useless-rename'],
       // TypeScript
       ['typescript/invalid/missing-type-import.ts', '@typescript-eslint/consistent-type-imports'],
       // React
