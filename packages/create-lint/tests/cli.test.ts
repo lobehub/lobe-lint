@@ -62,7 +62,7 @@ describe('create-lobe-lint CLI', () => {
     const pkg = await readJson(path.join(tmpDir, 'package.json'));
 
     expect(pkg['lint-staged']).toEqual({
-      '*.{js,jsx,ts,tsx}': ['eslint --fix'],
+      '*.{js,jsx,ts,tsx,yml,yaml}': ['eslint --fix'],
       '*': ['prettier --write --ignore-unknown'],
       '*.{css,less,scss}': ['stylelint --fix'],
     });
