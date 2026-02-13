@@ -23,6 +23,7 @@ describe('ESLint Config Fixtures', () => {
   describe('valid fixtures should pass', () => {
     it.each([
       ['javascript/valid/basic.js'],
+      ['javascript/valid/vite.config.ts'],
       ['javascript/valid/object-shorthand.ts'],
       ['javascript/valid/destructuring-shorthand.ts'],
       ['typescript/valid/types.ts'],
@@ -55,6 +56,7 @@ describe('ESLint Config Fixtures', () => {
     it.each([
       // JavaScript
       ['javascript/invalid/unused-var.js', 'unused-imports/no-unused-vars'],
+      ['javascript/invalid/default-export.ts', 'no-restricted-syntax'],
       ['javascript/invalid/object-shorthand.ts', 'object-shorthand'],
       ['javascript/invalid/no-useless-rename.ts', 'no-useless-rename'],
       // TypeScript

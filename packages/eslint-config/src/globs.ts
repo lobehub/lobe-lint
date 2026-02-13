@@ -15,6 +15,26 @@ export const GLOB_TEST = [
 
 export const GLOB_YAML = ['**/*.yaml', '**/*.yml'];
 
+export const GLOB_CONFIG_FILES = ['**/*.config.{js,mjs,ts,mts,cjs,cts}'];
+
+export const GLOB_NEXT_APP_FILES = [
+  '**/app/**/page.{js,jsx,ts,tsx}',
+  '**/app/**/layout.{js,jsx,ts,tsx}',
+  '**/app/**/loading.{js,jsx,ts,tsx}',
+  '**/app/**/error.{js,jsx,ts,tsx}',
+  '**/app/**/not-found.{js,jsx,ts,tsx}',
+  '**/app/**/template.{js,jsx,ts,tsx}',
+  '**/app/**/default.{js,jsx,ts,tsx}',
+  '**/app/**/route.{js,ts}',
+  '**/app/**/opengraph-image.{js,jsx,ts,tsx}',
+  '**/app/**/twitter-image.{js,jsx,ts,tsx}',
+  '**/app/**/apple-icon.{js,jsx,ts,tsx}',
+  '**/app/**/icon.{js,jsx,ts,tsx}',
+  '**/app/**/sitemap.{js,ts}',
+  '**/app/**/robots.{js,ts}',
+  '**/app/**/manifest.{js,ts}',
+];
+
 export const GLOB_IGNORES = [
   '**/node_modules/**',
   '**/dist/**',

@@ -1,27 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import unicornPlugin from 'eslint-plugin-unicorn';
 
-import { GLOB_SRC } from '../globs';
-
-const GLOB_NEXT_APP_FILES = [
-  '**/app/**/page.{js,jsx,ts,tsx}',
-  '**/app/**/layout.{js,jsx,ts,tsx}',
-  '**/app/**/loading.{js,jsx,ts,tsx}',
-  '**/app/**/error.{js,jsx,ts,tsx}',
-  '**/app/**/not-found.{js,jsx,ts,tsx}',
-  '**/app/**/template.{js,jsx,ts,tsx}',
-  '**/app/**/default.{js,jsx,ts,tsx}',
-  '**/app/**/route.{js,ts}',
-  '**/app/**/opengraph-image.{js,jsx,ts,tsx}',
-  '**/app/**/twitter-image.{js,jsx,ts,tsx}',
-  '**/app/**/apple-icon.{js,jsx,ts,tsx}',
-  '**/app/**/icon.{js,jsx,ts,tsx}',
-  '**/app/**/sitemap.{js,ts}',
-  '**/app/**/robots.{js,ts}',
-  '**/app/**/manifest.{js,ts}',
-];
-
-const GLOB_CONFIG_FILES = ['**/*.config.{js,mjs,ts,mts,cjs,cts}'];
+import { GLOB_CONFIG_FILES, GLOB_NEXT_APP_FILES, GLOB_SRC } from '../globs';
 
 export function unicorn() {
   return defineConfig([

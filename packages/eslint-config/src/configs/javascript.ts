@@ -2,7 +2,7 @@ import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 
-import { GLOB_SRC, GLOB_TEST } from '../globs';
+import { GLOB_CONFIG_FILES, GLOB_NEXT_APP_FILES, GLOB_SRC, GLOB_TEST } from '../globs';
 
 const GLOB_SCRIPTS = ['**/scripts/**'];
 
@@ -57,6 +57,20 @@ export function javascript() {
         'no-empty': 'warn',
         'no-extra-boolean-cast': 'off',
         'no-unused-vars': 'off',
+        'no-restricted-syntax': [
+          'warn',
+          {
+            selector: 'ExportDefaultDeclaration',
+            message: 'Default export is not allowed. Use named exports instead.',
+          },
+        ],
+      },
+    },
+    // Allow default export in config and Next.js App Router files
+    {
+      files: [...GLOB_CONFIG_FILES, ...GLOB_NEXT_APP_FILES],
+      rules: {
+        'no-restricted-syntax': 'off',
       },
     },
     // Allow all console in test and script files
