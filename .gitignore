@@ -37,9 +37,6 @@ test-output
 .umi-test
 .dumi/tmp*
 
-# husky
-.husky/prepare-commit-msg
-
 # misc
 # add other ignore file below
 

@@ -1,6 +1,6 @@
 {
   "name": "lobe-lint-monorepo",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "private": true,
   "homepage": "https://github.com/lobehub/lobe-lint",
   "bugs": {
