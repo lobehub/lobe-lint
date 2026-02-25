@@ -14,6 +14,13 @@ export interface Options {
   ignores?: string[];
 
   /**
+   * 是否启用 MDX 规则（需安装 eslint-plugin-mdx、eslint-mdx）
+   * ESLint 10 下需应用 patches/eslint-plugin-mdx@3.6.2.patch
+   * @default false
+   */
+  mdx?: boolean;
+
+  /**
    * 是否启用 Next.js ESLint 规则
    * @default false
    */

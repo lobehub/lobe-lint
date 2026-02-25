@@ -27,6 +27,7 @@ ESLint Flat Config configuration for LobeHub projects
 - Unicorn best practices
 - Accessibility rules (jsx-a11y)
 - React Compiler support
+- Optional MDX support (`eslint-plugin-mdx`)
 
 ## Installation
 
@@ -65,6 +66,30 @@ export default defineConfig({
   reactNative: true,
 });
 ```
+
+### With MDX
+
+```js
+import { defineConfig } from '@lobehub/eslint-config';
+
+export default defineConfig({
+  mdx: true,
+});
+```
+
+**ESLint 10:** `eslint-plugin-mdx@3.6.2` uses deprecated `context.getFilename()` and breaks. This repo ships a pnpm patch. In your project root, add to `package.json`:
+
+```json
+{
+  "pnpm": {
+    "patchedDependencies": {
+      "eslint-plugin-mdx@3.6.2": "patches/eslint-plugin-mdx@3.6.2.patch"
+    }
+  }
+}
+```
+
+Then copy [patches/eslint-plugin-mdx@3.6.2.patch](https://github.com/lobehub/lobe-lint/blob/master/patches/eslint-plugin-mdx@3.6.2.patch) into your `patches/` folder and run `pnpm install`. Once [eslint-plugin-mdx](https://github.com/mdx-js/eslint-mdx) releases a version with ESLint 10 support, you can remove the patch.
 
 ### With Type-Checked Rules
 
@@ -128,6 +153,9 @@ export default defineConfig({
 
   // Regexp optimization rules
   regexp: true,
+
+  // MDX support (requires eslint-plugin-mdx, eslint-mdx; ESLint 10 needs patch above)
+  mdx: false,
 
   // Additional ignore patterns
   ignores: ['**/dist/**'],
@@ -204,22 +232,23 @@ export default defineConfig(
 
 ## Options Reference
 
-| Option          | Type                                               | Default | Description                       |
-| --------------- | -------------------------------------------------- | ------- | --------------------------------- |
-| `typescript`    | `boolean \| 'strict'`                              | `true`  | Enable TypeScript rules           |
-| `typeChecked`   | `boolean`                                          | `false` | Enable type-aware rules           |
-| `tsconfigPath`  | `string \| string[]`                               | -       | Custom tsconfig path              |
-| `parserOptions` | `ParserOptions`                                    | -       | TypeScript parser options         |
-| `react`         | `boolean \| 'next' \| 'remix' \| 'vite' \| 'expo'` | `false` | Enable React rules                |
-| `reactNative`   | `boolean`                                          | `false` | Enable React Native rules         |
-| `reactCompiler` | `boolean`                                          | `false` | Enable React Compiler rules       |
-| `next`          | `boolean`                                          | `false` | Enable Next.js ESLint rules       |
-| `a11y`          | `boolean`                                          | `false` | Enable accessibility rules        |
-| `sortImports`   | `boolean`                                          | `true`  | Enable import sorting             |
-| `sortKeys`      | `boolean`                                          | `true`  | Enable interface/enum/jsx sorting |
-| `stylistic`     | `boolean`                                          | `true`  | Enable stylistic rules            |
-| `regexp`        | `boolean`                                          | `true`  | Enable regexp rules               |
-| `ignores`       | `string[]`                                         | `[]`    | Additional ignore patterns        |
+| Option          | Type                                               | Default | Description                           |
+| --------------- | -------------------------------------------------- | ------- | ------------------------------------- |
+| `typescript`    | `boolean \| 'strict'`                              | `true`  | Enable TypeScript rules               |
+| `typeChecked`   | `boolean`                                          | `false` | Enable type-aware rules               |
+| `tsconfigPath`  | `string \| string[]`                               | -       | Custom tsconfig path                  |
+| `parserOptions` | `ParserOptions`                                    | -       | TypeScript parser options             |
+| `react`         | `boolean \| 'next' \| 'remix' \| 'vite' \| 'expo'` | `false` | Enable React rules                    |
+| `reactNative`   | `boolean`                                          | `false` | Enable React Native rules             |
+| `reactCompiler` | `boolean`                                          | `false` | Enable React Compiler rules           |
+| `next`          | `boolean`                                          | `false` | Enable Next.js ESLint rules           |
+| `mdx`           | `boolean`                                          | `false` | Enable MDX rules (see ESLint 10 note) |
+| `a11y`          | `boolean`                                          | `false` | Enable accessibility rules            |
+| `sortImports`   | `boolean`                                          | `true`  | Enable import sorting                 |
+| `sortKeys`      | `boolean`                                          | `true`  | Enable interface/enum/jsx sorting     |
+| `stylistic`     | `boolean`                                          | `true`  | Enable stylistic rules                |
+| `regexp`        | `boolean`                                          | `true`  | Enable regexp rules                   |
+| `ignores`       | `string[]`                                         | `[]`    | Additional ignore patterns            |
 
 ## API
 

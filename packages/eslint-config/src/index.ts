@@ -6,6 +6,7 @@ import { eslintCommentsConfig } from './configs/eslint-comments';
 import { ignores } from './configs/ignores';
 import { imports } from './configs/imports';
 import { javascript } from './configs/javascript';
+import { mdxConfig } from './configs/mdx';
 import { next } from './configs/next';
 import { react } from './configs/react';
 import { reactNative } from './configs/react-native';
@@ -23,6 +24,7 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
   const {
     a11y: a11yOption = false,
     ignores: userIgnores = [],
+    mdx: mdxOption = false,
     next: nextOption = false,
     react: reactOption = false,
     reactNative: reactNativeOption = false,
@@ -41,6 +43,7 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
     ...react({ ...options, react: reactOption }),
     ...reactNative({ ...options, reactNative: reactNativeOption }),
     ...next({ ...options, next: nextOption }),
+    ...mdxConfig({ ...options, mdx: mdxOption }),
     ...a11y({ ...options, a11y: a11yOption, react: reactOption }),
     ...imports({ ...options, sortImports }),
     ...unicorn(),

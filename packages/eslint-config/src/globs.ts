@@ -13,6 +13,8 @@ export const GLOB_TEST = [
   '**/__tests__/**/*.{js,jsx,ts,tsx}',
 ];
 
+export const GLOB_MDX = '**/*.mdx';
+
 export const GLOB_YAML = ['**/*.yaml', '**/*.yml'];
 
 export const GLOB_CONFIG_FILES = ['**/*.config.{js,mjs,ts,mts,cjs,cts}'];

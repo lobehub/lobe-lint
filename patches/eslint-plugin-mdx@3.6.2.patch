@@ -1,0 +1,25 @@
+diff --git a/lib/rules/remark.js b/lib/rules/remark.js
+index b3caacafa239b4e1eb3d0d002f3330fd15a6f281..0ebfc3e69220c185861f6a564b86c980b103cf39 100644
+--- a/lib/rules/remark.js
++++ b/lib/rules/remark.js
+@@ -11,9 +11,9 @@ export const remark = {
+         fixable: 'code',
+     },
+     create(context) {
+-        const filename = context.getFilename();
++        const filename = context.filename ?? context.getFilename?.();
+         const extname = path.extname(filename);
+-        const sourceCode = context.getSourceCode();
++        const sourceCode = context.sourceCode ?? context.getSourceCode?.();
+         const { extensions, markdownExtensions, ignoreRemarkConfig, remarkConfigPath, } = {
+             ...context.parserOptions,
+             ...context.languageOptions?.parserOptions,
+@@ -32,7 +32,7 @@ export const remark = {
+                 const { messages, content: fixedText } = performSyncWork({
+                     filePath: getPhysicalFilename(filename),
+                     code: sourceText,
+-                    cwd: context.getCwd(),
++                    cwd: context.cwd ?? context.getCwd?.(),
+                     isMdx,
+                     process: true,
+                     ignoreRemarkConfig,

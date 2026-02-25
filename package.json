@@ -67,5 +67,10 @@
   "packageManager": "pnpm@9.15.4",
   "engines": {
     "node": ">=18"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "eslint-plugin-mdx@3.6.2": "patches/eslint-plugin-mdx@3.6.2.patch"
+    }
   }
 }
