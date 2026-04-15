@@ -16,14 +16,14 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
@@ -33,9 +33,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "prettier-plugin-packagejson": "^2.5.6",
-    "prettier-plugin-sh": "^0.14.0",
-    "prettier-plugin-sort-json": "^4.1.0"
+    "prettier-plugin-packagejson": "^3.0.2",
+    "prettier-plugin-sh": "^0.18.1",
+    "prettier-plugin-sort-json": "^4.2.0"
   },
   "peerDependencies": {
     "prettier": ">=3.0.0"

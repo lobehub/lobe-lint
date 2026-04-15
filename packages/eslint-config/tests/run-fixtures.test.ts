@@ -29,6 +29,7 @@ describe('ESLint Config Fixtures', () => {
       ['typescript/valid/types.ts'],
       ['typescript/valid/type-imports.ts'],
       ['react/valid/component.tsx'],
+      ['react/valid/dangerous-html.tsx'],
       ['react/valid/sorted-props.tsx'],
       ['sorting/valid/sorted-keys.ts'],
       ['sorting/valid/sorted-enum.ts'],
@@ -109,5 +110,14 @@ describe('ESLint Config Fixtures', () => {
 
       expect(hasExpectedError).toBe(true);
     });
+  });
+
+  it('react hooks violations should use @eslint-react rule ids', async () => {
+    const filePath = path.join(fixturesDir, 'react/invalid/hooks-order.tsx');
+    const results = await eslint.lintFiles(filePath);
+    const ruleIds = results[0]?.messages.map((message) => message.ruleId) ?? [];
+
+    expect(ruleIds).toContain('@eslint-react/rules-of-hooks');
+    expect(ruleIds).not.toContain('react-hooks/rules-of-hooks');
   });
 });

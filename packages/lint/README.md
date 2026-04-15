@@ -26,6 +26,8 @@ This is a convenience package that re-exports all LobeHub lint configurations. I
 pnpm add -D @lobehub/lint
 ```
 
+Node.js `>=22` is required because this meta package includes `@lobehub/eslint-config`.
+
 You'll also need to install the peer dependencies:
 
 ```bash
@@ -133,7 +135,7 @@ If you only need specific configurations, you can install them individually:
 
 ## Requirements
 
-- Node.js >= 18
+- Node.js >= 22
 
 ## License
 

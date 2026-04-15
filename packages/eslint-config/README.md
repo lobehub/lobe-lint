@@ -35,6 +35,8 @@ ESLint Flat Config configuration for LobeHub projects
 pnpm add -D @lobehub/eslint-config eslint typescript
 ```
 
+Node.js `>=22` is required.
+
 ## Usage
 
 Create `eslint.config.js` (or `eslint.config.mjs`) in your project root:
@@ -261,7 +263,7 @@ function defineConfig(options?: Options, ...configs: FlatConfig[]): FlatConfigAr
 
 ## Requirements
 
-- Node.js >= 18
+- Node.js >= 22
 - ESLint >= 9.0.0
 - TypeScript >= 5.0.0 (optional)
 

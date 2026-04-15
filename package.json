@@ -45,28 +45,28 @@
     "*.{ts,tsx}": [
       "prettier --parser=typescript --write",
       "stylelint --fix",
-      "eslint --fix"
+      "eslint --fix --no-warn-ignored"
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.6.1",
-    "@types/node": "^22.10.5",
-    "bumpp": "^10.4.1",
-    "commitlint": "^19.6.1",
-    "eslint": "^9.18.0",
-    "eslint-typegen": "^2.3.0",
+    "@commitlint/cli": "^20.5.0",
+    "@types/node": "^25.6.0",
+    "bumpp": "^11.0.1",
+    "commitlint": "^20.5.0",
+    "eslint": "^10.2.0",
+    "eslint-typegen": "^2.3.1",
     "husky": "^9.1.7",
-    "lint-staged": "^15.3.0",
-    "prettier": "^3.4.2",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3",
     "remark-cli": "^12.0.1",
-    "stylelint": "^16.12.0",
-    "tsdown": "^0.9.2",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.4"
+    "stylelint": "^17.7.0",
+    "tsdown": "^0.21.8",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
   },
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.33.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "pnpm": {
     "patchedDependencies": {

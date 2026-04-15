@@ -95,6 +95,13 @@ export async function run(options: CliOptions): Promise<void> {
     process.exit(0);
   }
 
+  if (selections.tools.includes('eslint')) {
+    p.note(
+      'Generated ESLint configs depend on @lobehub/eslint-config, which now requires Node.js >=22.',
+      'Node Requirement',
+    );
+  }
+
   // Ask about ignore files generation
   selections.configureIgnoreFiles = await askIgnoreFilesConfiguration(options, selections);
 
@@ -313,9 +320,11 @@ async function getManualSelections(
     process.exit(0);
   }
 
+  const tools = selectedTools as ConfigTool[];
+
   let reactFramework = detectedFramework;
 
-  if (selectedTools.includes('eslint')) {
+  if (tools.includes('eslint')) {
     if (options.react !== undefined) {
       reactFramework = parseReactFramework(options.react);
     } else if (!options.yes) {
@@ -333,7 +342,7 @@ async function getManualSelections(
     excludeUnusedImportsAutofix: false,
     installDeps: options.install ?? true,
     reactFramework,
-    tools: selectedTools as ConfigTool[],
+    tools,
   };
 }
 
@@ -551,11 +560,14 @@ function getInstallCommandHint(pm: string, deps: string[]): string {
 }
 
 function printHelp(): void {
-  console.log(`
+  console.info(`
 ${pc.bold('create-lobe-lint')} - Setup LobeHub lint configurations
 
 ${pc.bold('Usage:')}
   npx create-lobe-lint [options]
+
+${pc.bold('Note:')}
+  ESLint and @lobehub/lint configs require Node.js >=22
 
 ${pc.bold('Options:')}
   -p, --preset          Quick setup with preset tools (ESLint, Prettier, Stylelint, Commitlint)

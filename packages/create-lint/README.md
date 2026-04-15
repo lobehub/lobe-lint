@@ -10,7 +10,7 @@
 
 CLI tool to setup LobeHub lint configurations
 
-[Changelog](./CHANGELOG.md) · [Report Bug][issues-link] · [Request Feature][issues-link]
+[Changelog](./CHANGELOG.md) · \[Report Bug]\[issues-link] · \[Request Feature]\[issues-link]
 
 </div>
 
@@ -45,6 +45,8 @@ Run the CLI with npx:
 ```bash
 npx create-lobe-lint
 ```
+
+If you generate ESLint-related configs, use Node.js `>=22`. The generated setup depends on `@lobehub/eslint-config`, which now requires Node.js `>=22`.
 
 This will start an interactive setup process that:
 

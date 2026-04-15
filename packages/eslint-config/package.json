@@ -16,14 +16,14 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
@@ -36,33 +36,33 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@eslint-community/eslint-plugin-eslint-comments": "^4.6.0",
-    "@eslint-react/eslint-plugin": "^2.12.4",
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.7.1",
+    "@eslint-react/eslint-plugin": "^4.2.3",
     "@eslint/js": "^10.0.1",
-    "@next/eslint-plugin-next": "^16.1.6",
+    "@next/eslint-plugin-next": "^16.2.3",
     "eslint-config-prettier": "^9.1.2",
     "eslint-import-resolver-typescript": "^4.4.4",
-    "eslint-mdx": "^3.6.2",
-    "eslint-plugin-import-x": "^4.16.1",
+    "eslint-mdx": "^3.7.0",
+    "eslint-plugin-import-x": "^4.16.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-mdx": "^3.6.2",
-    "eslint-plugin-perfectionist": "^5.5.0",
+    "eslint-plugin-perfectionist": "^5.8.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-compiler": "^19.1.0-rc.2",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-native": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.5.0",
-    "eslint-plugin-regexp": "^3.0.0",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-unicorn": "^63.0.0",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "eslint-plugin-regexp": "^3.1.0",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
+    "eslint-plugin-unicorn": "^64.0.0",
     "eslint-plugin-unused-imports": "^4.4.1",
-    "eslint-plugin-yml": "^3.1.2",
-    "globals": "^17.3.0",
-    "typescript-eslint": "^8.55.0"
+    "eslint-plugin-yml": "^3.3.1",
+    "globals": "^17.5.0",
+    "typescript-eslint": "^8.58.2"
   },
   "devDependencies": {
-    "eslint-typegen": "^2.3.0",
-    "glob": "^13.0.2"
+    "eslint-typegen": "^2.3.1",
+    "glob": "^13.0.6"
   },
   "peerDependencies": {
     "eslint": "^10.0.0",
@@ -74,7 +74,7 @@
     }
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "publishConfig": {
     "access": "public",

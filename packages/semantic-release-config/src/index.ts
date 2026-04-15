@@ -1,3 +1,4 @@
+import type { Options as SemanticReleaseOptions } from 'semantic-release';
 import { type Options } from 'semantic-release-config-gitmoji/lib/createConfig.js';
 import { createConfig } from 'semantic-release-config-gitmoji/lib/createConfig.js';
 
@@ -69,8 +70,9 @@ export const options: Options = {
   ],
 } as Options;
 
-const config = {
+const config: SemanticReleaseOptions = {
   ...createConfig(options),
 };
 
+// eslint-disable-next-line no-restricted-syntax -- shareable semantic-release config entry
 export default config;
