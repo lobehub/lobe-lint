@@ -16,14 +16,14 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
@@ -34,12 +34,12 @@
   },
   "dependencies": {
     "postcss-less": "^6.0.0",
-    "postcss-styled-syntax": "^0.7.0",
-    "stylelint-config-clean-order": "^7.0.0",
-    "stylelint-config-recommended": "^14.0.1",
-    "stylelint-config-standard": "^37.0.0",
-    "stylelint-less": "^3.0.1",
-    "stylelint-order": "^6.0.4",
+    "postcss-styled-syntax": "^0.7.1",
+    "stylelint-config-clean-order": "^8.0.1",
+    "stylelint-config-recommended": "^18.0.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-less": "^4.1.0",
+    "stylelint-order": "^8.1.1",
     "stylelint-use-logical-spec": "^5.0.1"
   },
   "peerDependencies": {

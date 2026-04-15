@@ -16,14 +16,14 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     }
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "bin": {
-    "create-lobe-lint": "./dist/index.js"
+    "create-lobe-lint": "./dist/index.mjs"
   },
   "files": [
     "dist"
@@ -35,13 +35,16 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@clack/prompts": "^0.8.0",
+    "@clack/prompts": "^1.2.0",
     "mri": "^1.2.0",
     "package-manager-detector": "^1.6.0",
-    "picocolors": "^1.1.0"
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "publishConfig": {
     "access": "public",

@@ -89,6 +89,8 @@ Install the meta package for all configs:
 bun add -D @lobehub/lint
 ```
 
+`@lobehub/lint`, `@lobehub/eslint-config`, and `create-lobe-lint` now require Node.js `>=22`. The other standalone config packages still support Node.js `>=18`.
+
 Or install individual packages as needed:
 
 ```bash
@@ -112,6 +114,8 @@ The fastest way to set up LobeHub lint configs in your project is using the CLI 
 ```bash
 npx create-lobe-lint
 ```
+
+If you generate ESLint-related configs, use Node.js `>=22`.
 
 This will start an interactive setup that auto-detects your project configuration (package manager, TypeScript, React framework) and generates the appropriate config files.
 
@@ -223,7 +227,7 @@ export default semanticRelease;
 
 - **ESM only** - CommonJS is no longer supported
 - **ESLint 9** - Requires ESLint 9+ with Flat Config
-- **Node.js 18** - Requires Node.js 18+
+- **Node.js 22 for ESLint** - `@lobehub/eslint-config`, `@lobehub/lint`, and `create-lobe-lint` now require Node.js 22+
 
 ### Migration Steps
 

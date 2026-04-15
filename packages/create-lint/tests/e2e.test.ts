@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const packageRoot = path.resolve(__dirname, '..');
-const distEntry = path.join(packageRoot, 'dist', 'index.js');
+const distEntry = path.join(packageRoot, 'dist', 'index.mjs');
 
 describe('create-lobe-lint E2E', () => {
   let tmpDir: string;

@@ -16,24 +16,24 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./monorepo": {
-      "types": "./dist/monorepo.d.ts",
-      "import": "./dist/monorepo.js",
+      "types": "./dist/monorepo.d.mts",
+      "import": "./dist/monorepo.mjs",
       "require": "./dist/monorepo.cjs"
     },
     "./changelog": {
-      "types": "./dist/changelog.d.ts",
-      "import": "./dist/changelog.js",
+      "types": "./dist/changelog.d.mts",
+      "import": "./dist/changelog.mjs",
       "require": "./dist/changelog.cjs"
     }
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
