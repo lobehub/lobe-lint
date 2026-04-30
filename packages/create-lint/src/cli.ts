@@ -315,7 +315,7 @@ async function getManualSelections(
 
   let reactFramework = detectedFramework;
 
-  if (selectedTools.includes('eslint')) {
+  if ((selectedTools as ConfigTool[]).includes('eslint')) {
     if (options.react !== undefined) {
       reactFramework = parseReactFramework(options.react);
     } else if (!options.yes) {
@@ -551,7 +551,7 @@ function getInstallCommandHint(pm: string, deps: string[]): string {
 }
 
 function printHelp(): void {
-  console.log(`
+  console.info(`
 ${pc.bold('create-lobe-lint')} - Setup LobeHub lint configurations
 
 ${pc.bold('Usage:')}
