@@ -20,5 +20,5 @@ async function prependReferenceIfNeeded(filePath) {
 await fs.mkdir(distDir, { recursive: true });
 await fs.copyFile(srcTypegen, distTypegen);
 
-await prependReferenceIfNeeded(path.resolve('dist/index.d.ts'));
+await prependReferenceIfNeeded(path.resolve('dist/index.d.mts'));
 await prependReferenceIfNeeded(path.resolve('dist/index.d.cts'));
