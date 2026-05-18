@@ -24,15 +24,37 @@ export function react(options: Options) {
       files,
       plugins: {
         'react': reactPlugin,
-        'react-hooks': reactHooksPlugin,
+        'react-hooks': reactHooksPlugin as any,
         'react-refresh': reactRefresh,
       },
       rules: {
-        ...reactHooksPlugin.configs.recommended.rules,
+        'react-hooks/exhaustive-deps': 'warn',
+        'react-hooks/rules-of-hooks': 'error',
 
-        '@eslint-react/dom/no-dangerously-set-innerhtml': 'off',
+        'react-hooks/config': 'warn',
+        'react-hooks/error-boundaries': 'warn',
+        'react-hooks/gating': 'warn',
+        'react-hooks/globals': 'warn',
+        'react-hooks/immutability': 'warn',
+        'react-hooks/incompatible-library': 'warn',
+        'react-hooks/preserve-manual-memoization': 'warn',
+        'react-hooks/purity': 'warn',
+        'react-hooks/refs': 'warn',
+        'react-hooks/set-state-in-effect': 'warn',
+        'react-hooks/set-state-in-render': 'warn',
+        'react-hooks/static-components': 'warn',
+        'react-hooks/unsupported-syntax': 'warn',
+        'react-hooks/use-memo': 'warn',
+
+        '@eslint-react/dom-no-dangerously-set-innerhtml': 'off',
         '@eslint-react/no-array-index-key': 'warn',
         '@eslint-react/no-leaked-conditional-rendering': 'off',
+
+        '@eslint-react/error-boundaries': 'warn',
+        '@eslint-react/set-state-in-render': 'warn',
+        '@eslint-react/static-components': 'warn',
+        '@eslint-react/unsupported-syntax': 'warn',
+        '@eslint-react/use-memo': 'warn',
 
         'react/self-closing-comp': 'warn',
 
