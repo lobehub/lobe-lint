@@ -201,5 +201,17 @@ export const F: FC<{ c: ReactNode }> = () => null;
       expect(output).not.toMatch(/import type \{[^}]*\btype\s/);
       expect(result.messages.filter((m) => m.severity === 2)).toEqual([]);
     });
+
+    it('@eslint-react/no-forward-ref only suggests, never autofixes', async () => {
+      const code = `import { forwardRef } from 'react';
+
+export const E = forwardRef((props: any, ref) => <div ref={ref} {...props} />);
+`;
+      const result = await fix(code);
+      const message = result.messages.find((m) => m.ruleId === '@eslint-react/no-forward-ref');
+
+      expect(result.output ?? code).toContain('forwardRef((props: any, ref) =>');
+      expect(message?.fix).toBeUndefined();
+    });
   });
 });
