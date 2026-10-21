@@ -35,6 +35,17 @@ export default prettier;
 
 The other tools follow the same pattern with the exports below.
 
+### Changelog options
+
+The release notes are rendered by conventional-changelog-gitmoji-config, which reads `.changelogrc*` with cosmiconfig 7: CommonJS only, `.changelogrc.mjs` is never read. Use the CommonJS-safe subpath:
+
+```js
+// .changelogrc.cjs
+module.exports = require('@lobehub/lint/changelog');
+```
+
+`require('@lobehub/lint')` does not work (the ESLint plugins are ESM-only); `@lobehub/lint/changelog` only loads the options object.
+
 ## Exports
 
 | Export                                           | Description                              |
@@ -49,3 +60,5 @@ The other tools follow the same pattern with the exports below.
 | `semanticReleaseOptions`                         | Options used to build the release config |
 | `semanticReleaseMonoRepo`                        | Monorepo Semantic Release config         |
 | `changelog`                                      | Changelog formatting options             |
+
+`@lobehub/lint/changelog` (default export, CommonJS and ESM) holds the same changelog options for `.changelogrc.cjs`.

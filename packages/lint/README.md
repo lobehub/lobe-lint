@@ -100,6 +100,15 @@ export default semanticReleaseMonoRepo;
 
 `changelog` is not a release config: it holds the gitmoji changelog formatting options (`addBackToTop`, `showAuthor`, `scopeDisplayName`, etc.).
 
+### Changelog
+
+conventional-changelog-gitmoji-config reads `.changelogrc*` with cosmiconfig 7, which only loads CommonJS and never reads `.changelogrc.mjs`. Use the CommonJS-safe subpath (the root `@lobehub/lint` entry cannot be `require()`d):
+
+```js
+// .changelogrc.cjs
+module.exports = require('@lobehub/lint/changelog');
+```
+
 ## Exports
 
 | Export                    | Type     | Description                             |
@@ -114,7 +123,9 @@ export default semanticReleaseMonoRepo;
 | `semanticReleaseOptions`  | Object   | Options used to build `semanticRelease` |
 | `semanticReleaseMonoRepo` | Object   | Monorepo semantic release config        |
 | `changelog`               | Object   | Changelog formatting options            |
-| `EslintOptions`           | Type     | ESLint `defineConfig()` options         |
+
+`@lobehub/lint/changelog` default-exports the same changelog options and can be loaded with `require()`.
+\| `EslintOptions` | Type | ESLint `defineConfig()` options |
 
 ## Individual Packages
 

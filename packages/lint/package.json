@@ -19,6 +19,11 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./changelog": {
+      "types": "./dist/changelog.d.mts",
+      "import": "./dist/changelog.mjs",
+      "require": "./dist/changelog.cjs"
     }
   },
   "main": "./dist/index.cjs",
@@ -28,8 +33,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown",
-    "dev": "tsdown --watch",
+    "build": "tsdown src/index.ts src/changelog.ts",
+    "dev": "tsdown src/index.ts src/changelog.ts --watch",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
