@@ -10,6 +10,7 @@
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
 const VERSIONS = {
@@ -400,11 +401,13 @@ function migrateSimple({ exportName, olds, target, targets }) {
 // Two configs stay CommonJS because the tools that read them cannot load `.mjs`:
 // - conventional-changelog-gitmoji-config (release notes) reads `.changelogrc*` with cosmiconfig 7
 //   at require time: sync, no `.mjs`;
-// - semantic-release 21 depends on cosmiconfig ^8.0.0, and lockfiles that resolved 8.0 / 8.1
-//   (pnpm in lobe-icons / lobe-charts) never look at `.releaserc.mjs`; semantic-release then runs
-//   with its defaults and no gitmoji release ever happens.
+// - semantic-release 21 / 22 depend on cosmiconfig ^8.0.0 (^9 only from 23), and lockfiles that
+//   resolved 8.0 / 8.1 (pnpm in lobe-icons / lobe-charts) never look at `.releaserc.mjs`;
+//   semantic-release then runs with its defaults and no gitmoji release ever happens. `.cjs` loads
+//   with every cosmiconfig version, so it is written whatever semantic-release version is installed.
 // A `.mjs` file there is silently ignored, so these are written as `.cjs` and require the
 // CommonJS-safe `@lobehub/lint/*` entries (the root `@lobehub/lint` entry cannot be required).
+// semantic-release >= 23 depends on cosmiconfig ^9 (21 / 22: ^8.0.0)
 const srMajor = Number(String(allDeps['semantic-release'] ?? '').match(/\d+/)?.[0] ?? 0);
 const CJS_RC = {
   changelog: {
@@ -413,8 +416,6 @@ const CJS_RC = {
     header:
       '// CommonJS on purpose: conventional-changelog-gitmoji-config reads this file with cosmiconfig 7,\n' +
       '// which ignores .changelogrc.mjs.\n',
-    // an existing .mjs is never read, whatever the semantic-release version
-    keepMjs: () => false,
     rc: '.changelogrc',
   },
   release: {
@@ -424,9 +425,8 @@ const CJS_RC = {
     },
     files: ['.releaserc.js', '.releaserc.cjs', '.releaserc.json', '.releaserc', '.releaserc.mjs'],
     header:
-      '// CommonJS on purpose: semantic-release 21 with cosmiconfig 8.0 / 8.1 ignores .releaserc.mjs.\n',
-    // semantic-release >= 22 needs cosmiconfig >= 8.3, which loads .mjs
-    keepMjs: () => srMajor >= 22,
+      '// CommonJS on purpose: semantic-release < 23 resolves cosmiconfig ^8.0.0, and 8.0 / 8.1 ignore\n' +
+      '// .releaserc.mjs.\n',
     rc: '.releaserc',
   },
 };
@@ -504,13 +504,16 @@ function migrateCjsRc(kind, dir = '.') {
       todo.push(`port ${rc} by hand`);
     }
     if (mjs) todo.push(`${mjs}: also present; merge anything custom into ${target} by hand`);
-  } else if (spec.keepMjs()) {
-    return;
   } else {
     const name = Object.keys(spec.entries).find((n) => mjsTemplate(n).test(read(mjs)));
+    if (!name && kind === 'release' && srMajor >= 23) {
+      // custom config, and semantic-release >= 23 depends on cosmiconfig ^9, which reads .mjs
+      plan.notes.push(`${mjs}: custom config kept (semantic-release ${allDeps['semantic-release']} uses cosmiconfig 9); confirm with scripts/check-release.mjs`);
+      return;
+    }
     if (!name) {
       plan.todos.push(
-        `${mjs}: ${kind === 'changelog' ? 'cosmiconfig 7 (conventional-changelog-gitmoji-config)' : 'semantic-release 21 with cosmiconfig < 8.2'} never reads it. Rewrite it as ${target}: module.exports = { ...require('${firstEntry}'), /* your options */ }`,
+        `${mjs}: ${kind === 'changelog' ? 'cosmiconfig 7 (conventional-changelog-gitmoji-config)' : 'semantic-release with cosmiconfig < 8.2'} never reads it. Rewrite it as ${target}: module.exports = { ...require('${firstEntry}'), /* your options */ }`,
       );
       return;
     }
@@ -645,8 +648,8 @@ for (const kind of ['release', 'changelog']) {
   migrateCjsRc(kind);
   for (const dir of packages) migrateCjsRc(kind, dir);
 }
-if (firstExisting(['release.config.mjs', 'release.config.js']) && srMajor < 22) {
-  plan.todos.push('release.config.*: semantic-release 21 with cosmiconfig < 8.2 does not load ESM configs; use .releaserc.cjs with require(\'@lobehub/lint/release\')');
+if (firstExisting(['release.config.mjs', 'release.config.js'])) {
+  plan.todos.push('release.config.*: semantic-release with cosmiconfig < 8.2 does not load ESM configs; use .releaserc.cjs with require(\'@lobehub/lint/release\'), then run scripts/check-release.mjs');
 }
 // other workspace package rc files that load a root file this run deletes
 const RC_FILE = /^(?:\.(?:eslintrc|prettierrc|stylelintrc|commitlintrc|remarkrc|releaserc)(?:\.[a-z]+)?|(?:eslint|prettier|stylelint|commitlint|release)\.config\.[a-z]+)$/;
@@ -691,6 +694,7 @@ Next steps${dryRun ? ' (after running without --dry-run)' : ''}:
   1. Install: pnpm install (or your package manager)
   2. Format the new files: npx prettier --write "*.config.mjs" .remarkrc.mjs .releaserc.cjs .changelogrc.cjs package.json
   3. Check the configs load: npx eslint --print-config src/index.ts > /dev/null && npx stylelint --print-config src/index.ts > /dev/null
+     and semantic-release's own getConfig: node ${fileURLToPath(new URL('check-release.mjs', import.meta.url))}
   4. Fix: npx eslint "{src,tests}/**/*.{js,jsx,ts,tsx}" --fix, then npx prettier --write on the same files
      (ESLint fixers do not format), then fix the remaining errors by hand
   5. Verify: lint, lint:style, type-check, test, build, and one commit through the hooks
