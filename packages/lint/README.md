@@ -29,7 +29,7 @@ pnpm add -D @lobehub/lint
 You'll also need to install the peer dependencies:
 
 ```bash
-pnpm add -D eslint prettier stylelint @commitlint/cli remark-cli semantic-release typescript
+pnpm add -D eslint prettier stylelint @commitlint/cli remark-cli semantic-release typescript@^6
 ```
 
 ## Usage

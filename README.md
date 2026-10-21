@@ -74,7 +74,7 @@ Prefer to wire things up yourself? Install a config with its tool:
 [![][bun-shield]][bun-link]
 
 ```bash
-bun add -D @lobehub/eslint-config eslint typescript
+bun add -D @lobehub/eslint-config eslint typescript@^6
 bun add -D @lobehub/prettier-config prettier
 ```
 

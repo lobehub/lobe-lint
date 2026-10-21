@@ -35,7 +35,7 @@ ESLint Flat Config configuration for LobeHub projects
 ## Installation
 
 ```bash
-pnpm add -D @lobehub/eslint-config eslint typescript
+pnpm add -D @lobehub/eslint-config eslint typescript@^6
 ```
 
 ## Usage
@@ -257,7 +257,7 @@ function defineConfig(options?: Options, ...configs: FlatConfig[]): FlatConfigAr
 
 - Node.js `^20.19.0 || ^22.13.0 || >=24` (required by ESLint 10)
 - ESLint 10 (`^10.0.0`)
-- TypeScript >= 5.0.0 (optional)
+- TypeScript 5 or 6 (`>=5 <7`, required). TypeScript 7 is not supported yet: typescript-eslint needs the TypeScript JS API, which 7.0 does not ship
 
 ## License
 

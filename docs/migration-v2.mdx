@@ -127,6 +127,19 @@ useEffect(() => {
 
   The rule only accepts an `AbortController` signal. The `let ignore = false; … return () => { ignore = true; }` pattern from the React docs avoids the race too but is still reported (false positive); switch it to an `AbortController`, which also cancels the request. Not autofixable.
 
+- `@lobehub/eslint-config` and `@lobehub/lint` declare `typescript` as a peer with `>=5 <7` (it was `>=5`, optional, but the config cannot load without TypeScript). Keep the `typescript` package on 5.x or 6.x. `typescript@latest` is now 7, which ships no JS API, so typescript-eslint crashes on load (`TypeError: Cannot read properties of undefined (reading 'Cjs')`, or `'Intrinsic'` from `ts-api-utils`); a bare `pnpm add -D typescript` installs 7, so use `typescript@^6`. Package managers now warn about 7 instead of the config crashing. To type-check with TypeScript 7 anyway, install it next to 6 under another name and run its `tsc` for type checks only:
+
+```json
+{
+  "devDependencies": {
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "@typescript/native": "npm:typescript@^7.0.2"
+  }
+}
+```
+
+  `tsc` is then 7 and `tsc6` is 6; ESLint keeps using 6. TypeScript 7 also rejects `baseUrl` and `downlevelIteration` in `tsconfig.json`, and non-relative `paths` (prefix them with `./`).
+
 ## 4. Default exports
 
 v2 warns on `export default`. The warning does not block the upgrade: keep it, or turn it off in `eslint.config.mjs`:

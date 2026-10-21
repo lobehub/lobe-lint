@@ -28,6 +28,12 @@ On 2.1.6 (before 2.1.7), pin it instead. Any of these works:
 
 After upgrading to 2.1.7 you can drop the override. Run `install` again and then the check above. With bun, a lock that already holds 3.5.3 keeps it, so it stays fine. If the check fails, refresh the lockfile as described above.
 
+**`TypeError: Cannot read properties of undefined (reading 'Cjs')`** (in `@typescript-eslint/typescript-estree`) or **`… (reading 'Intrinsic')`** (in `ts-api-utils`) (verified with `typescript` 7.0.2 on lobe-ui and lobe-admin copies)
+The `typescript` package resolved to 7. TypeScript 7.0 is the Go compiler and ships no JS API; typescript-eslint (8.72 accepts `typescript <6.1.0`) and @eslint-react load it and crash. A bare `pnpm add -D typescript` / `bun add -d typescript` now installs 7. From 2.1.7, `@lobehub/eslint-config` and `@lobehub/lint` declare the peer `typescript >=5 <7`, so the install warns instead. Fix: `typescript@^6` (or keep `^5.9`). To type-check with 7 anyway, alias it next to 6 (`"typescript": "npm:@typescript/typescript6@^6.0.2"`, `"@typescript/native": "npm:typescript@^7.0.2"`; `tsc` is then 7, `tsc6` and ESLint use 6). `@typescript/native-preview` (`tsgo`) does not touch the `typescript` package and is unaffected.
+
+**`Cannot find package 'typescript' imported from …/@eslint-react/core/…`**
+TypeScript is not installed. It was an optional peer up to 2.1.6, but the config needs it even for JavaScript-only projects. Add `typescript@^6`.
+
 **v1 code that does `config.rules['x'] = 0` fails**
 v1 configs mutate `require('@lobehub/lint').eslint.rules`. In v2 `eslint` is `defineConfig`, a function with no `rules`. Pass overrides as config objects.
 
