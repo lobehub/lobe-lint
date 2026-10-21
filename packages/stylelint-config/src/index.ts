@@ -1,5 +1,7 @@
 import { type Config } from 'stylelint';
 
+import { useLogicalSpec } from './plugins/use-logical-spec';
+
 const config: Config = {
   extends: [
     'stylelint-config-standard',
@@ -29,7 +31,9 @@ const config: Config = {
       },
     },
   ],
-  plugins: ['stylelint-order', 'stylelint-use-logical-spec'],
+  // `liberty/use-logical-spec` comes from a wrapper around `stylelint-use-logical-spec` that keeps
+  // CSS-in-JS interpolations intact when autofixing `transition` / `will-change` values.
+  plugins: ['stylelint-order', useLogicalSpec],
   rules: {
     'liberty/use-logical-spec': [true, { except: ['float', /^((min|max)-)?(height|width)$/i] }],
   },
