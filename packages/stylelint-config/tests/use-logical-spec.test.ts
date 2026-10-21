@@ -29,24 +29,27 @@ export const useStyles = createStyles(({ css, cssVar }) => ({
 `;
 
 describe('liberty/use-logical-spec', () => {
-  it('reports physical properties in transition values without lowercasing interpolations', async () => {
+  it('does not report physical properties named in transition / will-change values', async () => {
     const { results } = await lint(source, false);
-    const texts = results[0].warnings
-      .filter((w) => w.rule === 'liberty/use-logical-spec')
-      .map((w) => w.text);
+    const rules = results[0].warnings.map((w) => w.rule);
 
-    expect(texts).toHaveLength(2);
-    expect(texts[0]).toContain('inset-inline-start 0.4s ${cssVar.motionEaseInOut}');
-    expect(texts.join('\n')).not.toContain('cssvar');
+    expect(rules).not.toContain('liberty/use-logical-spec');
   });
 
-  it('keeps CSS-in-JS interpolations and case-sensitive identifiers when fixing', async () => {
-    const { code } = await lint(source, true);
+  it('leaves transition / transition-property / will-change values untouched when fixing', async () => {
+    const code = `${source}export const b = css\`
+  transition-property: left, top;
+  TRANSITION: right 1s;
+\`;
+`;
+    const { code: output } = await lint(code, true);
 
-    expect(code).toContain('inset-inline-start 0.4s ${cssVar.motionEaseInOut}');
-    expect(code).toContain('inset-block-start 0.4s ${cssVar.motionEaseInOut}');
-    expect(code).toContain('will-change: inset-inline-start, var(--lobeOffsetX);');
-    expect(code).not.toMatch(/cssvar|motioneaseinout|lobeoffsetx/);
+    expect(output).toContain('left 0.4s ${cssVar.motionEaseInOut},');
+    expect(output).toContain('top 0.4s ${cssVar.motionEaseInOut},');
+    expect(output).toContain('will-change: left, var(--lobeOffsetX);');
+    expect(output).toContain('transition-property: left, top;');
+    expect(output).toMatch(/transition: right 1s;/i);
+    expect(output).not.toContain('inset-');
   });
 
   it('still converts physical properties', async () => {
@@ -56,5 +59,16 @@ describe('liberty/use-logical-spec', () => {
     expect((await lint('const a = css`\n  margin-left: 4px;\n`;\n', true)).code).toContain(
       'margin-inline-start: 4px;',
     );
+  });
+
+  it('still reports physical properties outside of transition values', async () => {
+    const { results } = await lint(
+      'const a = css`\n  left: 0;\n  transition: left 1s;\n`;\n',
+      false,
+    );
+    const warnings = results[0].warnings.filter((w) => w.rule === 'liberty/use-logical-spec');
+
+    expect(warnings).toHaveLength(1);
+    expect(warnings[0].line).toBe(2);
   });
 });
