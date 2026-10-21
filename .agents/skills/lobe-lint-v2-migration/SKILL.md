@@ -36,7 +36,7 @@ Work in order. Do not batch steps into one unverified change.
 
 5. **Manual leftovers.** Resolve every TODO and note: rules from plugins v2 does not ship, `@lobehub/ui/eslint` rules, hooks with repo-specific steps, `engines`. Details: [reference/package-json.md](reference/package-json.md), errors: [reference/errors.md](reference/errors.md).
 6. **Fix, in this order.** `eslint --fix` and `stylelint --fix` on the lint globs, then **type-check immediately** (an autofix can produce invalid imports, see errors.md), then fix the remaining errors by hand. A rule you disable locally gets a reason: `// eslint-disable-next-line no-console -- CLI output`. A rule you turn off for the whole repo goes in `eslint.config.mjs` with a comment saying why.
-7. **Default exports.** v2 warns on `export default` (`no-restricted-syntax`, severity `warn`). The upgrade does not require changing them: keep the warnings, or turn the rule off in `eslint.config.mjs`. To convert anyway, `scripts/default-export.mjs` rewrites modules and importers. See [reference/default-export.md](reference/default-export.md).
+7. **Default exports.** v2 warns on `export default` (`no-restricted-syntax`, severity `warn`). The upgrade does not require changing them: keep the warnings, or turn the rule off in `eslint.config.mjs`. Examples: [reference/default-export.md](reference/default-export.md).
 8. **Verify** (see Done when) and commit through the hooks.
 
 ## Rules

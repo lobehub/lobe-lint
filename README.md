@@ -110,12 +110,12 @@ Hand the setup to your coding agent. Copy this prompt:
 Set up LobeHub lint in this project: run `npx create-lobe-lint --preset -y`, then run ESLint and Prettier on the codebase and fix the reported problems until both pass.
 ```
 
-| Resource                                                                   | What it gives your agent                                                                                   |
-| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| [create-lobe-lint](./packages/create-lint)                                 | Non-interactive setup with `--preset -y`; add `--no-install` to skip installing dependencies               |
-| [@lobehub/eslint-config](./packages/eslint-config)                         | Every `defineConfig()` option, with override examples                                                      |
-| [AGENTS.md](./AGENTS.md)                                                   | Commands, architecture and conventions for agents working on this repository                               |
-| [lobe-lint-v2-migration](./.agents/skills/lobe-lint-v2-migration/SKILL.md) | Read before upgrading a repo from v1 to v2: steps, a config codemod and an optional default-export codemod |
+| Resource                                                                   | What it gives your agent                                                                     |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| [create-lobe-lint](./packages/create-lint)                                 | Non-interactive setup with `--preset -y`; add `--no-install` to skip installing dependencies |
+| [@lobehub/eslint-config](./packages/eslint-config)                         | Every `defineConfig()` option, with override examples                                        |
+| [AGENTS.md](./AGENTS.md)                                                   | Commands, architecture and conventions for agents working on this repository                 |
+| [lobe-lint-v2-migration](./.agents/skills/lobe-lint-v2-migration/SKILL.md) | Read before upgrading a repo from v1 to v2: steps and a config migration codemod             |
 
 Each tool reads one config file (`eslint.config.mjs`, `prettier.config.mjs`, `stylelint.config.mjs`, `commitlint.config.mjs`, `.remarkrc.mjs`, `release.config.mjs`) that re-exports the matching `@lobehub/*-config` package.
 

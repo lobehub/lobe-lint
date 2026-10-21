@@ -13,7 +13,7 @@ Agents can do the whole upgrade with the `lobe-lint-v2-migration` skill:
 npx skills add lobehub/lobe-lint
 ```
 
-The skill lives in `.agents/skills/lobe-lint-v2-migration/` in this repository, with two codemods in its `scripts/` directory. The commands below use that path; adjust it if your agent installs skills elsewhere.
+The skill lives in `.agents/skills/lobe-lint-v2-migration/` in this repository, with the config codemod in its `scripts/` directory. The commands below use that path; adjust it if your agent installs skills elsewhere.
 
 ## Before you start
 
@@ -76,15 +76,6 @@ export default defineConfig(
 ```
 
 If you set `no-restricted-syntax` yourself with other selectors, re-declare it with only those selectors instead.
-
-To convert to named exports, the skill ships a ts-morph codemod that also rewrites importers, aliases, `lazy()` and dynamic imports:
-
-```bash
-npm install --prefix .agents/skills/lobe-lint-v2-migration/scripts
-node .agents/skills/lobe-lint-v2-migration/scripts/default-export.mjs --dry-run .
-```
-
-Converting is a breaking change for consumers that default-import your deep paths.
 
 ## 5. Verify
 

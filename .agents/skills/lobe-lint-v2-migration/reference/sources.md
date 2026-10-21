@@ -11,7 +11,7 @@ Every rule in this skill comes from one of these. When the lobe-lint `master` br
 | lobe-editor upgrade commit `064c107` | second v2 example (`"type": "module"` names, global `no-restricted-syntax: off`, CI guard in pre-commit) |
 | lobe-icons, lobe-charts, lobe-tts, fluent-emoji (read-only) | v1 file sets and the cases the codemods must handle |
 | ESLint docs (migration guide, CLI, v9.21.0 release) | removed CLI flags, `--ext` re-added in 9.21 |
-| Clones in `/tmp` migrated with the scripts | every "verified" item and the numbers in default-export.md |
+| Clones in `/tmp` migrated with the scripts | every "verified" item |
 
 ## `@lobehub/lint` 2.1.5 vs lobe-lint `master` (after the tag)
 
