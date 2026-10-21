@@ -1,9 +1,9 @@
 import { defineConfig } from 'eslint/config';
-import { importX } from 'eslint-plugin-import-x';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 import { GLOB_SRC } from '../globs';
 import { type Options } from '../types';
+import { importXPlugin } from './import-x';
 
 export function imports(options: Options) {
   const { sortImports = true } = options;
@@ -12,7 +12,7 @@ export function imports(options: Options) {
     {
       files: GLOB_SRC,
       plugins: {
-        'import-x': importX as any,
+        'import-x': importXPlugin,
       },
       settings: {
         'import-x/resolver': {

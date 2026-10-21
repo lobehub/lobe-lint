@@ -110,4 +110,96 @@ describe('ESLint Config Fixtures', () => {
       expect(hasExpectedError).toBe(true);
     });
   });
+
+  describe('autofix output should stay valid TypeScript', () => {
+    const fixer = new ESLint({
+      cwd: fixturesDir,
+      fix: true,
+      overrideConfig: config as any,
+      overrideConfigFile: true,
+    });
+
+    const fix = async (code: string) => {
+      const [result] = await fixer.lintText(code, {
+        filePath: path.join(fixturesDir, 'imports/autofix/input.tsx'),
+      });
+      return result;
+    };
+
+    /** Import statements of the fixed output, whitespace removed (formatting is prettier's job). */
+    const importsOf = (code: string) =>
+      code
+        .split('\n')
+        .filter((line) => line.startsWith('import'))
+        .map((line) => line.replaceAll(/\s+/g, ''));
+
+    it.each([
+      [
+        'inline type + value specifiers (TS2206/TS1361 regression)',
+        `import { type CSSProperties, forwardRef, MouseEvent, useMemo } from 'react';
+
+export const A = forwardRef<HTMLDivElement, { o: (e: MouseEvent) => void; s: CSSProperties }>(
+  (p, ref) => {
+    const v = useMemo(() => p.s, [p.s]);
+    return <div onClick={p.o} ref={ref} style={v} />;
+  },
+);
+`,
+        [
+          "importtype{MouseEvent}from'react';",
+          "import{typeCSSProperties,forwardRef,useMemo}from'react';",
+        ],
+      ],
+      [
+        'type-only specifier split next to an inline type import (TS2206 regression)',
+        `import { createElement, ElementType } from 'react';
+import { type HTMLAttributes } from 'react';
+
+export const B = (p: { as: ElementType } & HTMLAttributes<HTMLElement>) => createElement(p.as, p);
+`,
+        ["importtype{ElementType,HTMLAttributes}from'react';", "import{createElement}from'react';"],
+      ],
+      [
+        'separate type + value imports are kept as is',
+        `import type { FC } from 'react';
+import { useMemo } from 'react';
+
+export const C: FC = () => {
+  useMemo(() => 1, []);
+  return null;
+};
+`,
+        ["importtype{FC}from'react';", "import{useMemo}from'react';"],
+      ],
+      [
+        'real duplicate value imports are still merged',
+        `import { type ReactNode, useMemo } from 'react';
+import { useState } from 'react';
+
+export const D = (p: { c: ReactNode }) => {
+  useMemo(() => 1, []);
+  useState(1);
+  return p.c;
+};
+`,
+        ["import{typeReactNode,useMemo,useState}from'react';"],
+      ],
+      [
+        'inline-type-only import is merged into import type without the inline keyword',
+        `import type { FC } from 'react';
+import { type ReactNode } from 'react';
+
+export const F: FC<{ c: ReactNode }> = () => null;
+`,
+        ["importtype{FC,ReactNode}from'react';"],
+      ],
+    ])('%s', async (_name, code, expected) => {
+      const result = await fix(code);
+      const output = result.output ?? code;
+
+      expect(importsOf(output)).toEqual(expected);
+      expect(output).not.toMatch(/import type \{[^}]*\btype\s/);
+      expect(result.messages.filter((m) => m.severity === 2)).toEqual([]);
+    });
+  });
 });
