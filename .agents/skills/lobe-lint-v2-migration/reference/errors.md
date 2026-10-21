@@ -54,6 +54,27 @@ eslintrc-only CLI flags, unsupported with flat config. Remove them from scripts 
 **`unicorn/no-anonymous-default-export`** (error)
 `export default () => …` / `export default memo(() => …)`. lobe-ui and lobe-editor turn it off; so does `migrate.mjs`.
 
+**`@eslint-react/web-api-no-leaked-fetch`: `A 'fetch' must be provided with an 'AbortController' for proper cleanup.`** (warning in 2.1.6, error in the next release)
+A `fetch` in an effect (or other cleanup scope) that is not aborted when the effect re-runs or the component unmounts: a slow response for an old `id` can arrive after the new one and overwrite it. Fix by passing an `AbortController` signal and aborting on cleanup:
+
+```tsx
+useEffect(() => {
+  const controller = new AbortController();
+  fetch(`/api/users/${id}`, { signal: controller.signal })
+    .then((res) => res.json())
+    .then(setUser)
+    .catch((error) => {
+      if (error.name !== 'AbortError') throw error;
+    });
+  return () => controller.abort();
+}, [id]);
+```
+
+The React docs' `let ignore = false` / `return () => { ignore = true; }` pattern also prevents the race, but the rule only recognises an abort signal, so it is still reported (false positive). Rewrite it with `AbortController` (it also cancels the network request) rather than disabling the rule.
+
+**Every hook violation reported twice (`react-hooks/rules-of-hooks` + `@eslint-react/rules-of-hooks`, same for `purity`, `set-state-in-effect`, `static-components`, …)** (2.1.6)
+`@eslint-react/eslint-plugin` 5 ships copies of the react-hooks rules. After 2.1.6 the copies are off (`error-boundaries`, `exhaustive-deps`, `purity`, `rules-of-hooks`, `set-state-in-effect`, `set-state-in-render`, `static-components`, `unsupported-syntax`, `use-memo`); only `react-hooks/*` reports. Disable comments should name the `react-hooks/*` id.
+
 **After upgrading 2.1.5 → 2.1.6: `@eslint-react/jsx-no-key-after-spread`, `@eslint-react/jsx-no-children-prop-with-children`, `@eslint-react/rules-of-hooks` (error)** (verified: lobe-ui got 26 `jsx-no-key-after-spread` errors)
 2.1.6 upgrades `@eslint-react/eslint-plugin` 2.x → 5.x (5.28.x) and `eslint-plugin-react-hooks` 5 → 7; the 2.1.6 changelog did not list the rule changes. A `--print-config` diff of 2.1.5 and 2.1.6 (`.ts`, `.tsx`, `.js`, `.mjs`, `.cjs`, test files) shows changes in `.jsx` / `.tsx` only. Repro: `export const A = (p: any) => <div {...p} key="x" />;` in a `.tsx` file. Fixes:
 

@@ -107,6 +107,26 @@ New warnings: `react-hooks/config`, `error-boundaries`, `gating`, `globals`, `im
 
 To keep a rule at its old level while you clean up, set it in `eslint.config.mjs` with a reason, e.g. `{ files: ['**/*.tsx'], rules: { '@eslint-react/jsx-no-key-after-spread': 'warn' } }`.
 
+### Upgrading from 2.1.6 to the next release
+
+- The `@eslint-react` copies of react-hooks rules are off, so each violation is reported once by `react-hooks/*`: `error-boundaries`, `exhaustive-deps`, `purity`, `rules-of-hooks`, `set-state-in-effect`, `set-state-in-render`, `static-components`, `unsupported-syntax`, `use-memo`. `--fix` removes disable comments that only named the `@eslint-react/*` id; keep or add the `react-hooks/*` one.
+- `@eslint-react/web-api-no-leaked-fetch` is an error. A `fetch` in an effect that is not aborted on cleanup can resolve after a newer request and overwrite its result. Abort it on cleanup:
+
+```tsx
+useEffect(() => {
+  const controller = new AbortController();
+  fetch(`/api/users/${id}`, { signal: controller.signal })
+    .then((res) => res.json())
+    .then(setUser)
+    .catch((error) => {
+      if (error.name !== 'AbortError') throw error;
+    });
+  return () => controller.abort();
+}, [id]);
+```
+
+  The rule only accepts an `AbortController` signal. The `let ignore = false; … return () => { ignore = true; }` pattern from the React docs avoids the race too but is still reported (false positive); switch it to an `AbortController`, which also cancels the request. Not autofixable.
+
 ## 4. Default exports
 
 v2 warns on `export default`. The warning does not block the upgrade: keep it, or turn it off in `eslint.config.mjs`:
