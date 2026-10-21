@@ -253,4 +253,26 @@ export const E = forwardRef((props: any, ref) => <div ref={ref} {...props} />);
       expect(errors.map((m) => m.ruleId)).toContain('@typescript-eslint/no-require-imports');
     });
   });
+
+  describe('react hooks rules are reported once', () => {
+    it('a missing effect dependency is only reported by react-hooks/exhaustive-deps', async () => {
+      const code = `import { useEffect, useState } from 'react';
+
+export const Counter = ({ step }: { step: number }) => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    setCount(count + step);
+  }, []);
+  return <span>{count}</span>;
+};
+`;
+      const [result] = await eslint.lintText(code, {
+        filePath: path.join(fixturesDir, 'react/hooks.tsx'),
+      });
+      const ids = result.messages.map((m) => m.ruleId);
+
+      expect(ids.filter((id) => id === 'react-hooks/exhaustive-deps')).toHaveLength(1);
+      expect(ids).not.toContain('@eslint-react/exhaustive-deps');
+    });
+  });
 });

@@ -63,6 +63,12 @@ export function react(options: Options) {
         'react-hooks/unsupported-syntax': 'warn',
         'react-hooks/use-memo': 'warn',
 
+        // react-hooks/exhaustive-deps (above) is the reference implementation: it supports
+        // `additionalHooks`, and existing `eslint-disable … react-hooks/exhaustive-deps` comments
+        // keep working. @eslint-react/eslint-plugin 5 ships its own copy in `recommended`, which
+        // reported every missing dependency a second time.
+        '@eslint-react/exhaustive-deps': 'off',
+
         '@eslint-react/dom-no-dangerously-set-innerhtml': 'off',
         '@eslint-react/no-array-index-key': 'warn',
         '@eslint-react/no-leaked-conditional-rendering': 'off',
