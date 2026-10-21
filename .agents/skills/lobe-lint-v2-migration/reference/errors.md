@@ -16,7 +16,7 @@ node --input-type=module -e "await import('@lobehub/lint'); console.log('ok')"
 
 Fixed in `@lobehub/eslint-config` / `@lobehub/lint` 2.1.7: eslint-plugin-react-compiler is no longer a dependency (react-hooks 7 has the same compiler rules; `reactCompiler: true` now raises them to `error`), and `zod-validation-error ^4.0.2` is a direct dependency. A fresh install with bun, pnpm or npm then loads, even when the project itself also depends on eslint-plugin-react-compiler. A lockfile that already resolved react-hooks to 3.5.4 keeps it after the upgrade (bun and pnpm reuse the locked resolution), so refresh it once:
 
-- pnpm: `pnpm update --depth Infinity zod-validation-error`, or delete `pnpm-lock.yaml` and reinstall.
+- pnpm: `pnpm update zod-validation-error` (reported to work on a downstream repo), or `pnpm update --depth Infinity zod-validation-error` (verified), or delete `pnpm-lock.yaml` and reinstall. This also applies on 2.1.6 without an override when the lock already holds 3.5.4 for react-hooks.
 - bun: delete `bun.lock` and run `bun install`. Do not run `bun update zod-validation-error`: it adds `zod-validation-error@^5` to your `package.json` and leaves react-hooks on 3.5.4.
 - npm: `npm install` re-resolves it.
 
@@ -95,19 +95,21 @@ export const A = forwardRef<HTMLDivElement, { s: CSSProperties; o: (e: MouseEven
 
 `npx eslint src/__r.tsx --fix-dry-run -f json` outputs `import type { type CSSProperties, forwardRef, MouseEvent, useMemo } from 'react';` on 2.1.5. 2.1.6 wraps `import-x/no-duplicates` (same rule id): a mixed import is grouped with the value imports, and `import { type A }` is merged into `import type { … }` without the inline keyword. Output: `import type { MouseEvent } from 'react';` + `import { type CSSProperties, forwardRef, useMemo } from 'react';`. On 2.1.5, turn the rule off while running `--fix` (`{ rules: { 'import-x/no-duplicates': 'off' } }`), and fix broken imports by hand: drop the inline `type` keywords inside `import type { … }` and move value names (`forwardRef`, `useMemo`, `createElement`) back to a value import.
 
-**Fixed imports are badly formatted: `import type {EdgeSpeechPayload }`, `import { genSSML,type SsmlOptions }`**
-Not a config problem: ESLint fixers splice text and never format (`eslint-config-prettier` only turns formatting rules off). Run Prettier after every `eslint --fix`: `npx prettier --write <same files>`. lint-staged does this when it runs `prettier --write` after `eslint --fix` on staged files.
+**Fixed imports are badly formatted: `import type {EdgeSpeechPayload }`, `import { genSSML,type SsmlOptions }`, `import { Button,Flexbox  } from '@lobehub/ui'`**
+Not a config problem: ESLint fixers splice text and never format (`eslint-config-prettier` only turns formatting rules off). `@typescript-eslint/consistent-type-imports` and `import-x/no-duplicates` (merging `import { Button } from 'x'` + `import { Flexbox } from 'x'` gives `import { Button, Flexbox  } from 'x'`, verified with 2.1.6) both leave odd spacing, and no rule option changes that. Run Prettier after every `eslint --fix`: `npx prettier --write <same files>`. lint-staged does this when it runs `prettier --write` after `eslint --fix` on staged files.
 
 **`@eslint-react/no-forward-ref` rewrote `forwardRef` and now `TS7031: Binding element 'ref' implicitly has an 'any' type` / `React.RefObject<T | null>` errors**
 2.1.5 ships `@eslint-react/eslint-plugin` 2.x, where this rule is an autofix (verified with 2.12.4). It turns `forwardRef<HTMLDivElement, P>((props, ref) => …)` into `({ ref, ...props }: P & { ref?: React.RefObject<HTMLDivElement | null> }) => …` (callers that pass a callback ref or a `Ref<T>` stop type-checking, and `React` must be in scope) and `forwardRef((props: any, ref) => …)` into an untyped `({ ref, ...props }) => …` (TS7031); the `forwardRef` import is left behind. 2.1.6 ships 5.x, where it is a warning with a suggestion only; `--fix` leaves `forwardRef` alone. Already-rewritten code: type the prop as `ref?: React.Ref<T>` (`({ ref, ...props }: Props & { ref?: React.Ref<HTMLDivElement> })`), or restore `forwardRef`. A library that still supports React 18 keeps `forwardRef` and turns the rule off with a comment.
 
 **Stylelint `--fix` lowercases CSS-in-JS interpolations: `${cssVar.motionEaseInOut}` → `${cssvar.motioneaseinout}`** (verified on lobe-charts `33e956f` `src/BenchmarkScatterChart/styles.ts`)
-`liberty/use-logical-spec` (stylelint-use-logical-spec 5.0.1, the latest) lowercases the whole value of `transition`, `transition-property` and `will-change` before replacing `left` / `top` with logical names, so the fix also lowercases interpolations and custom properties (`var(--myVar)`). Repro: `git show 33e956f:src/BenchmarkScatterChart/styles.ts | npx stylelint --stdin-filename src/BenchmarkScatterChart/styles.ts` prints `Use "inset-inline-start 0.4s ${cssvar.motioneaseinout}, …"`. 2.1.6 wraps the rule (same name) so interpolations and mixed-case identifiers survive the fix and the message. On 2.1.5, exclude those properties in `stylelint.config.mjs` and convert them by hand:
+`liberty/use-logical-spec` (stylelint-use-logical-spec 5.0.1, the latest) lowercases the whole value of `transition`, `transition-property` and `will-change` before replacing `left` / `top` with logical names, so the fix also lowercases interpolations and custom properties (`var(--myVar)`). Repro: `git show 33e956f:src/BenchmarkScatterChart/styles.ts | npx stylelint --stdin-filename src/BenchmarkScatterChart/styles.ts` prints `Use "inset-inline-start 0.4s ${cssvar.motioneaseinout}, …"`. 2.1.6 wraps the rule (same name) so interpolations and mixed-case identifiers survive the fix and the message.
+
+Rewriting these values is unsafe anyway: `transition: left 0.4s` → `inset-inline-start 0.4s` stops the animation when the element is positioned with physical `left` / `top` (inline `style={{ left, top }}` or JS), which lint cannot see. 2.1.7 no longer checks or fixes `transition`, `transition-property` and `will-change` values at all. Keep the animated property in sync with the property you set. If a 2.1.5 / 2.1.6 fix already rewrote them, change them back to the property that actually changes. On 2.1.5 and 2.1.6, exclude those properties in `stylelint.config.mjs`:
 
 ```js
 rules: {
   ...stylelint.rules,
-  // stylelint-use-logical-spec lowercases ${…} interpolations in these values (fixed in 2.1.6)
+  // stylelint-use-logical-spec rewrites property names inside these values (skipped in 2.1.7)
   'liberty/use-logical-spec': [true, { except: ['float', /^((min|max)-)?(height|width)$/i, /^transition(-property)?$/i, 'will-change'] }],
 },
 ```
@@ -153,9 +155,20 @@ node -e "const p=require('fs').realpathSync('node_modules/semantic-release/packa
 If the repo keeps `.releaserc.mjs`, that version must be >= 8.2 (re-check after every lockfile refresh). Fixed in `@lobehub/lint` 2.1.6. Fix (pick one):
 
 - `.releaserc.cjs` with `module.exports = require('@lobehub/lint/release');` (`@lobehub/lint/release-monorepo` for the monorepo config; `@lobehub/lint` >= 2.1.6). Works with every cosmiconfig 8 / 9. `migrate.mjs` (2.1.6) writes it and deletes `.releaserc.mjs`. On 2.1.5: `module.exports = require(require.resolve('@lobehub/semantic-release-config', { paths: [require.resolve('@lobehub/lint')] })).default;`.
-- Or upgrade `semantic-release` to `>=23` (lobe-ui uses 25), which uses cosmiconfig 9. Refreshing the lockfile so it resolves cosmiconfig >= 8.2 also works, but nothing keeps it there. Check that other release tooling (`@qiwi/multi-semantic-release`, overrides of `@semantic-release/*`) still works with it.
+- Or upgrade `semantic-release` to `>=23` (lobe-ui uses 25), which uses cosmiconfig 9. Refreshing the lockfile so it resolves cosmiconfig >= 8.2 also works, but nothing keeps it there.
+- On 2.1.5, keeping `.releaserc.mjs` with semantic-release 21: `pnpm update cosmiconfig` does not move the copy semantic-release resolves (it stays 8.0.0). Force it with an override in `pnpm-workspace.yaml`:
+
+  ```yaml
+  overrides:
+    'semantic-release@21>cosmiconfig': ^8.3.6
+  ```
+
+  Remove the override once the repo uses `.releaserc.cjs` (any cosmiconfig 8 / 9 loads it). Check that other release tooling (`@qiwi/multi-semantic-release`, overrides of `@semantic-release/*`) still works with it.
 
 Re-run the check above, then look at the next Release log: it must load `@semantic-release/changelog` and `@semantic-release/git` (lobe-tts run 39597781603 does). Commits that were skipped are released by the next run (semantic-release analyzes every commit since the last tag).
+
+**`check-release.mjs` fails locally with `Error [ERR_MODULE_NOT_FOUND]: Cannot find module '…/@semantic-release/release-notes-generator/wrappers/…'` while CI releases fine**
+Usually a local lockfile that is not committed (an untracked `pnpm-lock.yaml` / `bun.lock` next to the committed one, or one left from an older install) pins `@semantic-release/release-notes-generator` to 11.0.0, which has no `wrappers/` directory, while the release config loads a file from it. Check with `git status --short --ignored` and `pnpm why @semantic-release/release-notes-generator` (or `npm ls`). Do what CI does instead: clone (or `git worktree add`) into a clean dir, install from the committed files only, and run the check there.
 
 ## Install warnings
 

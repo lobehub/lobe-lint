@@ -78,7 +78,7 @@ npx stylelint --print-config src/index.ts > /dev/null
 ## 3. Fix
 
 1. `eslint --fix` and `stylelint --fix` on your lint globs.
-2. `prettier --write` on the same files. ESLint fixers do not format, so fixed imports can look like `import type {Foo }` until Prettier runs.
+2. `prettier --write` on the same files. ESLint fixers do not format, so fixed imports can look like `import type {Foo }` (`consistent-type-imports`) or `import { Button, Flexbox  }` (`import-x/no-duplicates` merging two imports) until Prettier runs.
 3. Type-check right away. With 2.1.5, autofixes could produce `import type { type A, useMemo }` (TS2206 / TS1361), untyped `({ ref, ...props })` from `@eslint-react/no-forward-ref` (TS7031) and lowercased `${…}` interpolations in `transition` values; 2.1.6 fixes all three. If you ran `--fix` on 2.1.5, upgrade, run `--fix` again and repair what the old fixes already broke.
 4. Fix the rest by hand. A local disable gets a reason: `// eslint-disable-next-line no-console -- CLI output`.
 
