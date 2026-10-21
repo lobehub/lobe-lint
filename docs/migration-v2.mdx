@@ -65,7 +65,7 @@ module.exports = require('@lobehub/lint/changelog');
 module.exports = require('@lobehub/lint/release');
 ```
 
-Already on v2 with `.changelogrc.mjs` / `.releaserc.mjs`? Run the codemod again: it replaces them (and the workspace package copies). Then check the next Release log: with the lobe config semantic-release loads `@semantic-release/changelog` and `@semantic-release/git`; the defaults load only `@semantic-release/npm` and `@semantic-release/github`. Before that, `node .agents/skills/lobe-lint-v2-migration/scripts/check-release.mjs` (from the skill) runs semantic-release's own `getConfig` and exits 1 when the config is not loaded; keep a `.releaserc.mjs` only if it passes.
+Already on v2 with `.changelogrc.mjs` / `.releaserc.mjs`? Run the codemod again: it replaces them (and the workspace package copies). Then check the next Release log: with the lobe config semantic-release loads `@semantic-release/changelog` and `@semantic-release/git`; the defaults load only `@semantic-release/npm` and `@semantic-release/github`. Before that, `node .agents/skills/lobe-lint-v2-migration/scripts/check-release.mjs` (from the skill) runs semantic-release's own `getConfig` for the root and every workspace package with its own release config (or the dirs you pass) and exits 1 when a config is not loaded; keep a `.releaserc.mjs` only if it passes.
 
 ## 2. Install and check the configs load
 
