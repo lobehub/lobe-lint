@@ -11,10 +11,12 @@
 | `@commitlint/cli` | | `^21.2.3` | `>=19` |
 | `remark-cli` / `remark` | `^12` / `^15` | `^12.0.1` | `remark-cli >=12`, `remark >=15` |
 | `semantic-release` | `^21` | `^25.0.9` | `>=21` |
-| `typescript` | `^5.9` | `^6.0.3` | `>=5`, optional |
+| `typescript` | `^5.9` | `^6.0.3` | `>=5`, optional (2.1.7: `>=5 <7`, required; never `^7`, see below) |
 | `husky` / `lint-staged` | `^9` / `^16` | `^9.1.7` / `^17.6.0` | |
 
 `migrate.mjs` bumps only the first four. Bump the others only if their peer range is not met. `@lobehub/lint` brings every plugin it needs; do not add ESLint plugins yourself unless a config or a disable comment references one v2 does not ship (lobe-ui added `eslint-plugin-sort-keys-fix` for old `// eslint-disable sort-keys-fix/...` comments, then registered it in a config block).
+
+Keep `typescript` on `^5.9` or `^6`. Do not bump it to 7 (`typescript@latest`): 7.0 has no JS API and typescript-eslint crashes on load. To type-check with 7, use the alias setup in [errors.md](errors.md) (`'Cjs'` entry); `@typescript/native-preview` / `tsgo` can stay.
 
 Keep `.npmrc` `public-hoist-pattern` entries if the repo has them (pnpm): editors and `npx eslint` resolve plugins from the root.
 

@@ -35,7 +35,7 @@ ESLint Flat Config configuration for LobeHub projects
 ## Installation
 
 ```bash
-pnpm add -D @lobehub/eslint-config eslint typescript
+pnpm add -D @lobehub/eslint-config eslint typescript@^6
 ```
 
 ## Usage
@@ -226,23 +226,23 @@ export default defineConfig(
 
 ## Options Reference
 
-| Option          | Type                                               | Default | Description                       |
-| --------------- | -------------------------------------------------- | ------- | --------------------------------- |
-| `typescript`    | `boolean \| 'strict'`                              | `true`  | Enable TypeScript rules           |
-| `typeChecked`   | `boolean`                                          | `false` | Enable type-aware rules           |
-| `tsconfigPath`  | `string \| string[]`                               | -       | Custom tsconfig path              |
-| `parserOptions` | `ParserOptions`                                    | -       | TypeScript parser options         |
-| `react`         | `boolean \| 'next' \| 'remix' \| 'vite' \| 'expo'` | `false` | Enable React rules                |
-| `reactNative`   | `boolean`                                          | `false` | Enable React Native rules         |
-| `reactCompiler` | `boolean`                                          | `false` | Enable React Compiler rules       |
-| `next`          | `boolean`                                          | `false` | Enable Next.js ESLint rules       |
-| `mdx`           | `boolean`                                          | `false` | Enable MDX rules                  |
-| `a11y`          | `boolean`                                          | `false` | Enable accessibility rules        |
-| `sortImports`   | `boolean`                                          | `true`  | Enable import sorting             |
-| `sortKeys`      | `boolean`                                          | `true`  | Enable interface/enum/jsx sorting |
-| `yml`           | `boolean`                                          | `true`  | Enable YAML rules                 |
-| `regexp`        | `boolean`                                          | `true`  | Enable regexp rules               |
-| `ignores`       | `string[]`                                         | `[]`    | Additional ignore patterns        |
+| Option          | Type                                               | Default | Description                         |
+| --------------- | -------------------------------------------------- | ------- | ----------------------------------- |
+| `typescript`    | `boolean \| 'strict'`                              | `true`  | Enable TypeScript rules             |
+| `typeChecked`   | `boolean`                                          | `false` | Enable type-aware rules             |
+| `tsconfigPath`  | `string \| string[]`                               | -       | Custom tsconfig path                |
+| `parserOptions` | `ParserOptions`                                    | -       | TypeScript parser options           |
+| `react`         | `boolean \| 'next' \| 'remix' \| 'vite' \| 'expo'` | `false` | Enable React rules                  |
+| `reactNative`   | `boolean`                                          | `false` | Enable React Native rules           |
+| `reactCompiler` | `boolean`                                          | `false` | Raise React Compiler rules to error |
+| `next`          | `boolean`                                          | `false` | Enable Next.js ESLint rules         |
+| `mdx`           | `boolean`                                          | `false` | Enable MDX rules                    |
+| `a11y`          | `boolean`                                          | `false` | Enable accessibility rules          |
+| `sortImports`   | `boolean`                                          | `true`  | Enable import sorting               |
+| `sortKeys`      | `boolean`                                          | `true`  | Enable interface/enum/jsx sorting   |
+| `yml`           | `boolean`                                          | `true`  | Enable YAML rules                   |
+| `regexp`        | `boolean`                                          | `true`  | Enable regexp rules                 |
+| `ignores`       | `string[]`                                         | `[]`    | Additional ignore patterns          |
 
 ## API
 
@@ -257,7 +257,7 @@ function defineConfig(options?: Options, ...configs: FlatConfig[]): FlatConfigAr
 
 - Node.js `^20.19.0 || ^22.13.0 || >=24` (required by ESLint 10)
 - ESLint 10 (`^10.0.0`)
-- TypeScript >= 5.0.0 (optional)
+- TypeScript 5 or 6 (`>=5 <7`, required). TypeScript 7 is not supported yet: typescript-eslint needs the TypeScript JS API, which 7.0 does not ship
 
 ## License
 

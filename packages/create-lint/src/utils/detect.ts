@@ -27,6 +27,15 @@ export function detectTypeScript(cwd: string): boolean {
   );
 }
 
+export function declaresDependency(cwd: string, name: string): boolean {
+  try {
+    const pkg = JSON.parse(fs.readFileSync(path.join(cwd, 'package.json'), 'utf8'));
+    return Boolean(pkg.dependencies?.[name] || pkg.devDependencies?.[name]);
+  } catch {
+    return false;
+  }
+}
+
 export function detectReactFramework(cwd: string): ReactFramework {
   const pkgPath = path.join(cwd, 'package.json');
   if (!fs.existsSync(pkgPath)) {

@@ -65,7 +65,7 @@ module.exports = require('@lobehub/lint/changelog');
 module.exports = require('@lobehub/lint/release');
 ```
 
-Already on v2 with `.changelogrc.mjs` / `.releaserc.mjs`? Run the codemod again: it replaces them (and the workspace package copies). Then check the next Release log: with the lobe config semantic-release loads `@semantic-release/changelog` and `@semantic-release/git`; the defaults load only `@semantic-release/npm` and `@semantic-release/github`. Before that, `node .agents/skills/lobe-lint-v2-migration/scripts/check-release.mjs` (from the skill) runs semantic-release's own `getConfig` and exits 1 when the config is not loaded; keep a `.releaserc.mjs` only if it passes.
+Already on v2 with `.changelogrc.mjs` / `.releaserc.mjs`? Run the codemod again: it replaces them (and the workspace package copies). Then check the next Release log: with the lobe config semantic-release loads `@semantic-release/changelog` and `@semantic-release/git`; the defaults load only `@semantic-release/npm` and `@semantic-release/github`. Before that, `node .agents/skills/lobe-lint-v2-migration/scripts/check-release.mjs` (from the skill) runs semantic-release's own `getConfig` for the root and every workspace package with its own release config (or the dirs you pass) and exits 1 when a config is not loaded; keep a `.releaserc.mjs` only if it passes.
 
 ## 2. Install and check the configs load
 
@@ -78,11 +78,67 @@ npx stylelint --print-config src/index.ts > /dev/null
 ## 3. Fix
 
 1. `eslint --fix` and `stylelint --fix` on your lint globs.
-2. `prettier --write` on the same files. ESLint fixers do not format, so fixed imports can look like `import type {Foo }` until Prettier runs.
+2. `prettier --write` on the same files. ESLint fixers do not format, so fixed imports can look like `import type {Foo }` (`consistent-type-imports`) or `import { Button, Flexbox  }` (`import-x/no-duplicates` merging two imports) until Prettier runs.
 3. Type-check right away. With 2.1.5, autofixes could produce `import type { type A, useMemo }` (TS2206 / TS1361), untyped `({ ref, ...props })` from `@eslint-react/no-forward-ref` (TS7031) and lowercased `${…}` interpolations in `transition` values; 2.1.6 fixes all three. If you ran `--fix` on 2.1.5, upgrade, run `--fix` again and repair what the old fixes already broke.
 4. Fix the rest by hand. A local disable gets a reason: `// eslint-disable-next-line no-console -- CLI output`.
 
 Most errors on a fresh migration are autofixable (`consistent-type-imports`, `simple-import-sort`, `perfectionist/sort-*`). `no-console` is not.
+
+### Upgrading from 2.1.5 to 2.1.6
+
+2.1.6 upgrades `@eslint-react/eslint-plugin` (2.x → 5.x) and `eslint-plugin-react-hooks` (5 → 7). Compared with `--print-config` for `.ts`, `.tsx`, `.js`, `.mjs`, `.cjs` and test files (`defineConfig({ react: true })`), only `.jsx` / `.tsx` rules changed. Rules that are new at `error`:
+
+| Rule | Before | Fix |
+| --- | --- | --- |
+| `@eslint-react/jsx-no-key-after-spread` | `jsx-key-before-spread`, warn | Move `key` before the spread: `<div key="x" {...props} />`. A `key` after a spread makes the automatic JSX runtime fall back to `createElement`. Not autofixable. |
+| `@eslint-react/jsx-no-children-prop-with-children` | — | Drop either the `children` prop or the children content (editor suggestion). |
+| `@eslint-react/rules-of-hooks` | — | Same check as `react-hooks/rules-of-hooks`, so a violation shows up twice; fixing the hook call clears both. |
+
+Renamed, same level. A disable comment with the old id is now an unused directive (an error), and `--fix` deletes it, so rename it instead:
+
+- `@eslint-react/dom/no-<x>` → `@eslint-react/dom-no-<x>`; `dom/no-namespace` → `jsx-no-namespace`
+- `@eslint-react/web-api/no-leaked-<x>` → `web-api-no-leaked-<x>`; `rsc/function-definition` → `rsc-function-definition`
+- `@eslint-react/naming-convention/<x>` → `naming-convention-<x>`; `naming-convention/use-state` → `use-state`
+- `@eslint-react/hooks-extra/no-direct-set-state-in-use-effect` → `set-state-in-effect` (and `react-hooks/set-state-in-effect`)
+
+Removed: `@eslint-react/no-default-props`, `no-prop-types`, `no-redundant-should-component-update`, `no-string-refs`, `no-useless-forward-ref`, `prefer-use-state-lazy-initialization`.
+
+New warnings: `react-hooks/config`, `error-boundaries`, `gating`, `globals`, `immutability`, `incompatible-library`, `preserve-manual-memoization`, `purity`, `refs`, `set-state-in-effect`, `set-state-in-render`, `static-components`, `unsupported-syntax`, `use-memo` (the React Compiler rules; `error` with `reactCompiler: true`), the `@eslint-react` rules with the same names (except `config`, `gating`, `globals`, `immutability`, `incompatible-library`, `preserve-manual-memoization`, `refs`) plus `@eslint-react/exhaustive-deps` (dropped again in 2.1.7, `react-hooks/exhaustive-deps` stays), `jsx-no-children-prop`, `jsx-no-leaked-dollar`, `jsx-no-leaked-semicolon`, `web-api-no-leaked-fetch` and `web-api-no-leaked-intersection-observer`.
+
+To keep a rule at its old level while you clean up, set it in `eslint.config.mjs` with a reason, e.g. `{ files: ['**/*.tsx'], rules: { '@eslint-react/jsx-no-key-after-spread': 'warn' } }`.
+
+### Upgrading from 2.1.6 to the next release
+
+- The `@eslint-react` copies of react-hooks rules are off, so each violation is reported once by `react-hooks/*`: `error-boundaries`, `exhaustive-deps`, `purity`, `rules-of-hooks`, `set-state-in-effect`, `set-state-in-render`, `static-components`, `unsupported-syntax`, `use-memo`. `--fix` removes disable comments that only named the `@eslint-react/*` id; keep or add the `react-hooks/*` one.
+- `@eslint-react/web-api-no-leaked-fetch` is an error. A `fetch` in an effect that is not aborted on cleanup can resolve after a newer request and overwrite its result. Abort it on cleanup:
+
+```tsx
+useEffect(() => {
+  const controller = new AbortController();
+  fetch(`/api/users/${id}`, { signal: controller.signal })
+    .then((res) => res.json())
+    .then(setUser)
+    .catch((error) => {
+      if (error.name !== 'AbortError') throw error;
+    });
+  return () => controller.abort();
+}, [id]);
+```
+
+  The rule only accepts an `AbortController` signal. The `let ignore = false; … return () => { ignore = true; }` pattern from the React docs avoids the race too but is still reported (false positive); switch it to an `AbortController`, which also cancels the request. Not autofixable.
+
+- `@lobehub/eslint-config` and `@lobehub/lint` declare `typescript` as a peer with `>=5 <7` (it was `>=5`, optional, but the config cannot load without TypeScript). Keep the `typescript` package on 5.x or 6.x. `typescript@latest` is now 7, which ships no JS API, so typescript-eslint crashes on load (`TypeError: Cannot read properties of undefined (reading 'Cjs')`, or `'Intrinsic'` from `ts-api-utils`); a bare `pnpm add -D typescript` installs 7, so use `typescript@^6`. Package managers now warn about 7 instead of the config crashing. To type-check with TypeScript 7 anyway, install it next to 6 under another name and run its `tsc` for type checks only:
+
+```json
+{
+  "devDependencies": {
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "@typescript/native": "npm:typescript@^7.0.2"
+  }
+}
+```
+
+  `tsc` is then 7 and `tsc6` is 6; ESLint keeps using 6. TypeScript 7 also rejects `baseUrl` and `downlevelIteration` in `tsconfig.json`, and non-relative `paths` (prefix them with `./`).
 
 ## 4. Default exports
 

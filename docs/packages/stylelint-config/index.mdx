@@ -24,7 +24,7 @@ export { default } from '@lobehub/stylelint-config';
 - Extends `stylelint-config-standard`, `stylelint-config-recommended` and `stylelint-config-clean-order`
 - `.css` and `.less` files use `postcss-less` with `stylelint-less`
 - `.js`, `.jsx`, `.ts` and `.tsx` files use `postcss-styled-syntax` for CSS-in-JS
-- `stylelint-use-logical-spec` enforces logical properties, except `float` and width/height
+- `stylelint-use-logical-spec` enforces logical properties, except `float` and width/height; property names inside `transition`, `transition-property` and `will-change` values are left alone (the animated property must match what changes at runtime)
 
 See every rule with its level and options on the [Rules](/rules/stylelint) page.
 

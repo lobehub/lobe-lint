@@ -38,7 +38,7 @@ export interface Options {
   react?: boolean | 'next' | 'remix' | 'vite' | 'expo';
 
   /**
-   * 是否启用 React Compiler 规则
+   * 是否把 React Compiler 规则（eslint-plugin-react-hooks 内置的 compiler 规则）升级为 error
    * @default false
    */
   reactCompiler?: boolean;

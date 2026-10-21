@@ -55,6 +55,9 @@
     "@lobehub/semantic-release-config": "workspace:*",
     "@lobehub/stylelint-config": "workspace:*"
   },
+  "peerDependencies": {
+    "typescript": ">=5 <7"
+  },
   "engines": {
     "node": ">=18"
   },

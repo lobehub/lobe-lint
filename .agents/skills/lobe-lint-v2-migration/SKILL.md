@@ -33,7 +33,7 @@ Work in order. Do not batch steps into one unverified change.
 
    ```bash
    npx eslint --print-config src/index.ts > /dev/null && npx stylelint --print-config src/index.ts > /dev/null
-   node <skill-dir>/scripts/check-release.mjs            # run in the repo root (or pass a package dir)
+   node <skill-dir>/scripts/check-release.mjs            # repo root + every workspace package with a release config (or pass dirs)
    ```
 
    `check-release.mjs` runs semantic-release's own `getConfig` (multi-semantic-release uses the same loader) and prints the semantic-release and cosmiconfig versions, the config file, the plugins and the commit-analyzer options. It exits 1 when semantic-release would run with its defaults. If the repo still has a `.releaserc.mjs` (or `release.config.mjs`), this check is required: `.mjs` is only read when the cosmiconfig that semantic-release resolves is >= 8.2, and that depends on the lockfile, not on `package.json`.

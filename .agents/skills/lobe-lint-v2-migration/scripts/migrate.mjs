@@ -508,7 +508,7 @@ function migrateCjsRc(kind, dir = '.') {
     const name = Object.keys(spec.entries).find((n) => mjsTemplate(n).test(read(mjs)));
     if (!name && kind === 'release' && srMajor >= 23) {
       // custom config, and semantic-release >= 23 depends on cosmiconfig ^9, which reads .mjs
-      plan.notes.push(`${mjs}: custom config kept (semantic-release ${allDeps['semantic-release']} uses cosmiconfig 9); confirm with scripts/check-release.mjs`);
+      plan.notes.push(`${mjs}: custom config kept (semantic-release ${allDeps['semantic-release']} uses cosmiconfig 9); confirm with scripts/check-release.mjs${dir === '.' ? '' : ` ${dir}`}`);
       return;
     }
     if (!name) {
@@ -694,7 +694,8 @@ Next steps${dryRun ? ' (after running without --dry-run)' : ''}:
   1. Install: pnpm install (or your package manager)
   2. Format the new files: npx prettier --write "*.config.mjs" .remarkrc.mjs .releaserc.cjs .changelogrc.cjs package.json
   3. Check the configs load: npx eslint --print-config src/index.ts > /dev/null && npx stylelint --print-config src/index.ts > /dev/null
-     and semantic-release's own getConfig: node ${fileURLToPath(new URL('check-release.mjs', import.meta.url))}
+     and semantic-release's own getConfig (root and every workspace package with a release config):
+     node ${fileURLToPath(new URL('check-release.mjs', import.meta.url))}
   4. Fix: npx eslint "{src,tests}/**/*.{js,jsx,ts,tsx}" --fix, then npx prettier --write on the same files
      (ESLint fixers do not format), then fix the remaining errors by hand
   5. Verify: lint, lint:style, type-check, test, build, and one commit through the hooks

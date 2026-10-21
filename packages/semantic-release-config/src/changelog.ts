@@ -11,7 +11,7 @@ const config = {
       emoji: '👷',
     },
   },
-  displayTypes: ['feat', 'fix', 'style', 'pref', 'refactor'],
+  displayTypes: ['feat', 'fix', 'style', 'perf', 'refactor'],
   newlineTimestamp: true,
   reduceHeadingLevel: true,
   scopeDisplayName: {

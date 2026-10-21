@@ -5,6 +5,9 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { run } from '../src/cli.js';
+import { getEslintDependencies } from '../src/generators/eslint.js';
+import { type UserSelections } from '../src/types.js';
+import { detectProject } from '../src/utils/detect.js';
 
 const readJson = async (filePath: string) =>
   JSON.parse(await fs.readFile(filePath, 'utf8')) as Record<string, any>;
@@ -181,5 +184,27 @@ describe('create-lobe-lint CLI', () => {
     expect(settings['editor.fontSize']).toBe(14);
     expect(settings['eslint.codeActionsOnSave.rules']).toContain('*');
     expect(settings['eslint.codeActionsOnSave.rules']).not.toContain('old-rule');
+  });
+
+  describe('eslint dependencies', () => {
+    const eslintDeps = () =>
+      getEslintDependencies({
+        cwd: tmpDir,
+        projectInfo: detectProject(tmpDir),
+        selections: {} as UserSelections,
+      });
+
+    it('installs typescript 6, not the latest (7), for a TypeScript project', () => {
+      expect(eslintDeps()).toContain('typescript@^6');
+      expect(eslintDeps()).not.toContain('typescript');
+    });
+
+    it('keeps the typescript version the project already declares', async () => {
+      const pkg = await readJson(path.join(tmpDir, 'package.json'));
+      pkg.devDependencies = { typescript: '^5.9.3' };
+      await fs.writeFile(path.join(tmpDir, 'package.json'), JSON.stringify(pkg), 'utf8');
+
+      expect(eslintDeps().some((dep) => dep.startsWith('typescript'))).toBe(false);
+    });
   });
 });

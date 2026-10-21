@@ -27,6 +27,16 @@
 - **misc**: Add lobe-lint v2 migration skill.
 - **skill**: Document semantic-release ignoring `.releaserc.mjs`, 2.1.5 autofixes, release notes and peer warnings.
 
+#### ⚠️ Rule changes (added after the release)
+
+2.1.6 upgrades `@eslint-react/eslint-plugin` from `^2.12.4` to `^5.8.1` (installs 5.28.x) and `eslint-plugin-react-hooks` from 5.2.0 to 7.1.1. Only `.jsx` / `.tsx` files are affected; no rule changed for `.js`, `.mjs`, `.cjs` or `.ts` files. New errors:
+
+- `@eslint-react/jsx-no-key-after-spread` (replaces the `jsx-key-before-spread` warning): `<div {...props} key="x" />` → `<div key="x" {...props} />`. Not autofixable.
+- `@eslint-react/jsx-no-children-prop-with-children`: an element with both a `children` prop and children content. Remove one (editor suggestion only).
+- `@eslint-react/rules-of-hooks`: the same check as `react-hooks/rules-of-hooks` (still an error), so each violation is reported twice.
+
+Renamed with the same level (disable comments with the old id become unused directives): `@eslint-react/dom/no-*` → `dom-no-*`, `dom/no-namespace` → `jsx-no-namespace`, `rsc/function-definition` → `rsc-function-definition`, `web-api/no-leaked-*` → `web-api-no-leaked-*`, `naming-convention/*` → `naming-convention-*`. New warnings: the React Compiler rules of `react-hooks` 7 and their `@eslint-react` counterparts, `jsx-no-children-prop`, `jsx-no-leaked-dollar`, `jsx-no-leaked-semicolon`, `web-api-no-leaked-fetch`, `web-api-no-leaked-intersection-observer`. Full list: [migration guide](https://lint.lobehub.com/migration-v2).
+
 <br/>
 
 <details>
