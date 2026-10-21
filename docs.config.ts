@@ -26,6 +26,12 @@ export default {
       packageName: '@lobehub/lint',
       sourceUrl: '{github}/tree/master/{atomId}',
     },
+    metadata: {
+      openGraph: {
+        image:
+          'https://repository-images.githubusercontent.com/650028465/2894e86e-c635-48f8-a150-84cdcf2ae463',
+      },
+    },
     navItems: [
       { href: '/getting-started', icon: 'rocket', label: 'Getting Started' },
       { href: '/rules/eslint', icon: 'list-checks', label: 'ESLint Rules' },
