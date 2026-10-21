@@ -4,6 +4,7 @@ import path from 'node:path';
 import { ESLint } from 'eslint';
 import { describe, expect, it } from 'vitest';
 
+import lintPkg from '../../lint/package.json';
 import pkg from '../package.json';
 import { defineConfig } from '../src';
 
@@ -27,6 +28,23 @@ describe('zod-validation-error resolution', () => {
     expect(() =>
       createRequire(path.join(hooks, 'index.js')).resolve('zod-validation-error/v4'),
     ).not.toThrow();
+  });
+});
+
+describe('typescript peer range', () => {
+  // TypeScript 7.0 ships no JS compiler API, so typescript-eslint (and @eslint-react) crash on load
+  // with `typescript@7`. The config cannot load without TypeScript either, so the peer is required.
+  it.each([
+    ['@lobehub/eslint-config', pkg],
+    ['@lobehub/lint', lintPkg],
+  ] as const)('%s requires typescript 5 or 6', (_name, manifest: Record<string, any>) => {
+    expect(manifest.peerDependencies?.typescript).toBe('>=5 <7');
+    expect(manifest.peerDependenciesMeta?.typescript?.optional).not.toBe(true);
+  });
+
+  it('the TypeScript this repo builds with satisfies the peer range', () => {
+    const { version } = require('typescript/package.json') as { version: string };
+    expect([5, 6]).toContain(Number(version.split('.')[0]));
   });
 });
 
