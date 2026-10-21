@@ -7,13 +7,13 @@ description: >
   this skill covers what is left. Trigger on: upgrade or migrate @lobehub/lint to v2, lobe-lint v2,
   ESLint 10 / flat config migration in a LobeHub repo, .eslintrc to eslint.config.mjs,
   "ERR_PACKAGE_PATH_NOT_EXPORTED" from a lint config, "Default export is not allowed",
-  release notes ignoring .changelogrc.mjs,
+  release notes ignoring .changelogrc.mjs, semantic-release ignoring .releaserc.mjs,
   升级 lobe-lint 2, 迁移 eslint flat config.
 ---
 
 # lobe-lint v2 migration
 
-v2 has no `.eslintrc` and no `.eslintignore`: one `eslint.config.mjs` built with `defineConfig(options, ...configs)`, and every other tool reads an ESM `*.config.mjs` / `.*rc.mjs` file, except the changelog config: `.changelogrc.cjs` (CommonJS, see Rules). The reference v2 repo is lobe-ui. `scripts/migrate.mjs` does the mechanical part; the human guide is https://lint.lobehub.com/migration-v2. `<skill-dir>` below is the directory of this file. Sources and 2.1.5-vs-master differences: [reference/sources.md](reference/sources.md).
+v2 has no `.eslintrc` and no `.eslintignore`: one `eslint.config.mjs` built with `defineConfig(options, ...configs)`, and every other tool reads an ESM `*.config.mjs` / `.*rc.mjs` file, except the changelog and release configs: `.changelogrc.cjs` and `.releaserc.cjs` (CommonJS, see Rules). The reference v2 repo is lobe-ui. `scripts/migrate.mjs` does the mechanical part; the human guide is https://lint.lobehub.com/migration-v2. `<skill-dir>` below is the directory of this file. Sources and 2.1.5-vs-master differences: [reference/sources.md](reference/sources.md).
 
 ## Workflow
 
@@ -28,7 +28,7 @@ Work in order. Do not batch steps into one unverified change.
    node <skill-dir>/scripts/migrate.mjs .
    ```
 
-   It writes lobe-ui-style configs, carries custom rules / ignores / overrides, writes `.changelogrc.cjs` at the root and in every workspace package that has a changelog config (also replacing an existing `.changelogrc.mjs`), bumps `@lobehub/lint ^2.1.6`, `eslint ^10.12.0`, `stylelint ^16.26.1`, `prettier ^3.9.10`, drops `remark` from the Markdown `lint-staged` entry and `--ignore-path` from scripts. Anything it cannot port is a `TODO(lobe-lint v2 migration)` comment and is listed under "Needs a manual look". It never installs, commits or touches husky hooks. Re-running prints "Nothing to migrate".
+   It writes lobe-ui-style configs, carries custom rules / ignores / overrides, writes `.releaserc.cjs` and `.changelogrc.cjs` at the root and in every workspace package that has one (also replacing an existing `.changelogrc.mjs`, and `.releaserc.mjs` when `semantic-release` is below 22), bumps `@lobehub/lint ^2.1.6`, `eslint ^10.12.0`, `stylelint ^16.26.1`, `prettier ^3.9.10`, drops `remark` from the Markdown `lint-staged` entry and `--ignore-path` from scripts. Anything it cannot port is a `TODO(lobe-lint v2 migration)` comment and is listed under "Needs a manual look". It never installs, commits or touches husky hooks. Re-running prints "Nothing to migrate".
 4. **Install and load.** Install with the repo's package manager, format the new files with Prettier, then check both configs load:
 
    ```bash
@@ -43,7 +43,11 @@ Work in order. Do not batch steps into one unverified change.
 ## Rules
 
 - Configs are ESM (`.mjs`, or `.js` with `"type": "module"`). Never `require('@lobehub/lint')`: it throws `ERR_PACKAGE_PATH_NOT_EXPORTED`.
-- The one exception is the changelog config. conventional-changelog-gitmoji-config (release notes) reads it with cosmiconfig 7, which never looks at `.changelogrc.mjs`, so a `.mjs` file is silently ignored. Use `.changelogrc.cjs` with `module.exports = require('@lobehub/lint/changelog');` (`@lobehub/lint` >= 2.1.6). Workspace packages re-export the root file: `module.exports = require('../../.changelogrc.cjs');`.
+- Two exceptions stay CommonJS, because the tool that reads them silently ignores `.mjs` and falls back to its defaults:
+  - the changelog config: conventional-changelog-gitmoji-config (release notes) uses cosmiconfig 7, which never looks at `.changelogrc.mjs`. Use `.changelogrc.cjs` with `module.exports = require('@lobehub/lint/changelog');`.
+  - the release config when `semantic-release` is below 22: semantic-release 21 accepts cosmiconfig `^8.0.0`, and 8.0 / 8.1 (what pnpm locked in lobe-icons and lobe-charts) do not read `.releaserc.mjs`, so the release runs with the angular defaults and gitmoji commits never release. Use `.releaserc.cjs` with `module.exports = require('@lobehub/lint/release');` (`release-monorepo` for `semanticReleaseMonoRepo`), or upgrade semantic-release to `^25` like lobe-ui.
+
+  Both entries need `@lobehub/lint` >= 2.1.6. Workspace packages re-export the root file: `module.exports = require('../../.changelogrc.cjs');`. After a release config change, check the next Release log: with the lobe config it loads plugins from `@semantic-release/changelog` and `@semantic-release/git`; the defaults load only `@semantic-release/npm` and `@semantic-release/github` (that is what lobe-icons run 39600210901 shows).
 - Use `defineConfig` from `@lobehub/lint` (or `@lobehub/eslint-config`). In v2 the `eslint` export is that function, not a config object; do not mutate `.rules` on it.
 - Keep repo-specific hook steps (`build:toc`, `git add .`, `lint:circular`, CI guards). Only the lint commands change.
 - Do not turn rules off to reach zero without a reason. Do not downgrade errors to warnings in bulk.
