@@ -2,9 +2,7 @@
 
 <div align="center">
 
-<img height="120" src="https://raw.githubusercontent.com/lobehub/lobe-assets/master/packages/assets-logo/assets/logo-3d.webp">
-<img height="120" src="https://raw.githubusercontent.com/lobehub/lobe-assets/master/packages/assets-logo/assets/split.svg">
-<img height="120" src="https://raw.githubusercontent.com/lobehub/lobe-assets/master/packages/assets-emoji/assets/triangular-ruler.webp">
+![](https://github.com/user-attachments/assets/c4d1392d-835e-4d5f-821d-9e7c86e4f0f2)
 
 <h1>Lobe Lint</h1>
 
@@ -29,8 +27,6 @@ Shared ESLint, Prettier, Stylelint, Commitlint, Remarklint and semantic-release 
 [![][github-license-shield]][github-license-link]
 
 </div>
-
-![](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <details>
 <summary><kbd>Table of contents</kbd></summary>
