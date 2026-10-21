@@ -107,16 +107,22 @@ module.exports = require(
 In a monorepo, each workspace package with its own changelog config re-exports the root one: `module.exports = require('../../.changelogrc.cjs');`. A v1 `packages/*/.changelogrc.js` that does `require('../../.changelogrc')` breaks as soon as the root `.changelogrc.js` is deleted; `migrate.mjs` rewrites those too.
 
 **Release job succeeds but never releases gitmoji commits: only `@semantic-release/npm` / `@semantic-release/github` plugins are loaded (no `@semantic-release/changelog` / `@semantic-release/git`) and `✨ feat(…)` → `The commit should not trigger a release`** (verified on lobe-icons run 39600210901, commit `4cb27b21`)
-semantic-release did not find `.releaserc.mjs` and ran with its defaults (angular rules, default plugins). semantic-release 21.1.2 depends on cosmiconfig `^8.0.0`; only cosmiconfig >= 8.2 loads `.mjs`. lobe-icons' `pnpm-lock.yaml` pins cosmiconfig 8.0.0 for it, and `bun i` in CI migrates that lockfile, so CI gets 8.0.0 too. lobe-tts and fluent-emoji have a `bun.lock` with 8.3.6 and do read the file (lobe-tts released v6.0.1 from `⬆️` / `🎨` commits, which the angular defaults would not release). Check what a repo gets:
+semantic-release did not find `.releaserc.mjs` and ran with its defaults (angular rules, default plugins). semantic-release 21 and 22 depend on cosmiconfig `^8.0.0` (23+ on `^9`); only cosmiconfig >= 8.2 loads `.mjs`. multi-semantic-release loads each package's config through the same `getConfig`. lobe-icons' `pnpm-lock.yaml` pins cosmiconfig 8.0.0 for it, and `bun i` in CI migrates that lockfile, so CI gets 8.0.0 too. lobe-tts (no pnpm lock pinning 8.0.0, so it resolves 8.3.6) and fluent-emoji (8.3.6) do read the file (lobe-tts released v6.0.1 from `⬆️` / `🎨` commits, which the angular defaults would not release). Check what a repo gets, with semantic-release's own `getConfig` (from the repo root after installing; pass a package dir for a workspace package):
 
 ```bash
-node -e "const p=require('fs').realpathSync('node_modules/semantic-release/package.json');const r=require('module').createRequire(p);console.log(r('cosmiconfig/package.json').version);r('cosmiconfig').cosmiconfig('release').search().then((x)=>console.log(x&&x.filepath))"
+node <skill-dir>/scripts/check-release.mjs
 ```
 
-`null` means semantic-release runs without your config. Fix (pick one):
+It prints the resolved semantic-release and cosmiconfig versions, the config files, the plugins and the commit-analyzer options, warns when a `.mjs` config meets cosmiconfig < 8.2, and exits 1 (`FAIL: semantic-release runs with its defaults`) when `@semantic-release/changelog` / `@semantic-release/git` are missing. Verified: lobe-icons (cosmiconfig 8.0.0, `.releaserc.mjs`) fails; lobe-tts and fluent-emoji (8.3.6) and lobe-ui (9.0.2) pass; a lobe-icons clone with `.releaserc.cjs` passes on 8.0.0. Without the skill, the cosmiconfig version alone:
 
-- `.releaserc.cjs` with `module.exports = require('@lobehub/lint/release');` (`@lobehub/lint/release-monorepo` for the monorepo config; `@lobehub/lint` >= 2.1.6). Works with every cosmiconfig 8 / 9. `migrate.mjs` writes it when `semantic-release` is below 22. On 2.1.5: `module.exports = require(require.resolve('@lobehub/semantic-release-config', { paths: [require.resolve('@lobehub/lint')] })).default;`.
-- Or upgrade `semantic-release` to `^25` (lobe-ui), which uses cosmiconfig 9. Check that other release tooling (`@qiwi/multi-semantic-release`, overrides of `@semantic-release/*`) still works with it.
+```bash
+node -e "const p=require('fs').realpathSync('node_modules/semantic-release/package.json');console.log(require('module').createRequire(p)('cosmiconfig/package.json').version)"
+```
+
+If the repo keeps `.releaserc.mjs`, that version must be >= 8.2 (re-check after every lockfile refresh). Fixed in `@lobehub/lint` 2.1.6. Fix (pick one):
+
+- `.releaserc.cjs` with `module.exports = require('@lobehub/lint/release');` (`@lobehub/lint/release-monorepo` for the monorepo config; `@lobehub/lint` >= 2.1.6). Works with every cosmiconfig 8 / 9. `migrate.mjs` (2.1.6) writes it and deletes `.releaserc.mjs`. On 2.1.5: `module.exports = require(require.resolve('@lobehub/semantic-release-config', { paths: [require.resolve('@lobehub/lint')] })).default;`.
+- Or upgrade `semantic-release` to `>=23` (lobe-ui uses 25), which uses cosmiconfig 9. Refreshing the lockfile so it resolves cosmiconfig >= 8.2 also works, but nothing keeps it there. Check that other release tooling (`@qiwi/multi-semantic-release`, overrides of `@semantic-release/*`) still works with it.
 
 Re-run the check above, then look at the next Release log: it must load `@semantic-release/changelog` and `@semantic-release/git` (lobe-tts run 39597781603 does). Commits that were skipped are released by the next run (semantic-release analyzes every commit since the last tag).
 

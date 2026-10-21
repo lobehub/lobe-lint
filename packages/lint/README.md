@@ -109,7 +109,7 @@ conventional-changelog-gitmoji-config reads `.changelogrc*` with cosmiconfig 7, 
 module.exports = require('@lobehub/lint/changelog');
 ```
 
-semantic-release 21 with cosmiconfig 8.0 / 8.1 (as some pnpm lockfiles resolve it) does not read `.releaserc.mjs` either. Use `.releaserc.cjs` there, or semantic-release 22+:
+semantic-release 21 / 22 with cosmiconfig 8.0 / 8.1 (as some pnpm lockfiles resolve it) does not read `.releaserc.mjs` either. Use `.releaserc.cjs` there, or semantic-release 23+:
 
 ```js
 // .releaserc.cjs

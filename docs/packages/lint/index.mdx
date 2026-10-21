@@ -46,7 +46,7 @@ module.exports = require('@lobehub/lint/changelog');
 
 `require('@lobehub/lint')` does not work (the ESLint plugins are ESM-only); `@lobehub/lint/changelog` only loads the options object.
 
-semantic-release 21 with cosmiconfig 8.0 / 8.1 (as locked by pnpm in some repos) does not read `.releaserc.mjs` either. Use `.releaserc.cjs`, or semantic-release 22+:
+semantic-release 21 / 22 with cosmiconfig 8.0 / 8.1 (as locked by pnpm in some repos) does not read `.releaserc.mjs` either. Use `.releaserc.cjs`, or semantic-release 23+:
 
 ```js
 // .releaserc.cjs

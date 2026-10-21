@@ -30,7 +30,7 @@ node .agents/skills/lobe-lint-v2-migration/scripts/migrate.mjs .
 It has no dependencies, never installs or commits, and a second run changes nothing. It:
 
 - converts the rc files to lobe-ui-style ESM configs and keeps your custom rules, ignores and overrides;
-- writes `.releaserc.cjs` and `.changelogrc.cjs` at the root and in every workspace package that has one (`packages/*/.changelogrc.js` that required the root file now requires `../../.changelogrc.cjs`), and replaces an existing `.changelogrc.mjs` (and `.releaserc.mjs` when `semantic-release` is below 22);
+- writes `.releaserc.cjs` and `.changelogrc.cjs` at the root and in every workspace package that has one (`packages/*/.changelogrc.js` that required the root file now requires `../../.changelogrc.cjs`), and replaces an existing `.changelogrc.mjs` and `.releaserc.mjs`;
 - bumps `@lobehub/lint` to `^2.1.6`, `eslint` to `^10.12.0`, `stylelint` to `^16.26.1`, `prettier` to `^3.9.10`;
 - drops `remark` from the Markdown `lint-staged` entry and `--ignore-path` from scripts;
 - leaves husky hooks alone, so repo steps such as `build:toc` stay;
@@ -51,9 +51,9 @@ Configs must be ESM. `require('@lobehub/lint')` throws `ERR_PACKAGE_PATH_NOT_EXP
 The changelog and release configs are the exceptions, because the tools that read them silently ignore `.mjs` and fall back to their defaults:
 
 - The release notes plugin (conventional-changelog-gitmoji-config) reads `.changelogrc*` with cosmiconfig 7, which never looks at `.changelogrc.mjs`.
-- semantic-release 21 accepts cosmiconfig `^8.0.0`, and a lockfile that resolved 8.0 or 8.1 never reads `.releaserc.mjs` (lobe-icons and lobe-charts: the Release job succeeds but uses the angular defaults, so gitmoji commits never release). semantic-release 22+ (lobe-ui uses 25) reads `.mjs`.
+- semantic-release 21 and 22 accept cosmiconfig `^8.0.0`, and a lockfile that resolved 8.0 or 8.1 never reads `.releaserc.mjs` (lobe-icons and lobe-charts: the Release job succeeds but uses the angular defaults, so gitmoji commits never release). Only semantic-release 23+ (cosmiconfig 9; lobe-ui uses 25) always reads `.mjs`.
 
-Use CommonJS with the `@lobehub/lint/*` entries (2.1.6+):
+Use CommonJS with the `@lobehub/lint/*` entries (new in 2.1.6, which fixes this):
 
 ```js
 // .changelogrc.cjs
@@ -65,7 +65,7 @@ module.exports = require('@lobehub/lint/changelog');
 module.exports = require('@lobehub/lint/release');
 ```
 
-Already on v2 with `.changelogrc.mjs` / `.releaserc.mjs`? Run the codemod again: it replaces them (and the workspace package copies). Then check the next Release log: with the lobe config semantic-release loads `@semantic-release/changelog` and `@semantic-release/git`; the defaults load only `@semantic-release/npm` and `@semantic-release/github`.
+Already on v2 with `.changelogrc.mjs` / `.releaserc.mjs`? Run the codemod again: it replaces them (and the workspace package copies). Then check the next Release log: with the lobe config semantic-release loads `@semantic-release/changelog` and `@semantic-release/git`; the defaults load only `@semantic-release/npm` and `@semantic-release/github`. Before that, `node .agents/skills/lobe-lint-v2-migration/scripts/check-release.mjs` (from the skill) runs semantic-release's own `getConfig` and exits 1 when the config is not loaded; keep a `.releaserc.mjs` only if it passes.
 
 ## 2. Install and check the configs load
 
