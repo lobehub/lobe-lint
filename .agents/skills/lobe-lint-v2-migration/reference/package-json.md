@@ -4,7 +4,7 @@
 
 | Package | v1 repos | v2 (lobe-ui) | Peer range in 2.1.5 |
 | --- | --- | --- | --- |
-| `@lobehub/lint` | `^1.26.3` | `^2.1.5` | |
+| `@lobehub/lint` | `^1.26.3` | `^2.1.5` (`migrate.mjs` writes `^2.1.6`: first release with `@lobehub/lint/changelog` and the 2.1.5 autofix fixes) | |
 | `eslint` | `^8.57.1` | `^10.12.0` | `^10.0.0` |
 | `stylelint` | `^15.11.0` | `^16.26.1` | `>=16` (lobe-editor uses 17, which needs Node 20.19) |
 | `prettier` | `^3.x` | `^3.9.10` | `>=3` |

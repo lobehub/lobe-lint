@@ -13,14 +13,17 @@ Derived from lobe-ui commit `5c0fab48` ("✨ chore(lint): update lint", 2026-02-
 | `.commitlintrc.js` | `commitlint.config.mjs` | `import { commitlint } from '@lobehub/lint'; export default commitlint;` |
 | `.remarkrc.js` | `.remarkrc.mjs` | `import { remarklint } from '@lobehub/lint'; export default remarklint;` |
 | `.releaserc.js` | `.releaserc.mjs` | `import { semanticRelease } from '@lobehub/lint'; export default semanticRelease;` |
-| `.changelogrc.js` | `.changelogrc.mjs` | `import { changelog } from '@lobehub/lint'; export default changelog;` |
+| `.changelogrc.js` | `.changelogrc.cjs` (CommonJS on purpose) | `module.exports = require('@lobehub/lint/changelog');` (needs `@lobehub/lint` >= 2.1.6) |
+| `packages/*/.changelogrc.js` (`require('../../.changelogrc')`) | `packages/*/.changelogrc.cjs` | `module.exports = require('../../.changelogrc.cjs');` |
 | `.prettierignore`, `.remarkignore`, `.editorconfig`, `.npmrc` | unchanged | |
 | `.husky/pre-commit`, `.husky/commit-msg` | unchanged | keep repo steps; see package-json.md |
 | `tsconfig.json` | unchanged | nothing lint-specific in any of these repos; set `tsconfigPath` / `typeChecked` only if you want type-aware rules |
 
-lobe-editor uses `remark.config.js`, `release.config.js`, `changelog.config.js` with `"type": "module"`; both styles load. Prefer lobe-ui's names.
+lobe-editor uses `remark.config.js`, `release.config.js`, `changelog.config.js` with `"type": "module"`; prefer lobe-ui's names.
 
-`@lobehub/lint` 2.1.5 exports: `defineConfig` (also as `eslint` and `defineEslintConfig`), `prettier`, `stylelint`, `commitlint`, `remarklint`, `changelog`, `semanticRelease`, `semanticReleaseMonoRepo`, `semanticReleaseOptions`, type `EslintOptions`.
+The changelog config is the exception to "everything is ESM": conventional-changelog-gitmoji-config 1.5.2 (pulled in by semantic-release-config-gitmoji for the release notes) searches `changelog` with cosmiconfig 7, whose search places are `package.json`, `.changelogrc`, `.changelogrc.{json,yaml,yml,js,cjs}` and `changelog.config.{js,cjs}`. There is no `.mjs`, so lobe-ui's `.changelogrc.mjs` is never read and the release notes use the plugin defaults (verified: the search prints `null` in lobe-ui, fluent-emoji and lobe-lint). The file must be CommonJS, and `require('@lobehub/lint')` fails (ESM-only plugins), hence the `@lobehub/lint/changelog` entry. `.releaserc.mjs` is fine: semantic-release 21 uses cosmiconfig 8.3, which loads `.mjs`.
+
+`@lobehub/lint` 2.1.5 exports: `defineConfig` (also as `eslint` and `defineEslintConfig`), `prettier`, `stylelint`, `commitlint`, `remarklint`, `changelog`, `semanticRelease`, `semanticReleaseMonoRepo`, `semanticReleaseOptions`, type `EslintOptions`. From 2.1.6 there is also the subpath `@lobehub/lint/changelog` (default export, CommonJS and ESM) for `.changelogrc.cjs`.
 
 ## ESLint: before / after
 

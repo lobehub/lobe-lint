@@ -13,8 +13,9 @@ import path from 'node:path';
 import vm from 'node:vm';
 
 const VERSIONS = {
-  // @lobehub/lint latest on npm; eslint / stylelint / prettier as in lobe-ui
-  '@lobehub/lint': '^2.1.5',
+  // @lobehub/lint: first release with the CommonJS `@lobehub/lint/changelog` entry and the
+  // 2.1.5 autofix fixes; eslint / stylelint / prettier as in lobe-ui
+  '@lobehub/lint': '^2.1.6',
   'eslint': '^10.12.0',
   'prettier': '^3.9.10',
   'stylelint': '^16.26.1',
@@ -394,6 +395,156 @@ function migrateSimple({ exportName, olds, target, targets }) {
   for (const t of todo) plan.todos.push(`${target}: ${t}`);
 }
 
+// ---------------------------------------------------------------- .changelogrc (CommonJS)
+
+// conventional-changelog-gitmoji-config (used by semantic-release-config-gitmoji for release
+// notes) loads `.changelogrc*` with cosmiconfig 7 at require time: sync, no `.mjs`. A
+// `.changelogrc.mjs` is silently ignored and the release notes fall back to its defaults, so the
+// changelog config stays CommonJS and requires the CommonJS-safe `@lobehub/lint/changelog` entry
+// (the root `@lobehub/lint` entry cannot be required).
+const CHANGELOG_TARGET = '.changelogrc.cjs';
+const CHANGELOG_HEADER =
+  '// CommonJS on purpose: conventional-changelog-gitmoji-config reads this file with cosmiconfig 7,\n' +
+  '// which ignores .changelogrc.mjs.\n';
+const CHANGELOG_CJS = `${CHANGELOG_HEADER}module.exports = require('@lobehub/lint/changelog');\n`;
+const CHANGELOG_FILES = ['.changelogrc.js', '.changelogrc.cjs', '.changelogrc.json', '.changelogrc', '.changelogrc.mjs'];
+const CHANGELOG_MJS_TEMPLATE =
+  /^\s*import\s*\{\s*changelog\s*\}\s*from\s*["']@lobehub\/lint["'];?\s*export\s+default\s+changelog;?\s*$/;
+// `require('../../.changelogrc')`, `export { default } from '../../.changelogrc.mjs'`, ...
+const CHANGELOG_REF = /(?:require\(\s*|from\s+)["'](\.{1,2}\/[^"']*?\.changelogrc(?:\.[a-z]+)?)["']/;
+
+const rel = (from, to) => {
+  const r = path.posix.relative(from === '.' ? '' : from, to === '.' ? '' : to) || '.';
+  return r.startsWith('.') ? r : `./${r}`;
+};
+const changelogRequiresLintChangelog = (src) => /@lobehub\/lint\/changelog/.test(src);
+
+function migrateChangelog(dir = '.') {
+  const at = (f) => (dir === '.' ? f : path.posix.join(dir, f));
+  const found = CHANGELOG_FILES.filter((f) => exists(at(f)));
+  if (found.length === 0) return;
+  const target = at(CHANGELOG_TARGET);
+
+  // already migrated
+  if (exists(target) && changelogRequiresLintChangelog(read(target))) {
+    for (const f of found.filter((f) => at(f) !== target)) {
+      plan.todos.push(`${at(f)}: still present next to ${target}. Merge by hand, then delete it.`);
+    }
+    return;
+  }
+
+  // a workspace package that re-exports another changelog config (usually the root one)
+  if (dir !== '.') {
+    const file = found[0];
+    const ref = read(at(file)).match(CHANGELOG_REF)?.[1];
+    const refDir = ref && path.posix.normalize(path.posix.join(dir, path.posix.dirname(ref)));
+    if (refDir) {
+      if (exists(target) && read(target).includes(`${rel(dir, refDir)}/${CHANGELOG_TARGET}`)) return;
+      const out = `${CHANGELOG_HEADER}module.exports = require('${rel(dir, refDir)}/${CHANGELOG_TARGET}');\n`;
+      plan.write.push([target, out]);
+      for (const f of found) if (at(f) !== target) plan.delete.push(at(f));
+      if (refDir !== '.') plan.todos.push(`${target}: re-exports ${refDir}/${CHANGELOG_TARGET}; make sure that file exists (run this script there too)`);
+      return;
+    }
+  }
+
+  const v1 = found.filter((f) => f !== '.changelogrc.mjs');
+  const mjs = found.includes('.changelogrc.mjs') ? at('.changelogrc.mjs') : null;
+  if (v1.length > 1) {
+    plan.todos.push(`${dir}: several changelog configs (${v1.join(', ')}); keeping ${v1[0]}, merge the rest by hand`);
+  }
+
+  let out;
+  const todo = [];
+  if (v1.length > 0) {
+    const rc = at(v1[0]);
+    let cfg;
+    try {
+      const loaded = loadConfig(rc);
+      if (loaded === null) todo.push(`${rc} is not JS/JSON; port it by hand`);
+      else cfg = loaded.value;
+    } catch (error) {
+      todo.push(`could not evaluate ${rc} (${error.message}); port it by hand`);
+    }
+    const name = baseOf(cfg);
+    const extra = name ? Object.fromEntries(Object.entries(cfg).filter(([k]) => k !== 'rules' || Object.keys(cfg.rules).length)) : {};
+    if (name && Object.keys(extra).length === 0) {
+      out = CHANGELOG_CJS;
+    } else if (name) {
+      out = `${CHANGELOG_HEADER}module.exports = {\n  ...require('@lobehub/lint/changelog'),\n${Object.entries(extra)
+        .map(([k, v]) => `  ${IDENT.test(k) ? k : quote(k)}: ${indentBlock(toJs(v, 1), 0)},`)
+        .join('\n')}\n};\n`;
+    } else if (cfg && typeof cfg === 'object') {
+      out = `${CHANGELOG_HEADER}// TODO(lobe-lint v2 migration): ${rc} did not use @lobehub/lint; copied as-is.\nmodule.exports = ${toJs(cfg, 0)};\n`;
+      todo.push(`${rc} did not use @lobehub/lint (expected \`changelog\`); review ${target}`);
+    } else {
+      out = `${CHANGELOG_HEADER}// TODO(lobe-lint v2 migration): port ${rc} by hand\nmodule.exports = require('@lobehub/lint/changelog');\n`;
+    }
+    if (mjs) todo.push(`${mjs}: also present; merge anything custom into ${target} by hand`);
+  } else if (CHANGELOG_MJS_TEMPLATE.test(read(mjs))) {
+    out = CHANGELOG_CJS;
+  } else {
+    plan.todos.push(
+      `${mjs}: cosmiconfig 7 (conventional-changelog-gitmoji-config) never reads it. Rewrite it as ${target}: module.exports = { ...require('@lobehub/lint/changelog'), /* your options */ }`,
+    );
+    return;
+  }
+
+  plan.write.push([target, out]);
+  for (const f of found) if (at(f) !== target) plan.delete.push(at(f));
+  for (const t of todo) plan.todos.push(`${target}: ${t}`);
+}
+
+// ---------------------------------------------------------------- workspace packages
+
+/** Directories of the workspace packages (pnpm-workspace.yaml or package.json `workspaces`). */
+function workspaceDirs() {
+  const patterns = [];
+  if (exists('pnpm-workspace.yaml')) {
+    let inPackages = false;
+    for (const line of read('pnpm-workspace.yaml').split('\n')) {
+      if (/^packages\s*:/.test(line)) inPackages = true;
+      else if (/^\S/.test(line)) inPackages = false;
+      else if (inPackages) {
+        const m = line.match(/^\s*-\s*["']?([^"'#]+?)["']?\s*(?:#.*)?$/);
+        if (m) patterns.push(m[1]);
+      }
+    }
+  }
+  const ws = Array.isArray(pkg.workspaces) ? pkg.workspaces : (pkg.workspaces?.packages ?? []);
+  patterns.push(...ws);
+
+  const dirs = new Set();
+  const isDir = (d) => fs.statSync(path.join(cwd, d), { throwIfNoEntry: false })?.isDirectory();
+  const children = (d) =>
+    fs
+      .readdirSync(path.join(cwd, d), { withFileTypes: true })
+      .filter((e) => e.isDirectory() && !e.name.startsWith('.') && e.name !== 'node_modules')
+      .map((e) => (d === '.' ? e.name : `${d}/${e.name}`));
+  const walk = (d, parts, depth = 0) => {
+    if (parts.length === 0) {
+      if (d !== '.' && exists(`${d}/package.json`)) dirs.add(d);
+      return;
+    }
+    const [head, ...rest] = parts;
+    if (head === '**') {
+      walk(d, rest, depth);
+      if (depth < 4) for (const c of children(d)) walk(c, parts, depth + 1);
+    } else if (head.includes('*')) {
+      const re = new RegExp(`^${head.replaceAll(/[$()+.?[\\\]^{|}]/g, String.raw`\$&`).replaceAll('*', '.*')}$`);
+      for (const c of children(d)) if (re.test(path.posix.basename(c))) walk(c, rest, depth);
+    } else {
+      const next = d === '.' ? head : `${d}/${head}`;
+      if (isDir(next)) walk(next, rest, depth);
+    }
+  };
+  for (const p of patterns) {
+    if (p.startsWith('!')) continue;
+    walk('.', p.replace(/^\.\//, '').replace(/\/$/, '').split('/').filter(Boolean));
+  }
+  return [...dirs].sort();
+}
+
 // ---------------------------------------------------------------- package.json
 
 function migratePackageJson() {
@@ -463,7 +614,26 @@ migrateSimple({ exportName: 'prettier', olds: ['.prettierrc.js', '.prettierrc.cj
 migrateSimple({ exportName: 'commitlint', olds: ['.commitlintrc.js', '.commitlintrc.cjs', '.commitlintrc.json', '.commitlintrc'], target: 'commitlint.config.mjs', targets: ['commitlint.config.mjs', 'commitlint.config.js', 'commitlint.config.cjs'] });
 migrateSimple({ exportName: 'remarklint', olds: ['.remarkrc.js', '.remarkrc.cjs', '.remarkrc.json', '.remarkrc'], target: '.remarkrc.mjs', targets: ['.remarkrc.mjs'] });
 migrateSimple({ exportName: 'semanticRelease', olds: ['.releaserc.js', '.releaserc.cjs', '.releaserc.json', '.releaserc'], target: '.releaserc.mjs', targets: ['.releaserc.mjs', 'release.config.mjs', 'release.config.js', 'release.config.cjs'] });
-migrateSimple({ exportName: 'changelog', olds: ['.changelogrc.js', '.changelogrc.cjs', '.changelogrc.json', '.changelogrc'], target: '.changelogrc.mjs', targets: ['.changelogrc.mjs'] });
+migrateChangelog();
+const packages = workspaceDirs();
+for (const dir of packages) migrateChangelog(dir);
+// other workspace package rc files that load a root file this run deletes
+const RC_FILE = /^(?:\.(?:eslintrc|prettierrc|stylelintrc|commitlintrc|remarkrc|releaserc)(?:\.[a-z]+)?|(?:eslint|prettier|stylelint|commitlint|release)\.config\.[a-z]+)$/;
+for (const dir of packages) {
+  for (const name of fs.readdirSync(path.join(cwd, dir))) {
+    if (!RC_FILE.test(name)) continue;
+    const src = read(`${dir}/${name}`);
+    for (const m of src.matchAll(/(?:require\(\s*|from\s+)["'](\.{1,2}\/[^"']+)["']/g)) {
+      const ref = path.posix.normalize(path.posix.join(dir, m[1]));
+      const gone = plan.delete.find((f) => f === ref || f.replace(/\.[a-z]+$/, '') === ref);
+      const written = plan.write.some(([f]) => f === ref);
+      if (gone) plan.todos.push(`${dir}/${name}: loads ${gone}, which this script deletes; point it at the new root config`);
+      else if (!written && !(m[0].startsWith('require') ? ['', '.js', '.json'] : ['']).some((ext) => exists(ref + ext))) {
+        plan.todos.push(`${dir}/${name}: loads ${m[1]}, which does not exist; point it at the new root config`);
+      }
+    }
+  }
+}
 migratePackageJson();
 
 const hooks = ['.husky/pre-commit', '.husky/commit-msg'].filter(exists);
@@ -488,9 +658,10 @@ if (plan.write.length > 0 || plan.delete.length > 0) {
   console.log(`
 Next steps${dryRun ? ' (after running without --dry-run)' : ''}:
   1. Install: pnpm install (or your package manager)
-  2. Format the new files: npx prettier --write "*.config.mjs" .remarkrc.mjs .releaserc.mjs .changelogrc.mjs package.json
+  2. Format the new files: npx prettier --write "*.config.mjs" .remarkrc.mjs .releaserc.mjs .changelogrc.cjs package.json
   3. Check the configs load: npx eslint --print-config src/index.ts > /dev/null && npx stylelint --print-config src/index.ts > /dev/null
-  4. Fix: npx eslint "{src,tests}/**/*.{js,jsx,ts,tsx}" --fix, then fix the remaining errors by hand
+  4. Fix: npx eslint "{src,tests}/**/*.{js,jsx,ts,tsx}" --fix, then npx prettier --write on the same files
+     (ESLint fixers do not format), then fix the remaining errors by hand
   5. Verify: lint, lint:style, type-check, test, build, and one commit through the hooks
 Nothing was installed or committed.`);
 }

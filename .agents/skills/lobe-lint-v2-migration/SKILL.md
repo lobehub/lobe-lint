@@ -2,17 +2,18 @@
 name: lobe-lint-v2-migration
 description: >
   Upgrade a repo from @lobehub/lint 1.x (ESLint 8, .eslintrc / .eslintignore, Stylelint 15,
-  CommonJS rc files) to @lobehub/lint 2.1.5 (ESLint 10 flat config, *.config.mjs files), using
+  CommonJS rc files) to @lobehub/lint 2.x (ESLint 10 flat config, *.config.mjs files), using
   lobe-ui as the template. A zero-dependency codemod rewrites the config files and package.json;
   this skill covers what is left. Trigger on: upgrade or migrate @lobehub/lint to v2, lobe-lint v2,
   ESLint 10 / flat config migration in a LobeHub repo, .eslintrc to eslint.config.mjs,
   "ERR_PACKAGE_PATH_NOT_EXPORTED" from a lint config, "Default export is not allowed",
+  release notes ignoring .changelogrc.mjs,
   升级 lobe-lint 2, 迁移 eslint flat config.
 ---
 
 # lobe-lint v2 migration
 
-v2 has no `.eslintrc` and no `.eslintignore`: one `eslint.config.mjs` built with `defineConfig(options, ...configs)`, and every other tool reads an ESM `*.config.mjs` / `.*rc.mjs` file. The reference v2 repo is lobe-ui. `scripts/migrate.mjs` does the mechanical part; the human guide is https://lint.lobehub.com/migration-v2. `<skill-dir>` below is the directory of this file. Sources and 2.1.5-vs-master differences: [reference/sources.md](reference/sources.md).
+v2 has no `.eslintrc` and no `.eslintignore`: one `eslint.config.mjs` built with `defineConfig(options, ...configs)`, and every other tool reads an ESM `*.config.mjs` / `.*rc.mjs` file, except the changelog config: `.changelogrc.cjs` (CommonJS, see Rules). The reference v2 repo is lobe-ui. `scripts/migrate.mjs` does the mechanical part; the human guide is https://lint.lobehub.com/migration-v2. `<skill-dir>` below is the directory of this file. Sources and 2.1.5-vs-master differences: [reference/sources.md](reference/sources.md).
 
 ## Workflow
 
@@ -27,7 +28,7 @@ Work in order. Do not batch steps into one unverified change.
    node <skill-dir>/scripts/migrate.mjs .
    ```
 
-   It writes lobe-ui-style configs, carries custom rules / ignores / overrides, bumps `@lobehub/lint ^2.1.5`, `eslint ^10.12.0`, `stylelint ^16.26.1`, `prettier ^3.9.10`, drops `remark` from the Markdown `lint-staged` entry and `--ignore-path` from scripts. Anything it cannot port is a `TODO(lobe-lint v2 migration)` comment and is listed under "Needs a manual look". It never installs, commits or touches husky hooks. Re-running prints "Nothing to migrate".
+   It writes lobe-ui-style configs, carries custom rules / ignores / overrides, writes `.changelogrc.cjs` at the root and in every workspace package that has a changelog config (also replacing an existing `.changelogrc.mjs`), bumps `@lobehub/lint ^2.1.6`, `eslint ^10.12.0`, `stylelint ^16.26.1`, `prettier ^3.9.10`, drops `remark` from the Markdown `lint-staged` entry and `--ignore-path` from scripts. Anything it cannot port is a `TODO(lobe-lint v2 migration)` comment and is listed under "Needs a manual look". It never installs, commits or touches husky hooks. Re-running prints "Nothing to migrate".
 4. **Install and load.** Install with the repo's package manager, format the new files with Prettier, then check both configs load:
 
    ```bash
@@ -35,13 +36,14 @@ Work in order. Do not batch steps into one unverified change.
    ```
 
 5. **Manual leftovers.** Resolve every TODO and note: rules from plugins v2 does not ship, `@lobehub/ui/eslint` rules, hooks with repo-specific steps, `engines`. Details: [reference/package-json.md](reference/package-json.md), errors: [reference/errors.md](reference/errors.md).
-6. **Fix, in this order.** `eslint --fix` and `stylelint --fix` on the lint globs, then **type-check immediately** (an autofix can produce invalid imports, see errors.md), then fix the remaining errors by hand. A rule you disable locally gets a reason: `// eslint-disable-next-line no-console -- CLI output`. A rule you turn off for the whole repo goes in `eslint.config.mjs` with a comment saying why.
+6. **Fix, in this order.** `eslint --fix` and `stylelint --fix` on the lint globs, then `prettier --write` on the same files (ESLint fixers do not format, so fixed imports can look like `import type {Foo }`), then **type-check immediately** (2.1.5 autofixes can produce invalid imports and untyped props, see errors.md), then fix the remaining errors by hand. A rule you disable locally gets a reason: `// eslint-disable-next-line no-console -- CLI output`. A rule you turn off for the whole repo goes in `eslint.config.mjs` with a comment saying why.
 7. **Default exports.** v2 warns on `export default` (`no-restricted-syntax`, severity `warn`). The upgrade does not require changing them: keep the warnings, or turn the rule off in `eslint.config.mjs`. Examples: [reference/default-export.md](reference/default-export.md).
 8. **Verify** (see Done when) and commit through the hooks.
 
 ## Rules
 
 - Configs are ESM (`.mjs`, or `.js` with `"type": "module"`). Never `require('@lobehub/lint')`: it throws `ERR_PACKAGE_PATH_NOT_EXPORTED`.
+- The one exception is the changelog config. conventional-changelog-gitmoji-config (release notes) reads it with cosmiconfig 7, which never looks at `.changelogrc.mjs`, so a `.mjs` file is silently ignored. Use `.changelogrc.cjs` with `module.exports = require('@lobehub/lint/changelog');` (`@lobehub/lint` >= 2.1.6). Workspace packages re-export the root file: `module.exports = require('../../.changelogrc.cjs');`.
 - Use `defineConfig` from `@lobehub/lint` (or `@lobehub/eslint-config`). In v2 the `eslint` export is that function, not a config object; do not mutate `.rules` on it.
 - Keep repo-specific hook steps (`build:toc`, `git add .`, `lint:circular`, CI guards). Only the lint commands change.
 - Do not turn rules off to reach zero without a reason. Do not downgrade errors to warnings in bulk.
