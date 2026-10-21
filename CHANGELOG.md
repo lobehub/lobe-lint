@@ -2,6 +2,79 @@
 
 # Changelog
 
+### [Version 2.1.7](https://github.com/lobehub/lobe-lint/compare/v2.1.6...v2.1.7)
+
+<sup>Released on **2026-10-21**</sup>
+
+#### ✨ Features
+
+- **skill**: Check every workspace package in check-release.
+
+#### 🐛 Bug Fixes
+
+- **eslint-config**: Resolve zod-validation-error v4 for eslint-plugin-react-hooks.
+- **eslint-config**: Allow `require()` in commonjs and rc config files.
+- **eslint-config**: Report missing hook dependencies and other react-hooks violations once.
+- **eslint-config**: Stop circular regex autofixes.
+- **eslint-config**: Report un-aborted fetch requests as errors.
+- **eslint-config**: Require typescript 5 or 6 as a peer.
+- **semantic-release-config**: Show perf commits in release notes.
+- **stylelint-config**: Leave transition and will-change values to the author.
+- **create-lint**: Install typescript 6 instead of the latest 7.
+
+#### 📝 Documentation
+
+- **skill**: Document the zod-validation-error `./v4` load failure, release lock pitfalls and formatting after fixes.
+- **misc**: List the react rules that changed in 2.1.6.
+- **misc**: Document leaked fetch errors, deduped react-hooks rules and keeping typescript below 7.
+
+#### ⚠️ Upgrade notes
+
+- **Fix:** the config no longer fails with `ERR_PACKAGE_PATH_NOT_EXPORTED … zod-validation-error/v4` (react-compiler plugin dropped, `zod-validation-error ^4` pinned). pnpm lockfiles that already hold 3.5.4 still need `pnpm update zod-validation-error`.
+- **Fix:** `.cjs` / rc / config files no longer fail `no-require-imports`; `unicorn/better-regex` off (fix cycle with `regexp/strict`); `perf` commits appear in release notes; `liberty/use-logical-spec` leaves `transition` / `will-change` alone; `check-release.mjs` checks workspace packages.
+- **Changed:** react-hooks violations are reported once. The 9 `@eslint-react` copies (`error-boundaries`, `exhaustive-deps`, `purity`, `rules-of-hooks`, `set-state-in-effect`, `set-state-in-render`, `static-components`, `unsupported-syntax`, `use-memo`) are off; use `react-hooks/*` ids in disable comments.
+- **Changed (new error):** `@eslint-react/web-api-no-leaked-fetch` is `error`. Abort the request on cleanup with an `AbortController`; the `let ignore = false` pattern from the React docs is a known false positive.
+- **Changed:** `@lobehub/eslint-config` and `@lobehub/lint` require the peer `typescript >=5 <7` (was `>=5`, optional). TypeScript 7.0 has no JS API, so typescript-eslint cannot run on it; install `typescript@^6`. `create-lobe-lint` installs `typescript@^6`.
+- **Docs:** 2.1.5 → 2.1.6 rule changes (`jsx-no-key-after-spread` etc.) and the upgrade steps above in [the migration guide](https://lint.lobehub.com/migration-v2).
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **skill**: Check every workspace package in check-release ([8ed6aee](https://github.com/lobehub/lobe-lint/commit/8ed6aee))
+
+#### What's fixed
+
+- **create-lint**: Install typescript 6 instead of the latest 7 ([6f9db53](https://github.com/lobehub/lobe-lint/commit/6f9db53))
+- **eslint-config**: Require typescript 5 or 6 as a peer ([6afb82d](https://github.com/lobehub/lobe-lint/commit/6afb82d))
+- **eslint-config**: Report un-aborted fetch requests as errors ([31bc328](https://github.com/lobehub/lobe-lint/commit/31bc328))
+- **eslint-config**: Report react-hooks violations once ([eb7eaf4](https://github.com/lobehub/lobe-lint/commit/eb7eaf4))
+- **stylelint-config**: Leave transition and will-change values to the author ([b840cf8](https://github.com/lobehub/lobe-lint/commit/b840cf8))
+- **semantic-release-config**: Show perf commits in release notes ([b28ffa2](https://github.com/lobehub/lobe-lint/commit/b28ffa2))
+- **eslint-config**: Stop circular regex autofixes ([76009ee](https://github.com/lobehub/lobe-lint/commit/76009ee))
+- **eslint-config**: Report missing hook dependencies once ([443a8ba](https://github.com/lobehub/lobe-lint/commit/443a8ba))
+- **eslint-config**: Allow require() in commonjs and rc config files ([8c0e647](https://github.com/lobehub/lobe-lint/commit/8c0e647))
+- **eslint-config**: Resolve zod-validation-error v4 for eslint-plugin-react-hooks ([1b3521b](https://github.com/lobehub/lobe-lint/commit/1b3521b))
+
+#### Documentation
+
+- **misc**: Keep typescript below 7 ([a507bd0](https://github.com/lobehub/lobe-lint/commit/a507bd0))
+- **misc**: Document leaked fetch errors and deduped react-hooks rules ([1232c23](https://github.com/lobehub/lobe-lint/commit/1232c23))
+- **skill**: Document release lock pitfalls and formatting after fixes ([a8e98a2](https://github.com/lobehub/lobe-lint/commit/a8e98a2))
+- **misc**: List the react rules that changed in 2.1.6 ([4115c43](https://github.com/lobehub/lobe-lint/commit/4115c43))
+- **skill**: Document the zod-validation-error ./v4 load failure ([df942b1](https://github.com/lobehub/lobe-lint/commit/df942b1))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 2.1.6](https://github.com/lobehub/lobe-lint/compare/v2.1.5...v2.1.6)
 
 <sup>Released on **2026-10-21**</sup>
