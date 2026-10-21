@@ -84,6 +84,29 @@ npx stylelint --print-config src/index.ts > /dev/null
 
 Most errors on a fresh migration are autofixable (`consistent-type-imports`, `simple-import-sort`, `perfectionist/sort-*`). `no-console` is not.
 
+### Upgrading from 2.1.5 to 2.1.6
+
+2.1.6 upgrades `@eslint-react/eslint-plugin` (2.x → 5.x) and `eslint-plugin-react-hooks` (5 → 7). Compared with `--print-config` for `.ts`, `.tsx`, `.js`, `.mjs`, `.cjs` and test files (`defineConfig({ react: true })`), only `.jsx` / `.tsx` rules changed. Rules that are new at `error`:
+
+| Rule | Before | Fix |
+| --- | --- | --- |
+| `@eslint-react/jsx-no-key-after-spread` | `jsx-key-before-spread`, warn | Move `key` before the spread: `<div key="x" {...props} />`. A `key` after a spread makes the automatic JSX runtime fall back to `createElement`. Not autofixable. |
+| `@eslint-react/jsx-no-children-prop-with-children` | — | Drop either the `children` prop or the children content (editor suggestion). |
+| `@eslint-react/rules-of-hooks` | — | Same check as `react-hooks/rules-of-hooks`, so a violation shows up twice; fixing the hook call clears both. |
+
+Renamed, same level. A disable comment with the old id is now an unused directive (an error), and `--fix` deletes it, so rename it instead:
+
+- `@eslint-react/dom/no-<x>` → `@eslint-react/dom-no-<x>`; `dom/no-namespace` → `jsx-no-namespace`
+- `@eslint-react/web-api/no-leaked-<x>` → `web-api-no-leaked-<x>`; `rsc/function-definition` → `rsc-function-definition`
+- `@eslint-react/naming-convention/<x>` → `naming-convention-<x>`; `naming-convention/use-state` → `use-state`
+- `@eslint-react/hooks-extra/no-direct-set-state-in-use-effect` → `set-state-in-effect` (and `react-hooks/set-state-in-effect`)
+
+Removed: `@eslint-react/no-default-props`, `no-prop-types`, `no-redundant-should-component-update`, `no-string-refs`, `no-useless-forward-ref`, `prefer-use-state-lazy-initialization`.
+
+New warnings: `react-hooks/config`, `error-boundaries`, `gating`, `globals`, `immutability`, `incompatible-library`, `preserve-manual-memoization`, `purity`, `refs`, `set-state-in-effect`, `set-state-in-render`, `static-components`, `unsupported-syntax`, `use-memo` (the React Compiler rules; `error` with `reactCompiler: true`), the `@eslint-react` rules with the same names (except `config`, `gating`, `globals`, `immutability`, `incompatible-library`, `preserve-manual-memoization`, `refs`) plus `@eslint-react/exhaustive-deps` (dropped again in 2.1.7, `react-hooks/exhaustive-deps` stays), `jsx-no-children-prop`, `jsx-no-leaked-dollar`, `jsx-no-leaked-semicolon`, `web-api-no-leaked-fetch` and `web-api-no-leaked-intersection-observer`.
+
+To keep a rule at its old level while you clean up, set it in `eslint.config.mjs` with a reason, e.g. `{ files: ['**/*.tsx'], rules: { '@eslint-react/jsx-no-key-after-spread': 'warn' } }`.
+
 ## 4. Default exports
 
 v2 warns on `export default`. The warning does not block the upgrade: keep it, or turn it off in `eslint.config.mjs`:

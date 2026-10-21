@@ -54,6 +54,16 @@ eslintrc-only CLI flags, unsupported with flat config. Remove them from scripts 
 **`unicorn/no-anonymous-default-export`** (error)
 `export default () => …` / `export default memo(() => …)`. lobe-ui and lobe-editor turn it off; so does `migrate.mjs`.
 
+**After upgrading 2.1.5 → 2.1.6: `@eslint-react/jsx-no-key-after-spread`, `@eslint-react/jsx-no-children-prop-with-children`, `@eslint-react/rules-of-hooks` (error)** (verified: lobe-ui got 26 `jsx-no-key-after-spread` errors)
+2.1.6 upgrades `@eslint-react/eslint-plugin` 2.x → 5.x (5.28.x) and `eslint-plugin-react-hooks` 5 → 7; the 2.1.6 changelog did not list the rule changes. A `--print-config` diff of 2.1.5 and 2.1.6 (`.ts`, `.tsx`, `.js`, `.mjs`, `.cjs`, test files) shows changes in `.jsx` / `.tsx` only. Repro: `export const A = (p: any) => <div {...p} key="x" />;` in a `.tsx` file. Fixes:
+
+- `jsx-no-key-after-spread` (was the `jsx-key-before-spread` warning): put `key` before the spread, `<div key="x" {...p} />`. Not autofixable. With the automatic JSX runtime a `key` after a spread falls back to `createElement`.
+- `jsx-no-children-prop-with-children`: remove the `children` prop or the children content.
+- `@eslint-react/rules-of-hooks`: the same violation is also reported by `react-hooks/rules-of-hooks`; fix the hook call. A disable comment must name both ids.
+- Renamed ids (`dom/no-*` → `dom-no-*`, `dom/no-namespace` → `jsx-no-namespace`, `web-api/no-leaked-*` → `web-api-no-leaked-*`, `naming-convention/*` → `naming-convention-*`, `rsc/function-definition` → `rsc-function-definition`, `hooks-extra/no-direct-set-state-in-use-effect` → `set-state-in-effect`): disable comments with the old id are reported as unused directives and `--fix` deletes them. Rename them first.
+
+The full list (including new warnings) is in the "Upgrading from 2.1.5 to 2.1.6" section of `docs/migration-v2.mdx`. To keep the old level while cleaning up: `{ files: ['**/*.tsx'], rules: { '@eslint-react/jsx-no-key-after-spread': 'warn' } }` with a reason.
+
 **`@typescript-eslint/consistent-type-imports`, `simple-import-sort/imports`, `perfectionist/sort-*`, `object-shorthand`**
 The bulk of the errors on a fresh migration (lobe-charts: 144 + 34 + 2 + 3 of 195; lobe-icons: 29 + 25 + 10 of 66). All autofixable.
 
