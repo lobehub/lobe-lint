@@ -2,8 +2,8 @@ name: Pkg Pr New CI
 on:
   pull_request: {}
   push:
-    branches:
-      - '!master'
+    branches-ignore:
+      - master
 
 jobs:
   release:
