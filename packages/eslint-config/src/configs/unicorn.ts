@@ -12,7 +12,10 @@ export function unicorn() {
       },
       rules: {
         // ===== Error Prevention / Bug Detection =====
-        'unicorn/better-regex': 'warn',
+        // Off: its regexp-tree optimizer is not u/v-flag aware and its fixes fight
+        // eslint-plugin-regexp (e.g. `\{` -> `{` vs regexp/strict), causing circular
+        // autofixes. eslint-plugin-regexp (`regexp` option) covers regex optimisation.
+        'unicorn/better-regex': 'off',
         'unicorn/error-message': 'error',
         'unicorn/new-for-builtins': 'error',
         'unicorn/no-abusive-eslint-disable': 'error',

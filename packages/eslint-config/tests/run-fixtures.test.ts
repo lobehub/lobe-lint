@@ -276,3 +276,21 @@ export const Counter = ({ step }: { step: number }) => {
     });
   });
 });
+
+describe('regex autofix', () => {
+  it('does not cycle between unicorn/better-regex and regexp/strict', async () => {
+    const code = 'export const R = /url\\(\\s*[\'"]?#(?!\\$\\{)[^\\s)\'"]/;\n';
+    const fixer = new ESLint({
+      cwd: fixturesDir,
+      fix: true,
+      overrideConfig: defineConfig({}) as any,
+      overrideConfigFile: true,
+    });
+    const [result] = await fixer.lintText(code, { filePath: path.join(fixturesDir, 'regex.mjs') });
+    const output = result.output ?? code;
+
+    expect(output).toContain(String.raw`(?!\$\{)`);
+    expect(result.messages.map((m) => m.ruleId)).not.toContain('regexp/strict');
+    expect(result.messages.map((m) => m.ruleId)).not.toContain('unicorn/better-regex');
+  });
+});
