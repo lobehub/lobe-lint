@@ -87,6 +87,10 @@ export function react(options: Options) {
         '@eslint-react/dom-no-dangerously-set-innerhtml': 'off',
         '@eslint-react/no-array-index-key': 'warn',
         '@eslint-react/no-leaked-conditional-rendering': 'off',
+        // A fetch in an effect that is not aborted on cleanup lets a stale response overwrite a
+        // newer one (race). Use an AbortController; note the React docs' `let ignore = false`
+        // pattern is still reported (false positive) and should move to AbortController too.
+        '@eslint-react/web-api-no-leaked-fetch': 'error',
 
         'react/self-closing-comp': 'warn',
 

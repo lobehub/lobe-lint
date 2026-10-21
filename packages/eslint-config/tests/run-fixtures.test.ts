@@ -306,6 +306,58 @@ export const A = ({ on }: { on: boolean }) => {
       expect(ids).not.toContain('@eslint-react/rules-of-hooks');
     });
   });
+
+  describe('@eslint-react/web-api-no-leaked-fetch', () => {
+    const lint = async (body: string) => {
+      const code = `import { useEffect, useState } from 'react';
+
+export const User = ({ id }: { id: string }) => {
+  const [user, setUser] = useState<unknown>();
+  useEffect(() => {
+${body}
+  }, [id]);
+  return <span>{String(user)}</span>;
+};
+`;
+      const [result] = await eslint.lintText(code, {
+        filePath: path.join(fixturesDir, 'react/fetch.tsx'),
+      });
+      return result.messages.filter((m) => m.ruleId === '@eslint-react/web-api-no-leaked-fetch');
+    };
+
+    it('reports an un-aborted fetch in an effect as an error', async () => {
+      const messages = await lint(`    fetch(\`/api/users/\${id}\`)
+      .then((r) => r.json())
+      .then(setUser);`);
+
+      expect(messages).toHaveLength(1);
+      expect(messages[0].severity).toBe(2);
+    });
+
+    it('still reports the `let ignore = false` pattern (known false positive)', async () => {
+      const messages = await lint(`    let ignore = false;
+    fetch(\`/api/users/\${id}\`)
+      .then((r) => r.json())
+      .then((u) => {
+        if (!ignore) setUser(u);
+      });
+    return () => {
+      ignore = true;
+    };`);
+
+      expect(messages).toHaveLength(1);
+    });
+
+    it('accepts a fetch aborted on cleanup', async () => {
+      const messages = await lint(`    const controller = new AbortController();
+    fetch(\`/api/users/\${id}\`, { signal: controller.signal })
+      .then((r) => r.json())
+      .then(setUser);
+    return () => controller.abort();`);
+
+      expect(messages).toEqual([]);
+    });
+  });
 });
 
 describe('regex autofix', () => {
