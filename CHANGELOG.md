@@ -2,6 +2,69 @@
 
 # Changelog
 
+### [Version 2.1.6](https://github.com/lobehub/lobe-lint/compare/v2.1.5...v2.1.6)
+
+<sup>Released on **2026-10-21**</sup>
+
+#### ✨ Features
+
+- **lint**: Add commonjs `@lobehub/lint/release` and `@lobehub/lint/release-monorepo` entries.
+- **lint**: Add commonjs `@lobehub/lint/changelog` entry.
+- **misc**: ESLint 10, toolchain bump, and MDX plugin patch.
+- **eslint-config**: Add MDX support to ESLint configuration.
+
+#### 🐛 Bug Fixes
+
+- **eslint-config**: Stop import-x/no-duplicates from merging into invalid type imports.
+- **stylelint-config**: Keep css-in-js interpolations when fixing logical properties.
+- **skill**: Always write `.releaserc.cjs` and verify it with getConfig.
+- **skill**: Write `.changelogrc.cjs` and migrate workspace packages.
+- **deps**: Upgrade dependencies and adapt eslint-config.
+
+#### 📝 Documentation
+
+- **misc**: Add docs site with rules explorer and refresh docs.
+- **misc**: Add lobe-lint v2 migration skill.
+- **skill**: Document semantic-release ignoring `.releaserc.mjs`, 2.1.5 autofixes, release notes and peer warnings.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **lint**: Add commonjs @lobehub/lint/release entries ([4f5d2a8](https://github.com/lobehub/lobe-lint/commit/4f5d2a8))
+- **lint**: Add commonjs @lobehub/lint/changelog entry ([7eb9d7e](https://github.com/lobehub/lobe-lint/commit/7eb9d7e))
+- **misc**: ESLint 10, toolchain bump, and MDX plugin patch ([73813e4](https://github.com/lobehub/lobe-lint/commit/73813e4))
+- **eslint-config**: Add MDX support to ESLint configuration ([70bca28](https://github.com/lobehub/lobe-lint/commit/70bca28))
+
+#### What's fixed
+
+- **eslint-config**: Stop import-x/no-duplicates from merging into invalid type imports ([0a1dc91](https://github.com/lobehub/lobe-lint/commit/0a1dc91))
+- **stylelint-config**: Keep css-in-js interpolations when fixing logical properties ([67c5269](https://github.com/lobehub/lobe-lint/commit/67c5269))
+- **skill**: Always write .releaserc.cjs and verify it with getConfig ([f7fbacc](https://github.com/lobehub/lobe-lint/commit/f7fbacc))
+- **skill**: Write .releaserc.cjs when semantic-release is below 22 ([d1b6c74](https://github.com/lobehub/lobe-lint/commit/d1b6c74))
+- **skill**: Write .changelogrc.cjs and migrate workspace packages ([09db266](https://github.com/lobehub/lobe-lint/commit/09db266))
+- **deps**: Upgrade dependencies and adapt eslint-config ([a25a984](https://github.com/lobehub/lobe-lint/commit/a25a984))
+
+#### Documentation
+
+- **misc**: Check the resolved cosmiconfig before keeping .releaserc.mjs ([90570ed](https://github.com/lobehub/lobe-lint/commit/90570ed))
+- **skill**: Document semantic-release ignoring .releaserc.mjs ([5a88f33](https://github.com/lobehub/lobe-lint/commit/5a88f33))
+- **skill**: Document 2.1.5 autofix, release-notes and peer warnings ([2d6bd56](https://github.com/lobehub/lobe-lint/commit/2d6bd56))
+- **misc**: Drop default-export codemod from v2 migration skill ([180a0d6](https://github.com/lobehub/lobe-lint/commit/180a0d6))
+- **misc**: Add lobe-lint v2 migration skill ([add4f16](https://github.com/lobehub/lobe-lint/commit/add4f16))
+- **misc**: Add docs site with rules explorer and refresh docs ([66c0e8f](https://github.com/lobehub/lobe-lint/commit/66c0e8f))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 2.1.5](https://github.com/lobehub/lobe-lint/compare/v2.1.4...v2.1.5)
 
 <sup>Released on **2026-02-14**</sup>
