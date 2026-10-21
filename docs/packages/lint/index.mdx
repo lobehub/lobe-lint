@@ -46,6 +46,13 @@ module.exports = require('@lobehub/lint/changelog');
 
 `require('@lobehub/lint')` does not work (the ESLint plugins are ESM-only); `@lobehub/lint/changelog` only loads the options object.
 
+semantic-release 21 with cosmiconfig 8.0 / 8.1 (as locked by pnpm in some repos) does not read `.releaserc.mjs` either. Use `.releaserc.cjs`, or semantic-release 22+:
+
+```js
+// .releaserc.cjs
+module.exports = require('@lobehub/lint/release'); // or '@lobehub/lint/release-monorepo'
+```
+
 ## Exports
 
 | Export                                           | Description                              |
@@ -61,4 +68,4 @@ module.exports = require('@lobehub/lint/changelog');
 | `semanticReleaseMonoRepo`                        | Monorepo Semantic Release config         |
 | `changelog`                                      | Changelog formatting options             |
 
-`@lobehub/lint/changelog` (default export, CommonJS and ESM) holds the same changelog options for `.changelogrc.cjs`.
+`@lobehub/lint/changelog`, `@lobehub/lint/release` and `@lobehub/lint/release-monorepo` default-export `changelog`, `semanticRelease` and `semanticReleaseMonoRepo` in CommonJS and ESM, for `.changelogrc.cjs` and `.releaserc.cjs`.

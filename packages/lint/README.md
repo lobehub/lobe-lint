@@ -109,6 +109,13 @@ conventional-changelog-gitmoji-config reads `.changelogrc*` with cosmiconfig 7, 
 module.exports = require('@lobehub/lint/changelog');
 ```
 
+semantic-release 21 with cosmiconfig 8.0 / 8.1 (as some pnpm lockfiles resolve it) does not read `.releaserc.mjs` either. Use `.releaserc.cjs` there, or semantic-release 22+:
+
+```js
+// .releaserc.cjs
+module.exports = require('@lobehub/lint/release'); // or '@lobehub/lint/release-monorepo'
+```
+
 ## Exports
 
 | Export                    | Type     | Description                             |
@@ -124,7 +131,7 @@ module.exports = require('@lobehub/lint/changelog');
 | `semanticReleaseMonoRepo` | Object   | Monorepo semantic release config        |
 | `changelog`               | Object   | Changelog formatting options            |
 
-`@lobehub/lint/changelog` default-exports the same changelog options and can be loaded with `require()`.
+`@lobehub/lint/changelog`, `@lobehub/lint/release` and `@lobehub/lint/release-monorepo` default-export `changelog`, `semanticRelease` and `semanticReleaseMonoRepo` and can be loaded with `require()`.
 \| `EslintOptions` | Type | ESLint `defineConfig()` options |
 
 ## Individual Packages

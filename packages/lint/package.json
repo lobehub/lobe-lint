@@ -24,6 +24,16 @@
       "types": "./dist/changelog.d.mts",
       "import": "./dist/changelog.mjs",
       "require": "./dist/changelog.cjs"
+    },
+    "./release": {
+      "types": "./dist/release.d.mts",
+      "import": "./dist/release.mjs",
+      "require": "./dist/release.cjs"
+    },
+    "./release-monorepo": {
+      "types": "./dist/release-monorepo.d.mts",
+      "import": "./dist/release-monorepo.mjs",
+      "require": "./dist/release-monorepo.cjs"
     }
   },
   "main": "./dist/index.cjs",
@@ -33,8 +43,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown src/index.ts src/changelog.ts",
-    "dev": "tsdown src/index.ts src/changelog.ts --watch",
+    "build": "tsdown src/index.ts src/changelog.ts src/release.ts src/release-monorepo.ts",
+    "dev": "tsdown src/index.ts src/changelog.ts src/release.ts src/release-monorepo.ts --watch",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
