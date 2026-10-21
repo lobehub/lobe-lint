@@ -7,6 +7,27 @@ Each entry: the message you see, the cause, the fix. "Verified" means reproduced
 **`Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: No "exports" main defined in …/@eslint-react/eslint-plugin/package.json`** (verified)
 The config is CommonJS (`.eslintrc.js`, `eslint.config.cjs`, `require('@lobehub/lint')`). The v2 dependency tree is ESM-only. Use `eslint.config.mjs` with `import`; same for every other config file.
 
+**`Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './v4' is not defined by "exports" in …/zod-validation-error/package.json`** (verified with bun 1.3.14, pnpm 11.20, npm 11.17, Node 24.19)
+Every config (`eslint`, `prettier`, `stylelint`, `commitlint`) fails to load, because `@lobehub/lint` imports eslint-plugin-react-hooks 7.1.1. It does `require('zod-validation-error/v4')` but accepts `zod-validation-error ^3.5.0 || ^4.0.0`, and 3.5.4 (the latest 3.x) dropped the `./v4` export (3.5.0 to 3.5.3 and 4.x have it). In 2.1.5 / 2.1.6, eslint-plugin-react-compiler (`^3.0.3`) is in the tree too, so a package manager that dedupes to one version picks 3.5.4 for both: a fresh `npm install` of 2.1.6 breaks, and so does any 2.1.5 → 2.1.6 upgrade with an existing `bun.lock` or `pnpm-lock.yaml`. A fresh bun or pnpm install can work or break depending on the rest of the tree. Check:
+
+```bash
+node --input-type=module -e "await import('@lobehub/lint'); console.log('ok')"
+```
+
+Fixed in `@lobehub/eslint-config` / `@lobehub/lint` 2.1.7: eslint-plugin-react-compiler is no longer a dependency (react-hooks 7 has the same compiler rules; `reactCompiler: true` now raises them to `error`), and `zod-validation-error ^4.0.2` is a direct dependency. A fresh install with bun, pnpm or npm then loads, even when the project itself also depends on eslint-plugin-react-compiler. A lockfile that already resolved react-hooks to 3.5.4 keeps it after the upgrade (bun and pnpm reuse the locked resolution), so refresh it once:
+
+- pnpm: `pnpm update --depth Infinity zod-validation-error`, or delete `pnpm-lock.yaml` and reinstall.
+- bun: delete `bun.lock` and run `bun install`. Do not run `bun update zod-validation-error`: it adds `zod-validation-error@^5` to your `package.json` and leaves react-hooks on 3.5.4.
+- npm: `npm install` re-resolves it.
+
+On 2.1.6 (before 2.1.7), pin it instead. Any of these works:
+
+- bun / npm: `"overrides": { "zod-validation-error": "3.5.3" }` (3.5.3 satisfies both ranges and still has `./v4`). With pnpm this pin breaks another `zod-validation-error/v3` import; use the next line there.
+- pnpm: in `pnpm-workspace.yaml`, `overrides: { 'eslint-plugin-react-hooks>zod-validation-error': ^4.0.2 }`.
+- npm: `"overrides": { "eslint-plugin-react-hooks": { "zod-validation-error": "^4.0.2" } }`.
+
+After upgrading to 2.1.7 you can drop the override. Run `install` again and then the check above. With bun, a lock that already holds 3.5.3 keeps it, so it stays fine. If the check fails, refresh the lockfile as described above.
+
 **v1 code that does `config.rules['x'] = 0` fails**
 v1 configs mutate `require('@lobehub/lint').eslint.rules`. In v2 `eslint` is `defineConfig`, a function with no `rules`. Pass overrides as config objects.
 
