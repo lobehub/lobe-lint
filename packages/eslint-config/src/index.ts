@@ -2,6 +2,7 @@
 /// <reference path="./eslint-typegen.d.ts" />
 
 import { a11y } from './configs/a11y';
+import { commonjs } from './configs/commonjs';
 import { eslintCommentsConfig } from './configs/eslint-comments';
 import { ignores } from './configs/ignores';
 import { imports } from './configs/imports';
@@ -52,6 +53,7 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
     ...unused(),
     ...yml({ ...options, yml: ymlOption }),
     ...eslintCommentsConfig(),
+    ...commonjs(),
     // 用户自定义配置（最高优先级）
     ...userConfigs,
   ];

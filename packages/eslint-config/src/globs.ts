@@ -17,7 +17,19 @@ export const GLOB_MDX = '**/*.mdx';
 
 export const GLOB_YAML = ['**/*.yaml', '**/*.yml'];
 
-export const GLOB_CONFIG_FILES = ['**/*.config.{js,mjs,ts,mts,cjs,cts}'];
+export const GLOB_CONFIG_FILES = [
+  '**/*.config.{js,mjs,ts,mts,cjs,cts}',
+  '**/.*rc.{js,mjs,ts,mts,cjs,cts}',
+];
+
+/** CommonJS sources: `require()` / `module.exports` are the only module syntax there. */
+export const GLOB_CJS = ['**/*.cjs'];
+
+/**
+ * Config files that are CommonJS whenever the package has no `"type": "module"`
+ * (`.releaserc.js`, `.changelogrc.js`, `*.config.js`, ...).
+ */
+export const GLOB_CJS_CONFIG_FILES = ['**/.*rc.js', '**/*.config.js'];
 
 export const GLOB_NEXT_APP_FILES = [
   '**/app/**/page.{js,jsx,ts,tsx}',

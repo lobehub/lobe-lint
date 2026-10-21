@@ -214,4 +214,43 @@ export const E = forwardRef((props: any, ref) => <div ref={ref} {...props} />);
       expect(message?.fix).toBeUndefined();
     });
   });
+
+  describe('commonjs config files may require()', () => {
+    const errorsOf = async (code: string, file: string) => {
+      const [result] = await eslint.lintText(code, { filePath: path.join(fixturesDir, file) });
+      return result.messages.filter((m) => m.severity === 2);
+    };
+
+    it.each([
+      ['.releaserc.cjs', "module.exports = require('@lobehub/lint/release');\n"],
+      ['.changelogrc.cjs', "module.exports = require('@lobehub/lint/changelog');\n"],
+      ['packages/a/.changelogrc.cjs', "module.exports = require('../../.changelogrc.cjs');\n"],
+      [
+        '.releaserc.cjs',
+        "module.exports = {\n  ...require('@lobehub/lint/release'),\n  branches: ['main'],\n};\n",
+      ],
+      ['.releaserc.js', "module.exports = require('@lobehub/lint/release');\n"],
+      ['tools/build.cjs', "const fs = require('node:fs');\n\nmodule.exports = fs.existsSync;\n"],
+    ])('%s', async (file, code) => {
+      expect(await errorsOf(code, file)).toEqual([]);
+    });
+
+    it('allows the default export of rc files such as .remarkrc.mjs', async () => {
+      const [result] = await eslint.lintText(
+        "import { remarklint } from '@lobehub/lint';\n\nexport default remarklint;\n",
+        { filePath: path.join(fixturesDir, '.remarkrc.mjs') },
+      );
+
+      expect(result.messages.map((m) => m.ruleId)).not.toContain('no-restricted-syntax');
+    });
+
+    it('still reports require() in ESM files', async () => {
+      const errors = await errorsOf(
+        "const fs = require('node:fs');\n\nexport const e = fs;\n",
+        'src/a.mjs',
+      );
+
+      expect(errors.map((m) => m.ruleId)).toContain('@typescript-eslint/no-require-imports');
+    });
+  });
 });
