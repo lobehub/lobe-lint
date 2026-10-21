@@ -37,6 +37,11 @@ test-output
 .umi-test
 .dumi/tmp*
 
+# docs
+.react-router
+docs/rules/*.mdx
+docs/rules/data/
+
 # misc
 # add other ignore file below
 

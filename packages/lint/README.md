@@ -37,7 +37,7 @@ pnpm add -D eslint prettier stylelint @commitlint/cli remark-cli semantic-releas
 ### ESLint
 
 ```js
-// eslint.config.js
+// eslint.config.mjs
 import { defineConfig } from '@lobehub/lint';
 
 export default defineConfig({
@@ -48,7 +48,7 @@ export default defineConfig({
 ### Prettier
 
 ```js
-// prettier.config.js
+// prettier.config.mjs
 import { prettier } from '@lobehub/lint';
 
 export default prettier;
@@ -57,7 +57,7 @@ export default prettier;
 ### Stylelint
 
 ```js
-// stylelint.config.js
+// stylelint.config.mjs
 import { stylelint } from '@lobehub/lint';
 
 export default stylelint;
@@ -66,7 +66,7 @@ export default stylelint;
 ### Commitlint
 
 ```js
-// commitlint.config.js
+// commitlint.config.mjs
 import { commitlint } from '@lobehub/lint';
 
 export default commitlint;
@@ -75,7 +75,7 @@ export default commitlint;
 ### Remarklint
 
 ```js
-// .remarkrc.js
+// .remarkrc.mjs
 import { remarklint } from '@lobehub/lint';
 
 export default remarklint;
@@ -84,7 +84,7 @@ export default remarklint;
 ### Semantic Release
 
 ```js
-// .releaserc.js
+// release.config.mjs
 import { semanticRelease } from '@lobehub/lint';
 
 export default semanticRelease;
@@ -98,27 +98,23 @@ import { semanticReleaseMonoRepo } from '@lobehub/lint';
 export default semanticReleaseMonoRepo;
 ```
 
-For changelog only:
-
-```js
-import { changelog } from '@lobehub/lint';
-
-export default changelog;
-```
+`changelog` is not a release config: it holds the gitmoji changelog formatting options (`addBackToTop`, `showAuthor`, `scopeDisplayName`, etc.).
 
 ## Exports
 
-| Export                    | Type     | Description                      |
-| ------------------------- | -------- | -------------------------------- |
-| `defineConfig` / `eslint` | Function | ESLint config factory            |
-| `defineEslintConfig`      | Function | Alias for defineConfig           |
-| `prettier`                | Object   | Prettier config                  |
-| `stylelint`               | Object   | Stylelint config                 |
-| `commitlint`              | Object   | Commitlint config                |
-| `remarklint`              | Object   | Remarklint config                |
-| `semanticRelease`         | Object   | Semantic release config          |
-| `semanticReleaseMonoRepo` | Object   | Monorepo semantic release config |
-| `changelog`               | Object   | Changelog-only config            |
+| Export                    | Type     | Description                             |
+| ------------------------- | -------- | --------------------------------------- |
+| `defineConfig` / `eslint` | Function | ESLint config factory                   |
+| `defineEslintConfig`      | Function | Alias for defineConfig                  |
+| `prettier`                | Object   | Prettier config                         |
+| `stylelint`               | Object   | Stylelint config                        |
+| `commitlint`              | Object   | Commitlint config                       |
+| `remarklint`              | Object   | Remarklint config                       |
+| `semanticRelease`         | Object   | Semantic release config                 |
+| `semanticReleaseOptions`  | Object   | Options used to build `semanticRelease` |
+| `semanticReleaseMonoRepo` | Object   | Monorepo semantic release config        |
+| `changelog`               | Object   | Changelog formatting options            |
+| `EslintOptions`           | Type     | ESLint `defineConfig()` options         |
 
 ## Individual Packages
 
@@ -133,7 +129,8 @@ If you only need specific configurations, you can install them individually:
 
 ## Requirements
 
-- Node.js >= 18
+- Node.js >= 20.18 (`@lobehub/remarklint-config` requires `>=20.18`; the other packages require `>=18`)
+- ESLint 10 needs Node.js `^20.19.0 || ^22.13.0 || >=24`
 
 ## License
 

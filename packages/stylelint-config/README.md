@@ -43,7 +43,7 @@ export default config;
 Or for CommonJS:
 
 ```js
-module.exports = require('@lobehub/stylelint-config').default;
+module.exports = require('@lobehub/stylelint-config');
 ```
 
 ## Supported File Types

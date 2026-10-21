@@ -53,5 +53,12 @@ Dockerfile*
 *.png
 *.jpg
 
+# agent skills (kept as authored)
+.agents
+
+# generated docs data
+docs/rules/*.mdx
+docs/rules/data/
+
 # misc
 # add other ignore file below

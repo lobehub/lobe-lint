@@ -1,0 +1,48 @@
+---
+title: Stylelint Config
+description: Stylelint config for CSS, Less and CSS-in-JS, with property ordering and logical properties.
+category: Configs
+order: 2
+---
+
+## Installation
+
+```bash
+pnpm add -D @lobehub/stylelint-config stylelint
+```
+
+## Usage
+
+Create `stylelint.config.mjs`:
+
+```js
+export { default } from '@lobehub/stylelint-config';
+```
+
+## What's Included
+
+- Extends `stylelint-config-standard`, `stylelint-config-recommended` and `stylelint-config-clean-order`
+- `.css` and `.less` files use `postcss-less` with `stylelint-less`
+- `.js`, `.jsx`, `.ts` and `.tsx` files use `postcss-styled-syntax` for CSS-in-JS
+- `stylelint-use-logical-spec` enforces logical properties, except `float` and width/height
+
+See every rule with its level and options on the [Rules](/rules/stylelint) page.
+
+## Extending
+
+```js
+import config from '@lobehub/stylelint-config';
+
+export default {
+  ...config,
+  rules: {
+    ...config.rules,
+    'color-hex-length': 'long',
+  },
+};
+```
+
+## Requirements
+
+- Node.js 18+
+- Stylelint 16+

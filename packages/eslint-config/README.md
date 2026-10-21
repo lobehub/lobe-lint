@@ -18,7 +18,7 @@ ESLint Flat Config configuration for LobeHub projects
 
 ## Features
 
-- ESLint 9+ Flat Config
+- ESLint 10 Flat Config
 - TypeScript support with type-aware rules
 - React / React Native / Next.js / Remix support
 - Next.js ESLint rules (`@next/eslint-plugin-next`)
@@ -27,6 +27,9 @@ ESLint Flat Config configuration for LobeHub projects
 - Unicorn best practices
 - Accessibility rules (jsx-a11y)
 - React Compiler support
+- RegExp rules (`eslint-plugin-regexp`)
+- YAML rules (`eslint-plugin-yml`)
+- ESLint directive comment checks (`@eslint-community/eslint-plugin-eslint-comments`)
 - Optional MDX support (`eslint-plugin-mdx`)
 
 ## Installation
@@ -77,19 +80,7 @@ export default defineConfig({
 });
 ```
 
-**ESLint 10:** `eslint-plugin-mdx@3.6.2` uses deprecated `context.getFilename()` and breaks. This repo ships a pnpm patch. In your project root, add to `package.json`:
-
-```json
-{
-  "pnpm": {
-    "patchedDependencies": {
-      "eslint-plugin-mdx@3.6.2": "patches/eslint-plugin-mdx@3.6.2.patch"
-    }
-  }
-}
-```
-
-Then copy [patches/eslint-plugin-mdx@3.6.2.patch](https://github.com/lobehub/lobe-lint/blob/master/patches/eslint-plugin-mdx@3.6.2.patch) into your `patches/` folder and run `pnpm install`. Once [eslint-plugin-mdx](https://github.com/mdx-js/eslint-mdx) releases a version with ESLint 10 support, you can remove the patch.
+This applies the flat config of [eslint-plugin-mdx](https://github.com/mdx-js/eslint-mdx) to `**/*.mdx` files. `eslint-plugin-mdx` and `eslint-mdx` are dependencies of this package, so there is nothing extra to install. Version 3.7.0 and later support ESLint 10, so no patch is needed.
 
 ### With Type-Checked Rules
 
@@ -145,16 +136,19 @@ export default defineConfig({
   // Import sorting
   sortImports: true,
 
-  // Interface and enum key sorting
+  // Interface and enum key sorting, plus JSX props sorting
   sortKeys: true,
-
-  // Stylistic rules (jsx-sort-props, etc.)
-  stylistic: true,
 
   // Regexp optimization rules
   regexp: true,
 
-  // MDX support (requires eslint-plugin-mdx, eslint-mdx; ESLint 10 needs patch above)
+  // Next.js rules (@next/eslint-plugin-next)
+  next: false,
+
+  // YAML rules (eslint-plugin-yml)
+  yml: true,
+
+  // MDX support (eslint-plugin-mdx)
   mdx: false,
 
   // Additional ignore patterns
@@ -232,23 +226,23 @@ export default defineConfig(
 
 ## Options Reference
 
-| Option          | Type                                               | Default | Description                           |
-| --------------- | -------------------------------------------------- | ------- | ------------------------------------- |
-| `typescript`    | `boolean \| 'strict'`                              | `true`  | Enable TypeScript rules               |
-| `typeChecked`   | `boolean`                                          | `false` | Enable type-aware rules               |
-| `tsconfigPath`  | `string \| string[]`                               | -       | Custom tsconfig path                  |
-| `parserOptions` | `ParserOptions`                                    | -       | TypeScript parser options             |
-| `react`         | `boolean \| 'next' \| 'remix' \| 'vite' \| 'expo'` | `false` | Enable React rules                    |
-| `reactNative`   | `boolean`                                          | `false` | Enable React Native rules             |
-| `reactCompiler` | `boolean`                                          | `false` | Enable React Compiler rules           |
-| `next`          | `boolean`                                          | `false` | Enable Next.js ESLint rules           |
-| `mdx`           | `boolean`                                          | `false` | Enable MDX rules (see ESLint 10 note) |
-| `a11y`          | `boolean`                                          | `false` | Enable accessibility rules            |
-| `sortImports`   | `boolean`                                          | `true`  | Enable import sorting                 |
-| `sortKeys`      | `boolean`                                          | `true`  | Enable interface/enum/jsx sorting     |
-| `stylistic`     | `boolean`                                          | `true`  | Enable stylistic rules                |
-| `regexp`        | `boolean`                                          | `true`  | Enable regexp rules                   |
-| `ignores`       | `string[]`                                         | `[]`    | Additional ignore patterns            |
+| Option          | Type                                               | Default | Description                       |
+| --------------- | -------------------------------------------------- | ------- | --------------------------------- |
+| `typescript`    | `boolean \| 'strict'`                              | `true`  | Enable TypeScript rules           |
+| `typeChecked`   | `boolean`                                          | `false` | Enable type-aware rules           |
+| `tsconfigPath`  | `string \| string[]`                               | -       | Custom tsconfig path              |
+| `parserOptions` | `ParserOptions`                                    | -       | TypeScript parser options         |
+| `react`         | `boolean \| 'next' \| 'remix' \| 'vite' \| 'expo'` | `false` | Enable React rules                |
+| `reactNative`   | `boolean`                                          | `false` | Enable React Native rules         |
+| `reactCompiler` | `boolean`                                          | `false` | Enable React Compiler rules       |
+| `next`          | `boolean`                                          | `false` | Enable Next.js ESLint rules       |
+| `mdx`           | `boolean`                                          | `false` | Enable MDX rules                  |
+| `a11y`          | `boolean`                                          | `false` | Enable accessibility rules        |
+| `sortImports`   | `boolean`                                          | `true`  | Enable import sorting             |
+| `sortKeys`      | `boolean`                                          | `true`  | Enable interface/enum/jsx sorting |
+| `yml`           | `boolean`                                          | `true`  | Enable YAML rules                 |
+| `regexp`        | `boolean`                                          | `true`  | Enable regexp rules               |
+| `ignores`       | `string[]`                                         | `[]`    | Additional ignore patterns        |
 
 ## API
 
@@ -261,8 +255,8 @@ function defineConfig(options?: Options, ...configs: FlatConfig[]): FlatConfigAr
 
 ## Requirements
 
-- Node.js >= 18
-- ESLint >= 9.0.0
+- Node.js `^20.19.0 || ^22.13.0 || >=24` (required by ESLint 10)
+- ESLint 10 (`^10.0.0`)
 - TypeScript >= 5.0.0 (optional)
 
 ## License

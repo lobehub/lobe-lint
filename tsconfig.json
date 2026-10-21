@@ -12,6 +12,7 @@
     { "path": "./packages/commitlint-config" },
     { "path": "./packages/remarklint-config" },
     { "path": "./packages/semantic-release-config" },
-    { "path": "./packages/lint" }
+    { "path": "./packages/lint" },
+    { "path": "./packages/create-lint" }
   ]
 }

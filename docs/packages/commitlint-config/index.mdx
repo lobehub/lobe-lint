@@ -1,0 +1,55 @@
+---
+title: Commitlint Config
+description: Commitlint config for gitmoji-style conventional commit messages.
+category: Configs
+order: 3
+---
+
+## Installation
+
+```bash
+pnpm add -D @lobehub/commitlint-config @commitlint/cli
+```
+
+## Usage
+
+Create `commitlint.config.mjs`:
+
+```js
+export { default } from '@lobehub/commitlint-config';
+```
+
+The config extends `commitlint-config-gitmoji` and turns off the `header-max-length` and `footer-leading-blank` rules.
+
+## Commit Format
+
+```
+:emoji: type(scope): subject
+
+body
+
+footer
+```
+
+```
+:sparkles: feat(auth): add OAuth2 support
+:bug: fix(api): resolve race condition in data fetching
+:memo: docs: update installation guide
+```
+
+See every rule with its level and options on the [Rules](/rules/commitlint) page.
+
+## Git Hook
+
+Run commitlint from a `commit-msg` hook, for example with Husky:
+
+```bash
+npx --no -- commitlint --edit $1
+```
+
+`create-lobe-lint --git-hooks` sets this up for you with simple-git-hooks.
+
+## Requirements
+
+- Node.js 18+
+- `@commitlint/cli` 19+

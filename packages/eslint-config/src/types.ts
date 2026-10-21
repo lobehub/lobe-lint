@@ -14,8 +14,8 @@ export interface Options {
   ignores?: string[];
 
   /**
-   * 是否启用 MDX 规则（需安装 eslint-plugin-mdx、eslint-mdx）
-   * ESLint 10 下需应用 patches/eslint-plugin-mdx@3.6.2.patch
+   * 是否启用 MDX 规则（eslint-plugin-mdx、eslint-mdx 已作为本包依赖安装）
+   * eslint-plugin-mdx 3.7.0 起支持 ESLint 10，无需 patch
    * @default false
    */
   mdx?: boolean;

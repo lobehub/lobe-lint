@@ -34,7 +34,7 @@ pnpm add -D @lobehub/semantic-release-config semantic-release
 
 ### Standard Project
 
-Create `.releaserc.js` in your project root:
+Create `release.config.mjs` in your project root:
 
 ```js
 import config from '@lobehub/semantic-release-config';
@@ -50,23 +50,21 @@ import config from '@lobehub/semantic-release-config/monorepo';
 export default config;
 ```
 
-### Changelog Only
+### Changelog Options
 
-For generating changelog without releasing:
+`@lobehub/semantic-release-config/changelog` exports the changelog formatting options (`addBackToTop`, `showAuthor`, `scopeDisplayName`, etc.), not a release config:
 
 ```js
-import config from '@lobehub/semantic-release-config/changelog';
-
-export default config;
+import changelog from '@lobehub/semantic-release-config/changelog';
 ```
 
 ## Exports
 
-| Export                                       | Description               |
-| -------------------------------------------- | ------------------------- |
-| `@lobehub/semantic-release-config`           | Standard release config   |
-| `@lobehub/semantic-release-config/monorepo`  | Monorepo release config   |
-| `@lobehub/semantic-release-config/changelog` | Changelog generation only |
+| Export                                       | Description                  |
+| -------------------------------------------- | ---------------------------- |
+| `@lobehub/semantic-release-config`           | Standard release config      |
+| `@lobehub/semantic-release-config/monorepo`  | Monorepo release config      |
+| `@lobehub/semantic-release-config/changelog` | Changelog formatting options |
 
 ## GitHub Actions
 
@@ -85,11 +83,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile

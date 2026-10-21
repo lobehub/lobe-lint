@@ -45,7 +45,7 @@ export default config;
 Or for CommonJS:
 
 ```js
-module.exports = require('@lobehub/remarklint-config').default;
+module.exports = require('@lobehub/remarklint-config');
 ```
 
 ### Run
@@ -96,7 +96,7 @@ pnpm remark . --output
 
 ## Requirements
 
-- Node.js >= 18
+- Node.js >= 20.18
 - remark >= 15.0.0
 - remark-cli >= 12.0.0
 

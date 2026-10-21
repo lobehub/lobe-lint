@@ -8,7 +8,9 @@
 
 <h1>Lobe Lint</h1>
 
-ESLint, Prettier, Stylelint, Commitlint, Remarklint, and Semantic Release configs for LobeHub
+<h3>Lint, Format and Commit the LobeHub Way</h3>
+
+Shared ESLint, Prettier, Stylelint, Commitlint, Remarklint and semantic-release configs from LobeHub, plus the `create-lobe-lint` CLI that sets them up. Use them in LobeHub projects or in any JavaScript and TypeScript project that wants the same conventions.
 
 [Changelog](./CHANGELOG.md) · [Report Bug][issues-link] · [Request Feature][issues-link]
 
@@ -35,181 +37,68 @@ ESLint, Prettier, Stylelint, Commitlint, Remarklint, and Semantic Release config
 
 #### TOC
 
-- [Features](#features)
+- [Why Lobe Lint?](#why-lobe-lint)
+- [Getting Started](#getting-started)
+  - [Manual Setup](#manual-setup)
+- [🤖 AI-Powered Development](#-ai-powered-development)
 - [Packages](#packages)
-- [Installation](#installation)
-- [Quick Start (CLI)](#quick-start-cli)
-  - [VSCode Settings](#vscode-settings)
-- [Usage](#usage)
-  - [ESLint](#eslint)
-  - [Prettier](#prettier)
-  - [Stylelint](#stylelint)
-  - [Commitlint](#commitlint)
-  - [Remarklint](#remarklint)
-  - [Semantic Release](#semantic-release)
-- [Migration from v1](#migration-from-v1)
-  - [Breaking Changes](#breaking-changes)
-  - [Migration Steps](#migration-steps)
 - [Local Development](#local-development)
 - [Contributing](#contributing)
+- [🔗 Links](#-links)
 
 ####
 
 </details>
 
-## Features
+## Why Lobe Lint?
 
-- **ESM-first** - Modern ES Modules support
-- **ESLint 9 Flat Config** - Latest ESLint configuration format
-- **TypeScript** - Full TypeScript support with type-aware rules
-- **React/Next.js/Remix** - React ecosystem support
-- **React Native** - Mobile development support
-- **Monorepo** - Modular packages for flexible usage
+Lobe Lint is the code style toolkit behind every LobeHub project: one set of ESLint, Prettier, Stylelint, Commitlint, Remarklint and Semantic Release configs you can add to any project in a minute.
 
-## Packages
+- **One command setup** - Add linting, formatting and commit checks with `npx create-lobe-lint`
+- **Works with your stack** - JavaScript, TypeScript, React, Next.js, Remix, Vite and Expo / React Native
+- **All or just what you need** - Get every config from `@lobehub/lint`, or install only the ones you use
+- **Sensible defaults, easy overrides** - Start from LobeHub's conventions and add your own rules on top
+- **Clean history** - Gitmoji commit checks, plus automated versions and changelogs
+- **Agent-friendly** - Non-interactive setup a coding agent can run in one step
 
-| Package                                                                | Version                                             | Description                |
-| ---------------------------------------------------------------------- | --------------------------------------------------- | -------------------------- |
-| [@lobehub/eslint-config](./packages/eslint-config)                     | [![][eslint-npm-shield]][eslint-npm-link]           | ESLint Flat Config         |
-| [@lobehub/prettier-config](./packages/prettier-config)                 | [![][prettier-npm-shield]][prettier-npm-link]       | Prettier config            |
-| [@lobehub/stylelint-config](./packages/stylelint-config)               | [![][stylelint-npm-shield]][stylelint-npm-link]     | Stylelint config           |
-| [@lobehub/commitlint-config](./packages/commitlint-config)             | [![][commitlint-npm-shield]][commitlint-npm-link]   | Commitlint config          |
-| [@lobehub/remarklint-config](./packages/remarklint-config)             | [![][remarklint-npm-shield]][remarklint-npm-link]   | Remarklint config          |
-| [@lobehub/semantic-release-config](./packages/semantic-release-config) | [![][semantic-npm-shield]][semantic-npm-link]       | Semantic release config    |
-| [@lobehub/lint](./packages/lint)                                       | [![][npm-release-shield]][npm-release-link]         | Meta package (all configs) |
-| [create-lobe-lint](./packages/create-lint)                             | [![][create-lint-npm-shield]][create-lint-npm-link] | CLI setup tool             |
+## Getting Started
 
-## Installation
-
-Install the meta package for all configs:
-
-[![][bun-shield]][bun-link]
-
-```bash
-bun add -D @lobehub/lint
-```
-
-Or install individual packages as needed:
-
-```bash
-# ESLint only
-bun add -D @lobehub/eslint-config eslint typescript
-
-# Prettier only
-bun add -D @lobehub/prettier-config prettier
-```
-
-<div align="right">
-
-[![][back-to-top]](#readme-top)
-
-</div>
-
-## Quick Start (CLI)
-
-The fastest way to set up LobeHub lint configs in your project is using the CLI tool:
+Run the setup CLI in your project root:
 
 ```bash
 npx create-lobe-lint
 ```
 
-This will start an interactive setup that auto-detects your project configuration (package manager, TypeScript, React framework) and generates the appropriate config files.
+It detects your package manager, TypeScript and React framework, asks which tools you want, writes the config files and installs the dependencies. Use `npx create-lobe-lint --preset -y` to accept the recommended setup without prompts. See [create-lobe-lint](./packages/create-lint) for all options.
+
+### Manual Setup
+
+Prefer to wire things up yourself? Install a config with its tool:
+
+[![][bun-shield]][bun-link]
 
 ```bash
-# Quick setup with preset defaults
-npx create-lobe-lint --preset -y
-
-# Select specific tools with framework
-npx create-lobe-lint --eslint --prettier --react next
-
-# Manual selection mode
-npx create-lobe-lint --manual
+bun add -D @lobehub/eslint-config eslint typescript
+bun add -D @lobehub/prettier-config prettier
 ```
 
-### VSCode Settings
-
-The CLI can generate `.vscode/settings.json` to suppress disruptive ESLint auto-fix rules (import sorting, object key sorting, etc.) that conflict with your editing workflow:
-
-```bash
-# Include VSCode settings in setup
-npx create-lobe-lint --preset --vscode -y
-
-# Skip VSCode settings
-npx create-lobe-lint --preset --no-vscode -y
-```
-
-Generated settings disable auto-fix for rules like `perfectionist/sort-enums`, `perfectionist/sort-interfaces`, `simple-import-sort/imports`, `react/jsx-sort-props`, and optionally `unused-imports/no-unused-imports`, while keeping them as informational diagnostics.
-
-See [create-lobe-lint](./packages/create-lint) for full options and documentation.
-
-## Usage
-
-### ESLint
-
-Create `eslint.config.mjs`:
+Then create `eslint.config.mjs`:
 
 ```js
 import { defineConfig } from '@lobehub/eslint-config';
 
 export default defineConfig({
-  // Enable React with Next.js support
-  react: 'next',
-  // Enable TypeScript strict mode
-  typescript: 'strict',
+  react: true, // or 'next' / 'remix' / 'vite' / 'expo'
 });
 ```
 
-See [@lobehub/eslint-config](./packages/eslint-config) for full options.
-
-### Prettier
-
-Create `prettier.config.mjs`:
+And `prettier.config.mjs`:
 
 ```js
-import { prettier } from '@lobehub/lint';
-
-export default prettier;
+export { default } from '@lobehub/prettier-config';
 ```
 
-### Stylelint
-
-Create `stylelint.config.mjs`:
-
-```js
-import { stylelint } from '@lobehub/lint';
-
-export default stylelint;
-```
-
-### Commitlint
-
-Create `commitlint.config.mjs`:
-
-```js
-import { commitlint } from '@lobehub/lint';
-
-export default commitlint;
-```
-
-### Remarklint
-
-Create `.remarkrc.mjs`:
-
-```js
-import { remarklint } from '@lobehub/lint';
-
-export default remarklint;
-```
-
-### Semantic Release
-
-Create `.releaserc.mjs`:
-
-```js
-import { semanticRelease } from '@lobehub/lint';
-
-export default semanticRelease;
-```
+The other tools follow the same pattern. See each package's README in [Packages](#packages) for options and examples.
 
 <div align="right">
 
@@ -217,35 +106,40 @@ export default semanticRelease;
 
 </div>
 
-## Migration from v1
+## 🤖 AI-Powered Development
 
-### Breaking Changes
+Hand the setup to your coding agent. Copy this prompt:
 
-- **ESM only** - CommonJS is no longer supported
-- **ESLint 9** - Requires ESLint 9+ with Flat Config
-- **Node.js 18** - Requires Node.js 18+
-
-### Migration Steps
-
-1. Update your config files to use ESM syntax (`.mjs` extension or `"type": "module"`)
-2. Replace `.eslintrc.js` with `eslint.config.mjs`
-3. Update imports:
-
-**Before (v1):**
-
-```js
-module.exports = require('@lobehub/lint').eslint;
+```text
+Set up LobeHub lint in this project: run `npx create-lobe-lint --preset -y`, then run ESLint and Prettier on the codebase and fix the reported problems until both pass.
 ```
 
-**After (v2):**
+| Resource                                           | What it gives your agent                                                                     |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| [create-lobe-lint](./packages/create-lint)         | Non-interactive setup with `--preset -y`; add `--no-install` to skip installing dependencies |
+| [@lobehub/eslint-config](./packages/eslint-config) | Every `defineConfig()` option, with override examples                                        |
+| [AGENTS.md](./AGENTS.md)                           | Commands, architecture and conventions for agents working on this repository                 |
 
-```js
-import { defineConfig } from '@lobehub/eslint-config';
+Each tool reads one config file (`eslint.config.mjs`, `prettier.config.mjs`, `stylelint.config.mjs`, `commitlint.config.mjs`, `.remarkrc.mjs`, `release.config.mjs`) that re-exports the matching `@lobehub/*-config` package.
 
-export default defineConfig({
-  react: true,
-});
-```
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## Packages
+
+| Package                                                                | What it's for                                           |
+| ---------------------------------------------------------------------- | ------------------------------------------------------- |
+| [@lobehub/eslint-config](./packages/eslint-config)                     | ESLint flat config for JavaScript, TypeScript and React |
+| [@lobehub/prettier-config](./packages/prettier-config)                 | Code formatting                                         |
+| [@lobehub/stylelint-config](./packages/stylelint-config)               | CSS, Less and CSS-in-JS styles                          |
+| [@lobehub/commitlint-config](./packages/commitlint-config)             | Gitmoji commit messages                                 |
+| [@lobehub/remarklint-config](./packages/remarklint-config)             | Markdown linting                                        |
+| [@lobehub/semantic-release-config](./packages/semantic-release-config) | Automated versions and changelogs                       |
+| [@lobehub/lint](./packages/lint)                                       | All configs in one package                              |
+| [create-lobe-lint](./packages/create-lint)                             | One-command setup CLI                                   |
 
 <div align="right">
 
@@ -259,13 +153,14 @@ You can use Github Codespaces for online development:
 
 [![][codespaces-shield]][codespaces-link]
 
-Or clone it for local development:
+Or clone it for local development (requires Node.js 22+ and pnpm):
 
 ```bash
 git clone https://github.com/lobehub/lobe-lint.git
 cd lobe-lint
 pnpm install
 pnpm build
+pnpm test
 ```
 
 <div align="right">
@@ -288,6 +183,22 @@ Contributions of all types are more than welcome, if you are interested in contr
 
 </div>
 
+## 🔗 Links
+
+- [🤯 Lobe UI](https://github.com/lobehub/lobe-ui) - React component library for AI apps
+- [🌈 Lobe Icons](https://github.com/lobehub/lobe-icons) - AI / LLM brand logos and icons
+- [📊 Lobe Charts](https://github.com/lobehub/lobe-charts) - React chart component library
+- [✒️ Lobe Editor](https://github.com/lobehub/lobe-editor) - Lexical-based rich text editor for React, with Markdown, plugins and a chat composer
+- [🗣️ Lobe TTS](https://github.com/lobehub/lobe-tts) - TTS / STT speech library
+- [📐 Lobe Lint](https://github.com/lobehub/lobe-lint) - ESLint, Prettier, Stylelint, Commitlint and more lint configs
+- [😊 Fluent Emoji](https://github.com/lobehub/fluent-emoji) - Fluent Emoji asset library
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
 ---
 
 #### 📝 License
@@ -302,16 +213,10 @@ This project is [MIT](./LICENSE) licensed.
 [bun-shield]: https://img.shields.io/badge/-speedup%20with%20bun-black?logo=bun&style=for-the-badge
 [codespaces-link]: https://codespaces.new/lobehub/lobe-lint
 [codespaces-shield]: https://github.com/codespaces/badge.svg
-[commitlint-npm-link]: https://www.npmjs.com/package/@lobehub/commitlint-config
-[commitlint-npm-shield]: https://img.shields.io/npm/v/@lobehub/commitlint-config?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [contributors-contrib]: https://contrib.rocks/image?repo=lobehub/lobe-lint
 [contributors-url]: https://github.com/lobehub/lobe-lint/graphs/contributors
-[create-lint-npm-link]: https://www.npmjs.com/package/create-lobe-lint
-[create-lint-npm-shield]: https://img.shields.io/npm/v/create-lobe-lint?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [discord-link]: https://discord.gg/AYFPHvv2jT
 [discord-shield]: https://img.shields.io/discord/1127171173982154893?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square
-[eslint-npm-link]: https://www.npmjs.com/package/@lobehub/eslint-config
-[eslint-npm-shield]: https://img.shields.io/npm/v/@lobehub/eslint-config?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [github-action-release-link]: https://github.com/lobehub/lobe-lint/actions/workflows/release.yml
 [github-action-release-shield]: https://img.shields.io/github/actions/workflow/status/lobehub/lobe-lint/release.yml?label=release&labelColor=black&logo=githubactions&logoColor=white&style=flat-square
 [github-action-test-link]: https://github.com/lobehub/lobe-lint/actions/workflows/test.yml
@@ -335,12 +240,4 @@ This project is [MIT](./LICENSE) licensed.
 [npm-release-shield]: https://img.shields.io/npm/v/@lobehub/lint?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [pr-welcome-link]: https://github.com/lobehub/lobe-lint/pulls
 [pr-welcome-shield]: https://img.shields.io/badge/🤯_pr_welcome-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
-[prettier-npm-link]: https://www.npmjs.com/package/@lobehub/prettier-config
-[prettier-npm-shield]: https://img.shields.io/npm/v/@lobehub/prettier-config?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [profile-link]: https://github.com/lobehub
-[remarklint-npm-link]: https://www.npmjs.com/package/@lobehub/remarklint-config
-[remarklint-npm-shield]: https://img.shields.io/npm/v/@lobehub/remarklint-config?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
-[semantic-npm-link]: https://www.npmjs.com/package/@lobehub/semantic-release-config
-[semantic-npm-shield]: https://img.shields.io/npm/v/@lobehub/semantic-release-config?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
-[stylelint-npm-link]: https://www.npmjs.com/package/@lobehub/stylelint-config
-[stylelint-npm-shield]: https://img.shields.io/npm/v/@lobehub/stylelint-config?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square

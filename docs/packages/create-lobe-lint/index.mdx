@@ -1,0 +1,73 @@
+---
+title: create-lobe-lint
+description: CLI that detects your project and generates LobeHub lint configs, ignore files, git hooks and VSCode settings.
+category: CLI
+order: 0
+---
+
+## Usage
+
+```bash
+npx create-lobe-lint
+```
+
+The interactive setup:
+
+1. Detects your package manager (from the lockfile), TypeScript (`tsconfig.json`) and React framework (Next.js, Remix, Expo, Vite or plain React, from `package.json`).
+2. Asks for the preset or a manual tool selection.
+3. Offers ignore files, lint-staged with simple-git-hooks, and VSCode settings.
+4. Writes the config files and installs the dependencies.
+
+## Options
+
+| Option | Alias | Description |
+| --- | --- | --- |
+| `--preset` | `-p` | Quick setup with preset tools (ESLint, Prettier, Stylelint, Commitlint) |
+| `--manual` | `-m` | Manually select tools to configure |
+| `--eslint` |  | Include ESLint configuration |
+| `--prettier` |  | Include Prettier configuration |
+| `--stylelint` |  | Include Stylelint configuration |
+| `--commitlint` |  | Include Commitlint configuration |
+| `--remarklint` |  | Include Remarklint configuration |
+| `--semantic-release` |  | Include Semantic Release configuration |
+| `--react <framework>` |  | Set React framework (`next` / `remix` / `vite` / `expo` / `true` / `false`) |
+| `--ignore-files` |  | Generate ignore files (`.prettierignore`, `.stylelintignore`, `.remarkignore`); `--no-ignore-files` to skip |
+| `--git-hooks` |  | Configure lint-staged and simple-git-hooks; `--no-git-hooks` to skip |
+| `--vscode` |  | Generate VSCode settings that suppress disruptive ESLint auto-fix; `--no-vscode` to skip |
+| `--install` |  | Install dependencies (default); `--no-install` to skip |
+| `--yes` | `-y` | Skip confirmations and accept defaults |
+| `--help` | `-h` | Show help |
+
+With `-y`, ignore files, git hooks and VSCode settings are generated unless you pass the matching `--no-*` flag.
+
+## Examples
+
+```bash
+# Recommended setup, no prompts
+npx create-lobe-lint --preset -y
+
+# Pick tools and framework
+npx create-lobe-lint --eslint --prettier --react next
+
+# Write files only
+npx create-lobe-lint --preset -y --no-install
+```
+
+## Generated Files
+
+| Tool             | Config file             |
+| ---------------- | ----------------------- |
+| ESLint           | `eslint.config.mjs`     |
+| Prettier         | `prettier.config.mjs`   |
+| Stylelint        | `stylelint.config.mjs`  |
+| Commitlint       | `commitlint.config.mjs` |
+| Remarklint       | `.remarkrc.mjs`         |
+| Semantic Release | `release.config.mjs`    |
+
+With git hooks enabled, `lint-staged` and `simple-git-hooks` entries are added to `package.json`: a `pre-commit` hook that runs lint-staged, and a `commit-msg` hook that runs commitlint when Commitlint is selected.
+
+The VSCode settings keep these rules as diagnostics but stop auto-fix on save: `perfectionist/sort-enums`, `perfectionist/sort-interfaces`, `simple-import-sort/imports`, `simple-import-sort/exports`, `react/jsx-sort-props` (React projects) and optionally `unused-imports/no-unused-imports`.
+
+## Requirements
+
+- Node.js 20+

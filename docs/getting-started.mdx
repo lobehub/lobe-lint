@@ -1,0 +1,65 @@
+---
+title: Getting Started
+description: Add LobeHub lint configs to a project with one command, or install and wire them up by hand.
+---
+
+## Quick Start
+
+Run the setup CLI in your project root:
+
+```bash
+npx create-lobe-lint
+```
+
+It detects your package manager, TypeScript and React framework, asks which tools you want, writes the config files and installs the dependencies. To accept the recommended setup without prompts:
+
+```bash
+npx create-lobe-lint --preset -y
+```
+
+The preset configures ESLint, Prettier, Stylelint and Commitlint. See [create-lobe-lint](/packages/create-lobe-lint) for every flag.
+
+## Manual Setup
+
+Install a config together with its tool:
+
+```bash
+pnpm add -D @lobehub/eslint-config eslint typescript
+pnpm add -D @lobehub/prettier-config prettier
+```
+
+Create `eslint.config.mjs`:
+
+```js
+import { defineConfig } from '@lobehub/eslint-config';
+
+export default defineConfig({
+  react: true, // or 'next' / 'remix' / 'vite' / 'expo'
+});
+```
+
+Create `prettier.config.mjs`:
+
+```js
+export { default } from '@lobehub/prettier-config';
+```
+
+## Config Files
+
+Each tool reads one config file that re-exports the matching package:
+
+| Tool             | Config file             | Package                            |
+| ---------------- | ----------------------- | ---------------------------------- |
+| ESLint           | `eslint.config.mjs`     | `@lobehub/eslint-config`           |
+| Prettier         | `prettier.config.mjs`   | `@lobehub/prettier-config`         |
+| Stylelint        | `stylelint.config.mjs`  | `@lobehub/stylelint-config`        |
+| Commitlint       | `commitlint.config.mjs` | `@lobehub/commitlint-config`       |
+| Remarklint       | `.remarkrc.mjs`         | `@lobehub/remarklint-config`       |
+| Semantic Release | `release.config.mjs`    | `@lobehub/semantic-release-config` |
+
+These are the files `create-lobe-lint` generates. Prefer a single dependency? `@lobehub/lint` re-exports every config, see [@lobehub/lint](/packages/lint).
+
+## Requirements
+
+- Node.js 18+ for most config packages (`engines`); `create-lobe-lint` needs Node.js 20+, `@lobehub/remarklint-config` needs Node.js 20.18+, and ESLint 10 itself needs Node.js `^20.19.0 || ^22.13.0 || >=24`
+- ESLint 10 with flat config for `@lobehub/eslint-config`

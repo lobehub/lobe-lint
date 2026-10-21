@@ -16,6 +16,10 @@
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm -r --parallel dev",
+    "docs:build": "pnpm docs:rules && lobedocs build",
+    "docs:dev": "pnpm docs:rules && lobedocs dev",
+    "docs:rules": "tsx scripts/generate-rules-data.ts",
+    "postinstall": "lobedocs typegen",
     "lint": "eslint \"packages/*/src/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --output",
     "lint:style": "stylelint \"packages/*/src/**/*.{css,less,js,jsx,ts,tsx}\" --fix",
@@ -27,7 +31,7 @@
   },
   "lint-staged": {
     "*.md": [
-      "remark --quiet --output --",
+      "remark --quiet --output --silently-ignore --",
       "prettier --write --no-error-on-unmatched-pattern"
     ],
     "*.json": [
@@ -50,6 +54,9 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",
+    "@lobehub/docs-kit": "^6.0.2",
+    "@lobehub/ui": "^6.5.1",
+    "@react-router/dev": "8.2.0",
     "@types/node": "^25.9.0",
     "bumpp": "^11.1.0",
     "commitlint": "^21.0.1",
@@ -57,12 +64,18 @@
     "eslint-typegen": "^2.3.1",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.5",
+    "lucide-react": "^0.562.0",
     "pkg-pr-new": "^0.0.74",
     "prettier": "^3.8.3",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router": "8.2.0",
     "remark-cli": "^12.0.1",
     "stylelint": "^16.12.0",
     "tsdown": "^0.22.0",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
+    "vite": "8.1.4",
     "vitest": "^4.1.6"
   },
   "packageManager": "pnpm@9.15.4",

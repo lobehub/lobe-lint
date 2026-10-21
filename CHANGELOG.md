@@ -2,6 +2,331 @@
 
 # Changelog
 
+### [Version 2.1.5](https://github.com/lobehub/lobe-lint/compare/v2.1.4...v2.1.5)
+
+<sup>Released on **2026-02-14**</sup>
+
+#### ⚠ BREAKING CHANGES
+
+- **eslint-config**: Ban default export.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint-config**: Ban default export ([63c720e](https://github.com/lobehub/lobe-lint/commit/63c720e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 2.1.4](https://github.com/lobehub/lobe-lint/compare/v2.1.3...v2.1.4)
+
+<sup>Released on **2026-02-13**</sup>
+
+#### 🔧 Chores
+
+- **eslint-config**: Change fixStyle option for TypeScript configuration from inline-type-imports to separate-type-imports.
+- **eslint-config**: Update dependencies to latest versions.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Chores
+
+- **eslint-config**: Change fixStyle option for TypeScript configuration from inline-type-imports to separate-type-imports ([9bfcb3d](https://github.com/lobehub/lobe-lint/commit/9bfcb3d))
+- **eslint-config**: Update dependencies to latest versions ([648c330](https://github.com/lobehub/lobe-lint/commit/648c330))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 2.1.3](https://github.com/lobehub/lobe-lint/compare/v2.1.2...v2.1.3)
+
+<sup>Released on **2026-02-12**</sup>
+
+#### ✨ Features
+
+- **eslint-config**: Add new ESLint rules for object shorthand and useless rename.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint-config**: Add new ESLint rules for object shorthand and useless rename ([288ca31](https://github.com/lobehub/lobe-lint/commit/288ca31))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 2.1.2](https://github.com/lobehub/lobe-lint/compare/v2.1.1...v2.1.2)
+
+<sup>Released on **2026-02-12**</sup>
+
+#### ✨ Features
+
+- **git-hooks**: Add YAML file support to ESLint linting rules.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **git-hooks**: Add YAML file support to ESLint linting rules ([3818f8d](https://github.com/lobehub/lobe-lint/commit/3818f8d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 2.1.1](https://github.com/lobehub/lobe-lint/compare/v2.1.0...v2.1.1)
+
+<sup>Released on **2026-02-11**</sup>
+
+#### ✨ Features
+
+- **eslint-config**: Add YAML support to ESLint configuration.
+- **eslint-config**: Add ESLint type generation scripts and update configuration.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint-config**: Add YAML support to ESLint configuration ([ae2afbd](https://github.com/lobehub/lobe-lint/commit/ae2afbd))
+- **eslint-config**: Add ESLint type generation scripts and update configuration ([33464af](https://github.com/lobehub/lobe-lint/commit/33464af))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.1.0](https://github.com/lobehub/lobe-lint/compare/v2.0.3...v2.1.0)
+
+<sup>Released on **2026-02-11**</sup>
+
+#### ✨ Features
+
+- **eslint-config**: Enhance console logging rules and update glob patterns.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint-config**: Enhance console logging rules and update glob patterns ([e6131a1](https://github.com/lobehub/lobe-lint/commit/e6131a1))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 2.0.3](https://github.com/lobehub/lobe-lint/compare/v2.0.2...v2.0.3)
+
+<sup>Released on **2026-02-10**</sup>
+
+#### 🔧 Chores
+
+- **eslint-config**: Disable consistent-type-specifier-style rule.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Chores
+
+- **eslint-config**: Disable consistent-type-specifier-style rule ([dc20cc5](https://github.com/lobehub/lobe-lint/commit/dc20cc5))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 2.0.2](https://github.com/lobehub/lobe-lint/compare/v2.0.1...v2.0.2)
+
+<sup>Released on **2026-02-09**</sup>
+
+#### ✨ Features
+
+- **eslint-config**: Disable various unicorn rules for improved flexibility.
+- **create-lint**: Add ignore files generation with interactive option.
+
+#### 🐛 Bug Fixes
+
+- **misc**: Use inline type imports in test fixtures to match eslint config.
+
+#### 📝 Documentation
+
+- **misc**: Fix link formatting and remove redundant back-to-top sections in README.
+- **misc**: Fix link formatting and remove redundant back-to-top sections in README.
+- **misc**: Add LICENSE file and fix formatting in README.
+- **misc**: Clean up README by removing shield section.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **eslint-config**: Disable various unicorn rules for improved flexibility ([ea84f0b](https://github.com/lobehub/lobe-lint/commit/ea84f0b))
+- **create-lint**: Add ignore files generation with interactive option ([c681a72](https://github.com/lobehub/lobe-lint/commit/c681a72))
+
+#### What's fixed
+
+- **misc**: Use inline type imports in test fixtures to match eslint config ([b66ad55](https://github.com/lobehub/lobe-lint/commit/b66ad55))
+
+#### Documentation
+
+- **misc**: Fix link formatting and remove redundant back-to-top sections in README ([812743a](https://github.com/lobehub/lobe-lint/commit/812743a))
+- **misc**: Fix link formatting and remove redundant back-to-top sections in README ([3e3afc3](https://github.com/lobehub/lobe-lint/commit/3e3afc3))
+- **misc**: Add LICENSE file and fix formatting in README ([3b1ccc5](https://github.com/lobehub/lobe-lint/commit/3b1ccc5))
+- **misc**: Clean up README by removing shield section ([e9e69ac](https://github.com/lobehub/lobe-lint/commit/e9e69ac))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 2.0.1](https://github.com/lobehub/lobe-lint/compare/v2.0.0...v2.0.1)
+
+<sup>Released on **2026-02-06**</sup>
+
+#### ✨ Features
+
+- **misc**: Add VSCode settings support to CLI and update README.
+
+#### 📝 Documentation
+
+- **misc**: Add Quick Start section for CLI tool in README.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add VSCode settings support to CLI and update README ([2622dd8](https://github.com/lobehub/lobe-lint/commit/2622dd8))
+
+#### Documentation
+
+- **misc**: Add Quick Start section for CLI tool in README ([0fbc471](https://github.com/lobehub/lobe-lint/commit/0fbc471))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0](https://github.com/lobehub/lobe-lint/compare/v1.26.3...v2.0.0)
+
+<sup>Released on **2026-02-05**</sup>
+
+Includes the `v2.0.0-beta.1` to `v2.0.0-beta.10` pre-releases.
+
+#### ⚠ BREAKING CHANGES
+
+- **misc**: v2 - Migrate to monorepo with ESLint 9 flat config.
+
+#### ✨ Features
+
+- **misc**: Add git hooks configuration support to create-lint.
+
+#### 🔧 Chores
+
+- **misc**: Enhance dependency installation logging in CLI.
+- **misc**: Update ESLint import and TypeScript configurations for inline type imports.
+- **misc**: Revise ESLint unicorn configuration and add new test fixtures.
+- **misc**: Update ESLint unicorn configuration to disable require-module-specifiers rule.
+- **misc**: Add ESLint comments configuration to enhance linting rules.
+- **misc**: Update ESLint unicorn configuration to prefer immutable array methods.
+- **misc**: Remove 'no-missing-end-of-source-newline' rule from stylelint configuration.
+- **misc**: Update ESLint React configuration to disable no-leaked-conditional-rendering rule.
+- **misc**: Enhance ESLint configuration to include glob patterns for config files.
+- **misc**: Update GitHub Actions workflow to use pnpm for dependency management.
+- **misc**: Update import paths to include file extensions in semantic-release-config.
+- **misc**: Update release workflow to conditionally publish with beta tag and adjust branch filter in test workflow.
+- **misc**: Refactor release script in package.json to include commit message and tag formatting.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add git hooks configuration support to create-lint ([10f5cf2](https://github.com/lobehub/lobe-lint/commit/10f5cf2))
+- **misc**: v2 - Migrate to monorepo with ESLint 9 flat config ([5420303](https://github.com/lobehub/lobe-lint/commit/5420303)) ([#80](https://github.com/lobehub/lobe-lint/pull/80))
+
+#### Chores
+
+- **misc**: Enhance dependency installation logging in CLI ([914caa6](https://github.com/lobehub/lobe-lint/commit/914caa6))
+- **misc**: Update ESLint import and TypeScript configurations for inline type imports ([5af5ba7](https://github.com/lobehub/lobe-lint/commit/5af5ba7))
+- **misc**: Revise ESLint unicorn configuration and add new test fixtures ([47c98d8](https://github.com/lobehub/lobe-lint/commit/47c98d8))
+- **misc**: Update ESLint unicorn configuration to disable require-module-specifiers rule ([87f56f5](https://github.com/lobehub/lobe-lint/commit/87f56f5))
+- **misc**: Add ESLint comments configuration to enhance linting rules ([488cc7e](https://github.com/lobehub/lobe-lint/commit/488cc7e))
+- **misc**: Update ESLint unicorn configuration to prefer immutable array methods ([fffa19b](https://github.com/lobehub/lobe-lint/commit/fffa19b))
+- **misc**: Remove 'no-missing-end-of-source-newline' rule from stylelint configuration ([4384444](https://github.com/lobehub/lobe-lint/commit/4384444))
+- **misc**: Update ESLint React configuration to disable no-leaked-conditional-rendering rule ([aaf2c16](https://github.com/lobehub/lobe-lint/commit/aaf2c16))
+- **misc**: Enhance ESLint configuration to include glob patterns for config files ([cfc7a48](https://github.com/lobehub/lobe-lint/commit/cfc7a48))
+- **misc**: Update GitHub Actions workflow to use pnpm for dependency management ([3b28ec7](https://github.com/lobehub/lobe-lint/commit/3b28ec7))
+- **misc**: Update import paths to include file extensions in semantic-release-config ([7b66fe7](https://github.com/lobehub/lobe-lint/commit/7b66fe7))
+- **misc**: Update release workflow to conditionally publish with beta tag and adjust branch filter in test workflow ([adc151a](https://github.com/lobehub/lobe-lint/commit/adc151a))
+- **misc**: Refactor release script in package.json to include commit message and tag formatting ([033aa8b](https://github.com/lobehub/lobe-lint/commit/033aa8b))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.26.3](https://github.com/lobehub/lobe-lint/compare/v1.26.2...v1.26.3)
 
 <sup>Released on **2025-11-24**</sup>

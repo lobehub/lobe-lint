@@ -1,0 +1,48 @@
+---
+title: Remarklint Config
+description: Remark config that lints and formats Markdown, with GFM, frontmatter, TOC generation and CJK spacing.
+category: Configs
+order: 4
+---
+
+## Installation
+
+```bash
+pnpm add -D @lobehub/remarklint-config remark-cli
+```
+
+## Usage
+
+Create `.remarkrc.mjs`:
+
+```js
+import config from '@lobehub/remarklint-config';
+
+export default config;
+```
+
+Check or fix Markdown:
+
+```bash
+# Check
+npx remark . --quiet
+
+# Fix
+npx remark . --quiet --output
+```
+
+## What's Included
+
+- `remark-gfm` and `remark-frontmatter`
+- `remark-toc`: rebuilds the list under a `TOC` heading (max depth 3)
+- `remark-pangu`: spacing between CJK and Latin text
+- `remark-sort-definitions` and `remark-remove-unused-definitions`
+- Presets `remark-preset-lint-markdown-style-guide`, `remark-preset-lint-recommended` and `remark-preset-lint-consistent`, plus extra `remark-lint-*` rules and `remark-lint-write-good`
+- Output settings: `-` bullets, `*` emphasis and strong, fenced code
+
+See every lint rule with its level and options on the [Rules](/rules/remarklint) page.
+
+## Requirements
+
+- Node.js 20.18+
+- remark 15+ and remark-cli 12+

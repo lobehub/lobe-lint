@@ -1,0 +1,64 @@
+---
+title: Prettier Config
+description: Prettier config for LobeHub projects, with shell, package.json and JSON sorting plugins.
+category: Configs
+order: 1
+---
+
+## Installation
+
+```bash
+pnpm add -D @lobehub/prettier-config prettier
+```
+
+## Usage
+
+Create `prettier.config.mjs`:
+
+```js
+export { default } from '@lobehub/prettier-config';
+```
+
+Or reference it from `package.json`:
+
+```json
+{
+  "prettier": "@lobehub/prettier-config"
+}
+```
+
+## What's Included
+
+```js
+{
+  arrowParens: 'always',
+  bracketSpacing: true,
+  endOfLine: 'lf',
+  printWidth: 100,
+  proseWrap: 'never', // 'preserve' for *.md
+  quoteProps: 'consistent',
+  singleQuote: true,
+  tabWidth: 2,
+  trailingComma: 'all',
+  useTabs: false,
+  plugins: ['prettier-plugin-sh', 'prettier-plugin-packagejson', 'prettier-plugin-sort-json'],
+}
+```
+
+See every option with its level and options on the [Rules](/rules/prettier) page.
+
+## Extending
+
+```js
+import config from '@lobehub/prettier-config';
+
+export default {
+  ...config,
+  printWidth: 120,
+};
+```
+
+## Requirements
+
+- Node.js 18+
+- Prettier 3+

@@ -1,0 +1,116 @@
+---
+title: ESLint Config
+description: ESLint flat config for JavaScript, TypeScript and React projects, built from one defineConfig() factory.
+category: Configs
+order: 0
+---
+
+## Installation
+
+```bash
+pnpm add -D @lobehub/eslint-config eslint typescript
+```
+
+## Usage
+
+Create `eslint.config.mjs` in your project root:
+
+```js
+import { defineConfig } from '@lobehub/eslint-config';
+
+export default defineConfig();
+```
+
+### Next.js
+
+`react: 'next'` tunes React rules for Next.js; `next: true` adds the `@next/eslint-plugin-next` rules.
+
+```js
+export default defineConfig({
+  next: true,
+  react: 'next',
+});
+```
+
+### React Native
+
+```js
+export default defineConfig({
+  react: 'expo',
+  reactNative: true,
+});
+```
+
+### Type-Checked Rules
+
+```js
+export default defineConfig({
+  typeChecked: true,
+  typescript: 'strict',
+});
+```
+
+### Custom Overrides
+
+Every argument after the options is a flat config applied last, with the highest priority:
+
+```js
+export default defineConfig(
+  { react: 'next' },
+  {
+    rules: {
+      'no-console': 'warn',
+    },
+  },
+  {
+    files: ['**/*.test.ts'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+);
+```
+
+## What's Included
+
+- JavaScript recommended rules, plus TypeScript via `typescript-eslint`
+- React, React Hooks and React Refresh rules; optional React Compiler, React Native, Next.js and jsx-a11y rules
+- Import sorting (`simple-import-sort`), interface and enum sorting (`perfectionist`), JSX props sorting and unused import removal
+- Unicorn, RegExp and YAML rules, and checks for ESLint directive comments
+- Optional MDX support (`eslint-plugin-mdx`)
+
+See every rule with its level and options on the [Rules](/rules/eslint) page.
+
+## Options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `typescript` | `boolean \| 'strict'` | `true` | TypeScript rules |
+| `typeChecked` | `boolean` | `false` | Type-aware rules |
+| `tsconfigPath` | `string \| string[]` | - | tsconfig used by type-aware rules |
+| `parserOptions` | `ParserOptions` | - | TypeScript parser options |
+| `react` | `boolean \| 'next' \| 'remix' \| 'vite' \| 'expo'` | `false` | React rules |
+| `reactCompiler` | `boolean` | `false` | React Compiler rules |
+| `reactNative` | `boolean` | `false` | React Native rules |
+| `next` | `boolean` | `false` | Next.js rules |
+| `a11y` | `boolean` | `false` | Accessibility rules |
+| `sortImports` | `boolean` | `true` | Import sorting |
+| `sortKeys` | `boolean` | `true` | Interface and enum key sorting, plus JSX props sorting |
+| `regexp` | `boolean` | `true` | RegExp rules |
+| `yml` | `boolean` | `true` | YAML rules |
+| `mdx` | `boolean` | `false` | MDX rules (`eslint-plugin-mdx` is a dependency, nothing extra to install) |
+| `ignores` | `string[]` | `[]` | Additional ignore patterns |
+
+`Options`, `FlatConfig` and `FlatConfigArray` types are exported for typed configs.
+
+## API
+
+```ts
+function defineConfig(options?: Options, ...configs: FlatConfig[]): FlatConfigArray;
+```
+
+## Requirements
+
+- Node.js `^20.19.0 || ^22.13.0 || >=24` (required by ESLint 10)
+- ESLint 10
+- TypeScript 5+ (optional)

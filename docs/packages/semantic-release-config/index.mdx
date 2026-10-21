@@ -1,0 +1,64 @@
+---
+title: Semantic Release Config
+description: Semantic Release config that turns gitmoji commits into versions, changelogs and releases.
+category: Configs
+order: 5
+---
+
+## Installation
+
+```bash
+pnpm add -D @lobehub/semantic-release-config semantic-release
+```
+
+## Usage
+
+Create `release.config.mjs`:
+
+```js
+export { default } from '@lobehub/semantic-release-config';
+```
+
+For a monorepo:
+
+```js
+export { default } from '@lobehub/semantic-release-config/monorepo';
+```
+
+## Exports
+
+| Export                                       | Description                                |
+| -------------------------------------------- | ------------------------------------------ |
+| `@lobehub/semantic-release-config`           | Release config (default) and its `options` |
+| `@lobehub/semantic-release-config/monorepo`  | Release config with monorepo mode          |
+| `@lobehub/semantic-release-config/changelog` | Changelog formatting options               |
+
+## Release Rules
+
+The config is built with `semantic-release-config-gitmoji`:
+
+| Commit                                                         | Release               |
+| -------------------------------------------------------------- | --------------------- |
+| `feat`                                                         | minor                 |
+| `fix`, `perf`, `style`, `refactor`, `build`                    | patch                 |
+| `docs(README)`                                                 | patch                 |
+| Other `docs`, `test`, `ci`, `chore`, `wip`                     | none                  |
+| `BREAKING CHANGE`                                              | major                 |
+| Subject contains `force patch` / `force minor` / `force major` | patch / minor / major |
+| Subject contains `skip release`                                | none                  |
+
+## Extending
+
+```js
+import config from '@lobehub/semantic-release-config';
+
+export default {
+  ...config,
+  branches: ['main', 'next'],
+};
+```
+
+## Requirements
+
+- Node.js 18+
+- semantic-release 21+

@@ -10,7 +10,7 @@
 
 CLI tool to setup LobeHub lint configurations
 
-[Changelog](./CHANGELOG.md) · [Report Bug][issues-link] · [Request Feature][issues-link]
+[Changelog](./CHANGELOG.md) · \[Report Bug]\[issues-link] · \[Request Feature]\[issues-link]
 
 </div>
 
@@ -26,6 +26,7 @@ CLI tool to setup LobeHub lint configurations
 - [Options](#options)
 - [Examples](#examples)
 - [Generated Files](#generated-files)
+- [Requirements](#requirements)
 
 ####
 
@@ -37,6 +38,7 @@ CLI tool to setup LobeHub lint configurations
 - **Interactive Mode** - Guided setup with preset and manual options
 - **Framework Support** - Next.js, Remix, Vite, Expo support
 - **Flexible** - Generate configs for ESLint, Prettier, Stylelint, Commitlint, Remarklint, Semantic Release
+- **Extras** - Optional ignore files, lint-staged with simple-git-hooks, and VSCode settings
 
 ## Usage
 
@@ -50,8 +52,9 @@ This will start an interactive setup process that:
 
 1. Detects your project configuration
 2. Asks which tools you want to configure
-3. Generates the appropriate config files
-4. Installs the required dependencies
+3. Offers ignore files, git hooks and VSCode settings
+4. Generates the appropriate config files
+5. Installs the required dependencies
 
 ## Options
 
@@ -66,6 +69,12 @@ This will start an interactive setup process that:
 | `--remarklint`        |       | Include Remarklint configuration                                        |
 | `--semantic-release`  |       | Include Semantic Release configuration                                  |
 | `--react <framework>` |       | Set React framework (next/remix/vite/expo/true/false)                   |
+| `--ignore-files`      |       | Generate ignore files (.prettierignore, .stylelintignore, etc.)         |
+| `--no-ignore-files`   |       | Skip ignore files generation                                            |
+| `--git-hooks`         |       | Configure lint-staged and simple-git-hooks                              |
+| `--no-git-hooks`      |       | Skip git hooks configuration                                            |
+| `--vscode`            |       | Generate VSCode settings to suppress disruptive ESLint auto-fix         |
+| `--no-vscode`         |       | Skip VSCode settings generation                                         |
 | `--install`           |       | Auto-install dependencies (default)                                     |
 | `--no-install`        |       | Skip dependency installation                                            |
 | `--yes`               | `-y`  | Skip confirmations                                                      |
@@ -100,6 +109,12 @@ npx create-lobe-lint --preset -y --no-install
 | Commitlint       | `commitlint.config.mjs` |
 | Remarklint       | `.remarkrc.mjs`         |
 | Semantic Release | `release.config.mjs`    |
+
+Depending on your choices, it also writes ignore files (`.prettierignore`, `.stylelintignore`, `.remarkignore`), adds `lint-staged` and `simple-git-hooks` to `package.json`, and creates `.vscode/settings.json`.
+
+## Requirements
+
+- Node.js >= 20
 
 ---
 

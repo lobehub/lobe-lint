@@ -41,7 +41,7 @@ export default config;
 Or for CommonJS:
 
 ```js
-module.exports = require('@lobehub/commitlint-config').default;
+module.exports = require('@lobehub/commitlint-config');
 ```
 
 ## Commit Format

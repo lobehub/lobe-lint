@@ -1,0 +1,51 @@
+---
+title: Lint Meta Package
+description: '@lobehub/lint re-exports every LobeHub lint config from a single package.'
+category: Meta
+order: 0
+---
+
+## Installation
+
+```bash
+pnpm add -D @lobehub/lint
+```
+
+Then install the tools you use:
+
+```bash
+pnpm add -D eslint prettier stylelint @commitlint/cli remark-cli semantic-release typescript
+```
+
+## Usage
+
+```js
+// eslint.config.mjs
+import { defineConfig } from '@lobehub/lint';
+
+export default defineConfig({ react: true });
+```
+
+```js
+// prettier.config.mjs
+import { prettier } from '@lobehub/lint';
+
+export default prettier;
+```
+
+The other tools follow the same pattern with the exports below.
+
+## Exports
+
+| Export                                           | Description                              |
+| ------------------------------------------------ | ---------------------------------------- |
+| `defineConfig` / `defineEslintConfig` / `eslint` | ESLint config factory                    |
+| `EslintOptions`                                  | Type of the ESLint options               |
+| `prettier`                                       | Prettier config                          |
+| `stylelint`                                      | Stylelint config                         |
+| `commitlint`                                     | Commitlint config                        |
+| `remarklint`                                     | Remarklint config                        |
+| `semanticRelease`                                | Semantic Release config                  |
+| `semanticReleaseOptions`                         | Options used to build the release config |
+| `semanticReleaseMonoRepo`                        | Monorepo Semantic Release config         |
+| `changelog`                                      | Changelog formatting options             |
