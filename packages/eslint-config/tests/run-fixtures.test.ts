@@ -4,6 +4,7 @@ import { ESLint } from 'eslint';
 import { describe, expect, it } from 'vitest';
 
 import { defineConfig } from '../src';
+import { ESLINT_REACT_DUPLICATES } from '../src/configs/react';
 
 const fixturesDir = path.join(__dirname, 'fixtures');
 
@@ -273,6 +274,36 @@ export const Counter = ({ step }: { step: number }) => {
 
       expect(ids.filter((id) => id === 'react-hooks/exhaustive-deps')).toHaveLength(1);
       expect(ids).not.toContain('@eslint-react/exhaustive-deps');
+    });
+
+    it.each(ESLINT_REACT_DUPLICATES)('%s is only enabled in react-hooks', async (rule) => {
+      const config = await eslint.calculateConfigForFile(path.join(fixturesDir, 'react/hooks.tsx'));
+      const level = (id: string) => {
+        const value = config.rules?.[id];
+        return Array.isArray(value) ? value[0] : value;
+      };
+
+      expect([0, 'off']).toContain(level(`@eslint-react/${rule}`));
+      expect([1, 2, 'warn', 'error']).toContain(level(`react-hooks/${rule}`));
+    });
+
+    it('a conditional hook call is reported once', async () => {
+      const code = `import { useState } from 'react';
+
+export const A = ({ on }: { on: boolean }) => {
+  if (on) {
+    useState(0);
+  }
+  return <span />;
+};
+`;
+      const [result] = await eslint.lintText(code, {
+        filePath: path.join(fixturesDir, 'react/hooks.tsx'),
+      });
+      const ids = result.messages.map((m) => m.ruleId);
+
+      expect(ids.filter((id) => id === 'react-hooks/rules-of-hooks')).toHaveLength(1);
+      expect(ids).not.toContain('@eslint-react/rules-of-hooks');
     });
   });
 });

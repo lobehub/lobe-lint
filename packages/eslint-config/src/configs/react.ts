@@ -25,6 +25,19 @@ const REACT_COMPILER_RULES = [
   'use-memo',
 ] as const;
 
+/** @eslint-react rules that duplicate a react-hooks rule (the react-hooks one is kept). */
+export const ESLINT_REACT_DUPLICATES = [
+  'error-boundaries',
+  'exhaustive-deps',
+  'purity',
+  'rules-of-hooks',
+  'set-state-in-effect',
+  'set-state-in-render',
+  'static-components',
+  'unsupported-syntax',
+  'use-memo',
+] as const;
+
 export function react(options: Options) {
   const { react: reactOption, reactCompiler: reactCompilerOption } = options;
 
@@ -63,21 +76,17 @@ export function react(options: Options) {
         'react-hooks/unsupported-syntax': 'warn',
         'react-hooks/use-memo': 'warn',
 
-        // react-hooks/exhaustive-deps (above) is the reference implementation: it supports
-        // `additionalHooks`, and existing `eslint-disable … react-hooks/exhaustive-deps` comments
-        // keep working. @eslint-react/eslint-plugin 5 ships its own copy in `recommended`, which
-        // reported every missing dependency a second time.
-        '@eslint-react/exhaustive-deps': 'off',
+        // @eslint-react/eslint-plugin 5 ships its own copies of the react-hooks rules. Keep the
+        // react-hooks ones (reference implementation; `exhaustive-deps` supports `additionalHooks`,
+        // the compiler rules follow `reactCompiler`, existing disable comments keep working) and
+        // turn the copies off, otherwise every violation is reported twice.
+        ...Object.fromEntries(
+          ESLINT_REACT_DUPLICATES.map((rule) => [`@eslint-react/${rule}`, 'off']),
+        ),
 
         '@eslint-react/dom-no-dangerously-set-innerhtml': 'off',
         '@eslint-react/no-array-index-key': 'warn',
         '@eslint-react/no-leaked-conditional-rendering': 'off',
-
-        '@eslint-react/error-boundaries': 'warn',
-        '@eslint-react/set-state-in-render': 'warn',
-        '@eslint-react/static-components': 'warn',
-        '@eslint-react/unsupported-syntax': 'warn',
-        '@eslint-react/use-memo': 'warn',
 
         'react/self-closing-comp': 'warn',
 
