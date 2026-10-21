@@ -17,7 +17,12 @@ export default {
     icon32: 'https://lobehub.com/favicon.ico',
   },
   homePage: './docs/home/home.tsx',
-  publicDocs: ['docs/getting-started.mdx', 'docs/ai-agents.mdx', ...rulesPages],
+  publicDocs: [
+    'docs/getting-started.mdx',
+    'docs/migration-v2.mdx',
+    'docs/ai-agents.mdx',
+    ...rulesPages,
+  ],
   siteUrl: 'https://lint.lobehub.com',
   themeConfig: {
     apiHeader: {
@@ -39,6 +44,7 @@ export default {
       { href: '/rules/prettier', icon: 'wand-sparkles', label: 'Prettier Options' },
       { href: '/rules/commitlint', icon: 'git-commit-horizontal', label: 'Commitlint Rules' },
       { href: '/rules/remarklint', icon: 'file-text', label: 'Remarklint Rules' },
+      { href: '/migration-v2', icon: 'milestone', label: 'Migrating to v2' },
       { href: '/ai-agents', icon: 'bot', label: 'AI Agents' },
     ],
     prefersColor: 'auto',

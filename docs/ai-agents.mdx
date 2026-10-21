@@ -11,6 +11,8 @@ Copy this prompt into your coding agent:
 Read https://lint.lobehub.com/skills.md, then set up LobeHub lint in this project: run `npx create-lobe-lint --preset -y`, run ESLint and Prettier on the codebase and fix the reported problems until both pass.
 ```
 
+To upgrade a repo from v1 instead, start with `npx skills add lobehub/lobe-lint` and ask the agent to follow the `lobe-lint-v2-migration` skill. See [Migrating to v2](/migration-v2).
+
 ## Resources
 
 | Resource | What it gives your agent |
@@ -19,6 +21,7 @@ Read https://lint.lobehub.com/skills.md, then set up LobeHub lint in this projec
 | [llms.txt](/llms.txt) | Page index with outlines, for LLM context |
 | [create-lobe-lint](/packages/create-lobe-lint) | Non-interactive setup with `--preset -y`; add `--no-install` to skip installing dependencies |
 | [@lobehub/eslint-config](/packages/eslint-config) | Every `defineConfig()` option, with override examples |
+| [Migrating to v2](/migration-v2) | Upgrade from v1 with the `lobe-lint-v2-migration` skill and its config codemod |
 
 ## Working on Lobe Lint
 

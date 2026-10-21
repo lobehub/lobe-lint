@@ -22,10 +22,11 @@ Lobe Lint is a pnpm monorepo that publishes LobeHub's shared lint configs (`@lob
 
 Project skills live in `.agents/skills/`. Read the whole `SKILL.md` (and the `reference/` files it points to) before doing the matching task:
 
-| Skill                   | Use it when                                                                                                                            |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `using-docs-kit`        | Working on the docs site: `docs.config.ts`, pages under `docs/`, `lobedocs` commands, generated `llms.txt` / `skills.md`, build errors |
-| `building-landing-home` | Changing the site home page `docs/home/home.tsx` (`@lobehub/ui/awesome` landing components)                                            |
+| Skill                    | Use it when                                                                                                                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `using-docs-kit`         | Working on the docs site: `docs.config.ts`, pages under `docs/`, `lobedocs` commands, generated `llms.txt` / `skills.md`, build errors                                             |
+| `building-landing-home`  | Changing the site home page `docs/home/home.tsx` (`@lobehub/ui/awesome` landing components)                                                                                        |
+| `lobe-lint-v2-migration` | Upgrading a repo from @lobehub/lint 1.x to 2.x: `scripts/migrate.mjs` (config codemod), `scripts/default-export.mjs` (optional named-export codemod); page `docs/migration-v2.mdx` |
 
 The skill files are kept exactly as authored: `.agents` is listed in `.remarkignore` and `.prettierignore`, so hooks do not reformat them. Do not edit them unless asked.
 

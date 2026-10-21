@@ -1,0 +1,94 @@
+---
+title: Migrating to v2
+description: Upgrade a repo from @lobehub/lint 1.x (ESLint 8, .eslintrc) to 2.x (ESLint 10 flat config) with the migration codemod and agent skill.
+---
+
+## Overview
+
+`@lobehub/lint` 2.x runs on ESLint 10 flat config. There is no `.eslintrc` and no `.eslintignore`: one `eslint.config.mjs` built with `defineConfig()`, and every other tool reads an ESM config file. lobe-ui is the reference v2 repo.
+
+Agents can do the whole upgrade with the `lobe-lint-v2-migration` skill:
+
+```bash
+npx skills add lobehub/lobe-lint
+```
+
+The skill lives in `.agents/skills/lobe-lint-v2-migration/` in this repository, with two codemods in its `scripts/` directory. The commands below use that path; adjust it if your agent installs skills elsewhere.
+
+## Before you start
+
+- Node **20.19 or later** (ESLint 10 supports `^20.19.0 || ^22.13.0 || >=24`; the `>=18` in the 2.1.5 `engines` field is wrong). lobe-ui uses `>=22.22.0`.
+- A clean worktree, and the repo's own package manager.
+
+## 1. Run the config codemod
+
+```bash
+node .agents/skills/lobe-lint-v2-migration/scripts/migrate.mjs --dry-run .
+node .agents/skills/lobe-lint-v2-migration/scripts/migrate.mjs .
+```
+
+It has no dependencies, never installs or commits, and a second run changes nothing. It:
+
+- converts the rc files to lobe-ui-style ESM configs and keeps your custom rules, ignores and overrides;
+- bumps `@lobehub/lint` to `^2.1.5`, `eslint` to `^10.12.0`, `stylelint` to `^16.26.1`, `prettier` to `^3.9.10`;
+- drops `remark` from the Markdown `lint-staged` entry and `--ignore-path` from scripts;
+- leaves husky hooks alone, so repo steps such as `build:toc` stay;
+- writes a `TODO(lobe-lint v2 migration)` comment for anything it cannot port, and lists it.
+
+| v1                               | v2                                                    |
+| -------------------------------- | ----------------------------------------------------- |
+| `.eslintrc.js` + `.eslintignore` | `eslint.config.mjs` (`ignores` in the first argument) |
+| `.prettierrc.js`                 | `prettier.config.mjs`                                 |
+| `.stylelintrc.js`                | `stylelint.config.mjs`                                |
+| `.commitlintrc.js`               | `commitlint.config.mjs`                               |
+| `.remarkrc.js`                   | `.remarkrc.mjs`                                       |
+| `.releaserc.js`                  | `.releaserc.mjs`                                      |
+| `.changelogrc.js`                | `.changelogrc.mjs`                                    |
+
+Configs must be ESM. `require('@lobehub/lint')` throws `ERR_PACKAGE_PATH_NOT_EXPORTED`.
+
+## 2. Install and check the configs load
+
+```bash
+pnpm install
+npx eslint --print-config src/index.ts > /dev/null
+npx stylelint --print-config src/index.ts > /dev/null
+```
+
+## 3. Fix
+
+1. `eslint --fix` and `stylelint --fix` on your lint globs.
+2. Type-check right away: an import autofix can produce `import type { …, useMemo }`.
+3. Fix the rest by hand. A local disable gets a reason: `// eslint-disable-next-line no-console -- CLI output`.
+
+Most errors on a fresh migration are autofixable (`consistent-type-imports`, `simple-import-sort`, `perfectionist/sort-*`). `no-console` is not.
+
+## 4. Default exports
+
+v2 warns on `export default`. The warning does not block the upgrade: keep it, or turn it off in `eslint.config.mjs`:
+
+```js
+export default defineConfig(
+  { react: true },
+  // This library default-exports one component per module.
+  { rules: { 'no-restricted-syntax': 'off' } },
+);
+```
+
+If you set `no-restricted-syntax` yourself with other selectors, re-declare it with only those selectors instead.
+
+To convert to named exports, the skill ships a ts-morph codemod that also rewrites importers, aliases, `lazy()` and dynamic imports:
+
+```bash
+npm install --prefix .agents/skills/lobe-lint-v2-migration/scripts
+node .agents/skills/lobe-lint-v2-migration/scripts/default-export.mjs --dry-run .
+```
+
+Converting is a breaking change for consumers that default-import your deep paths.
+
+## 5. Verify
+
+- `lint`, `lint:style`, `type-check`, `test` and `build` pass with 0 errors.
+- A commit goes through the pre-commit and commit-msg hooks without `--no-verify`.
+
+Options for `defineConfig()` are in [@lobehub/eslint-config](/packages/eslint-config). Found a lobe-lint bug? Open an issue with the exact error text and a one-command repro.
