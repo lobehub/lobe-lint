@@ -104,7 +104,21 @@ module.exports = require(
 );
 ```
 
-In a monorepo, each workspace package with its own changelog config re-exports the root one: `module.exports = require('../../.changelogrc.cjs');`. A v1 `packages/*/.changelogrc.js` that does `require('../../.changelogrc')` breaks as soon as the root `.changelogrc.js` is deleted; `migrate.mjs` rewrites those too. `.releaserc.mjs` is fine: semantic-release 21+ uses cosmiconfig 8.3+, which loads `.mjs`.
+In a monorepo, each workspace package with its own changelog config re-exports the root one: `module.exports = require('../../.changelogrc.cjs');`. A v1 `packages/*/.changelogrc.js` that does `require('../../.changelogrc')` breaks as soon as the root `.changelogrc.js` is deleted; `migrate.mjs` rewrites those too.
+
+**Release job succeeds but never releases gitmoji commits: only `@semantic-release/npm` / `@semantic-release/github` plugins are loaded (no `@semantic-release/changelog` / `@semantic-release/git`) and `✨ feat(…)` → `The commit should not trigger a release`** (verified on lobe-icons run 39600210901, commit `4cb27b21`)
+semantic-release did not find `.releaserc.mjs` and ran with its defaults (angular rules, default plugins). semantic-release 21.1.2 depends on cosmiconfig `^8.0.0`; only cosmiconfig >= 8.2 loads `.mjs`. lobe-icons' `pnpm-lock.yaml` pins cosmiconfig 8.0.0 for it, and `bun i` in CI migrates that lockfile, so CI gets 8.0.0 too. lobe-tts and fluent-emoji have a `bun.lock` with 8.3.6 and do read the file (lobe-tts released v6.0.1 from `⬆️` / `🎨` commits, which the angular defaults would not release). Check what a repo gets:
+
+```bash
+node -e "const p=require('fs').realpathSync('node_modules/semantic-release/package.json');const r=require('module').createRequire(p);console.log(r('cosmiconfig/package.json').version);r('cosmiconfig').cosmiconfig('release').search().then((x)=>console.log(x&&x.filepath))"
+```
+
+`null` means semantic-release runs without your config. Fix (pick one):
+
+- `.releaserc.cjs` with `module.exports = require('@lobehub/lint/release');` (`@lobehub/lint/release-monorepo` for the monorepo config; `@lobehub/lint` >= 2.1.6). Works with every cosmiconfig 8 / 9. `migrate.mjs` writes it when `semantic-release` is below 22. On 2.1.5: `module.exports = require(require.resolve('@lobehub/semantic-release-config', { paths: [require.resolve('@lobehub/lint')] })).default;`.
+- Or upgrade `semantic-release` to `^25` (lobe-ui), which uses cosmiconfig 9. Check that other release tooling (`@qiwi/multi-semantic-release`, overrides of `@semantic-release/*`) still works with it.
+
+Re-run the check above, then look at the next Release log: it must load `@semantic-release/changelog` and `@semantic-release/git` (lobe-tts run 39597781603 does). Commits that were skipped are released by the next run (semantic-release analyzes every commit since the last tag).
 
 ## Install warnings
 
