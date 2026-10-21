@@ -226,23 +226,23 @@ export default defineConfig(
 
 ## Options Reference
 
-| Option          | Type                                               | Default | Description                       |
-| --------------- | -------------------------------------------------- | ------- | --------------------------------- |
-| `typescript`    | `boolean \| 'strict'`                              | `true`  | Enable TypeScript rules           |
-| `typeChecked`   | `boolean`                                          | `false` | Enable type-aware rules           |
-| `tsconfigPath`  | `string \| string[]`                               | -       | Custom tsconfig path              |
-| `parserOptions` | `ParserOptions`                                    | -       | TypeScript parser options         |
-| `react`         | `boolean \| 'next' \| 'remix' \| 'vite' \| 'expo'` | `false` | Enable React rules                |
-| `reactNative`   | `boolean`                                          | `false` | Enable React Native rules         |
-| `reactCompiler` | `boolean`                                          | `false` | Enable React Compiler rules       |
-| `next`          | `boolean`                                          | `false` | Enable Next.js ESLint rules       |
-| `mdx`           | `boolean`                                          | `false` | Enable MDX rules                  |
-| `a11y`          | `boolean`                                          | `false` | Enable accessibility rules        |
-| `sortImports`   | `boolean`                                          | `true`  | Enable import sorting             |
-| `sortKeys`      | `boolean`                                          | `true`  | Enable interface/enum/jsx sorting |
-| `yml`           | `boolean`                                          | `true`  | Enable YAML rules                 |
-| `regexp`        | `boolean`                                          | `true`  | Enable regexp rules               |
-| `ignores`       | `string[]`                                         | `[]`    | Additional ignore patterns        |
+| Option          | Type                                               | Default | Description                         |
+| --------------- | -------------------------------------------------- | ------- | ----------------------------------- |
+| `typescript`    | `boolean \| 'strict'`                              | `true`  | Enable TypeScript rules             |
+| `typeChecked`   | `boolean`                                          | `false` | Enable type-aware rules             |
+| `tsconfigPath`  | `string \| string[]`                               | -       | Custom tsconfig path                |
+| `parserOptions` | `ParserOptions`                                    | -       | TypeScript parser options           |
+| `react`         | `boolean \| 'next' \| 'remix' \| 'vite' \| 'expo'` | `false` | Enable React rules                  |
+| `reactNative`   | `boolean`                                          | `false` | Enable React Native rules           |
+| `reactCompiler` | `boolean`                                          | `false` | Raise React Compiler rules to error |
+| `next`          | `boolean`                                          | `false` | Enable Next.js ESLint rules         |
+| `mdx`           | `boolean`                                          | `false` | Enable MDX rules                    |
+| `a11y`          | `boolean`                                          | `false` | Enable accessibility rules          |
+| `sortImports`   | `boolean`                                          | `true`  | Enable import sorting               |
+| `sortKeys`      | `boolean`                                          | `true`  | Enable interface/enum/jsx sorting   |
+| `yml`           | `boolean`                                          | `true`  | Enable YAML rules                   |
+| `regexp`        | `boolean`                                          | `true`  | Enable regexp rules                 |
+| `ignores`       | `string[]`                                         | `[]`    | Additional ignore patterns          |
 
 ## API
 

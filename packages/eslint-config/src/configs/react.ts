@@ -1,12 +1,29 @@
 import eslintReact from '@eslint-react/eslint-plugin';
 import { defineConfig } from 'eslint/config';
 import reactPlugin from 'eslint-plugin-react';
-import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
 import { GLOB_JSX, GLOB_TSX } from '../globs';
 import { type Options } from '../types';
+
+/** react-hooks rules backed by the React Compiler (`warn` by default, `error` with `reactCompiler`). */
+const REACT_COMPILER_RULES = [
+  'config',
+  'error-boundaries',
+  'gating',
+  'globals',
+  'immutability',
+  'incompatible-library',
+  'preserve-manual-memoization',
+  'purity',
+  'refs',
+  'set-state-in-effect',
+  'set-state-in-render',
+  'static-components',
+  'unsupported-syntax',
+  'use-memo',
+] as const;
 
 export function react(options: Options) {
   const { react: reactOption, reactCompiler: reactCompilerOption } = options;
@@ -94,14 +111,14 @@ export function react(options: Options) {
   ]);
 
   if (reactCompilerOption) {
+    // eslint-plugin-react-hooks 6+ ships the React Compiler diagnostics as separate rules and
+    // replaces the deprecated eslint-plugin-react-compiler (its `zod-validation-error ^3` range
+    // made package managers hoist 3.5.4, which lacks the `./v4` export react-hooks 7 requires).
     configs.push({
       files,
-      plugins: {
-        'react-compiler': reactCompiler,
-      },
-      rules: {
-        'react-compiler/react-compiler': 'error',
-      },
+      rules: Object.fromEntries(
+        REACT_COMPILER_RULES.map((rule) => [`react-hooks/${rule}`, 'error']),
+      ),
     });
   }
 
