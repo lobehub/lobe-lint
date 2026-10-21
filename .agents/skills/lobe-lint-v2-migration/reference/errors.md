@@ -43,12 +43,14 @@ Not autofixable. Remove debug output; for intentional output (CLIs, scripts) dis
 lobe-ui turns `no-undef` off; TypeScript already reports undefined names.
 
 **Stylelint: `Unexpected "border-bottom" property. Use "border-block-end"` (`liberty/use-logical-spec`)**
-New in the Stylelint 16 config (lobe-charts: 54 errors). `stylelint --fix` rewrites them; review the diff on RTL-sensitive layouts.
+New in the Stylelint 16 config (lobe-charts: 54 errors). `stylelint --fix` rewrites them; review the diff on RTL-sensitive layouts. On 2.1.5 its fix lowercases `${…}` interpolations in `transition` values; see below.
 
 ## Autofix breaks the build
 
-**`TS2206: The 'type' modifier cannot be used on a named import when 'import type' is used`** and **`TS1361: 'useMemo' cannot be used as a value because it was imported using 'import type'`** after `eslint --fix` (verified on lobe-charts)
-The `@typescript-eslint/consistent-type-imports` fix in 2.1.5 can turn a mixed import into `import type { type CSSProperties, MouseEvent, useMemo } from 'react'`. Repro on a migrated lobe-charts clone:
+All of these are fixed in `@lobehub/lint` 2.1.6. After upgrading, run `eslint --fix` (and `stylelint --fix`) again, then `prettier --write`, then type-check. Code already broken by a 2.1.5 fix is not repaired automatically: fix it by hand as described.
+
+**`TS2206: The 'type' modifier cannot be used on a named import when 'import type' is used`** and **`TS1361: 'useMemo' cannot be used as a value because it was imported using 'import type'`** after `eslint --fix` (verified on lobe-charts and in the lobe-lint fixtures)
+Two fixers interact. `@typescript-eslint/consistent-type-imports` (`fixStyle: 'separate-type-imports'`) moves type-only names into a new `import type { MouseEvent } from 'react'`. `import-x/no-duplicates` then sees it next to `import { type CSSProperties, forwardRef, useMemo } from 'react'`; without `prefer-inline` it puts every import that has an inline `type` specifier in the same group as `import type`, and its fix merges them into `import type { type CSSProperties, MouseEvent, useMemo }`. Same with `import { ElementType, createElement }` + `import { type HTMLAttributes }` → `import type { ElementType, type HTMLAttributes }`. Repro:
 
 ```tsx
 // src/__r.tsx
@@ -60,10 +62,54 @@ export const A = forwardRef<HTMLDivElement, { s: CSSProperties; o: (e: MouseEven
 });
 ```
 
-`npx eslint src/__r.tsx --fix-dry-run -f json` outputs `import type { type CSSProperties, MouseEvent, useMemo } from 'react';`. Run type-check right after every `--fix`, fix such imports by hand (`import { type CSSProperties, type MouseEvent, useMemo } from 'react'`), and report it upstream (below).
+`npx eslint src/__r.tsx --fix-dry-run -f json` outputs `import type { type CSSProperties, forwardRef, MouseEvent, useMemo } from 'react';` on 2.1.5. 2.1.6 wraps `import-x/no-duplicates` (same rule id): a mixed import is grouped with the value imports, and `import { type A }` is merged into `import type { … }` without the inline keyword. Output: `import type { MouseEvent } from 'react';` + `import { type CSSProperties, forwardRef, useMemo } from 'react';`. On 2.1.5, turn the rule off while running `--fix` (`{ rules: { 'import-x/no-duplicates': 'off' } }`), and fix broken imports by hand: drop the inline `type` keywords inside `import type { … }` and move value names (`forwardRef`, `useMemo`, `createElement`) back to a value import.
 
-**`@eslint-react/no-forward-ref` autofix**
-Rewrites `forwardRef` to a `ref` prop (React 19 style). Fine for React 19 apps; a library that still supports React 18 should turn the rule off and say so in a comment.
+**Fixed imports are badly formatted: `import type {EdgeSpeechPayload }`, `import { genSSML,type SsmlOptions }`**
+Not a config problem: ESLint fixers splice text and never format (`eslint-config-prettier` only turns formatting rules off). Run Prettier after every `eslint --fix`: `npx prettier --write <same files>`. lint-staged does this when it runs `prettier --write` after `eslint --fix` on staged files.
+
+**`@eslint-react/no-forward-ref` rewrote `forwardRef` and now `TS7031: Binding element 'ref' implicitly has an 'any' type` / `React.RefObject<T | null>` errors**
+2.1.5 ships `@eslint-react/eslint-plugin` 2.x, where this rule is an autofix (verified with 2.12.4). It turns `forwardRef<HTMLDivElement, P>((props, ref) => …)` into `({ ref, ...props }: P & { ref?: React.RefObject<HTMLDivElement | null> }) => …` (callers that pass a callback ref or a `Ref<T>` stop type-checking, and `React` must be in scope) and `forwardRef((props: any, ref) => …)` into an untyped `({ ref, ...props }) => …` (TS7031); the `forwardRef` import is left behind. 2.1.6 ships 5.x, where it is a warning with a suggestion only; `--fix` leaves `forwardRef` alone. Already-rewritten code: type the prop as `ref?: React.Ref<T>` (`({ ref, ...props }: Props & { ref?: React.Ref<HTMLDivElement> })`), or restore `forwardRef`. A library that still supports React 18 keeps `forwardRef` and turns the rule off with a comment.
+
+**Stylelint `--fix` lowercases CSS-in-JS interpolations: `${cssVar.motionEaseInOut}` → `${cssvar.motioneaseinout}`** (verified on lobe-charts `33e956f` `src/BenchmarkScatterChart/styles.ts`)
+`liberty/use-logical-spec` (stylelint-use-logical-spec 5.0.1, the latest) lowercases the whole value of `transition`, `transition-property` and `will-change` before replacing `left` / `top` with logical names, so the fix also lowercases interpolations and custom properties (`var(--myVar)`). Repro: `git show 33e956f:src/BenchmarkScatterChart/styles.ts | npx stylelint --stdin-filename src/BenchmarkScatterChart/styles.ts` prints `Use "inset-inline-start 0.4s ${cssvar.motioneaseinout}, …"`. 2.1.6 wraps the rule (same name) so interpolations and mixed-case identifiers survive the fix and the message. On 2.1.5, exclude those properties in `stylelint.config.mjs` and convert them by hand:
+
+```js
+rules: {
+  ...stylelint.rules,
+  // stylelint-use-logical-spec lowercases ${…} interpolations in these values (fixed in 2.1.6)
+  'liberty/use-logical-spec': [true, { except: ['float', /^((min|max)-)?(height|width)$/i, /^transition(-property)?$/i, 'will-change'] }],
+},
+```
+
+## Releases
+
+**Release notes ignore the changelog options (no author, no back-to-top, default headings); `.changelogrc.mjs` is never read** (verified on lobe-ui, fluent-emoji)
+conventional-changelog-gitmoji-config 1.5.2 loads the config with `cosmiconfigSync('changelog')` from cosmiconfig 7, which has no `.mjs` search place. Repro from the repo root:
+
+```bash
+node -e "const r=require('module').createRequire(process.cwd()+'/node_modules/conventional-changelog-gitmoji-config/lib/customConfig.js');console.log(r('cosmiconfig').cosmiconfigSync('changelog').search(process.cwd()))"
+```
+
+It prints `null` with `.changelogrc.mjs`. Use `.changelogrc.cjs` (`migrate.mjs` writes it):
+
+```js
+module.exports = require('@lobehub/lint/changelog');
+```
+
+`@lobehub/lint/changelog` is new in 2.1.6. Do not write `require('@lobehub/lint').changelog`: the root entry throws `ERR_PACKAGE_PATH_NOT_EXPORTED` (see "Config does not load"). On 2.1.5, resolve the options package through `@lobehub/lint` (resolving does not load the root entry):
+
+```js
+module.exports = require(
+  require.resolve('@lobehub/semantic-release-config/changelog', { paths: [require.resolve('@lobehub/lint')] }),
+);
+```
+
+In a monorepo, each workspace package with its own changelog config re-exports the root one: `module.exports = require('../../.changelogrc.cjs');`. A v1 `packages/*/.changelogrc.js` that does `require('../../.changelogrc')` breaks as soon as the root `.changelogrc.js` is deleted; `migrate.mjs` rewrites those too. `.releaserc.mjs` is fine: semantic-release 21+ uses cosmiconfig 8.3+, which loads `.mjs`.
+
+## Install warnings
+
+**`bun install`: `warn: incorrect peer dependency "eslint@10.13.0"` (four times)** (verified on lobe-tts `bun.lock`)
+Plugins whose `peerDependencies.eslint` stops at 9 although they run on ESLint 10. With 2.1.5: `eslint-plugin-react@7.37.5` (`^9.7`), `eslint-plugin-jsx-a11y@6.10.2` (`^9`), `eslint-plugin-react-native@5.0.0` (`^9`) and `eslint-plugin-react-hooks@5.2.0` (`^9`). 2.1.6 moves react-hooks to 7.1.1 (supports `^10`), which removes one warning. The other three are the latest releases of those plugins; no version declares ESLint 10 yet. The warnings are only about the declared range: lobe-lint lints itself and runs its fixture tests with `eslint-plugin-react` on ESLint 10.13.0, and `jsx-a11y` / `react-native` rules only run when the `a11y` / `reactNative` options are on. Ignore the warnings until upstream widens the ranges; do not pin ESLint 9 for them.
 
 ## Reporting a lobe-lint bug
 

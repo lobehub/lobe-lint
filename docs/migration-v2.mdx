@@ -30,7 +30,8 @@ node .agents/skills/lobe-lint-v2-migration/scripts/migrate.mjs .
 It has no dependencies, never installs or commits, and a second run changes nothing. It:
 
 - converts the rc files to lobe-ui-style ESM configs and keeps your custom rules, ignores and overrides;
-- bumps `@lobehub/lint` to `^2.1.5`, `eslint` to `^10.12.0`, `stylelint` to `^16.26.1`, `prettier` to `^3.9.10`;
+- writes `.changelogrc.cjs` at the root and in every workspace package with a changelog config (`packages/*/.changelogrc.js` that required the root file now requires `../../.changelogrc.cjs`), and replaces an existing `.changelogrc.mjs`;
+- bumps `@lobehub/lint` to `^2.1.6`, `eslint` to `^10.12.0`, `stylelint` to `^16.26.1`, `prettier` to `^3.9.10`;
 - drops `remark` from the Markdown `lint-staged` entry and `--ignore-path` from scripts;
 - leaves husky hooks alone, so repo steps such as `build:toc` stay;
 - writes a `TODO(lobe-lint v2 migration)` comment for anything it cannot port, and lists it.
@@ -43,9 +44,18 @@ It has no dependencies, never installs or commits, and a second run changes noth
 | `.commitlintrc.js`               | `commitlint.config.mjs`                               |
 | `.remarkrc.js`                   | `.remarkrc.mjs`                                       |
 | `.releaserc.js`                  | `.releaserc.mjs`                                      |
-| `.changelogrc.js`                | `.changelogrc.mjs`                                    |
+| `.changelogrc.js`                | `.changelogrc.cjs` (CommonJS, see below)              |
 
 Configs must be ESM. `require('@lobehub/lint')` throws `ERR_PACKAGE_PATH_NOT_EXPORTED`.
+
+The changelog config is the exception. The release notes plugin (conventional-changelog-gitmoji-config) reads it with cosmiconfig 7, which never looks at `.changelogrc.mjs`, so a `.mjs` file is silently ignored and the notes fall back to the plugin defaults. Use CommonJS with the `@lobehub/lint/changelog` entry (2.1.6+):
+
+```js
+// .changelogrc.cjs
+module.exports = require('@lobehub/lint/changelog');
+```
+
+Already on v2 with `.changelogrc.mjs`? Run the codemod again: it replaces the file (and the workspace package copies).
 
 ## 2. Install and check the configs load
 
@@ -58,8 +68,9 @@ npx stylelint --print-config src/index.ts > /dev/null
 ## 3. Fix
 
 1. `eslint --fix` and `stylelint --fix` on your lint globs.
-2. Type-check right away: an import autofix can produce `import type { …, useMemo }`.
-3. Fix the rest by hand. A local disable gets a reason: `// eslint-disable-next-line no-console -- CLI output`.
+2. `prettier --write` on the same files. ESLint fixers do not format, so fixed imports can look like `import type {Foo }` until Prettier runs.
+3. Type-check right away. With 2.1.5, autofixes could produce `import type { type A, useMemo }` (TS2206 / TS1361), untyped `({ ref, ...props })` from `@eslint-react/no-forward-ref` (TS7031) and lowercased `${…}` interpolations in `transition` values; 2.1.6 fixes all three. If you ran `--fix` on 2.1.5, upgrade, run `--fix` again and repair what the old fixes already broke.
+4. Fix the rest by hand. A local disable gets a reason: `// eslint-disable-next-line no-console -- CLI output`.
 
 Most errors on a fresh migration are autofixable (`consistent-type-imports`, `simple-import-sort`, `perfectionist/sort-*`). `no-console` is not.
 
