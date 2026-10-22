@@ -41,7 +41,7 @@
     "build": "tsdown src/index.ts src/monorepo.ts src/changelog.ts",
     "dev": "tsdown src/index.ts src/monorepo.ts src/changelog.ts --watch",
     "test": "vitest run",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsrs --noEmit"
   },
   "dependencies": {
     "semantic-release-config-gitmoji": "^1.5.3"

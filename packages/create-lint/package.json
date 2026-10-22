@@ -32,7 +32,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest run",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsrs --noEmit"
   },
   "dependencies": {
     "@clack/prompts": "^1.4.0",

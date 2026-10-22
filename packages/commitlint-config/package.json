@@ -30,7 +30,7 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsrs --noEmit"
   },
   "dependencies": {
     "commitlint-config-gitmoji": "^2.3.1"

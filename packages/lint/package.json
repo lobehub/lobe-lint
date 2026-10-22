@@ -45,7 +45,7 @@
   "scripts": {
     "build": "tsdown src/index.ts src/changelog.ts src/release.ts src/release-monorepo.ts",
     "dev": "tsdown src/index.ts src/changelog.ts src/release.ts src/release-monorepo.ts --watch",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsrs --noEmit"
   },
   "dependencies": {
     "@lobehub/commitlint-config": "workspace:*",

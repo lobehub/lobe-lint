@@ -30,7 +30,7 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsrs --noEmit"
   },
   "dependencies": {
     "prettier-plugin-packagejson": "^3.0.2",

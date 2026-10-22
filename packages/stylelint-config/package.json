@@ -31,7 +31,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest run",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsrs --noEmit"
   },
   "dependencies": {
     "postcss-less": "^6.0.0",

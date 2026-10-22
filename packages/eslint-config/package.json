@@ -33,7 +33,7 @@
     "postbuild": "node ./scripts/postbuild.mjs",
     "dev": "tsdown --watch",
     "test": "vitest run",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsrs --noEmit"
   },
   "dependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.7.1",
