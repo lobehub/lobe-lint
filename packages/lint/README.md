@@ -45,6 +45,19 @@ export default defineConfig({
 });
 ```
 
+### Oxlint
+
+The Oxlint config lives on an ESM-only subpath, so it loads without ESLint or TypeScript:
+
+```ts
+// oxlint.config.ts
+import { defineOxlintConfig } from '@lobehub/lint/oxlint';
+
+export default defineOxlintConfig({
+  react: 'next',
+});
+```
+
 ### Prettier
 
 ```js
@@ -132,6 +145,8 @@ module.exports = require('@lobehub/lint/release'); // or '@lobehub/lint/release-
 | `changelog`               | Object   | Changelog formatting options            |
 
 `@lobehub/lint/changelog`, `@lobehub/lint/release` and `@lobehub/lint/release-monorepo` default-export `changelog`, `semanticRelease` and `semanticReleaseMonoRepo` and can be loaded with `require()`.
+
+`@lobehub/lint/oxlint` (ESM only) exports `defineOxlintConfig` (alias `defineConfig`) and the `OxlintOptions` type.
 \| `EslintOptions` | Type | ESLint `defineConfig()` options |
 
 ## Individual Packages
@@ -139,6 +154,7 @@ module.exports = require('@lobehub/lint/release'); // or '@lobehub/lint/release-
 If you only need specific configurations, you can install them individually:
 
 - `@lobehub/eslint-config` - ESLint configuration
+- `@lobehub/oxlint-config` - Oxlint configuration
 - `@lobehub/prettier-config` - Prettier configuration
 - `@lobehub/stylelint-config` - Stylelint configuration
 - `@lobehub/commitlint-config` - Commitlint configuration
@@ -149,6 +165,7 @@ If you only need specific configurations, you can install them individually:
 
 - Node.js >= 20.18 (`@lobehub/remarklint-config` requires `>=20.18`; the other packages require `>=18`)
 - ESLint 10 needs Node.js `^20.19.0 || ^22.13.0 || >=24`
+- `@lobehub/lint/oxlint` needs Oxlint 1.90+; `oxlint.config.ts` needs Node.js >= 22.18
 
 ## License
 

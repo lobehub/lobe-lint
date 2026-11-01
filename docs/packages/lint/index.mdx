@@ -26,6 +26,13 @@ import { defineConfig } from '@lobehub/lint';
 export default defineConfig({ react: true });
 ```
 
+```ts
+// oxlint.config.ts, loads without ESLint or TypeScript
+import { defineOxlintConfig } from '@lobehub/lint/oxlint';
+
+export default defineOxlintConfig({ react: true });
+```
+
 ```js
 // prettier.config.mjs
 import { prettier } from '@lobehub/lint';
@@ -69,3 +76,5 @@ module.exports = require('@lobehub/lint/release'); // or '@lobehub/lint/release-
 | `changelog`                                      | Changelog formatting options             |
 
 `@lobehub/lint/changelog`, `@lobehub/lint/release` and `@lobehub/lint/release-monorepo` default-export `changelog`, `semanticRelease` and `semanticReleaseMonoRepo` in CommonJS and ESM, for `.changelogrc.cjs` and `.releaserc.cjs`.
+
+`@lobehub/lint/oxlint` (ESM only) exports `defineOxlintConfig` (alias `defineConfig`) and the `OxlintOptions` type.
