@@ -22,7 +22,7 @@
     "postinstall": "lobedocs typegen",
     "lint": "eslint \"packages/*/src/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --output",
-    "lint:style": "stylelint \"packages/*/src/**/*.{css,less,js,jsx,ts,tsx}\" --fix",
+    "lint:style": "stylelint \"packages/*/src/**/*.{css,less}\" --fix --allow-empty-input",
     "prepare": "husky",
     "prettier": "prettier -c --write \"**/**\"",
     "release": "bumpp -r --all --commit \":bookmark: chore(release): v%s\" --tag \"v%s\"",
@@ -43,12 +43,10 @@
     ],
     "*.{js,jsx}": [
       "prettier --write",
-      "stylelint --fix",
       "eslint --fix"
     ],
     "*.{ts,tsx}": [
       "prettier --parser=typescript --write",
-      "stylelint --fix",
       "eslint --fix"
     ]
   },

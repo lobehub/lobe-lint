@@ -1,6 +1,6 @@
 ---
 title: Stylelint Config
-description: Stylelint config for CSS, Less and CSS-in-JS, with property ordering and logical properties.
+description: Stylelint config for CSS and Less, with property ordering and logical properties.
 category: Configs
 order: 2
 ---
@@ -23,7 +23,7 @@ export { default } from '@lobehub/stylelint-config';
 
 - Extends `stylelint-config-standard`, `stylelint-config-recommended` and `stylelint-config-clean-order`
 - `.css` and `.less` files use `postcss-less` with `stylelint-less`
-- `.js`, `.jsx`, `.ts` and `.tsx` files use `postcss-styled-syntax` for CSS-in-JS
+- JS and TS files are not linted: CSS-in-JS support (`postcss-styled-syntax`) was dropped because it installs TypeScript. Lint StyleX styles with the `stylex` option of the [ESLint](/packages/eslint-config) or [Oxlint](/packages/oxlint-config) config
 - `stylelint-use-logical-spec` enforces logical properties, except `float` and width/height; property names inside `transition`, `transition-property` and `will-change` values are left alone (the animated property must match what changes at runtime)
 
 See every rule with its level and options on the [Rules](/rules/stylelint) page.

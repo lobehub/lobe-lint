@@ -35,7 +35,6 @@
   },
   "dependencies": {
     "postcss-less": "^6.0.0",
-    "postcss-styled-syntax": "^0.7.1",
     "stylelint-config-clean-order": "^7.0.0",
     "stylelint-config-recommended": "^14.0.1",
     "stylelint-config-standard": "^37.0.0",
