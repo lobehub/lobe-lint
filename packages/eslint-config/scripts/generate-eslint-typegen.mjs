@@ -4,6 +4,7 @@ import path from 'node:path';
 import eslintComments from '@eslint-community/eslint-plugin-eslint-comments';
 import eslintReact from '@eslint-react/eslint-plugin';
 import nextPlugin from '@next/eslint-plugin-next';
+import stylexPlugin from '@stylexjs/eslint-plugin';
 import { pluginsToRulesDTS } from 'eslint-typegen/core';
 import { importX } from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
@@ -25,18 +26,19 @@ const eslintReactPlugins = eslintReact.configs['recommended-typescript']?.plugin
 const dts = await pluginsToRulesDTS({
   // ESLint plugins used by this package
   '@typescript-eslint': tseslint.plugin,
-  unicorn: unicornPlugin,
+  'unicorn': unicornPlugin,
   'import-x': importX,
   'simple-import-sort': simpleImportSort,
-  perfectionist: perfectionistPlugin,
-  react: reactPlugin,
+  'perfectionist': perfectionistPlugin,
+  'react': reactPlugin,
   'react-hooks': reactHooksPlugin,
   'react-refresh': reactRefresh,
   'react-native': reactNativePlugin,
-  regexp: regexpPlugin,
+  'regexp': regexpPlugin,
   'unused-imports': unusedImportsPlugin,
   'jsx-a11y': jsxA11y,
   '@next/next': nextPlugin,
+  '@stylexjs': stylexPlugin,
   '@eslint-community/eslint-comments': eslintComments,
 
   ...eslintReactPlugins,

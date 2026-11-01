@@ -68,6 +68,12 @@ export interface Options {
   sortKeys?: boolean;
 
   /**
+   * 是否启用 StyleX 规则（@stylexjs/eslint-plugin），校验 stylex.create 中的样式
+   * @default false
+   */
+  stylex?: boolean;
+
+  /**
    * tsconfig 路径，用于类型检查规则
    */
   tsconfigPath?: string | string[];
