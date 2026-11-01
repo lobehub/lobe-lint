@@ -1,0 +1,65 @@
+{
+  "name": "@lobehub/oxlint-config",
+  "version": "2.1.7",
+  "description": "Oxlint configuration for LobeHub projects",
+  "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/oxlint-config",
+  "bugs": {
+    "url": "https://github.com/lobehub/lobe-lint/issues/new"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobehub/lobe-lint.git",
+    "directory": "packages/oxlint-config"
+  },
+  "license": "MIT",
+  "author": "canisminor1990 <i@canisminor.cc>, Innei <i@innei.in>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    },
+    "./plugins/*": "./dist/plugins/*.mjs"
+  },
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "node ./scripts/prebuild.mjs",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "generate": "tsx ./scripts/generate-layers.ts",
+    "pretest": "pnpm run build",
+    "test": "vitest run",
+    "type-check": "tsrs --noEmit"
+  },
+  "devDependencies": {
+    "@eslint-react/eslint-plugin": "^5.8.1",
+    "@oxlint/migrate": "1.90.0",
+    "@stylexjs/eslint-plugin": "^0.19.1",
+    "@types/node": "^25.9.0",
+    "eslint-plugin-perfectionist": "^5.9.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-native": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
+    "oxlint": "1.90.0"
+  },
+  "peerDependencies": {
+    "oxlint": ">=1.90.0 <2",
+    "oxlint-tsgolint": ">=7.0.2005"
+  },
+  "peerDependenciesMeta": {
+    "oxlint-tsgolint": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

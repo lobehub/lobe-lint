@@ -7,6 +7,7 @@
   "include": [],
   "references": [
     { "path": "./packages/eslint-config" },
+    { "path": "./packages/oxlint-config" },
     { "path": "./packages/prettier-config" },
     { "path": "./packages/stylelint-config" },
     { "path": "./packages/commitlint-config" },

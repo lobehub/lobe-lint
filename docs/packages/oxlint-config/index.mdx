@@ -1,0 +1,69 @@
+---
+title: Oxlint Config
+description: The @lobehub/eslint-config rule set for Oxlint, without TypeScript or ESLint installed.
+category: Configs
+order: 6
+---
+
+## Installation
+
+```bash
+pnpm add -D @lobehub/oxlint-config oxlint
+```
+
+No `typescript` or `eslint` install is needed. The JS plugins the config uses are bundled.
+
+## Usage
+
+Create `oxlint.config.ts` (Oxlint loads TypeScript config files on Node.js 22.18+):
+
+```ts
+import { defineConfig } from '@lobehub/oxlint-config';
+
+export default defineConfig({
+  react: 'next',
+  next: true,
+});
+```
+
+Run `npx oxlint`, or `npx oxlint --fix` to apply fixes.
+
+Every argument after the options is an Oxlint override, applied after the built-in ones:
+
+```ts
+export default defineConfig(
+  { react: true },
+  { files: ['**/*.test.ts'], rules: { 'no-console': 'off' } },
+);
+```
+
+## Options
+
+| Option          | Default | Description                                                       |
+| --------------- | ------- | ----------------------------------------------------------------- |
+| `typescript`    | `true`  | TypeScript rules; `'strict'` uses the strict rule set             |
+| `typeChecked`   | `false` | Type-aware rules; install `oxlint-tsgolint`                       |
+| `react`         | `false` | `true`, `'next'`, `'remix'`, `'vite'` or `'expo'`                 |
+| `reactCompiler` | `false` | Raise the React Compiler rules from `warn` to `error`             |
+| `reactNative`   | `false` | React Native rules                                                |
+| `next`          | `false` | Next.js rules                                                     |
+| `a11y`          | `false` | jsx-a11y rules; requires `react`                                  |
+| `sortImports`   | `true`  | Sort imports and exports with `simple-import-sort`                |
+| `sortKeys`      | `true`  | Sort interface members, enum members and JSX props                |
+| `stylex`        | `false` | StyleX rules for `stylex.create` styles                           |
+| `ignores`       | `[]`    | Extra ignore globs; a pattern without a slash matches at the root |
+
+## Differences from the ESLint config
+
+- The `regexp`, `yml` and `mdx` options, `parserOptions` and `tsconfigPath` are not ported.
+- Unused disable comments are reported by Oxlint itself. Of the comment rules, only `no-unlimited-disable` and `no-duplicate-disable` are kept.
+- The React Compiler rules are Oxlint's own implementations. They also check components wrapped in `memo()`, so expect more warnings than with ESLint.
+- `no-useless-assignment` is off until [oxc-project/oxc#28603](https://github.com/oxc-project/oxc/issues/28603) is fixed. `unicorn/no-immediate-mutation` is a warning, and `no-unsafe-optional-chaining` is off in test files.
+- Type-aware `@eslint-react` rules are off.
+
+Full option docs are in the [package README](https://github.com/lobehub/lobe-lint/tree/master/packages/oxlint-config).
+
+## Requirements
+
+- Node.js 20.19+ (22.18+ for `oxlint.config.ts`)
+- Oxlint 1.90+ (below 2)
