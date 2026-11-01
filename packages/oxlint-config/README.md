@@ -21,7 +21,7 @@ Oxlint configuration for LobeHub projects
 - The `@lobehub/eslint-config` rule set, converted to Oxlint and kept in sync by a generator
 - No `typescript` or `eslint` install: the JS plugins it needs are bundled with stubs for both
 - Native Oxlint rules for JavaScript, TypeScript, React, Next.js, import, unicorn and jsx-a11y
-- Bundled JS plugins: `@eslint-react`, `perfectionist`, `simple-import-sort`, `react-native`, `react/jsx-sort-props`, `@stylexjs`
+- Bundled JS plugins: ESLint's `no-restricted-imports` and `no-restricted-syntax` (`eslint-core`), `@eslint-react`, `perfectionist`, `simple-import-sort`, `react-native`, `react/jsx-sort-props`, `@stylexjs`
 - Optional type-aware rules through `oxlint-tsgolint`
 - About 4x faster than ESLint on a 12,000-file codebase (6.7s vs 30s)
 
@@ -67,7 +67,43 @@ export default defineConfig(
 );
 ```
 
-Overrides that use your own JS plugins list them in `jsPlugins`. Do not list a plugin this package already bundles.
+Overrides that use your own JS plugins list them in `jsPlugins`. To use a bundled plugin in an override, name it by its key (`'eslint-core'`, `'eslint-react'`, `'perfectionist'`, `'react-js'`, `'react-native'`, `'simple-import-sort'`, `'stylex'`); never point at the plugin's npm package, which registers it a second time.
+
+### ESLint core rules
+
+Oxlint has no `no-restricted-syntax`, and its native `no-restricted-imports` also reports `import()`. The bundled `eslint-core` plugin runs ESLint's own versions of both:
+
+```ts
+export default defineConfig(
+  {},
+  {
+    files: ['src/**/*.{ts,tsx}'],
+    jsPlugins: ['eslint-core'],
+    rules: {
+      'eslint-core/no-restricted-imports': [
+        'error',
+        { paths: [{ name: 'heavy-lib', message: 'Load it with import().' }] },
+      ],
+      'eslint-core/no-restricted-syntax': [
+        'error',
+        { selector: 'WithStatement', message: 'No with.' },
+      ],
+    },
+  },
+);
+```
+
+Oxlint loads each plugin file once, so a plugin cannot be registered twice under different names. For a second, independently configured copy of a rule, re-export it from a local plugin:
+
+```js
+// lint/guard.mjs
+import core from '@lobehub/oxlint-config/plugins/eslint-core';
+
+export default {
+  meta: { name: 'guard' },
+  rules: { 'no-legacy': core.rules['no-restricted-imports'] },
+};
+```
 
 ## Options Reference
 

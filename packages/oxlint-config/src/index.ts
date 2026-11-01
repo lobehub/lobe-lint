@@ -4,18 +4,35 @@ import { type ExternalPluginEntry, type OxlintConfig, type OxlintOverride } from
 
 import * as layers from './generated/layers';
 import { PLUGIN_NAMES } from './plugin-names';
-import { type Layer, type LayerOverride, type Options, type PluginKey } from './types';
+import {
+  type Layer,
+  type LayerOverride,
+  type Options,
+  type PluginKey,
+  type UserOverride,
+} from './types';
 
 const pluginPath = (key: PluginKey) =>
   fileURLToPath(new URL(`plugins/${key}.mjs`, import.meta.url));
 
-const resolvePlugin = (key: PluginKey): ExternalPluginEntry => ({
+const bundledPlugin = (key: PluginKey): ExternalPluginEntry => ({
   name: PLUGIN_NAMES[key],
   specifier: pluginPath(key),
 });
 
+const isPluginKey = (entry: unknown): entry is PluginKey =>
+  typeof entry === 'string' && Object.hasOwn(PLUGIN_NAMES, entry);
+
+const resolveUserOverride = ({ jsPlugins, ...override }: UserOverride): OxlintOverride =>
+  jsPlugins
+    ? {
+        ...override,
+        jsPlugins: jsPlugins.map((entry) => (isPluginKey(entry) ? bundledPlugin(entry) : entry)),
+      }
+    : override;
+
 const resolveOverride = ({ jsPlugins, ...override }: LayerOverride): OxlintOverride =>
-  jsPlugins ? { ...override, jsPlugins: jsPlugins.map(resolvePlugin) } : override;
+  jsPlugins ? { ...override, jsPlugins: jsPlugins.map((key) => bundledPlugin(key)) } : override;
 
 // oxlint reads ignorePatterns like .gitignore, where a pattern without a slash matches at any
 // depth; ESLint flat config anchors it to the config directory.
@@ -39,7 +56,7 @@ const reactLayer = (mode: NonNullable<Options['react']>, compiler: boolean): Lay
   return compiler ? layers.reactCompiler : layers.react;
 };
 
-export function defineConfig(options: Options = {}, ...overrides: OxlintOverride[]): OxlintConfig {
+export function defineConfig(options: Options = {}, ...overrides: UserOverride[]): OxlintConfig {
   const {
     a11y = false,
     ignores = [],
@@ -78,10 +95,13 @@ export function defineConfig(options: Options = {}, ...overrides: OxlintOverride
       reportUnusedDisableDirectives: 'warn',
       ...(typeChecked && { typeAware: true }),
     },
-    overrides: [...selected.flatMap((layer) => layer.overrides.map(resolveOverride)), ...overrides],
+    overrides: [
+      ...selected.flatMap((layer) => layer.overrides.map(resolveOverride)),
+      ...overrides.map(resolveUserOverride),
+    ],
     plugins: [...new Set(selected.flatMap((layer) => layer.plugins))],
     settings: Object.assign({}, ...selected.map((layer) => layer.settings)),
   };
 }
 
-export type { Options, OxlintConfig, OxlintOverride } from './types';
+export type { Options, OxlintConfig, OxlintOverride, PluginKey, UserOverride } from './types';

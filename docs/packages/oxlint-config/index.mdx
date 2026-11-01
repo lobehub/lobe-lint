@@ -37,6 +37,24 @@ export default defineConfig(
 );
 ```
 
+Name a bundled plugin by its key in an override's `jsPlugins`. The `eslint-core` plugin runs ESLint's own `no-restricted-imports` (which, unlike Oxlint's, leaves `import()` alone) and `no-restricted-syntax`:
+
+```ts
+export default defineConfig(
+  {},
+  {
+    files: ['src/**/*.{ts,tsx}'],
+    jsPlugins: ['eslint-core'],
+    rules: {
+      'eslint-core/no-restricted-syntax': [
+        'error',
+        { selector: 'WithStatement', message: 'No with.' },
+      ],
+    },
+  },
+);
+```
+
 ## Options
 
 | Option          | Default | Description                                                       |

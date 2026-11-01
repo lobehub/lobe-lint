@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 
 import { defineConfig, type UserConfig } from 'tsdown';
@@ -10,9 +11,18 @@ const STUBS = {
   typescript: path.resolve('src/stubs/typescript.cjs'),
 };
 
+const ESLINT_CORE_RULE = 'eslint-core-rule:';
+const ESLINT_RULES_DIR = path.join(
+  path.dirname(createRequire(import.meta.url).resolve('eslint/package.json')),
+  'lib/rules',
+);
+
 const stubTypeScriptAndESLint = {
   name: 'lobe:stub-typescript-and-eslint',
   resolveId(id: string) {
+    if (id.startsWith(ESLINT_CORE_RULE)) {
+      return path.join(ESLINT_RULES_DIR, `${id.slice(ESLINT_CORE_RULE.length)}.js`);
+    }
     if (id === 'typescript' || id.startsWith('typescript/')) return STUBS.typescript;
     if (id === 'eslint' || id.startsWith('eslint/')) return STUBS.eslint;
     return null;
@@ -84,6 +94,7 @@ export default defineConfig([
     deps: { onlyBundle: false },
     dts: false,
     entry: {
+      'plugins/eslint-core': 'src/plugins/eslint-core.ts',
       'plugins/eslint-react': 'src/plugins/eslint-react.ts',
       'plugins/lobe': 'src/plugins/lobe.ts',
       'plugins/perfectionist': 'src/plugins/perfectionist.ts',

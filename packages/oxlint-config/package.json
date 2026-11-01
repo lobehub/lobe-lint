@@ -40,6 +40,7 @@
     "@oxlint/migrate": "1.90.0",
     "@stylexjs/eslint-plugin": "^0.19.1",
     "@types/node": "^25.9.0",
+    "eslint": "^10.4.0",
     "eslint-plugin-perfectionist": "^5.9.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-native": "^5.0.0",

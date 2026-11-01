@@ -69,6 +69,7 @@ export interface Options {
 }
 
 export type PluginKey =
+  | 'eslint-core'
   | 'eslint-react'
   | 'lobe'
   | 'perfectionist'
@@ -78,6 +79,13 @@ export type PluginKey =
   | 'stylex';
 
 export type LayerOverride = Omit<OxlintOverride, 'jsPlugins'> & { jsPlugins?: PluginKey[] };
+
+/**
+ * An Oxlint override. `jsPlugins` may name a bundled plugin by its key (`'eslint-core'`, `'stylex'`, ...).
+ */
+export type UserOverride = Omit<OxlintOverride, 'jsPlugins'> & {
+  jsPlugins?: (PluginKey | NonNullable<OxlintOverride['jsPlugins']>[number])[];
+};
 
 export interface Layer {
   overrides: LayerOverride[];
