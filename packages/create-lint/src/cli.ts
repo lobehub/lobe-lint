@@ -233,6 +233,7 @@ export async function run(options: CliOptions): Promise<void> {
 function hasToolFlags(options: CliOptions): boolean {
   return Boolean(
     options.eslint ||
+    options.oxlint ||
     options.prettier ||
     options.stylelint ||
     options.commitlint ||
@@ -248,6 +249,7 @@ function getSelectionsFromFlags(
   const tools: ConfigTool[] = [];
 
   if (options.eslint) tools.push('eslint');
+  if (options.oxlint) tools.push('oxlint');
   if (options.prettier) tools.push('prettier');
   if (options.stylelint) tools.push('stylelint');
   if (options.commitlint) tools.push('commitlint');
@@ -315,7 +317,7 @@ async function getManualSelections(
 
   let reactFramework = detectedFramework;
 
-  if ((selectedTools as ConfigTool[]).includes('eslint')) {
+  if ((selectedTools as ConfigTool[]).some((tool) => tool === 'eslint' || tool === 'oxlint')) {
     if (options.react !== undefined) {
       reactFramework = parseReactFramework(options.react);
     } else if (!options.yes) {
@@ -416,7 +418,7 @@ async function askGitHooksConfiguration(
 
   // Check if there are tools that can be linted
   const hasLintableTools = selections.tools.some((t) =>
-    ['eslint', 'prettier', 'stylelint', 'remarklint'].includes(t),
+    ['eslint', 'oxlint', 'prettier', 'stylelint', 'remarklint'].includes(t),
   );
   const hasCommitlint = selections.tools.includes('commitlint');
 
@@ -561,6 +563,7 @@ ${pc.bold('Options:')}
   -p, --preset          Quick setup with preset tools (ESLint, Prettier, Stylelint, Commitlint)
   -m, --manual          Manually select tools to configure
   --eslint              Include ESLint configuration
+  --oxlint              Include Oxlint configuration (oxlint.config.ts, Node.js >= 22.18)
   --prettier            Include Prettier configuration
   --stylelint           Include Stylelint configuration
   --commitlint          Include Commitlint configuration

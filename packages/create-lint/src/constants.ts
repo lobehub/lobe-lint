@@ -8,6 +8,13 @@ export const CONFIG_META: Record<ConfigTool, ConfigMeta> = {
     peerDependencies: ['eslint'],
     configFile: 'eslint.config.mjs',
   },
+  'oxlint': {
+    name: 'oxlint',
+    displayName: 'Oxlint',
+    package: '@lobehub/oxlint-config',
+    peerDependencies: ['oxlint'],
+    configFile: 'oxlint.config.ts',
+  },
   'prettier': {
     name: 'prettier',
     displayName: 'Prettier',
@@ -49,6 +56,7 @@ export const PRESET_TOOLS: ConfigTool[] = ['eslint', 'prettier', 'stylelint', 'c
 
 export const ALL_TOOLS: ConfigTool[] = [
   'eslint',
+  'oxlint',
   'prettier',
   'stylelint',
   'commitlint',
@@ -69,6 +77,7 @@ export const EXISTING_CONFIG_PATTERNS: Record<ConfigTool, string[]> = {
     '.eslintrc.yaml',
     '.eslintrc.yml',
   ],
+  'oxlint': ['oxlint.config.ts', 'oxlint.config.mts', '.oxlintrc.json'],
   'prettier': [
     'prettier.config.js',
     'prettier.config.mjs',

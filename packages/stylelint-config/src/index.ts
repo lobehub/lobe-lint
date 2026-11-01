@@ -20,19 +20,9 @@ const config: Config = {
         'less/color-no-invalid-hex': true,
       },
     },
-    {
-      customSyntax: 'postcss-styled-syntax',
-      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
-      rules: {
-        'no-empty-source': null,
-        'no-invalid-double-slash-comments': null,
-        'property-no-vendor-prefix': true,
-        'value-no-vendor-prefix': [true, { ignoreValues: ['box'] }],
-      },
-    },
   ],
-  // `liberty/use-logical-spec` comes from a wrapper around `stylelint-use-logical-spec` that keeps
-  // CSS-in-JS interpolations intact when autofixing `transition` / `will-change` values.
+  // `liberty/use-logical-spec` comes from a wrapper around `stylelint-use-logical-spec` that leaves
+  // `transition` / `will-change` values alone: rewriting them breaks animations.
   plugins: ['stylelint-order', useLogicalSpec],
   rules: {
     'liberty/use-logical-spec': [true, { except: ['float', /^((min|max)-)?(height|width)$/i] }],

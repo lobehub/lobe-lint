@@ -4,6 +4,7 @@ export type ReactFramework = 'next' | 'remix' | 'vite' | 'expo' | true | false;
 
 export type ConfigTool =
   | 'eslint'
+  | 'oxlint'
   | 'prettier'
   | 'stylelint'
   | 'commitlint'
@@ -27,6 +28,7 @@ export interface CliOptions {
   ignoreFiles?: boolean;
   install?: boolean;
   manual?: boolean;
+  oxlint?: boolean;
   preset?: boolean;
   prettier?: boolean;
   react?: string;

@@ -6,17 +6,18 @@ Guidance for AI coding agents working in this repository. Everything below is ch
 
 Lobe Lint is a pnpm monorepo that publishes LobeHub's shared lint configs (`@lobehub/*-config`), the `@lobehub/lint` meta package, and the `create-lobe-lint` setup CLI. Development needs Node.js 22+ (root `engines`) and pnpm 9 (`packageManager`).
 
-| Path                                                         | What lives there                                                                                                                                                     |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `packages/eslint-config`                                     | `defineConfig()` in `src/index.ts`; one module per concern in `src/configs/*.ts`; options in `src/types.ts`; file globs in `src/globs.ts`; fixture tests in `tests/` |
-| `packages/{prettier,stylelint,commitlint,remarklint}-config` | A single `src/index.ts` that default-exports the config                                                                                                              |
-| `packages/semantic-release-config`                           | `src/index.ts`, plus `src/monorepo.ts` and `src/changelog.ts` subpath exports                                                                                        |
-| `packages/lint`                                              | `@lobehub/lint` meta package; `src/index.ts` re-exports every config                                                                                                 |
-| `packages/create-lint`                                       | `create-lobe-lint` CLI: tool registry in `src/constants.ts`, config writers in `src/generators/`, tests in `tests/`                                                  |
-| Root `*.config.js`, `.remarkrc.mjs`                          | The repo lints itself with its own workspace packages                                                                                                                |
-| `.husky/`, `.github/workflows/`                              | Git hooks; CI (`test.yml`), npm publish (`release.yml`), PR previews (`pkg.pr.new.yml`)                                                                              |
-| `docs.config.ts`, `docs/`                                    | Documentation site built with `@lobehub/docs-kit` (`siteUrl` `https://lint.lobehub.com`)                                                                             |
-| `.agents/skills/`                                            | Project skills for agents (see Using Skills)                                                                                                                         |
+| Path                                                         | What lives there                                                                                                                                                                           |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `packages/eslint-config`                                     | `defineConfig()` in `src/index.ts`; one module per concern in `src/configs/*.ts`; options in `src/types.ts`; file globs in `src/globs.ts`; fixture tests in `tests/`                       |
+| `packages/{prettier,stylelint,commitlint,remarklint}-config` | A single `src/index.ts` that default-exports the config                                                                                                                                    |
+| `packages/semantic-release-config`                           | `src/index.ts`, plus `src/monorepo.ts` and `src/changelog.ts` subpath exports                                                                                                              |
+| `packages/oxlint-config`                                     | `defineConfig()` in `src/index.ts`; rules generated from eslint-config by `pnpm generate` (`scripts/generate-layers.ts` → `src/generated/layers.ts`); bundled JS plugins in `src/plugins/` |
+| `packages/lint`                                              | `@lobehub/lint` meta package; `src/index.ts` re-exports every config (Oxlint on the ESM-only `src/oxlint.ts` subpath)                                                                      |
+| `packages/create-lint`                                       | `create-lobe-lint` CLI: tool registry in `src/constants.ts`, config writers in `src/generators/`, tests in `tests/`                                                                        |
+| Root `*.config.js`, `.remarkrc.mjs`                          | The repo lints itself with its own workspace packages                                                                                                                                      |
+| `.husky/`, `.github/workflows/`                              | Git hooks; CI (`test.yml`), npm publish (`release.yml`), PR previews (`pkg.pr.new.yml`)                                                                                                    |
+| `docs.config.ts`, `docs/`                                    | Documentation site built with `@lobehub/docs-kit` (`siteUrl` `https://lint.lobehub.com`)                                                                                                   |
+| `.agents/skills/`                                            | Project skills for agents (see Using Skills)                                                                                                                                               |
 
 ## Using Skills
 
@@ -91,7 +92,6 @@ Line-length and write-good warnings do not block the commit.
    - put new file globs in `src/globs.ts`.
 
 4. Add fixtures (eslint-config): put files in `tests/fixtures/<concern>/valid/` or `invalid/`, then register each one in `tests/run-fixtures.test.ts`:
-
    - valid files: add the path to the "valid" list;
    - invalid files: add `[path, expectedRuleId]`.
 

@@ -25,6 +25,10 @@
       "import": "./dist/changelog.mjs",
       "require": "./dist/changelog.cjs"
     },
+    "./oxlint": {
+      "types": "./dist/oxlint.d.mts",
+      "import": "./dist/oxlint.mjs"
+    },
     "./release": {
       "types": "./dist/release.d.mts",
       "import": "./dist/release.mjs",
@@ -43,13 +47,14 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown src/index.ts src/changelog.ts src/release.ts src/release-monorepo.ts",
-    "dev": "tsdown src/index.ts src/changelog.ts src/release.ts src/release-monorepo.ts --watch",
+    "build": "tsdown src/index.ts src/changelog.ts src/oxlint.ts src/release.ts src/release-monorepo.ts",
+    "dev": "tsdown src/index.ts src/changelog.ts src/oxlint.ts src/release.ts src/release-monorepo.ts --watch",
     "type-check": "tsrs --noEmit"
   },
   "dependencies": {
     "@lobehub/commitlint-config": "workspace:*",
     "@lobehub/eslint-config": "workspace:*",
+    "@lobehub/oxlint-config": "workspace:*",
     "@lobehub/prettier-config": "workspace:*",
     "@lobehub/remarklint-config": "workspace:*",
     "@lobehub/semantic-release-config": "workspace:*",

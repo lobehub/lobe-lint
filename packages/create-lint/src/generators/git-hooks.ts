@@ -8,6 +8,7 @@ export interface GitHooksConfig {
 const LINT_STAGED_RULES: Record<ConfigTool, { pattern: string; commands: string[] } | null> = {
   'commitlint': null,
   'eslint': { pattern: '*.{js,jsx,ts,tsx,yml,yaml}', commands: ['eslint --fix'] },
+  'oxlint': { pattern: '*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}', commands: ['oxlint --fix'] },
   'prettier': { pattern: '*', commands: ['prettier --write --ignore-unknown'] },
   'remarklint': { pattern: '*.md', commands: ['remark --quiet --output --'] },
   'semantic-release': null,

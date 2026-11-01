@@ -28,6 +28,7 @@ ESLint Flat Config configuration for LobeHub projects
 - Accessibility rules (jsx-a11y)
 - React Compiler support
 - RegExp rules (`eslint-plugin-regexp`)
+- Optional StyleX rules (`@stylexjs/eslint-plugin`)
 - YAML rules (`eslint-plugin-yml`)
 - ESLint directive comment checks (`@eslint-community/eslint-plugin-eslint-comments`)
 - Optional MDX support (`eslint-plugin-mdx`)
@@ -142,6 +143,9 @@ export default defineConfig({
   // Regexp optimization rules
   regexp: true,
 
+  // StyleX rules (@stylexjs/eslint-plugin)
+  stylex: false,
+
   // Next.js rules (@next/eslint-plugin-next)
   next: false,
 
@@ -242,6 +246,7 @@ export default defineConfig(
 | `sortKeys`      | `boolean`                                          | `true`  | Enable interface/enum/jsx sorting   |
 | `yml`           | `boolean`                                          | `true`  | Enable YAML rules                   |
 | `regexp`        | `boolean`                                          | `true`  | Enable regexp rules                 |
+| `stylex`        | `boolean`                                          | `false` | Enable StyleX rules                 |
 | `ignores`       | `string[]`                                         | `[]`    | Additional ignore patterns          |
 
 ## API

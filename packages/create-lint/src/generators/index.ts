@@ -2,6 +2,7 @@ import { type ConfigTool, type GeneratedFile, type GeneratorContext } from '../t
 import { generateCommitlintConfig, getCommitlintDependencies } from './commitlint.js';
 import { generateEslintConfig, getEslintDependencies } from './eslint.js';
 import { generateIgnoreFiles } from './ignore-files.js';
+import { generateOxlintConfig, getOxlintDependencies } from './oxlint.js';
 import { generatePrettierConfig, getPrettierDependencies } from './prettier.js';
 import { generateRemarklintConfig, getRemarklintDependencies } from './remarklint.js';
 import {
@@ -31,6 +32,9 @@ function generateConfig(tool: ConfigTool, ctx: GeneratorContext): GeneratedFile 
   switch (tool) {
     case 'eslint': {
       return generateEslintConfig(ctx);
+    }
+    case 'oxlint': {
+      return generateOxlintConfig(ctx);
     }
     case 'prettier': {
       return generatePrettierConfig();
@@ -71,6 +75,9 @@ function getToolDependencies(tool: ConfigTool, ctx: GeneratorContext): string[] 
     case 'eslint': {
       return getEslintDependencies(ctx);
     }
+    case 'oxlint': {
+      return getOxlintDependencies();
+    }
     case 'prettier': {
       return getPrettierDependencies();
     }
@@ -97,6 +104,7 @@ export { generateEslintConfig, getEslintDependencies } from './eslint.js';
 export type { GitHooksConfig } from './git-hooks.js';
 export { generateGitHooksConfig, getGitHooksDependencies } from './git-hooks.js';
 export { generateIgnoreFiles } from './ignore-files.js';
+export { generateOxlintConfig, getOxlintDependencies } from './oxlint.js';
 export { generatePrettierConfig, getPrettierDependencies } from './prettier.js';
 export { generateRemarklintConfig, getRemarklintDependencies } from './remarklint.js';
 export {

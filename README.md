@@ -130,8 +130,9 @@ Each tool reads one config file (`eslint.config.mjs`, `prettier.config.mjs`, `st
 | Package                                                                | What it's for                                           |
 | ---------------------------------------------------------------------- | ------------------------------------------------------- |
 | [@lobehub/eslint-config](./packages/eslint-config)                     | ESLint flat config for JavaScript, TypeScript and React |
+| [@lobehub/oxlint-config](./packages/oxlint-config)                     | The ESLint rule set for Oxlint, without TypeScript      |
 | [@lobehub/prettier-config](./packages/prettier-config)                 | Code formatting                                         |
-| [@lobehub/stylelint-config](./packages/stylelint-config)               | CSS, Less and CSS-in-JS styles                          |
+| [@lobehub/stylelint-config](./packages/stylelint-config)               | CSS and Less styles                                     |
 | [@lobehub/commitlint-config](./packages/commitlint-config)             | Gitmoji commit messages                                 |
 | [@lobehub/remarklint-config](./packages/remarklint-config)             | Markdown linting                                        |
 | [@lobehub/semantic-release-config](./packages/semantic-release-config) | Automated versions and changelogs                       |

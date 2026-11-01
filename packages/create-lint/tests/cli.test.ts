@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { run } from '../src/cli.js';
 import { getEslintDependencies } from '../src/generators/eslint.js';
+import { getOxlintDependencies } from '../src/generators/oxlint.js';
 import { type UserSelections } from '../src/types.js';
 import { detectProject } from '../src/utils/detect.js';
 
@@ -73,6 +74,27 @@ describe('create-lobe-lint CLI', () => {
       'pre-commit': 'pnpm lint-staged',
       'commit-msg': 'npx --no -- commitlint --edit $1',
     });
+  });
+
+  it('generates an oxlint config and lint-staged rule without TypeScript or ESLint', async () => {
+    await run({ gitHooks: true, install: false, oxlint: true, yes: true });
+
+    const oxlintConfig = await fs.readFile(path.join(tmpDir, 'oxlint.config.ts'), 'utf8');
+    expect(oxlintConfig).toBe(`import { defineConfig } from '@lobehub/oxlint-config';
+
+export default defineConfig({
+  react: true,
+  typescript: true,
+});
+`);
+    await expect(fs.access(path.join(tmpDir, 'eslint.config.mjs'))).rejects.toThrow();
+    await expect(fs.access(path.join(tmpDir, '.vscode/settings.json'))).rejects.toThrow();
+
+    const pkg = await readJson(path.join(tmpDir, 'package.json'));
+    expect(pkg['lint-staged']).toEqual({
+      '*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}': ['oxlint --fix'],
+    });
+    expect(getOxlintDependencies()).toEqual(['@lobehub/oxlint-config', 'oxlint']);
   });
 
   it('generates preset configs with vscode settings (--yes includes vscode)', async () => {

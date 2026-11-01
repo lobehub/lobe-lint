@@ -46,3 +46,4 @@ docs/rules/data/
 # add other ignore file below
 
 eslint-typegen.d.ts
+packages/oxlint-config/src/stubs/typescript.cjs

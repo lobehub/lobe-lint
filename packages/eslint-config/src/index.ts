@@ -13,6 +13,7 @@ import { react } from './configs/react';
 import { reactNative } from './configs/react-native';
 import { regexp } from './configs/regexp';
 import { sorting } from './configs/sorting';
+import { stylex } from './configs/stylex';
 import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
 import { unused } from './configs/unused';
@@ -32,6 +33,7 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
     regexp: regexpOption = true,
     sortImports = true,
     sortKeys = true,
+    stylex: stylexOption = false,
     typeChecked = false,
     typescript: tsOption = true,
     yml: ymlOption = true,
@@ -49,6 +51,7 @@ export function defineConfig(options: Options = {}, ...userConfigs: FlatConfig[]
     ...imports({ ...options, sortImports }),
     ...unicorn(),
     ...sorting({ ...options, sortKeys }),
+    ...stylex({ ...options, stylex: stylexOption }),
     ...regexp({ ...options, regexp: regexpOption }),
     ...unused(),
     ...yml({ ...options, yml: ymlOption }),

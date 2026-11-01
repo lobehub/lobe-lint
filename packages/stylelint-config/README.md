@@ -21,7 +21,6 @@ Stylelint configuration for LobeHub projects
 - Standard stylelint rules
 - Property ordering with `stylelint-config-clean-order`
 - Less support
-- CSS-in-JS support (styled-components, emotion, etc.)
 - Logical properties enforcement
 
 ## Installation
@@ -50,7 +49,8 @@ module.exports = require('@lobehub/stylelint-config');
 
 - `.css` - Standard CSS files
 - `.less` - Less preprocessor files
-- `.js`, `.jsx`, `.ts`, `.tsx` - CSS-in-JS (styled-components, emotion)
+
+JS and TS files are not linted. CSS-in-JS (`postcss-styled-syntax`) was dropped because it installs TypeScript. Lint StyleX styles with the `stylex` option of [`@lobehub/eslint-config`](../eslint-config) or [`@lobehub/oxlint-config`](../oxlint-config) instead, and point `stylelint` at `.css` / `.less` files only.
 
 ## Configuration
 
@@ -63,7 +63,6 @@ The config extends:
 And includes:
 
 - `stylelint-less` for Less support
-- `postcss-styled-syntax` for CSS-in-JS
 - `stylelint-use-logical-spec` for logical properties
 
 ### Extending the Config

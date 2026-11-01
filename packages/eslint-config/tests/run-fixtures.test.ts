@@ -377,3 +377,32 @@ describe('regex autofix', () => {
     expect(result.messages.map((m) => m.ruleId)).not.toContain('unicorn/better-regex');
   });
 });
+
+describe('stylex option', () => {
+  const lintWith = async (stylex: boolean, file: string) => {
+    const eslint = new ESLint({
+      cwd: fixturesDir,
+      overrideConfig: defineConfig({ ignores: [], react: true, stylex }) as any,
+      overrideConfigFile: true,
+    });
+    const [result] = await eslint.lintFiles(path.join(fixturesDir, file));
+    return result.messages.filter((m) => m.severity === 2).map((m) => m.ruleId);
+  };
+
+  it('accepts valid stylex.create styles', async () => {
+    expect(await lintWith(true, 'stylex/valid/styles.tsx')).toEqual([]);
+  });
+
+  it.each([
+    ['stylex/invalid/unknown-property.tsx', '@stylexjs/valid-styles'],
+    ['stylex/invalid/multi-value-shorthand.tsx', '@stylexjs/valid-shorthands'],
+    ['stylex/invalid/unused-style.tsx', '@stylexjs/no-unused'],
+  ])('%s reports %s', async (file, ruleId) => {
+    expect(await lintWith(true, file)).toContain(ruleId);
+  });
+
+  it('is off by default', async () => {
+    const ids = await lintWith(false, 'stylex/invalid/unknown-property.tsx');
+    expect(ids.filter((id) => id?.startsWith('@stylexjs/'))).toEqual([]);
+  });
+});
