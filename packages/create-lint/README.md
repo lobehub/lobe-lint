@@ -37,7 +37,7 @@ CLI tool to setup LobeHub lint configurations
 - **Auto Detection** - Detects package manager, TypeScript, and React framework
 - **Interactive Mode** - Guided setup with preset and manual options
 - **Framework Support** - Next.js, Remix, Vite, Expo support
-- **Flexible** - Generate configs for ESLint, Prettier, Stylelint, Commitlint, Remarklint, Semantic Release
+- **Flexible** - Generate configs for ESLint, Oxlint, Prettier, Stylelint, Commitlint, Remarklint, Semantic Release
 - **Extras** - Optional ignore files, lint-staged with simple-git-hooks, and VSCode settings
 
 ## Usage
@@ -63,6 +63,7 @@ This will start an interactive setup process that:
 | `--preset`            | `-p`  | Quick setup with preset tools (ESLint, Prettier, Stylelint, Commitlint) |
 | `--manual`            | `-m`  | Manually select tools to configure                                      |
 | `--eslint`            |       | Include ESLint configuration                                            |
+| `--oxlint`            |       | Include Oxlint configuration (`oxlint.config.ts`, Node.js >= 22.18)     |
 | `--prettier`          |       | Include Prettier configuration                                          |
 | `--stylelint`         |       | Include Stylelint configuration                                         |
 | `--commitlint`        |       | Include Commitlint configuration                                        |
@@ -104,6 +105,7 @@ npx create-lobe-lint --preset -y --no-install
 | Tool             | Config File             |
 | ---------------- | ----------------------- |
 | ESLint           | `eslint.config.mjs`     |
+| Oxlint           | `oxlint.config.ts`      |
 | Prettier         | `prettier.config.mjs`   |
 | Stylelint        | `stylelint.config.mjs`  |
 | Commitlint       | `commitlint.config.mjs` |
