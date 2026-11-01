@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/oxlint-config",
-  "version": "2.1.7",
+  "version": "3.0.0",
   "description": "Oxlint configuration for LobeHub projects",
   "homepage": "https://github.com/lobehub/lobe-lint/tree/master/packages/oxlint-config",
   "bugs": {
