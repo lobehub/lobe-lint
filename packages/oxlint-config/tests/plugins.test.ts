@@ -20,6 +20,16 @@ const TYPE_AWARE_RULES = new Set(
   ].flatMap((rule) => [`@eslint-react/${rule}`, `@eslint-react/x-${rule}`]),
 );
 
+const BUNDLED_PACKAGES = [
+  '@eslint-react/eslint-plugin',
+  '@stylexjs/eslint-plugin',
+  'eslint',
+  'eslint-plugin-perfectionist',
+  'eslint-plugin-react',
+  'eslint-plugin-react-native',
+  'eslint-plugin-simple-import-sort',
+];
+
 const loadRules = async (key: PluginKey) => {
   const plugin = (await import(path.join(PLUGIN_DIR, `${key}.mjs`))).default as {
     rules: Record<string, unknown>;
@@ -53,6 +63,15 @@ describe('bundled plugins', () => {
 
     expect(files).toBeGreaterThan(40);
     expect(pluginErrors(diagnostics)).toEqual([]);
+  });
+
+  it('pins every bundled package to an exact version', () => {
+    const { devDependencies } = JSON.parse(
+      fs.readFileSync(path.join(PACKAGE_ROOT, 'package.json'), 'utf8'),
+    ) as { devDependencies: Record<string, string> };
+    for (const name of BUNDLED_PACKAGES) {
+      expect(devDependencies[name], name).toMatch(/^\d+\.\d+\.\d+$/);
+    }
   });
 
   it('ships a third-party license notice', () => {
