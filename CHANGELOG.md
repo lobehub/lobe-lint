@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 3.0.1](https://github.com/lobehub/lobe-lint/compare/v3.0.0...v3.0.1)
+
+<sup>Released on **2026-11-01**</sup>
+
+#### 🐛 Bug Fixes
+
+- **oxlint-config**: Pin the bundled plugins to exact versions, so each release bundles the plugin versions it was tested with. The versions match 3.0.0 (`@eslint-react/eslint-plugin` 5.28.8, `eslint-plugin-perfectionist` 5.13.0, `eslint` 10.14.0 for the `eslint-core` rules); rule results do not change.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **oxlint-config**: Pin the bundled plugins to exact versions ([b1c930c](https://github.com/lobehub/lobe-lint/commit/b1c930c))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 3.0.0](https://github.com/lobehub/lobe-lint/compare/v2.1.7...v3.0.0)
 
 <sup>Released on **2026-11-01**</sup>
