@@ -56,4 +56,25 @@ describe('rules adjusted for oxlint behavior', () => {
 
     expect(mutation?.severity).toBe('warning');
   });
+
+  it('lets a later override turn off a rule of a plugin enabled by a layer override', () => {
+    const config = defineConfig(
+      { react: true },
+      {
+        files: ['**/*'],
+        rules: {
+          'react/only-export-components': 'off',
+          'unicorn/number-literal-case': 'off',
+        },
+      },
+    );
+    const diagnostics = lint(config, ['src/hex.tsx'], {
+      sources: {
+        'src/hex.tsx': 'export const A = () => <div />;\nexport const b = 0xff;\n',
+      },
+    }).diagnostics;
+
+    expect(codesOf(diagnostics)).not.toContain('unicorn(number-literal-case)');
+    expect(codesOf(diagnostics)).not.toContain('react(only-export-components)');
+  });
 });

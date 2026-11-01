@@ -99,7 +99,17 @@ export function defineConfig(options: Options = {}, ...overrides: UserOverride[]
       ...selected.flatMap((layer) => layer.overrides.map(resolveOverride)),
       ...overrides.map(resolveUserOverride),
     ],
-    plugins: [...new Set(selected.flatMap((layer) => layer.plugins))],
+    // Oxlint drops a later override's setting for a plugin that only an earlier override
+    // enabled, so every plugin an override uses is enabled at the root as well.
+    plugins: [
+      ...new Set([
+        ...selected.flatMap((layer) => layer.plugins),
+        ...selected.flatMap((layer) =>
+          layer.overrides.flatMap((override) => override.plugins ?? []),
+        ),
+        ...overrides.flatMap((override) => override.plugins ?? []),
+      ]),
+    ],
     settings: Object.assign({}, ...selected.map((layer) => layer.settings)),
   };
 }
