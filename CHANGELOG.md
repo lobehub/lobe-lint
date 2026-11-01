@@ -2,6 +2,55 @@
 
 # Changelog
 
+### [Version 3.0.0](https://github.com/lobehub/lobe-lint/compare/v2.1.7...v3.0.0)
+
+<sup>Released on **2026-11-01**</sup>
+
+#### ✨ Features
+
+- **oxlint-config**: Add `@lobehub/oxlint-config`, the `@lobehub/eslint-config` rule set for Oxlint, generated from the ESLint modules. It installs neither `typescript` nor `eslint`; the JS plugins it needs are bundled.
+- **oxlint-config**: Bundle ESLint's `no-restricted-imports` and `no-restricted-syntax` as the `eslint-core` plugin.
+- **eslint-config**: Add the `stylex` option for `@stylexjs/eslint-plugin` rules (also in `@lobehub/oxlint-config`).
+- **lint**: Export the Oxlint config from the ESM-only `@lobehub/lint/oxlint` subpath.
+- **create-lint**: Add `--oxlint` to generate `oxlint.config.ts`.
+
+#### 🐛 Bug Fixes
+
+- **oxlint-config**: Enable override plugins at the root so later overrides can turn their rules off.
+
+#### 📝 Documentation
+
+- **misc**: Document the Oxlint config, the `stylex` option and the CSS-only stylelint config.
+- **misc**: Sync Links with all nine LobeHub libraries.
+
+#### ⚠️ Upgrade notes
+
+- **Breaking:** `@lobehub/stylelint-config` no longer lints CSS-in-JS. `postcss-styled-syntax` (which installs `typescript`) is removed, so stylelint only checks `.css` and `.less`. Point `stylelint` globs at CSS/Less files (add `--allow-empty-input` if there are none), and lint StyleX styles with the `stylex` option instead.
+- **New:** to move off ESLint, install `@lobehub/oxlint-config` and `oxlint`, and replace `eslint.config.mjs` with `oxlint.config.ts`. YAML, MDX and `regexp` rules are not ported. Rule ids in disable comments change where Oxlint names differ (`@typescript-eslint/*` → `typescript/*`, ESLint core restrictions → `eslint-core/*`).
+- **Note:** importing the root of `@lobehub/lint` still loads the ESLint config and needs `eslint` and `typescript`. TypeScript-free setups import the individual `@lobehub/*-config` packages or `@lobehub/lint/oxlint`.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add @lobehub/oxlint-config and drop the TypeScript dependency from lint configs ([84d5192](https://github.com/lobehub/lobe-lint/commit/84d5192))
+- **type-check**: Switch to tsrs ([53a8d1f](https://github.com/lobehub/lobe-lint/commit/53a8d1f))
+
+#### Documentation
+
+- **misc**: Sync Links with all nine LobeHub libraries ([e488e1f](https://github.com/lobehub/lobe-lint/commit/e488e1f))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 2.1.7](https://github.com/lobehub/lobe-lint/compare/v2.1.6...v2.1.7)
 
 <sup>Released on **2026-10-21**</sup>
